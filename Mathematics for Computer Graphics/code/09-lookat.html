@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>09 — lookAt sketch</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>09 — lookAt sketch</h1>
+  <p class='hint'>eye, center, up. Right-handed: f = normalize(center-eye) as look direction teaching — CG I uses look −Z. See conventions.</p><pre id='out'></pre>
+  <script>
+function n(v){ const l=Math.hypot(v.x,v.y,v.z)||1; return {x:v.x/l,y:v.y/l,z:v.z/l}; }
+function cr(a,b){ return {x:a.y*b.z-a.z*b.y, y:a.z*b.x-a.x*b.z, z:a.x*b.y-a.y*b.x}; }
+const eye={x:0,y:1,z:5}, center={x:0,y:0,z:0}, up={x:0,y:1,z:0};
+const f=n({x:center.x-eye.x,y:center.y-eye.y,z:center.z-eye.z});
+const s=n(cr(f,up)); const u=cr(s,f);
+out.textContent=JSON.stringify({f,s,u},null,2);
+</script>
+</body>
+</html>

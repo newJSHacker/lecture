@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>11 — Point</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>11 — Point</h1>
+  <pre id='out'></pre>
+  <script>
+class Point { constructor(x,y){ this.x=x; this.y=y; } dist(q){ return Math.hypot(this.x-q.x, this.y-q.y); } }
+const p=new Point(0,0), q=new Point(3,4);
+document.getElementById('out').textContent='dist = '+p.dist(q)+' (expect 5)';
+</script>
+</body>
+</html>

@@ -50,7 +50,7 @@ Hypothesis:
 
 ## F. One-page lesson plan
 
-See [[Teaching/03 Lesson Planning]] for the full template. Minimum:
+See [[Teaching/03 Lesson Planning]] for the timing sheet. See [[Teaching/24 Session Guides]] for Say / Board / Slide (the session guide). Minimum Sunday sheet:
 
 ```
 Goal:

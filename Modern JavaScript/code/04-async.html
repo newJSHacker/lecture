@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>04 — async</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>04 — async</h1>
+  <pre id='out'></pre>
+  <script>
+async function go(){ try { const r=await fetch('data.json'); out.textContent = r.ok? await r.text() : 'not ok '+r.status; } catch(e){ out.textContent=String(e)+' — serve folder'; } } go();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>06 — closure</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>06 — closure</h1>
+  <button id='b'>inc</button><pre id='out'></pre>
+  <script>
+function counter(){ let n=0; return ()=>++n; } const inc=counter(); b.onclick=()=>out.textContent=String(inc());
+</script>
+</body>
+</html>

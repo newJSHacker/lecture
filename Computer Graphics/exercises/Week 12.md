@@ -1,6 +1,6 @@
 # Extra exercises — Week 12 (textures)
 
-Lecture: [[Computer Graphics/Week 12 Texture Mapping]] · Demo: [15-texture](../code/15-texture.html)
+Lecture: [[Computer Graphics/Lecture 12 Texture Mapping]] · Demo: [15-texture](../code/15-texture.html)
 
 ## Written
 

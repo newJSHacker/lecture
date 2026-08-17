@@ -1,6 +1,6 @@
 # Extra exercises — Week 15 (presentations)
 
-Lecture: [[Computer Graphics/Week 15 Presentations]] · Tests: [17-kernel-tests](../code/17-kernel-tests.html)
+Lecture: [[Computer Graphics/Lecture 15 Presentations]] · Tests: [17-kernel-tests](../code/17-kernel-tests.html)
 
 Rehearse 12 + 5 once. Each teammate answers one:
 

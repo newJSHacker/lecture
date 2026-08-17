@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>03 — pointer</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — pointer</h1>
+  <p class='hint'>CSS pixels ≠ backing store. We map via getBoundingClientRect.</p><canvas id='c' width='640' height='320'></canvas>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); const dots=[];
+function cssToCanvas(ev){ const r=c.getBoundingClientRect(); return {x:(ev.clientX-r.left)*c.width/r.width, y:(ev.clientY-r.top)*c.height/r.height}; }
+c.addEventListener('pointerdown', ev=>{ dots.push(cssToCanvas(ev)); draw(); });
+function draw(){ ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#8f8'; for(const p of dots){ ctx.beginPath(); ctx.arc(p.x,p.y,5,0,6.28); ctx.fill(); } }
+draw();
+</script>
+</body>
+</html>

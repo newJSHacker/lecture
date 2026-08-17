@@ -1,6 +1,6 @@
 # Extra exercises — Week 12 (closest pair + survey)
 
-Lecture: [[Computational Geometry/Week 12 Closest Pair and Survey]]  
+Lecture: [[Computational Geometry/Lecture 12 Closest Pair and Survey]]  
 Demo: [17-closest-pair.html](../code/17-closest-pair.html)
 
 ---

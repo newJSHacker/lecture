@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>03 — box model</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — box model</h1>
+  <style>
+  * { box-sizing: border-box; }
+  .box { width: 220px; margin: 16px; padding: 16px; border: 8px solid #1a4f8b; background: #cde; }
+</style>
+<p class="hint">Inspect computed width. border-box includes padding+border in 220px.</p>
+<div class="box">content / padding / border / margin</div>
+  
+</body>
+</html>

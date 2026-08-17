@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>03 — promise</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — promise</h1>
+  <pre id='out'></pre>
+  <script>
+out.textContent='pending'; Promise.resolve(3).then(x=>x*2).then(x=>{ out.textContent='resolved '+x; });
+</script>
+</body>
+</html>

@@ -1,4 +1,6 @@
 
+Fifteen-week **course plans** for every course in [[01 subjects]] are in [[00 IGWT Lectures]]. The meeting files are named **Lecture 1, 2, …** (not “Week 01”). How to write what you say, board, and show: [[Teaching/24 Session Guides]]. Assessment in those notes is standardized at labs 25% / homework 20% / quizzes 10% / midterm 15% / project 30% unless the department requires otherwise.
+
 Your curriculum is already at the level of a modern specialization rather than a traditional computer science program. The biggest challenge now is **how to teach each course**, not what topics to include.
 
 A good university course should be built around five pillars:

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>07 — toggle</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>07 — toggle</h1>
+  <button id="b">Toggle theme class</button>
+<p>Uses <code>textContent</code> policy: no innerHTML with user strings.</p>
+  <script>
+b.onclick=()=>document.body.classList.toggle('dark');
+const s=document.createElement('style'); s.textContent='body.dark{background:#111;color:#eee}'; document.head.append(s);
+</script>
+</body>
+</html>

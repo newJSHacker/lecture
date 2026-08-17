@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>07 — entities</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>07 — entities</h1>
+  <canvas id='c' width='640' height='320'></canvas>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+const ents=Array.from({length:12},()=>({x:Math.random()*640,y:Math.random()*320,vx:(Math.random()-0.5)*80,vy:(Math.random()-0.5)*80,r:8}));
+let last=performance.now();
+function tick(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle='#6cf';
+  for(const e of ents){
+    e.x+=e.vx*dt; e.y+=e.vy*dt;
+    if(e.x<e.r||e.x>c.width-e.r) e.vx*=-1;
+    if(e.y<e.r||e.y>c.height-e.r) e.vy*=-1;
+    ctx.beginPath(); ctx.arc(e.x,e.y,e.r,0,6.28); ctx.fill();
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

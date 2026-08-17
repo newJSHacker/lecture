@@ -1,6 +1,6 @@
 # Extra exercises — Week 9 (NDC / depth)
 
-Lecture: [[Computer Graphics/Week 09 Clip NDC Depth]] · Demo: [12-zbuffer](../code/12-zbuffer.html)
+Lecture: [[Computer Graphics/Lecture 09 Clip NDC Depth]] · Demo: [12-zbuffer](../code/12-zbuffer.html)
 
 ## Written
 

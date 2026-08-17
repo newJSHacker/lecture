@@ -1,6 +1,6 @@
 # Extra exercises — Week 8 (projection)
 
-Lecture: [[Computer Graphics/Week 08 Midterm and Projection]] · Demo: [11-perspective](../code/11-perspective.html)
+Lecture: [[Computer Graphics/Lecture 08 Midterm and Projection]] · Demo: [11-perspective](../code/11-perspective.html)
 
 Makeup drills (no laptop) plus projection.
 

@@ -1,6 +1,6 @@
 # Extra exercises — Week 4 (Jarvis)
 
-Lecture: [[Computational Geometry/Week 04 Convex Hull I]]  
+Lecture: [[Computational Geometry/Lecture 04 Convex Hull I]]  
 Demo: [07-jarvis.html](../code/07-jarvis.html)
 
 ---

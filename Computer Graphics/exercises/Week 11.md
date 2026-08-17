@@ -1,6 +1,6 @@
 # Extra exercises — Week 11 (Blinn-Phong)
 
-Lecture: [[Computer Graphics/Week 11 Blinn Phong and Gamma]] · Demo: [14-blinn-phong](../code/14-blinn-phong.html)
+Lecture: [[Computer Graphics/Lecture 11 Blinn Phong and Gamma]] · Demo: [14-blinn-phong](../code/14-blinn-phong.html)
 
 ## Written
 

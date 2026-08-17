@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Tiny tracer</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>Tiny tracer</h1>
+  <p class="hint">Accumulate spp. Noise is the lesson. Sphere + Lambert + one light. Not a product renderer.</p>
+<canvas id="c" width="320" height="200"></canvas>
+<pre id="out"></pre>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+const W=c.width, H=c.height; const acc=new Float32Array(W*H*3); let spp=0;
+const sph={c:[0,0,-3], r:1};
+function hit(o,d){
+  const oc=o.map((x,i)=>x-sph.c[i]);
+  const a=d[0]*d[0]+d[1]*d[1]+d[2]*d[2];
+  const b=2*(oc[0]*d[0]+oc[1]*d[1]+oc[2]*d[2]);
+  const cc=oc[0]*oc[0]+oc[1]*oc[1]+oc[2]*oc[2]-sph.r*sph.r;
+  const disc=b*b-4*a*cc; if(disc<0) return null;
+  const t=(-b-Math.sqrt(disc))/(2*a); if(t<0.001) return null;
+  const p=o.map((x,i)=>x+d[i]*t); const n=p.map((x,i)=>(x-sph.c[i])/sph.r);
+  return {p,n};
+}
+function trace(){
+  const img=ctx.getImageData(0,0,W,H);
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const u=(x+Math.random())/W*2-1, v=1-(y+Math.random())/H*2;
+    const d=[u*W/H,v,-1.5]; const L=Math.hypot(...d); d[0]/=L;d[1]/=L;d[2]/=L;
+    const h=hit([0,0,0], d);
+    let col=[0.02,0.02,0.04];
+    if(h){ const l=[0.4,0.7,0.2]; const ll=Math.hypot(...l); const nd=Math.max(0,(h.n[0]*l[0]+h.n[1]*l[1]+h.n[2]*l[2])/ll); col=[nd, nd*0.9, nd*0.8]; }
+    const i=(y*W+x)*3; acc[i]+=col[0]; acc[i+1]+=col[1]; acc[i+2]+=col[2];
+  }
+  spp++;
+  for(let i=0;i<W*H;i++){
+    const g=1/spp; const o=i*4, t=i*3;
+    img.data[o]=Math.pow(acc[t]*g,1/2.2)*255;
+    img.data[o+1]=Math.pow(acc[t+1]*g,1/2.2)*255;
+    img.data[o+2]=Math.pow(acc[t+2]*g,1/2.2)*255;
+    img.data[o+3]=255;
+  }
+  ctx.putImageData(img,0,0);
+  out.textContent='spp='+spp;
+  requestAnimationFrame(trace);
+}
+requestAnimationFrame(trace);
+</script>
+</body>
+</html>

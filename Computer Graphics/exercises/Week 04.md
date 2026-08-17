@@ -1,6 +1,6 @@
 # Extra exercises — Week 4 (vectors)
 
-Lecture: [[Computer Graphics/Week 04 Vectors and Frames]] · Demo: [06-vec3](../code/06-vec3.html)
+Lecture: [[Computer Graphics/Lecture 04 Vectors and Frames]] · Demo: [06-vec3](../code/06-vec3.html)
 
 ## Written
 

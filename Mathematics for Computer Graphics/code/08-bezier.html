@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>08 — bezier</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>08 — bezier</h1>
+  <canvas id='c' width='640' height='360'></canvas>
+  <script>
+
+function boot(draw){
+  const c=document.getElementById('c'); const ctx=c.getContext('2d');
+  function frame(){ ctx.clearRect(0,0,c.width,c.height); draw(ctx,c); }
+  frame();
+  document.querySelectorAll('input').forEach(el=>el.oninput=frame);
+  return {ctx,c,frame};
+}
+function axes(ctx,c){
+  ctx.save(); ctx.translate(0,c.height); ctx.scale(1,-1);
+  ctx.strokeStyle='#555'; ctx.beginPath(); ctx.moveTo(20,40); ctx.lineTo(20,c.height-20); ctx.moveTo(20,40); ctx.lineTo(c.width-20,40); ctx.stroke();
+  return ctx;
+}
+
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+const P0={x:40,y:300}, P1={x:200,y:40}, P2={x:400,y:320}, P3={x:600,y:80};
+function lerp(a,b,t){ return {x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t}; }
+ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+ctx.strokeStyle='#8f8'; ctx.beginPath();
+for(let i=0;i<=40;i++){
+  const t=i/40;
+  const a=lerp(P0,P1,t), b=lerp(P1,P2,t), cc=lerp(P2,P3,t);
+  const d=lerp(a,b,t), e=lerp(b,cc,t), p=lerp(d,e,t);
+  if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+}
+ctx.stroke();
+
+</script>
+</body>
+</html>

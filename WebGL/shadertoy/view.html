@@ -28,11 +28,17 @@
     const pick = document.getElementById("pick");
     const params = new URLSearchParams(location.search);
     const start = params.get("s") || "fire";
-    (window.SHADERTOY_LIST || []).forEach((s) => {
-      const o = document.createElement("option");
-      o.value = s.id; o.textContent = s.title + (s.warn ? " (flicker)" : "");
-      if (s.id === start) o.selected = true;
-      pick.appendChild(o);
+    const groups = { popular: "Popular techniques", effects: "Effects" };
+    Object.keys(groups).forEach((g) => {
+      const og = document.createElement("optgroup");
+      og.label = groups[g];
+      (window.SHADERTOY_LIST || []).filter((s) => (s.group || "effects") === g).forEach((s) => {
+        const o = document.createElement("option");
+        o.value = s.id; o.textContent = s.title + (s.warn ? " (flicker)" : "");
+        if (s.id === start) o.selected = true;
+        og.appendChild(o);
+      });
+      pick.appendChild(og);
     });
     let running = null;
     function load(id) {

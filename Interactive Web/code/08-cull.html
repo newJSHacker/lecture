@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>08 — cull</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>08 — cull</h1>
+  <p class='hint'>1000 particles; skip draw if off canvas. Measure in DevTools — do not invent fps.</p><canvas id='c' width='640' height='280'></canvas><label><input type='checkbox' id='cull' checked> cull</label>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+const ps=Array.from({length:1000},()=>({x:Math.random()*900-130,y:Math.random()*400-60,r:3}));
+function tick(){
+  ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle='#fc6'; const cull=document.getElementById('cull').checked;
+  for(const p of ps){
+    if(cull && (p.x<-p.r||p.x>c.width+p.r||p.y<-p.r||p.y>c.height+p.r)) continue;
+    ctx.fillRect(p.x,p.y,2,2);
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

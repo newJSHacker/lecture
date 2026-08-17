@@ -1,6 +1,6 @@
 # Extra exercises — Week 11 (Delaunay)
 
-Lecture: [[Computational Geometry/Week 11 Delaunay Triangulation]]  
+Lecture: [[Computational Geometry/Lecture 11 Delaunay Triangulation]]  
 Demos: [15-incircle](../code/15-incircle.html) · [16-delaunay](../code/16-delaunay.html)
 
 ---

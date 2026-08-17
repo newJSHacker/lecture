@@ -1,6 +1,6 @@
 # Extra exercises — Week 7 (ear clipping)
 
-Lecture: [[Computational Geometry/Week 07 Polygon Triangulation]]  
+Lecture: [[Computational Geometry/Lecture 07 Polygon Triangulation]]  
 Demo: [11-ear-clip.html](../code/11-ear-clip.html)
 
 ---

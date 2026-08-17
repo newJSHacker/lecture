@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Mock API</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>Mock API</h1>
+  <p class="hint">Architecture: browser → your server → vendor. This page mocks the server.</p>
+<input id="q" value="set the cube red"><button id="b">complete</button>
+<pre id="out"></pre>
+  <script>
+function mockComplete(prompt){
+  return new Promise(r=>setTimeout(()=>r({tool:'setColor', hex:'#cc3333', prompt}), 400));
+}
+b.onclick=async()=>{ out.textContent='…'; out.textContent=JSON.stringify(await mockComplete(q.value),null,2); };
+</script>
+</body>
+</html>

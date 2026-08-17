@@ -1,6 +1,6 @@
 # Extra exercises — Week 5 (matrices)
 
-Lecture: [[Computer Graphics/Week 05 Homogeneous Transforms]] · Demos: [07](../code/07-mat4-order.html) [08](../code/08-rotate-center.html)
+Lecture: [[Computer Graphics/Lecture 05 Homogeneous Transforms]] · Demos: [07](../code/07-mat4-order.html) [08](../code/08-rotate-center.html)
 
 ## Written
 

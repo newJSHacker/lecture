@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>04 — nested loops</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>04 — nested loops</h1>
+  <pre id='out'></pre>
+  <script>
+let s=''; for(let y=0;y<8;y++){ let row=''; for(let x=0;x<8;x++) row+=((x+y)%2?'#':'.'); s+=row+'\n'; } document.getElementById('out').textContent=s;
+</script>
+</body>
+</html>

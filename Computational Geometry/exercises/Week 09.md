@@ -1,6 +1,6 @@
 # Extra exercises — Week 9 (kd-tree and location)
 
-Lecture: [[Computational Geometry/Week 09 Point Location and Range Search]]  
+Lecture: [[Computational Geometry/Lecture 09 Point Location and Range Search]]  
 Demo: [13-kd-range.html](../code/13-kd-range.html)
 
 ---

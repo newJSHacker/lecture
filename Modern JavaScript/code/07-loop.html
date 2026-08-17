@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>07 — rAF dt</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>07 — rAF dt</h1>
+  <canvas id='c' width='640' height='200'></canvas><pre id='out'></pre>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); let x=20, last=performance.now();
+function tick(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+  x+=80*dt; if(x>c.width) x=0;
+  ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle='#8f8'; ctx.fillRect(x,80,20,20);
+  out.textContent='dt='+dt.toFixed(4)+' (capped)';
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

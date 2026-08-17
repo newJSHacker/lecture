@@ -1,13 +1,19 @@
 # IGWT Lectures
 
-Course notes for **Interactive Graphics and Web Technologies (IGWT)**, including 15-week computational geometry and Computer Graphics I courses, sample graduation theses, a teaching handbook, and WebGL / Three.js / GLSL snippet demos.
+Course notes for **Interactive Graphics and Web Technologies (IGWT)**: a full six-semester program (17 courses, 15 weeks each), extra exercises, runnable demos, sample graduation theses, a teaching handbook, and WebGL / Three.js / GLSL snippet catalogs.
 
-This repository is teaching material. The sample theses are reference documents, not submissions for academic credit. Timing tables in the short thesis are templates, not measured data.
+Start here: [00 IGWT Lectures.md](00%20IGWT%20Lectures.md). Printable bundle of lectures, exercises, catalogs, and the teaching handbook: [IGWT.pdf](IGWT.pdf).
+
+This repository is teaching material for **offline** labs: no jsDelivr, unpkg, or Google Draco CDN. Three.js r170 lives in [ThreeJS/vendor/](ThreeJS/vendor/). GSAP lives in [Interactive Web/vendor/](Interactive%20Web/vendor/). Serve a folder with `python -m http.server` when ES modules need it.
+
+The sample theses are reference documents, not submissions for academic credit. Timing tables in the short thesis are templates, not measured data. Do not invent frame rates in student reports.
 
 ## Contents
 
 | Path | What it is |
 | --- | --- |
+| [00 IGWT Lectures.md](00%20IGWT%20Lectures.md) | Master index of every course |
+| [IGWT.pdf](IGWT.pdf) | Comprehensive printable notes |
 | [01 subjects.md](01%20subjects.md) | Six-semester curriculum |
 | [02 Curriculum Design Advice.md](02%20Curriculum%20Design%20Advice.md) | How to structure each course |
 | [Graduation Requirements.md](Graduation%20Requirements.md) | Thesis, capstone, defense |
@@ -17,7 +23,9 @@ This repository is teaching material. The sample theses are reference documents,
 | [Computer Graphics/exercises/](Computer%20Graphics/exercises/) | Extra written + coding exercises per week |
 | [Computer Graphics/code/](Computer%20Graphics/code/) | Software-rasterizer kernel + 18 demos |
 | [11 Computer Graphics Snippets.md](11%20Computer%20Graphics%20Snippets.md) | Demo catalog + copy-paste kernel |
-| [Computer Graphics.pdf](Computer%20Graphics.pdf) | Printable notes + exercises + kernel |
+| [Computer Graphics.pdf](Computer%20Graphics.pdf) | Printable CG I notes + exercises + kernel |
+| [12 Introduction to Programming.md](12%20Introduction%20to%20Programming.md) … [27 Capstone Project.md](27%20Capstone%20Project.md) | Remaining 15-week course plans |
+| Course folders (`Programming/` … `Capstone/`) | Week notes, extra exercises, `code/` demos |
 | [Computational Geometry/](Computational%20Geometry/) | Full lecture notes, weeks 1–15 |
 | [Computational Geometry.pdf](Computational%20Geometry.pdf) | Printable notes + exercises + kernel |
 | [Computational Geometry/exercises/](Computational%20Geometry/exercises/) | Extra written + coding exercises per week |
@@ -37,6 +45,19 @@ This repository is teaching material. The sample theses are reference documents,
 | [ThreeJS/](ThreeJS/) | 20 runnable Three.js demos |
 | [ThreeJS.pdf](ThreeJS.pdf) | Printable Three.js catalogs |
 
+## Full 15-week program
+
+Every course in [01 subjects.md](01%20subjects.md) now has a plan file, 15 week notes, extra exercises, and `code/` demos or links to the existing WebGL / Three.js / Shadertoy catalogs. Open [00 IGWT Lectures.md](00%20IGWT%20Lectures.md) for the table.
+
+| Sem | Courses |
+| ---: | --- |
+| 1 | Programming, Web Technologies, Mathematics for Computer Graphics |
+| 2 | Computer Graphics I, Computational Geometry (recommended), Modern JavaScript, Interactive Web |
+| 3 | WebGL Programming, Three.js Development, Blender |
+| 4 | Shader Programming, Real-Time Rendering, GPU Programming |
+| 5 | Interactive Experience (R3F), WebXR, AI for Interactive Graphics |
+| 6 | Advanced Computer Graphics, Capstone |
+
 ## Computational geometry
 
 Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20Lectures.md). Extra problem sets: [exercises/00 Index.md](Computational%20Geometry/exercises/00%20Index.md). Open [code/index.html](Computational%20Geometry/code/index.html) for orientation through BVH picking (JavaScript + Canvas, no Three.js required).
@@ -51,7 +72,7 @@ Start at [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.
 
 ## Three.js
 
-Start at [08 Three.js Snippets.md](08%20Three.js%20Snippets.md). Open [ThreeJS/demos/index.html](ThreeJS/demos/index.html) (CDN, three r170). Do this after a student can draw a WebGL triangle.
+Start at [08 Three.js Snippets.md](08%20Three.js%20Snippets.md). Open [ThreeJS/demos/index.html](ThreeJS/demos/index.html) (local `ThreeJS/vendor/`, three r170, no CDN). Do this after a student can draw a WebGL triangle.
 
 ## Becoming a good teacher
 

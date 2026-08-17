@@ -12,7 +12,7 @@ A strong IGWT instructor is not only a graphics engineer who talks. They design 
 | [[02 Curriculum Design Advice]] | Course skeleton: lecture, live coding, lab, homework, quiz | Pedagogy, feedback, inclusion, integrity, TAs |
 | [[04 Computational Geometry]] | One fully designed course | Transferable classroom craft |
 | [[Graduation Requirements]] | What students must submit | How to supervise and examine them |
-| Lecture notes in [[Computational Geometry/00 Lectures]] | What to say each week | How to recover when the demo dies |
+| Lecture notes in [[Computational Geometry/00 Lectures]] | Session guides for each meeting | Recovery when the demo dies — [[Teaching/24 Session Guides]] |
 
 ## What this handbook adds
 
@@ -22,7 +22,8 @@ Start at [[Teaching/00 How to Use These Notes]]. Read in order the first time. L
 | --- | --- |
 | [[Teaching/01 What Good Teaching Looks Like]] | You need a definition of “good,” not a vibe |
 | [[Teaching/02 How Students Learn]] | You are tempted to add more slides |
-| [[Teaching/03 Lesson Planning]] | You are writing next week |
+| [[Teaching/03 Lesson Planning]] | You are writing next week’s one-pager |
+| [[Teaching/24 Session Guides]] | You need Say / Board / Slide for one meeting |
 | [[Teaching/04 First Day and Syllabus]] | Week 0 / Week 1 |
 | [[Teaching/05 Lecture Craft]] | The room is quiet and you are talking too much |
 | [[Teaching/06 Live Coding Pedagogy]] | The signature IGWT skill |

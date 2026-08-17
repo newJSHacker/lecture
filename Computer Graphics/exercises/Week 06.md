@@ -1,6 +1,6 @@
 # Extra exercises — Week 6 (scene graph)
 
-Lecture: [[Computer Graphics/Week 06 Scene Graphs]] · Demo: [09-scene-graph](../code/09-scene-graph.html)
+Lecture: [[Computer Graphics/Lecture 06 Scene Graphs]] · Demo: [09-scene-graph](../code/09-scene-graph.html)
 
 ## Written
 

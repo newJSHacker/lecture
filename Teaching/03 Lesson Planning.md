@@ -1,8 +1,12 @@
 # 03 — Lesson planning
 
-A lesson plan is not a script of everything you will say. It is a sequence of student actions with times, materials, and a fallback.
+A lesson plan is not a transcript of everything you will say. It is a sequence of **moves** with times, materials, and a fallback.
 
-If you only have slides, you have a talk. If you have this sheet, you have a class.
+The Sunday sheet below is one page. The file you teach from is a **session guide** (Say / Board / Slide / Ask / They do). Naming, template, and a worked Lecture 1: [[Teaching/24 Session Guides]].
+
+Do not call the 15-week course markdown a “lecture plan.” That file is a **course plan**. Do not call the meeting “Week 01” when you walk in — say **Lecture 1**. Keep “Week 1 of 15” on the page for the calendar.
+
+If you only have slides, you have a talk. If you have this sheet plus a session guide, you have a class.
 
 ## The one-page plan
 

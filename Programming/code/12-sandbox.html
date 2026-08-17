@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>12 — sandbox</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>12 — sandbox</h1>
+  <p class='hint'>Guess 1–10. Kernel: one function, tests in comments.</p><input id='g' type='number'><button id='b'>Guess</button><pre id='out'></pre>
+  <script>
+const secret=1+Math.floor(Math.random()*10); let n=0; const out=document.getElementById('out');
+document.getElementById('b').onclick=()=>{ n++; const g=+document.getElementById('g').value; out.textContent=g===secret?('yes in '+n+' tries'):(g<secret?'higher':'lower'); };
+</script>
+</body>
+</html>

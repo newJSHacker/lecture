@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>10 — recursion</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>10 — recursion</h1>
+  <pre id='out'></pre>
+  <script>
+function fact(n){ if(n<=1) return 1; return n*fact(n-1); }
+let fibCalls=0; function fib(n){ fibCalls++; if(n<=1) return n; return fib(n-1)+fib(n-2); }
+const f=fib(8); document.getElementById('out').textContent='fact(6)='+fact(6)+'\nfib(8)='+f+' calls='+fibCalls+' (naive)';
+</script>
+</body>
+</html>

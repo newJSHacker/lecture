@@ -1,6 +1,6 @@
 # Extra exercises — Week 13 (graphics applications)
 
-Lecture: [[Computational Geometry/Week 13 Graphics Applications]]  
+Lecture: [[Computational Geometry/Lecture 13 Graphics Applications]]  
 Demo: [18-bvh-pick.html](../code/18-bvh-pick.html)
 
 ---

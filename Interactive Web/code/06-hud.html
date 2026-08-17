@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>06 — HUD</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>06 — HUD</h1>
+  <div class="hud">
+  <canvas id="c" width="640" height="280"></canvas>
+  <div class="overlay">score <span id="s">0</span> — DOM on top of canvas</div>
+</div>
+<button id="b">+1</button>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); ctx.fillStyle='#123'; ctx.fillRect(0,0,c.width,c.height);
+let n=0; b.onclick=()=>{ s.textContent=String(++n); };
+</script>
+</body>
+</html>

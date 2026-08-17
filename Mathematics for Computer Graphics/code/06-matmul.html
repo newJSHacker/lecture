@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>06 — mat2</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>06 — mat2</h1>
+  <pre id='out'></pre>
+  <script>
+function mul(A,B){ return [A[0]*B[0]+A[1]*B[2], A[0]*B[1]+A[1]*B[3], A[2]*B[0]+A[3]*B[2], A[2]*B[1]+A[3]*B[3]]; }
+const R=[0,-1,1,0], T=[1,0,3,1];
+out.textContent='column-major 2x2 teaching as [a,b,c,d] rows\nR*T='+mul(R,T)+'\nT*R='+mul(T,R);
+</script>
+</body>
+</html>

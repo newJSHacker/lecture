@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>08 — todo DOM</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>08 — todo DOM</h1>
+  <input id="t" placeholder="item"><button id="add">Add</button>
+<ul id="ul"></ul>
+  <script>
+add.onclick=()=>{ const text=t.value.trim(); if(!text) return; const li=document.createElement('li'); li.textContent=text; const rm=document.createElement('button'); rm.textContent='x'; rm.onclick=()=>li.remove(); li.append(' ',rm); ul.append(li); t.value=''; };
+</script>
+</body>
+</html>

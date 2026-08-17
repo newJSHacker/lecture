@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>06 — responsive</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>06 — responsive</h1>
+  <style>
+  .cards { display:flex; gap:1rem; flex-wrap:wrap; }
+  .cards .card { flex: 1 1 14rem; }
+  @media (max-width: 640px) { .cards { flex-direction: column; } }
+</style>
+<p class="hint">Resize under 640px. Viewport meta is in this page.</p>
+<div class="cards"><div class="card">one</div><div class="card">two</div><div class="card">three</div></div>
+  
+</body>
+</html>

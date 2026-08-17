@@ -1,6 +1,6 @@
 # Extra exercises — Week 3 (triangles)
 
-Lecture: [[Computer Graphics/Week 03 Lines and Triangles]] · Demos: [04](../code/04-barycentric.html) [05](../code/05-quad.html)
+Lecture: [[Computer Graphics/Lecture 03 Lines and Triangles]] · Demos: [04](../code/04-barycentric.html) [05](../code/05-quad.html)
 
 ## Written
 

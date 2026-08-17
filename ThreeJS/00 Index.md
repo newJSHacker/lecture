@@ -2,7 +2,7 @@
 
 Parent: [[08 Three.js Snippets]]
 
-Open `ThreeJS/demos/`. Each file is `type="module"` and loads **three r170** from jsDelivr. Needs the network the first time.
+Open `ThreeJS/demos/`. Each file is `type="module"` and loads **three r170** from `ThreeJS/vendor/` (offline). Serve the `ThreeJS/` folder locally; do not use a CDN.
 
 ## Demos
 

@@ -1,6 +1,6 @@
 # Extra exercises — Week 10 (Lambert)
 
-Lecture: [[Computer Graphics/Week 10 Lambert Lighting]] · Demo: [13-lambert](../code/13-lambert.html)
+Lecture: [[Computer Graphics/Lecture 10 Lambert Lighting]] · Demo: [13-lambert](../code/13-lambert.html)
 
 ## Written
 

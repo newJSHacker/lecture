@@ -1,6 +1,6 @@
 # Extra exercises — Week 3 (convexity and polygons)
 
-Lecture: [[Computational Geometry/Week 03 Convexity and Polygons]]  
+Lecture: [[Computational Geometry/Lecture 03 Convexity and Polygons]]  
 Demo: [06-shoelace.html](../code/06-shoelace.html)
 
 ---

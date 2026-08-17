@@ -1,6 +1,6 @@
 # Extra exercises — Week 1 (orientation)
 
-Lecture: [[Computational Geometry/Week 01 What Computational Geometry Is]]  
+Lecture: [[Computational Geometry/Lecture 01 What Computational Geometry Is]]  
 Demo: [01-orient.html](../code/01-orient.html)
 
 ---

@@ -6,7 +6,7 @@ Shadertoy is the usual place students steal fire and water from. These notes giv
 
 Open `WebGL/shadertoy/index.html`. Each `.glsl` file is one Image shader.
 
-**Not copies of named Shadertoy classics.** The uniforms and `mainImage` entry point match Shadertoy. The pictures are IGWT lab pieces. Warn before fire, lightning, and plasma ([[Teaching/10 Inclusive Teaching and Accessibility]]).
+**Not copies of named Shadertoy classics.** The uniforms and `mainImage` entry point match Shadertoy. The pictures are IGWT lab pieces: fire/water **effects**, plus original takes on the **popular genres** (star fields, fractals, SDF characters, tunnels, voxels). Warn before fire, lightning, plasma, creation, and domain warp ([[Teaching/10 Inclusive Teaching and Accessibility]]).
 
 ## Shadertoy contract
 
@@ -69,12 +69,40 @@ Waterfall = vertical water + **rock SDF** + **foam** where the column hits a poo
 | `shadertoy/steam.glsl` | Hot vent, white noise wisps |
 | `shadertoy/foam.glsl` | Shore break, voronoi bubbles |
 
+### Popular techniques
+
+| File | Picture / technique |
+| --- | --- |
+| `shadertoy/seascape.glsl` | Height-field ocean, fresnel, sun (drag to look) |
+| `shadertoy/star-nest.glsl` | Volumetric fold/invert star field |
+| `shadertoy/creation.glsl` | RGB expanding rings (strobe — warn) |
+| `shadertoy/fractal-pyramid.glsl` | Recursive box fold, glow march |
+| `shadertoy/primitives.glsl` | SDF gallery: sphere, box, torus, capsule |
+| `shadertoy/happy.glsl` | Jumping SDF character, squash/stretch |
+| `shadertoy/mandelbulb.glsl` | Power-8 3D fractal, orbit trap |
+| `shadertoy/mandelbrot.glsl` | Live zoom (drag to retarget) |
+| `shadertoy/julia.glsl` | Quadratic Julia (drag to move `c`) |
+| `shadertoy/menger.glsl` | Menger sponge |
+| `shadertoy/metaballs.glsl` | Ray-marched blob field |
+| `shadertoy/tunnel.glsl` | Polar `1/r` corridor |
+| `shadertoy/terrain.glsl` | fBm height field, fog |
+| `shadertoy/volume-clouds.glsl` | Density along a sky ray |
+| `shadertoy/voxels.glsl` | DDA through a hashed height map |
+| `shadertoy/warp.glsl` | Domain-warped cosine palette (strobe — warn) |
+| `shadertoy/heart.glsl` | 2D heart SDF + beat |
+| `shadertoy/neon.glsl` | Distance-as-glow 2D SDFs |
+
+After editing a `.glsl` file, run `node pack.mjs` in `WebGL/shadertoy/` so `embed.js` stays in sync.
+
 ## Lab prompts
 
 - Fire: change only the **ramp**. Then only the **scroll speed**. Then only the **shape**.
 - Waterfall: remove the rock SDF. What is left? Put it back.
 - Ocean: flatten the waves (`amp *= 0.1`). The lighting should still read as water if fresnel remains.
 - Ripples: click. Explain why two rings can cancel.
+- Primitives: delete the torus from `map`. The lighting path should still work.
+- Mandelbulb: drop the inner loop from 7 to 3. What happens to the surface?
+- Tunnel: replace `0.35 / r` with `r`. Why did the corridor collapse?
 
 ## Paste checklist (Shadertoy)
 

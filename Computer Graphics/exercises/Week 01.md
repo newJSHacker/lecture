@@ -1,6 +1,6 @@
 # Extra exercises — Week 1 (images / pipeline)
 
-Lecture: [[Computer Graphics/Week 01 What Computer Graphics Is]] · Demo: [01-putpixel](../code/01-putpixel.html)
+Lecture: [[Computer Graphics/Lecture 01 What Computer Graphics Is]] · Demo: [01-putpixel](../code/01-putpixel.html)
 
 ## Written
 

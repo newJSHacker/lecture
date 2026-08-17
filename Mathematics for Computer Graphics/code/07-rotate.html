@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>07 — rotate</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>07 — rotate</h1>
+  <canvas id='c' width='640' height='360'></canvas><label>deg <input id='d' type='range' min='0' max='360' value='30'></label>
+  <script>
+
+function boot(draw){
+  const c=document.getElementById('c'); const ctx=c.getContext('2d');
+  function frame(){ ctx.clearRect(0,0,c.width,c.height); draw(ctx,c); }
+  frame();
+  document.querySelectorAll('input').forEach(el=>el.oninput=frame);
+  return {ctx,c,frame};
+}
+function axes(ctx,c){
+  ctx.save(); ctx.translate(0,c.height); ctx.scale(1,-1);
+  ctx.strokeStyle='#555'; ctx.beginPath(); ctx.moveTo(20,40); ctx.lineTo(20,c.height-20); ctx.moveTo(20,40); ctx.lineTo(c.width-20,40); ctx.stroke();
+  return ctx;
+}
+
+const dEl=document.getElementById('d');
+boot((ctx,c)=>{
+  const r=+dEl.value*Math.PI/180, p={x:80,y:0};
+  const q={x:p.x*Math.cos(r)-p.y*Math.sin(r), y:p.x*Math.sin(r)+p.y*Math.cos(r)};
+  ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+  ctx.translate(c.width/2,c.height/2); ctx.scale(1,-1);
+  ctx.strokeStyle='#6cf'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(p.x,p.y); ctx.stroke();
+  ctx.strokeStyle='#8f8'; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(q.x,q.y); ctx.stroke();
+});
+
+</script>
+</body>
+</html>

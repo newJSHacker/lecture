@@ -7,23 +7,23 @@ Do this **after** a student can draw a triangle in [[07 WebGL and Shader Snippet
 ## Start
 
 1. [[ThreeJS/00 Index]]
-2. Open `ThreeJS/demos/01-hello-cube.html` (needs network once: CDN)
+2. Open `ThreeJS/demos/01-hello-cube.html` (local `ThreeJS/vendor/`, no CDN)
 3. [[ThreeJS/01 Scene Camera Renderer]]
 
-Import map (every demo):
+Import map (every demo). Modules need a local static server (`python -m http.server` in `ThreeJS/`), not the network:
 
 ```html
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    "three": "../vendor/three.module.js",
+    "three/addons/": "../vendor/jsm/"
   }
 }
 </script>
 ```
 
-Pinned **r170**. If the CDN is blocked, download the same files into `ThreeJS/vendor/` and point the import map at them.
+Pinned **r170**, vendored under `ThreeJS/vendor/` (MIT). Draco WASM lives in `vendor/jsm/libs/draco/gltf/`.
 
 ## What is in the folder
 

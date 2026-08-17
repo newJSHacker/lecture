@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>02 — rAF</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>02 — rAF</h1>
+  <canvas id='c' width='640' height='200'></canvas>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); let t0=performance.now();
+function tick(now){ const t=(now-t0)/1000; ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#6cf'; ctx.fillRect(40+Math.sin(t)*120,80,24,24); requestAnimationFrame(tick);} requestAnimationFrame(tick);
+</script>
+</body>
+</html>

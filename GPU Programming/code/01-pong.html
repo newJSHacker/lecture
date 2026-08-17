@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ping-pong Life</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>Ping-pong Life</h1>
+  <p class="hint">Two buffers. Never read and write the same. Pause. This is a CPU stand-in of the FBO pattern — port to a FS in the lab.</p>
+<canvas id="c" width="256" height="256"></canvas>
+<button id="p">pause</button>
+  <script>
+const W=64, A=new Uint8Array(W*W), B=new Uint8Array(W*W);
+for(let i=0;i<A.length;i++) A[i]=Math.random()<0.35?1:0;
+let cur=A, nxt=B, pause=false;
+p.onclick=()=>pause=!pause;
+const c=document.getElementById('c'), ctx=c.getContext('2d');
+function idx(x,y){ return ((y+W)%W)*W+((x+W)%W); }
+function step(){
+  if(!pause){
+    for(let y=0;y<W;y++) for(let x=0;x<W;x++){
+      let n=0; for(let j=-1;j<=1;j++) for(let i=-1;i<=1;i++) if(i||j) n+=cur[idx(x+i,y+j)];
+      const alive=cur[idx(x,y)];
+      nxt[idx(x,y)] = (alive && (n===2||n===3)) || (!alive && n===3) ? 1 : 0;
+    }
+    [cur,nxt]=[nxt,cur];
+  }
+  const img=ctx.createImageData(W,W);
+  for(let i=0;i<cur.length;i++){ const v=cur[i]*220; img.data[i*4]=v; img.data[i*4+1]=v; img.data[i*4+2]=v; img.data[i*4+3]=255; }
+  ctx.putImageData(img,0,0); ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(c,0,0,W,W,0,0,c.width,c.height);
+  requestAnimationFrame(step);
+}
+requestAnimationFrame(step);
+</script>
+</body>
+</html>

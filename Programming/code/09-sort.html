@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>09 — selection sort</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>09 — selection sort</h1>
+  <pre id='out'></pre>
+  <script>
+function sel(a){ const b=a.slice(); const n=b.length; let swaps=0; for(let i=0;i<n;i++){ let m=i; for(let j=i+1;j<n;j++) if(b[j]<b[m]) m=j; if(m!==i){ [b[i],b[m]]=[b[m],b[i]]; swaps++; } } return {b,swaps}; }
+const a=[7,1,4,2,9,3]; document.getElementById('out').textContent=JSON.stringify({in:a,...sel(a)},null,2);
+</script>
+</body>
+</html>

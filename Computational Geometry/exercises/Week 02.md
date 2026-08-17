@@ -1,6 +1,6 @@
 # Extra exercises — Week 2 (primitives)
 
-Lecture: [[Computational Geometry/Week 02 Geometric Primitives]]  
+Lecture: [[Computational Geometry/Lecture 02 Geometric Primitives]]  
 Demos: [02](../code/02-on-segment.html) · [03](../code/03-segments.html) · [04](../code/04-point-in-polygon.html) · [05](../code/05-aabb.html)
 
 ---

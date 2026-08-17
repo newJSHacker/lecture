@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>02 — strings</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>02 — strings</h1>
+  <label>First <input id='a' value='Ada'></label><label>Last <input id='b' value='Lovelace'></label><pre id='out'></pre>
+  <script>
+function go(){const a=aEl.value,b=bEl.value; out.textContent=`${a} ${b}\nlength ${a.length}\nslice ${a.slice(0,2)}`;}
+const aEl=document.getElementById('a'), bEl=document.getElementById('b'), out=document.getElementById('out');
+[aEl,bEl].forEach(el=>el.oninput=go); go();
+</script>
+</body>
+</html>

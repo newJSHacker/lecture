@@ -1,6 +1,6 @@
 # Extra exercises — Week 10 (Voronoi)
 
-Lecture: [[Computational Geometry/Week 10 Voronoi Diagrams]]  
+Lecture: [[Computational Geometry/Lecture 10 Voronoi Diagrams]]  
 Demo: [14-voronoi-discrete.html](../code/14-voronoi-discrete.html)
 
 ---

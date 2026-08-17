@@ -1,6 +1,6 @@
 # Extra exercises — Week 14 (studio)
 
-Lecture: [[Computer Graphics/Week 14 Project Studio]] · Demo: [18-project-sandbox](../code/18-project-sandbox.html)
+Lecture: [[Computer Graphics/Lecture 14 Project Studio]] · Demo: [18-project-sandbox](../code/18-project-sandbox.html)
 
 ## Desk-review drills (write in the repo)
 

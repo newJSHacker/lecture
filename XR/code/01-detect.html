@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Detect</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>Detect</h1>
+  <pre id='out'></pre>
+  <script>
+out.textContent = 'xr' in navigator ? 'navigator.xr present' : 'no WebXR — inline fallback required';
+if (navigator.xr) navigator.xr.isSessionSupported('immersive-vr').then(v=>out.textContent+='\nimmersive-vr '+v).catch(()=>{});
+</script>
+</body>
+</html>

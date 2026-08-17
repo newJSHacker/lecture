@@ -1,6 +1,6 @@
 # Extra exercises — Week 5 (Graham / Andrew)
 
-Lecture: [[Computational Geometry/Week 05 Convex Hull II]]  
+Lecture: [[Computational Geometry/Lecture 05 Convex Hull II]]  
 Demo: [08-andrew.html](../code/08-andrew.html)
 
 ---

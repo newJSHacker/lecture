@@ -1,6 +1,6 @@
 # Extra exercises — Week 7 (camera)
 
-Lecture: [[Computer Graphics/Week 07 Cameras]] · Demo: [10-lookat](../code/10-lookat.html)
+Lecture: [[Computer Graphics/Lecture 07 Cameras]] · Demo: [10-lookat](../code/10-lookat.html)
 
 ## Written
 

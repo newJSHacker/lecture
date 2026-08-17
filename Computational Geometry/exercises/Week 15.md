@@ -1,6 +1,6 @@
 # Extra exercises — Week 15 (presentations)
 
-Lecture: [[Computational Geometry/Week 15 Presentations]]  
+Lecture: [[Computational Geometry/Lecture 15 Presentations]]  
 Tests demo: [19-kernel-tests.html](../code/19-kernel-tests.html)
 
 There is no new algorithm. Use this sheet as a rehearsal script.

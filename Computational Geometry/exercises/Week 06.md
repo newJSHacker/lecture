@@ -1,6 +1,6 @@
 # Extra exercises — Week 6 (sweep)
 
-Lecture: [[Computational Geometry/Week 06 Sweep Line Intersection]]  
+Lecture: [[Computational Geometry/Lecture 06 Sweep Line Intersection]]  
 Demos: [09-naive](../code/09-naive-intersect.html) · [10-sweep](../code/10-sweep.html)
 
 ---

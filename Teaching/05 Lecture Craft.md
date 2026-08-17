@@ -6,6 +6,8 @@ A lecture in this program is a guided encounter with one idea, not a transfer of
 
 If a colleague asks “what was lecture 6 about?” you should answer with a noun phrase: *clip space*, *sweep line status*, *Cook–Torrance at a glance*, *the scene graph vs the scene*.
 
+Name the meeting **Lecture 6**, not “Week 06.” The week is when it happens. The lecture is what you do. Full naming rules: [[Teaching/24 Session Guides]].
+
 If your answer is a list of six topics, it was not a lecture. It was a table of contents.
 
 ## The shape of 75 minutes

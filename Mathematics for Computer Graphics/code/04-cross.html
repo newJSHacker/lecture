@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>04 — cross2</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>04 — cross2</h1>
+  <p class='hint'>Signed area of triangle (0,0),(1,0),(0,1) is 0.5. Here 2D cross = parallelogram area.</p><pre id='out'></pre>
+  <script>
+const cross=(a,b)=>a.x*b.y-a.y*b.x; const a={x:80,y:0}, b={x:20,y:60};
+document.getElementById('out').textContent='a×b = '+cross(a,b)+' (expect 4800)\ntriangle area = '+0.5*cross(a,b);
+</script>
+</body>
+</html>

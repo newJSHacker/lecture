@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Two clocks</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>Two clocks</h1>
+  <p class="hint">Click = React-like state. Spin = frame loop. Do not setState every frame.</p>
+<canvas id="c" width="640" height="240"></canvas>
+<button id="b">select</button> <span id="s">idle</span>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); let sel=false, rot=0, last=performance.now();
+b.onclick=()=>{ sel=!sel; s.textContent=sel?'selected':'idle'; };
+function tick(now){ const dt=Math.min(0.05,(now-last)/1000); last=now; rot+=dt;
+ ctx.fillStyle='#111'; ctx.fillRect(0,0,c.width,c.height);
+ ctx.save(); ctx.translate(200,120); ctx.rotate(rot); ctx.fillStyle=sel?'#fc6':'#6cf'; ctx.fillRect(-20,-20,40,40); ctx.restore();
+ requestAnimationFrame(tick);} requestAnimationFrame(tick);
+</script>
+</body>
+</html>

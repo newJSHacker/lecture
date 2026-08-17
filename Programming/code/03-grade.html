@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>03 — conditions</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — conditions</h1>
+  <label>Score <input id='s' type='number' value='82'></label><pre id='out'></pre>
+  <script>
+function grade(n){ if(n>=90) return 'A'; if(n>=80) return 'B'; if(n>=70) return 'C'; return 'F'; }
+const s=document.getElementById('s'), out=document.getElementById('out');
+function go(){ const n=Number(s.value); out.textContent=n+' → '+grade(n)+'\n=== vs == : (0==\'\') is '+ (0=='') +' (forbidden in this course)'; }
+s.oninput=go; go();
+</script>
+</body>
+</html>

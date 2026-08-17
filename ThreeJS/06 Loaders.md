@@ -11,7 +11,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 const draco = new DRACOLoader();
-draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+draco.setDecoderPath("../vendor/jsm/libs/draco/gltf/");
 const loader = new GLTFLoader();
 loader.setDRACOLoader(draco);
 

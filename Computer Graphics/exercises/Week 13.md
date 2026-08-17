@@ -1,6 +1,6 @@
 # Extra exercises — Week 13 (GPU map)
 
-Lecture: [[Computer Graphics/Week 13 GPU Mapping]] · Demo: [16-webgl-cube](../code/16-webgl-cube.html)
+Lecture: [[Computer Graphics/Lecture 13 GPU Mapping]] · Demo: [16-webgl-cube](../code/16-webgl-cube.html)
 
 ## Written
 

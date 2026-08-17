@@ -1,6 +1,6 @@
 # Extra exercises — Week 14 (project studio)
 
-Lecture: [[Computational Geometry/Week 14 Project Studio]]  
+Lecture: [[Computational Geometry/Lecture 14 Project Studio]]  
 Demo: [20-project-sandbox.html](../code/20-project-sandbox.html)
 
 No new theory. These are desk-review prompts. Answer in the repo and the report outline, not in a new essay tonight.

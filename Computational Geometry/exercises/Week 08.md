@@ -1,6 +1,6 @@
 # Extra exercises — Week 8 (midterm + DCEL)
 
-Lecture: [[Computational Geometry/Week 08 Midterm and DCEL]]  
+Lecture: [[Computational Geometry/Lecture 08 Midterm and DCEL]]  
 Demo: [12-dcel-walk.html](../code/12-dcel-walk.html)
 
 No extra homework for credit. These are recitation / makeup / oral-exam drills.

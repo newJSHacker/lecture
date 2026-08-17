@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>HUD</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>HUD</h1>
+  <p class="hint">R3F still uses this sandwich. pointer-events on controls only.</p>
+<div class="hud"><canvas id="c" width="640" height="280"></canvas>
+<div class="overlay" style="pointer-events:none"><button style="pointer-events:auto" id="b">paint</button></div></div>
+  <script>
+const c=document.getElementById('c'), ctx=c.getContext('2d'); let on=false; function draw(){ ctx.fillStyle=on?'#633':'#123'; ctx.fillRect(0,0,c.width,c.height);} draw(); b.onclick=()=>{on=!on; draw();};
+</script>
+</body>
+</html>

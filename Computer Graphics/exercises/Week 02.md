@@ -1,6 +1,6 @@
 # Extra exercises — Week 2 (color)
 
-Lecture: [[Computer Graphics/Week 02 Color and Framebuffer]] · Demos: [02](../code/02-checker.html) [03](../code/03-alpha-over.html)
+Lecture: [[Computer Graphics/Lecture 02 Color and Framebuffer]] · Demos: [02](../code/02-checker.html) [03](../code/03-alpha-over.html)
 
 ## Written
 

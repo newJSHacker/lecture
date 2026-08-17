@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>05 — grid</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>05 — grid</h1>
+  <style>
+  .g { display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.5rem; }
+  .g div { background:#cde; padding:1.2rem; }
+  .g .feat { grid-column: 1 / span 1; grid-row: 1 / span 2; }
+</style>
+<div class="g"><div class="feat">featured</div><div>2</div><div>3</div><div>4</div><div>5</div></div>
+  
+</body>
+</html>

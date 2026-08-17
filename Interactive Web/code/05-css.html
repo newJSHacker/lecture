@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>05 — keyframes</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>05 — keyframes</h1>
+  <style>
+  .ball { width:40px; height:40px; background:#1a4f8b; border-radius:50%; animation: bounce 0.8s ease-in-out infinite alternate; }
+  @keyframes bounce { to { transform: translateY(80px); } }
+  @media (prefers-reduced-motion: reduce) { .ball { animation: none; } }
+</style>
+<div class="ball"></div>
+<p class="hint">Respect reduced motion.</p>
+  
+</body>
+</html>
