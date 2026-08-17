@@ -13,6 +13,7 @@ This repository is teaching material. The sample theses are reference documents,
 | [Graduation Requirements.md](Graduation%20Requirements.md) | Thesis, capstone, defense |
 | [04 Computational Geometry.md](04%20Computational%20Geometry.md) | 15-week course plan |
 | [Computational Geometry/](Computational%20Geometry/) | Full lecture notes, weeks 1–15 |
+| [Computational Geometry.pdf](Computational%20Geometry.pdf) | Printable notes + exercises + kernel |
 | [Computational Geometry/exercises/](Computational%20Geometry/exercises/) | Extra written + coding exercises per week |
 | [Computational Geometry/code/](Computational%20Geometry/code/) | Kernel + 20 Canvas demos |
 | [09 Computational Geometry Snippets.md](09%20Computational%20Geometry%20Snippets.md) | Demo catalog + copy-paste kernel |
