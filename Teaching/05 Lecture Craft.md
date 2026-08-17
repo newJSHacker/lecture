@@ -29,6 +29,7 @@ Times flex. The attempt does not disappear.
 - A lie students believe: “More triangles will fix this silhouette.”
 - A 30-second silent demo, then “write what you think happened.”
 - A single numerical surprise: three collinear points and a naive `if (area == 0)`.
+- One common-sense story, then the invariant: [[Teaching/25 Common Sense Anecdotes]]. Ninety seconds, then the board. Not a stand-up set.
 
 Openings that fail: “Last time we talked about… and today we will continue…”
 

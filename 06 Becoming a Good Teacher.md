@@ -24,6 +24,7 @@ Start at [[Teaching/00 How to Use These Notes]]. Read in order the first time. L
 | [[Teaching/02 How Students Learn]] | You are tempted to add more slides |
 | [[Teaching/03 Lesson Planning]] | You are writing next week’s one-pager |
 | [[Teaching/24 Session Guides]] | You need Say / Board / Slide for one meeting |
+| [[Teaching/25 Common Sense Anecdotes]] | You need a 40-second CS story that lands the kernel |
 | [[Teaching/04 First Day and Syllabus]] | Week 0 / Week 1 |
 | [[Teaching/05 Lecture Craft]] | The room is quiet and you are talking too much |
 | [[Teaching/06 Live Coding Pedagogy]] | The signature IGWT skill |

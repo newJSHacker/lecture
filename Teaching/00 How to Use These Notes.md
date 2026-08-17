@@ -18,7 +18,7 @@ They are not a theory of education degree. They are what a competent colleague w
 
 **If you have 90 minutes before the semester:** [[Teaching/01 What Good Teaching Looks Like]], [[Teaching/04 First Day and Syllabus]], [[Teaching/19 Checklists and Templates]], [[Teaching/23 First Year as an Instructor]].
 
-**If you have one week:** those four, then [[Teaching/02 How Students Learn]], [[Teaching/03 Lesson Planning]], [[Teaching/24 Session Guides]], [[Teaching/06 Live Coding Pedagogy]], [[Teaching/08 Feedback and Rubrics]], [[Teaching/12 Academic Integrity and AI]].
+**If you have one week:** those four, then [[Teaching/02 How Students Learn]], [[Teaching/03 Lesson Planning]], [[Teaching/24 Session Guides]], [[Teaching/25 Common Sense Anecdotes]], [[Teaching/06 Live Coding Pedagogy]], [[Teaching/08 Feedback and Rubrics]], [[Teaching/12 Academic Integrity and AI]].
 
 **If you have a month:** read the folder in numeric order. Do the exercises at the end of each note. Put artifacts in your teaching portfolio ([[Teaching/16 Teaching Portfolio and Growth]]).
 
@@ -33,6 +33,7 @@ They are not a theory of education degree. They are what a competent colleague w
 | Student in crisis | [[Teaching/11 Mentoring and Office Hours]] |
 | Argument in class | [[Teaching/13 Classroom Difficulties]] |
 | You have no time | [[Teaching/15 Time Management for Instructors]] |
+| Need a 40-second CS hook | [[Teaching/25 Common Sense Anecdotes]] |
 
 ## What “good” means here
 
