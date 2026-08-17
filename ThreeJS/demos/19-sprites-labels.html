@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>19 sprites — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:40rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>19 — Sprite labels</strong><br/>
+    CanvasTexture on a Sprite. Always faces the camera.
+    <div><a href="18-bloom.html">prev</a> · <a href="20-shadow-contact.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1e);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(3, 2, 4);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x334, 1));
+    const box = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshStandardMaterial({ color: 0x4a8fd4 })
+    );
+    scene.add(box);
+    function makeLabel(text) {
+      const cnv = document.createElement("canvas");
+      cnv.width = 256; cnv.height = 64;
+      const ctx = cnv.getContext("2d");
+      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      ctx.fillRect(0, 0, 256, 64);
+      ctx.fillStyle = "#eee";
+      ctx.font = "28px Segoe UI, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(text, 128, 42);
+      const tex = new THREE.CanvasTexture(cnv);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+      spr.scale.set(1.6, 0.4, 1);
+      return spr;
+    }
+    const label = makeLabel("hero cube");
+    label.position.set(0, 1.05, 0);
+    scene.add(label);
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>06 solar system — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:40rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>06 — Groups (solar system)</strong><br/>
+    Position is relative to the parent. Earth pivot vs moon pivot.
+    <div><a href="05-canvas-texture.html">prev</a> · <a href="07-raycaster.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x07070c);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(0, 5, 10);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+    const sunLight = new THREE.PointLight(0xffeeaa, 80, 40, 2);
+    scene.add(sunLight);
+    const sun = new THREE.Mesh(
+      new THREE.SphereGeometry(0.8, 32, 16),
+      new THREE.MeshBasicMaterial({ color: 0xffcc66 })
+    );
+    const earthPivot = new THREE.Group();
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(0.28, 24, 16),
+      new THREE.MeshStandardMaterial({ color: 0x3366bb, roughness: 0.5 })
+    );
+    earth.position.x = 3.2;
+    const moonPivot = new THREE.Group();
+    const moon = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08, 12, 8),
+      new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.8 })
+    );
+    moon.position.x = 0.55;
+    moonPivot.add(moon);
+    earth.add(moonPivot);
+    earthPivot.add(earth);
+    scene.add(sun, earthPivot);
+    const clock = new THREE.Clock();
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      const dt = clock.getDelta();
+      earthPivot.rotation.y += dt * 0.35;
+      moonPivot.rotation.y += dt * 1.8;
+      earth.rotation.y += dt * 1.2;
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

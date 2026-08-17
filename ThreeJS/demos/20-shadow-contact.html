@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>20 shadow knobs — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:42rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>20 — Shadow camera helper</strong><br/>
+    If the yellow frustum misses the mesh, there is no shadow. Tune bias if you see acne.
+    <div><a href="19-sprites-labels.html">prev</a> · <a href="index.html">index</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1e);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(8, 6, 10);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0x8899aa, 0x332211, 0.35));
+    const sun = new THREE.DirectionalLight(0xfff1dd, 2.2);
+    sun.position.set(5, 8, 4);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(1024, 1024);
+    Object.assign(sun.shadow.camera, { near: 0.5, far: 28, left: -8, right: 8, top: 8, bottom: -8 });
+    sun.shadow.bias = -0.0005;
+    sun.shadow.normalBias = 0.03;
+    scene.add(sun);
+    scene.add(new THREE.CameraHelper(sun.shadow.camera));
+    scene.add(new THREE.DirectionalLightHelper(sun, 0.8));
+    const box = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 1.4, 1.4),
+      new THREE.MeshStandardMaterial({ color: 0xe85d3a, roughness: 0.45 })
+    );
+    box.position.y = 0.8;
+    box.castShadow = true;
+    box.receiveShadow = true;
+    scene.add(box);
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(18, 18),
+      new THREE.MeshStandardMaterial({ color: 0x3a3a40, roughness: 0.95 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

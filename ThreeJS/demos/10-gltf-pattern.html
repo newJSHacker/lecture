@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>10 glTF pattern — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:42rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>10 — glTF load pattern</strong><br/>
+    Stand-in mesh uses the same <code>traverse</code> you run on <code>gltf.scene</code>. Swap in GLTFLoader when you have a .glb.
+    <div><a href="09-shader-material.html">prev</a> · <a href="11-particles.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1e);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(3, 2, 4);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x334, 0.5));
+    const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+    sun.position.set(4, 6, 3);
+    sun.castShadow = true;
+    scene.add(sun);
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(12, 12),
+      new THREE.MeshStandardMaterial({ color: 0x333338, roughness: 0.9 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    function prepareModel(root) {
+      root.traverse((o) => {
+        if (o.isMesh) {
+          o.castShadow = true;
+          o.receiveShadow = true;
+        }
+      });
+      scene.add(root);
+    }
+
+    const standIn = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(0.55, 0.18, 80, 12),
+      new THREE.MeshStandardMaterial({ color: 0xc45c38, roughness: 0.35, metalness: 0.2 })
+    );
+    standIn.position.y = 0.9;
+    prepareModel(standIn);
+
+    // Real load (will 404 here — that is the lesson: handle err, keep stand-in):
+    new GLTFLoader().load(
+      "models/hero.glb",
+      (gltf) => { scene.remove(standIn); prepareModel(gltf.scene); },
+      undefined,
+      () => { /* keep stand-in */ }
+    );
+
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

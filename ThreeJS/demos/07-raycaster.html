@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>07 raycaster — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block;cursor:pointer}
+    .hud{position:fixed;left:12px;top:12px;max-width:40rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>07 — Raycaster</strong><br/>
+    Click a cube. NDC y is flipped. Last hit gets emissive.
+    <div><a href="06-solar-system.html">prev</a> · <a href="08-instancing.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1e);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(0, 3, 8);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x334, 1));
+    const pickables = [];
+    const geo = new THREE.BoxGeometry(1, 1, 1);
+    for (let i = 0; i < 5; i++) {
+      const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x4a8fd4, roughness: 0.5 }));
+      m.position.set((i - 2) * 1.5, 0.5, 0);
+      m.userData.name = "box-" + i;
+      scene.add(m);
+      pickables.push(m);
+    }
+    scene.add(new THREE.GridHelper(12, 12, 0x444, 0x2a2a2a));
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    let selected = null;
+    canvas.addEventListener("pointerdown", (e) => {
+      const r = canvas.getBoundingClientRect();
+      pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+      pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(pickables, false);
+      if (selected) selected.material.emissive.setHex(0x000000);
+      selected = hits[0] ? hits[0].object : null;
+      if (selected) selected.material.emissive.setHex(0x442200);
+    });
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

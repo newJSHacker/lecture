@@ -1,6 +1,6 @@
 # IGWT Lectures
 
-Course notes for **Interactive Graphics and Web Technologies (IGWT)**, including a 15-week computational geometry course, sample graduation theses, a teaching handbook, and WebGL / GLSL snippet demos.
+Course notes for **Interactive Graphics and Web Technologies (IGWT)**, including a 15-week computational geometry course, sample graduation theses, a teaching handbook, and WebGL / Three.js / GLSL snippet demos.
 
 This repository is teaching material. The sample theses are reference documents, not submissions for academic credit. Timing tables in the short thesis are templates, not measured data.
 
@@ -23,6 +23,9 @@ This repository is teaching material. The sample theses are reference documents,
 | [WebGL/](WebGL/) | Pipeline demos + GLSL catalogs |
 | [WebGL/shadertoy/](WebGL/shadertoy/) | Fire, water, waterfall, ocean (Shadertoy-style) |
 | [WebGL.pdf](WebGL.pdf) | Printable snippet catalogs |
+| [08 Three.js Snippets.md](08%20Three.js%20Snippets.md) | Three.js catalog |
+| [ThreeJS/](ThreeJS/) | 20 runnable Three.js demos |
+| [ThreeJS.pdf](ThreeJS.pdf) | Printable Three.js catalogs |
 
 ## Computational geometry
 
@@ -31,6 +34,10 @@ Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20L
 ## WebGL and shaders
 
 Start at [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md). Open [WebGL/demos/index.html](WebGL/demos/index.html) for the triangle-through-PBR sequence. For fire, water, and waterfall, open [WebGL/shadertoy/index.html](WebGL/shadertoy/index.html) (same `mainImage` contract as [Shadertoy](https://www.shadertoy.com)). Copy functions from [WebGL/glsl/](WebGL/glsl/).
+
+## Three.js
+
+Start at [08 Three.js Snippets.md](08%20Three.js%20Snippets.md). Open [ThreeJS/demos/index.html](ThreeJS/demos/index.html) (CDN, three r170). Do this after a student can draw a WebGL triangle.
 
 ## Becoming a good teacher
 

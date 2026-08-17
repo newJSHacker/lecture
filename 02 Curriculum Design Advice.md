@@ -268,7 +268,7 @@ GPU visualizations
 
 Interactive demos
 
-Three.js examples
+Three.js examples — start from [[08 Three.js Snippets]]
 
 ---
 

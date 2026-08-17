@@ -102,7 +102,7 @@ Full plan: [[04 Computational Geometry]]. Notes: [[Computational Geometry/00 Lec
 
 **Hard:** the library hides the pipeline they just learned; they forget it.
 
-**Do:** keep asking “what is this in GL?” Load glTF; lights; a simple optimize (instance or fewer lights).
+**Do:** keep asking “what is this in GL?” Load glTF; lights; a simple optimize (instance or fewer lights). Live-code from [[08 Three.js Snippets]] demos 01–08.
 
 **Do not:** every add-on in the examples folder.
 

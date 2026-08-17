@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>04 materials — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:42rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>04 — Materials</strong><br/>
+    Basic, Lambert, Phong, Standard, Physical. Same geometry, same lights.
+    <div><a href="03-lights-shadows.html">prev</a> · <a href="05-canvas-texture.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a1e);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(0, 1.4, 8);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x334455, 0.6));
+    const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+    sun.position.set(3, 5, 4);
+    scene.add(sun);
+    const geo = new THREE.SphereGeometry(0.7, 32, 24);
+    const mats = [
+      new THREE.MeshBasicMaterial({ color: 0xe85d3a }),
+      new THREE.MeshLambertMaterial({ color: 0xe85d3a }),
+      new THREE.MeshPhongMaterial({ color: 0xe85d3a, shininess: 80, specular: 0x888888 }),
+      new THREE.MeshStandardMaterial({ color: 0xe85d3a, roughness: 0.35, metalness: 0.0 }),
+      new THREE.MeshPhysicalMaterial({ color: 0xe85d3a, roughness: 0.2, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.15 }),
+    ];
+    mats.forEach((mat, i) => {
+      const m = new THREE.Mesh(geo, mat);
+      m.position.x = (i - 2) * 1.7;
+      scene.add(m);
+    });
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

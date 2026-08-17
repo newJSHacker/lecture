@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>17 tone mapping — IGWT Three.js</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:40rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <div class="hud">
+    <strong>17 — ACES tone mapping</strong><br/>
+    Click canvas to toggle ACES vs none. Keep <code>outputColorSpace = SRGB</code>.
+    <div><a href="16-custom-buffer.html">prev</a> · <a href="18-bloom.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const canvas = document.getElementById("c");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x101014);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(2.5, 1.5, 3.5);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x223, 0.4));
+    const sun = new THREE.DirectionalLight(0xffffff, 4.5);
+    sun.position.set(2, 3, 2);
+    scene.add(sun);
+    scene.add(new THREE.Mesh(
+      new THREE.SphereGeometry(0.8, 48, 32),
+      new THREE.MeshStandardMaterial({ color: 0xe85d3a, roughness: 0.25, metalness: 0.15 })
+    ));
+    const note = document.querySelector(".hud");
+    canvas.addEventListener("click", () => {
+      const on = renderer.toneMapping === THREE.NoToneMapping;
+      renderer.toneMapping = on ? THREE.ACESFilmicToneMapping : THREE.NoToneMapping;
+      note.lastElementChild.textContent = "toneMapping = " + (on ? "ACES" : "None");
+    });
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      resize();
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
