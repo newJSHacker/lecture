@@ -1,49 +1,125 @@
 # Lecture 12 — Modules and structure
 
-**Course:** Introduction to Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** split files, functions as API  
-**Board first:** boxes: main.js → math.js
+**Week 12 of 15** · Introduction to Programming  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** `export function lerp` in `math.js`; `import` from `main.js`; serve locally  
+**Success check:** lerp runs from a second file on a local server, not as a 400-line paste
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Quiz from Lecture 11 (10 min, paper or LMS).
+- Demo: `Programming/code/05-clamp.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 12 | Goal: split a program without globals | Invariant: a file is a set of named functions; `file://` often blocks modules`
+
+## Board at the end (they photograph this)
+
+```
+main.js  ──import──►  math.js   export function lerp …
+
+<script type="module" src="main.js"></script>
+
+python -m http.server     (not file://)
+```
+
+## Slides today (cap: 6)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Error screenshot of CORS / module on `file://` | the red text is a photo |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Split helpers into a second file.
-2. Know script order or type=module.
-3. Export a function.
-4. Avoid circular dumps.
-5. Write a README run line.
+### Minutes 0–10 — Retrieve (quiz)
+
+Hand out the Lecture 11 quiz. Mark one item together. Then:
+
+**Say:** Later: `kernel.js` vs `raster.js`. Today: `math.js` with clamp and lerp. A 400-line file is not simplicity.
+
+**Ask:** Why might `import` fail when you double-click HTML? Wait. Want: `file://` / modules / CORS.
+
+**Board:** parked strip. Then boxes: main.js → math.js.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *split files, functions as API*.
+
+**Do not:** One 400-line file 'for simplicity'.
+
+### Minutes 10–12 — Frame
+
+**Say:** `type="module"` and `export function`. Same rule as WebGL demos. Interface: named functions, no hidden globals.
+
+**Ask:** Name two files you expect in Computer Graphics I’s kernel.
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** Script order vs modules. Modules are deferred and strict.
+
+**Board:** arrows main → math. Export / import syntax.
+
+**Say:** README run line is part of the program. Circular imports: do not.
+
+**Ask:** What is the export syntax for lerp?
+
+**They do:** Write the import line for lerp on paper.
+
+**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+
+### Minutes 35–50 — Show
+
+**Say:** Move clamp/lerp into math.js. Break it on `file://` on purpose if the room allows, then serve.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** Three-file mini: math, strings, main. README: how to serve.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Homework: why `file://` breaks modules; one export/import pair. Quiz: export syntax, why serve, two CG I file names.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
-
-## 1. Why files
-
-Later: kernel.js vs raster.js. Now: `math.js` with clamp/lerp.
-
-## 2. Browser modules
-
-`type="module"` and `export function`. file:// may fail — use a static server. Same rule as WebGL demos.
-
-## 3. Interface
-
-A file is a set of named functions. No hidden globals.
 
 ## Live coding (60 min)
 
-Move clamp/lerp into math.js; import in main.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Split lerp | Forget type=module. |
+| 15–35 | Serve | Plant file:// failure. |
+| 35–50 | README one line | They copy the command. |
+| 50–60 | They add clamp export | Circulate. |
+
+Point them at `Programming/code/05-clamp.html` as the after-class check, not as the lecture.
 
 ---
 
@@ -61,11 +137,12 @@ Move clamp/lerp into math.js; import in main.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting (they hear this now)
 
 1. export syntax (3)
 2. Why serve locally (4)
 3. Name two files in CG I kernel (3)
+
 
 ## Snippet
 
@@ -75,15 +152,31 @@ export function lerp(a,b,t){ return a + (b-a)*t; }
 
 ---
 
-## Common mistakes
+## Extra exercises
 
-- One 400-line file 'for simplicity'.
-- Forgetting to serve.
+See [[Programming/exercises/Week 12]].
 
 ---
 
-## Board drawings
+## Notes you may still need (from the outline)
 
-1. File arrows.
-2. export/import.
+**1. Why files.** Later: kernel.js vs raster.js. Now: `math.js` with clamp/lerp.
 
+**2. Browser modules.** `type="module"` and `export function`. file:// may fail — use a static server. Same rule as WebGL demos.
+
+**3. Interface.** A file is a set of named functions. No hidden globals.
+
+---
+
+## Common mistakes
+
+1. One 400-line file 'for simplicity'.
+2. Forgetting to serve.
+
+## If we run long, cut
+
+Bundlers. Keep export/import + serve.
+
+## If we run short, add
+
+`import { lerp as mix }` name only.

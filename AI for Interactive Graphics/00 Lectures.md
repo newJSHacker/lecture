@@ -3,7 +3,7 @@
 Parent plan: [[25 AI for Interactive Graphics]]  
 Semester 5 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 Mocks are first-class. Real vendor calls are optional and budgeted.
 

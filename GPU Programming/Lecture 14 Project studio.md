@@ -1,49 +1,76 @@
 # Lecture 14 — Project studio
 
-**Course:** GPU Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** GPGPU or WebGPU mini  
-**Board first:** headings
+**Week 14 of 15** · GPU Programming  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** GPGPU or WebGPU mini  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `GPU Programming/code/01-pong.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: data lives where the kernel runs`
+
+## Board at the end (they photograph this)
+
+```
+headings
+Headings.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Freeze.
-2. Fallback if WebGPU.
-3. Numbers.
-4. Report.
-5. Recording.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk review: packing diagram.
 
 ---
 
-## 1. Project
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Particles, life, blur chain, or compute noise.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Cuts
+### Minutes 65–75 — Land
 
-WGSL triangle + compute gradient is a valid cut.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Report
+**Do not:** “Any questions?” End on the clock.
 
-memory layout, dispatch, device.
+---
 
 ## Live coding (60 min)
 
-Desk review: packing diagram.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: GPGPU or WebGPU mini | Plant the first common mistake. |
+| 10–30 | Desk review: packing diagram. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -59,19 +86,24 @@ Desk review: packing diagram.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[GPU Programming/exercises/Week 14]].
 
-- unexplained sample dump.
+## Notes from the outline
 
----
+**1. Project.** Particles, life, blur chain, or compute noise.
+**2. Cuts.** WGSL triangle + compute gradient is a valid cut.
+**3. Report.** memory layout, dispatch, device.
 
-## Board drawings
+## If we run long, cut
 
-1. Headings.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

@@ -1,49 +1,76 @@
 # Lecture 8 — Midterm and raycaster
 
-**Course:** Three.js Development  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** midterm; picking oracle  
-**Board first:** Raycaster.intersectObjects
+**Week 8 of 15** · Three.js Development  
+**Meeting:** written midterm, then leftover lecture + live coding  
+**Kernel (after the exam):** midterm; picking oracle  
+**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+
+This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Printed midterm + spare paper. No laptop for the exam.
+- Topic list was announced at the end of Lecture 7.
+- After collection: demo `ThreeJS Development/code/` ready (local, no CDN).
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: Three.js is an engine, not the algorithm`
+
+## Midterm (about 50–60 min)
+
+Written. No laptop. Weeks 1–7.
+
+**Topics:** Sit midterm., Raycaster as oracle., Student must still know a ray., NDC mouse mapping.
+
+Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
+
+## Board at the end (after the exam; they photograph this)
+
+```
+Raycaster.intersectObjects
+Ray.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## After the exam (~15–25 min lecture)
 
-1. Sit midterm.
-2. Raycaster as oracle.
-3. Student must still know a ray.
-4. NDC mouse mapping.
-5. Not the CG geometry claim.
+**Say:** The exam is over. The leftover kernel is on the parked strip.
+
+**Ask:** Raycaster as oracle.
+
+**They do:** copy the leftover board.
+
+**Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
+
+**2. Picking.** [[Computational Geometry/Week 13]] vs engine raycast.
+
+**3. Demo.** picking demo.
+
+### Show / attempt if time
+
+**Say:** Click to highlight a mesh.
 
 ---
 
-## 1. Midterm
+**They do:** layer extra.
 
-scene graph, materials, lights, glTF, textures.
+---
 
-## 2. Picking
+## Live coding (remaining time)
 
-[[Computational Geometry/Week 13]] vs engine raycast.
-
-## 3. Demo
-
-picking demo.
-
-## Live coding (60 min)
-
-Click to highlight a mesh.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: midterm; picking oracle | Plant the first common mistake. |
+| 10–30 | Click to highlight a mesh. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
 
 ---
 
@@ -61,25 +88,18 @@ Click to highlight a mesh.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week — midterm. Next quiz is Lecture 9.
 
-## Snippet
+## Extra exercises
 
-```js
-raycaster.setFromCamera(ndc, camera);
-```
+See [[ThreeJS Development/exercises/Week 08]].
 
----
+## If we run long, cut
 
-## Common mistakes
+Live coding. Keep the leftover board.
 
-- claiming they implemented BVH because Raycaster hit.
+## If we run short, add
 
----
-
-## Board drawings
-
-1. Ray.
-
+One more worked leftover example.

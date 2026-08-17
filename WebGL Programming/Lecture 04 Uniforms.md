@@ -1,49 +1,123 @@
 # Lecture 4 — Uniforms
 
-**Course:** WebGL Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** mat4, time, colors  
-**Board first:** u_time slider
+**Week 4 of 15** · WebGL Programming  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** mat4, time, colors  
+**Success check:** uniform locations.
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Quiz from Lecture 3 (10 min, paper or LMS).
+- Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 4 | Goal: mat4, time, colors | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+
+## Board at the end (they photograph this)
+
+```
+u_time slider
+CPU/GPU arrow.
+```
+
+## Slides today (cap: 6)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. uniform locations.
-2. upload mat4 column-major.
-3. u_time.
-4. Don't upload unused every frame without measuring.
-5. CPU writes, shader reads.
+### Minutes 0–10 — Retrieve (quiz)
+
+Hand out the Lecture 3 quiz. Mark one item together. Then:
+
+**Say:** Uniforms. Constants for a draw call.
+
+**Ask:** uniform locations? Wait seven seconds. Take two answers.
+
+**Board:** parked strip. Then u_time slider.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *mat4, time, colors*.
+
+**Do not:** Row-major by accident.
+
+### Minutes 10–12 — Frame
+
+**Say:** Today’s question: mat4, time, colors. Kernel: mat4, time, colors. We freeze conventions and we do not invent timings.
+
+**Ask:** What would a wrong version of this look like? Want: row-major by accident.
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** Uniforms. Constants for a draw call.
+
+**Say:** Column-major. false in uniformMatrix4fv means already column-major — match kernel.js.
+
+**Say:** Demo. 04 rotating cube.
+
+**Ask:** uniform locations? Wait seven seconds. Take two answers.
+
+**They do:** On paper: Pause time.
+
+**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+
+### Minutes 35–50 — Show
+
+**Say:** Live demo: Spin with u_time; then a color uniform.. Zoom 140%. Read errors out loud.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** Pause time.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Photograph the board. Lab: Pause time.; Two objects different uniforms extra.. Homework: Written: uniform vs attribute.; Code: time.. Do not end on “any questions?” — end on the lab hook.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
-
-## 1. Uniforms
-
-Constants for a draw call. PVM later.
-
-## 2. Column-major
-
-false in uniformMatrix4fv means already column-major — match kernel.js.
-
-## 3. Demo
-
-04 rotating cube.
 
 ## Live coding (60 min)
 
-Spin with u_time; then a color uniform.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: mat4, time, colors | Plant the first common mistake. |
+| 10–30 | Spin with u_time; then a color uniform. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
 ---
 
@@ -61,11 +135,12 @@ Spin with u_time; then a color uniform.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting (they hear this now)
 
 1. uniform vs attribute (4)
 2. column-major (3)
 3. location of missing name (3)
+
 
 ## Snippet
 
@@ -75,14 +150,31 @@ gl.uniform1f(gl.getUniformLocation(prog,'u_time'), t);
 
 ---
 
-## Common mistakes
+## Extra exercises
 
-- row-major by accident.
-- getUniformLocation every pixel.
+See [[WebGL Programming/exercises/Week 04]].
 
 ---
 
-## Board drawings
+## Notes you may still need (from the outline)
 
-1. CPU/GPU arrow.
+**1. Uniforms.** Constants for a draw call. PVM later.
 
+**2. Column-major.** false in uniformMatrix4fv means already column-major — match kernel.js.
+
+**3. Demo.** 04 rotating cube.
+
+---
+
+## Common mistakes
+
+1. row-major by accident.
+2. getUniformLocation every pixel.
+
+## If we run long, cut
+
+Demo
+
+## If we run short, add
+
+Two objects different uniforms extra.

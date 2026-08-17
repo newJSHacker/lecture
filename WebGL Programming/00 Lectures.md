@@ -3,7 +3,7 @@
 Parent plan: [[17 WebGL Programming]]  
 Semester 3 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 Labs may copy `_gl.js` boilerplate; students fill shaders and uniforms.
 

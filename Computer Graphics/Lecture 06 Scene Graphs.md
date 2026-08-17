@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/06-vec3.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — Sun–Earth–Moon as three nested frames.
+- Parked strip: `Lecture 6 | Hierarchical models and scene graphs | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+Sun–Earth–Moon as three nested frames
+Nested frames, Sun–Earth–Moon.
+Tree with matrices on edges.
+RGB axes on a tilted cube.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -116,3 +143,8 @@ Done when moving the parent moves the child, and rotating the child does not mov
 1. Nested frames, Sun–Earth–Moon.
 2. Tree with matrices on edges.
 3. RGB axes on a tilted cube.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 06]].

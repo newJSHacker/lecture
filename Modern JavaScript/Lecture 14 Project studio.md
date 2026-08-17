@@ -1,49 +1,76 @@
 # Lecture 14 — Project studio
 
-**Course:** Modern JavaScript Development  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** small tool  
-**Board first:** headings
+**Week 14 of 15** · Modern JavaScript Development  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** small tool  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Modern JavaScript/code/08-modules.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: one binding, one module, no hidden globals`
+
+## Board at the end (they photograph this)
+
+```
+headings
+Headings.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. A module-based tool.
-2. Tests.
-3. Vite or static.
-4. README.
-5. Freeze.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk review: import graph + tests.
 
 ---
 
-## 1. Ideas
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-JSON pretty, fetch dashboard, module math lib with tests, mini bundler-free app.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Cuts
+### Minutes 65–75 — Land
 
-Drop TS. Keep modules + tests.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Report
+**Do not:** “Any questions?” End on the clock.
 
-Architecture, how to run.
+---
 
 ## Live coding (60 min)
 
-Desk review: import graph + tests.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: small tool | Plant the first common mistake. |
+| 10–30 | Desk review: import graph + tests. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -59,19 +86,24 @@ Desk review: import graph + tests.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Modern JavaScript/exercises/Week 14]].
 
-- Remote script URLs mixed into the repo.
+## Notes from the outline
 
----
+**1. Ideas.** JSON pretty, fetch dashboard, module math lib with tests, mini bundler-free app.
+**2. Cuts.** Drop TS. Keep modules + tests.
+**3. Report.** Architecture, how to run.
 
-## Board drawings
+## If we run long, cut
 
-1. Headings.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

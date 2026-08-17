@@ -8,6 +8,33 @@
 
 Session guide convention: [[Teaching/24 Session Guides]].
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/01-putpixel.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — object → world → view → clip → NDC → pixels.
+- Parked strip: `Lecture 1 | What computer graphics is | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+object → world → view → clip → NDC → pixels
+Six-space pipeline.
+Framebuffer as a grid; one pixel’s RGBA.
+The 15-week map as five boxes: pixels, transforms, camera, shade, GPU.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Classroom moves (75 min)
 
 | Min | Phase | Say / board / slide / they do |
@@ -223,3 +250,8 @@ Due start of Week 2.
 1. Six-space pipeline.
 2. Framebuffer as a grid; one pixel’s RGBA.
 3. The 15-week map as five boxes: pixels, transforms, camera, shade, GPU.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 01]].

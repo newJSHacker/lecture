@@ -1,49 +1,77 @@
 # Lecture 7 — Sprint: performance and a11y
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** measure + keyboard  
-**Board first:** table + checklist
+**Week 7 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** measure + keyboard  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 7 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+table + checklist
+Two tables.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Measured table on lab device.
-2. dpr cap.
-3. a11y checklist (HUD, focus, motion).
-4. Don't invent fps.
-5. Reduced motion if you animate.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Fill tables; fix the worst row.
 
 ---
 
-## 1. Perf
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-RTR/R3F habits. Cuts with screenshots.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. a11y
+### Minutes 65–75 — Land
 
-Teaching handbook. Canvas-only fails if you claimed a product.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. XR
+**Do not:** “Any questions?” End on the clock.
 
-Comfort defaults if XR.
+---
 
 ## Live coding (60 min)
 
-Fill tables; fix the worst row.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: measure + keyboard | Plant the first common mistake. |
+| 10–30 | Fill tables; fix the worst row. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,22 +88,24 @@ Fill tables; fix the worst row.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. device (3)
-2. a11y row (4)
-3. dpr (3)
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Capstone/exercises/Week 07]].
 
-- 'runs fine'.
-- strobe.
+## Notes from the outline
 
----
+**1. Perf.** RTR/R3F habits. Cuts with screenshots.
+**2. a11y.** Teaching handbook. Canvas-only fails if you claimed a product.
+**3. XR.** Comfort defaults if XR.
 
-## Board drawings
+## If we run long, cut
 
-1. Two tables.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

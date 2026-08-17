@@ -2,7 +2,7 @@
 
 **Interactive Graphics and Web Technologies** — six-semester program. Parent list: [[01 subjects]]. How to teach: [[02 Curriculum Design Advice]] · [[Teaching/00 How to Use These Notes]]. Degree rules: [[Graduation Requirements]].
 
-Every course below is 15 weeks: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Week 8 is the midterm. Week 14 is studio. Week 15 is 12+5 presentations (capstone: defense). Meeting files are named **Lecture 1–15**; the week is the calendar. Write them as session guides: [[Teaching/24 Session Guides]].
+Every course below is 15 weeks: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Week 8 is the midterm. Week 14 is studio. Week 15 is 12+5 presentations (capstone: defense). Meeting files are named **Lecture 1–15** and are **session guides** (Say / Ask / Board / Slide / They do): [[Teaching/24 Session Guides]].
 
 JavaScript is the programming language unless the department already standardized on Python. Conventions for 3D: right-handed, Y-up, look −Z, `P * V * M`, CCW — [[WebGL/01 Conventions]].
 

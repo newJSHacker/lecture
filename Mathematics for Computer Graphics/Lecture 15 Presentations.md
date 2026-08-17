@@ -1,49 +1,57 @@
 # Lecture 15 — Presentations
 
-**Course:** Mathematics for Computer Graphics  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** 12+5  
-**Board first:** rubric
+**Week 15 of 15** · Mathematics for Computer Graphics  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** 12+5; demo the visualizer; derive one formula if asked  
+**Success check:** they stop at 12 and they can say vector vs matrix vs frame
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 15 | 12 min + 5 questions | Invariant: no new features`
+
+## Board at the end (they photograph this)
+
+```
+12 + 5
+Questions: dot meaning? det 0? homogeneous w?
+Next: Computer Graphics I · Computational Geometry
+Habit: name the object — vector, matrix, frame
+```
+
+## Slides today
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Timer | not Wikipedia |
+
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Learning goals
+## The meeting
 
-1. Demo the visualizer.
-2. Derive one formula on the board if asked.
-3. Repo.
-4. Stop at 12.
-5. No new math.
+**Say:** Presentations. 12+5. Repo. Stop at 12.
+
+**Ask (every team, two of):** dot meaning? det 0? homogeneous w?
+
+**They do:** present. Live-coding hour is more talks.
+
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
-
-## 1. Questions
-
-dot meaning? det 0? homogeneous w?
-
-## 2. Next
-
-Computer Graphics I and Computational Geometry.
-
-## 3. Habit
-
-Name the object: vector, matrix, frame.
 
 ## Live coding (60 min)
 
-Present.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–60 | Talks | Cut at 12. No new math. |
 
 ---
 
@@ -59,19 +67,18 @@ Present.
 
 ---
 
-## Quiz (10 min)
+## Quiz
 
-1. None.
+None.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Mathematics for Computer Graphics/exercises/Week 15]].
 
-- Reading slides of Wikipedia.
+## If we run long, cut
 
----
+Slides of Wikipedia.
 
-## Board drawings
+## If we run short, add
 
-1. Rubric.
-
+One extra question on a missed formula.

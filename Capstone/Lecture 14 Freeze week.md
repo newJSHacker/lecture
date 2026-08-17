@@ -1,49 +1,76 @@
 # Lecture 14 — Freeze week
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** tag, report, video  
-**Board first:** git tag freeze
+**Week 14 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** tag, report, video  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+git tag freeze
+Tag.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Tag the repo.
-2. Report PDF/md.
-3. Final video.
-4. Don't commit Thursday night a new GI.
-5. TAs install from tag.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** TA run from README + tag.
 
 ---
 
-## 1. Freeze
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Code freeze except readme typos if department allows. The tag is what is graded.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Report
+### Minutes 65–75 — Land
 
-Problem, architecture, oracles, measures, limits, who wrote what, ethics/AI if any.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Studio
+**Do not:** “Any questions?” End on the clock.
 
-Desk check: TA runs the tag.
+---
 
 ## Live coding (60 min)
 
-TA run from README + tag.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: tag, report, video | Plant the first common mistake. |
+| 10–30 | TA run from README + tag. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,26 +87,24 @@ TA run from README + tag.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
-## Snippet
+## Extra exercises
 
-```
-git tag capstone-freeze
-```
+See [[Capstone/exercises/Week 14]].
 
----
+## Notes from the outline
 
-## Common mistakes
+**1. Freeze.** Code freeze except readme typos if department allows. The tag is what is graded.
+**2. Report.** Problem, architecture, oracles, measures, limits, who wrote what, ethics/AI if any.
+**3. Studio.** Desk check: TA runs the tag.
 
-- rewriting the engine.
-- missing tag.
+## If we run long, cut
 
----
+New features. Keep freeze.
 
-## Board drawings
+## If we run short, add
 
-1. Tag.
-
+One 60-second rehearsal in front of another team.

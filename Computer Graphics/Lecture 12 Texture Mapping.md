@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/12-zbuffer.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — a quad with (0,0),(1,0),(1,1),(0,1) labeled.
+- Parked strip: `Lecture 12 | Texture mapping | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+a quad with (0,0),(1,0),(1,1),(0,1) labeled
+UV square on a mesh.
+Nearest vs bilinear 2×2.
+Trapezoid road, affine vs correct.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -121,3 +148,8 @@ Done when rotating the cube does not smear a single texel across a face unless U
 1. UV square on a mesh.
 2. Nearest vs bilinear 2×2.
 3. Trapezoid road, affine vs correct.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 12]].

@@ -1,49 +1,77 @@
 # Lecture 6 — Sprint: interaction
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** the verb  
-**Board first:** input → state → view
+**Week 6 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** the verb  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 6 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+input → state → view
+Input-state-view.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. The user verb (configure, pick, teleport, scrub data).
-2. Undo or reset.
-3. Don't three verbs.
-4. Keyboard or documented limit.
-5. Log events extra.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Verb works on the slice; error state.
 
 ---
 
-## 1. Verb
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-XR/R3F/Web courses: one verb well.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. State
+### Minutes 65–75 — Land
 
-URL hash or JSON for the configuration — shareable extra.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Fail
+**Do not:** “Any questions?” End on the clock.
 
-Empty states, load errors.
+---
 
 ## Live coding (60 min)
 
-Verb works on the slice; error state.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: the verb | Plant the first common mistake. |
+| 10–30 | Verb works on the slice; error state. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,22 +88,24 @@ Verb works on the slice; error state.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. verb (3)
-2. reset (3)
-3. empty state (4)
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Capstone/exercises/Week 06]].
 
-- orbit-only and calling it interactive.
-- no error UI.
+## Notes from the outline
 
----
+**1. Verb.** XR/R3F/Web courses: one verb well.
+**2. State.** URL hash or JSON for the configuration — shareable extra.
+**3. Fail.** Empty states, load errors.
 
-## Board drawings
+## If we run long, cut
 
-1. Input-state-view.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

@@ -1,49 +1,77 @@
 # Lecture 8 — Midterm and debugging
 
-**Course:** Introduction to Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** midterm; then debugger  
-**Board first:** red squiggle vs runtime error
+**Week 8 of 15** · Introduction to Programming  
+**Meeting:** written midterm, then leftover lecture + live coding  
+**Kernel (after the exam):** read a stack trace; `console.assert`; one breakpoint  
+**Success check:** after the exam, they can point at the first stack line of a planted bug
+
+This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Printed midterm + spare paper. No laptop for the exam.
+- Topic list was announced at the end of Lecture 7.
+- After collection: demo `Programming/code/05-clamp.html` ready (local, no CDN).
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: syntax vs runtime vs wrong answer are three different diseases`
+
+## Midterm (about 50–60 min)
+
+Written. No laptop. Weeks 1–7.
+
+**Topics:** values and `'3'+1`; `let`/`const`; `===`; loops 0..n−1; functions that return; arrays (copy vs alias); objects `{x,y}`.
+
+Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
+
+## Board at the end (after the exam; they photograph this)
+
+```
+syntax     red squiggle / failed to parse
+runtime    throws: TypeError, ReferenceError
+wrong      runs, lies
+
+read the FIRST line of the stack
+console.assert(clamp(5,0,3)===3, 'clamp high')
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | A real TypeError stack, first line circled | do not draw Chrome’s UI |
 
 ---
 
-## Learning goals
+## After the exam (~15–25 min lecture)
 
-1. Sit a written midterm.
-2. Read a stack trace.
-3. Use a breakpoint.
-4. console.assert.
-5. Binary-search a bug.
+**Say:** This meeting is a **midterm**, then a short lecture on debugging. No laptop for the exam.
+
+**Ask:** Read a stack trace.
+
+**They do:** copy the leftover board.
+
+**Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
+
+**2. Debugging.** Syntax error vs runtime vs wrong answer. Breakpoints in DevTools. Do not `console.log` fifty times as the only strategy — but it is allowed.
+
+**3. assert.** `console.assert(lerp(0,10,0.5)===5)` is the seed of Week 19 kernel tests in later courses.
+
+### Show / attempt if time
+
+**Say:** After collection: a broken `average` that divides by `length-1`. Breakpoint on the return. `console.assert`.
+
+**They do:** They fix one planted bug in a starter after the exam (if time). Otherwise this is the lab.
 
 ---
 
-## 1. Midterm
+## Live coding (remaining time)
 
-Values, if, loops, functions, arrays, objects. No laptop. See the Week 7 list.
-
-## 2. Debugging
-
-Syntax error vs runtime vs wrong answer. Breakpoints in DevTools. Do not `console.log` fifty times as the only strategy — but it is allowed.
-
-## 3. assert
-
-`console.assert(lerp(0,10,0.5)===5)` is the seed of Week 19 kernel tests in later courses.
-
-## Live coding (60 min)
-
-After the exam: take a broken `average` and fix it with a breakpoint.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Broken average + breakpoint | They watch you; then they try. |
+| 15–40 | Three error kinds on the board | Plant a silent wrong answer (no throw). |
+| 40–60 | They write asserts for centroid | Circulate. |
 
 ---
 
@@ -60,27 +88,18 @@ After the exam: take a broken `average` and fix it with a breakpoint.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None — midterm week. Next quiz is Week 9.
+None this week — midterm. Next quiz is Lecture 9.
 
-## Snippet
+## Extra exercises
 
-```js
-console.assert(clamp(5,0,3)===3, 'clamp high');
-```
+See [[Programming/exercises/Week 08]].
 
----
+## If we run long, cut
 
-## Common mistakes
+Live coding if the exam ran long. Keep the error-kinds board.
 
-- Fixing by rewriting the whole file.
-- Ignoring the first stack line.
+## If we run short, add
 
----
-
-## Board drawings
-
-1. Error kinds.
-2. Call stack.
-
+Binary-search a bug: comment out half.

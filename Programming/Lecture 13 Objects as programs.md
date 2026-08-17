@@ -1,49 +1,128 @@
 # Lecture 13 — Objects as programs
 
-**Course:** Introduction to Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** tiny OOP, methods  
-**Board first:** object with a method arrow
+**Week 13 of 15** · Introduction to Programming  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** `class Point { dist(q){…} }` or record + `dist(p,q)` — student choice, with tests  
+**Success check:** they can say what `this` is in one sentence and they did not build an inheritance tree
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Quiz from Lecture 12 (10 min, paper or LMS).
+- Demo: `Programming/code/11-point.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 13 | Goal: a method that uses the object | Invariant: `this` is the receiver; losing it in a callback is a later course; inheritance is skipped`
+
+## Board at the end (they photograph this)
+
+```
+p.dist(q)     this is p
+
+class Point {
+  constructor(x,y){ this.x=x; this.y=y; }
+  dist(q){ return Math.hypot(this.x-q.x, this.y-q.y); }
+}
+
+has-a  (sprite has a point)    not  is-a  trees
+```
+
+## Slides today (cap: 6)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Optional: `this` undefined in a detached callback | the TypeError is a photo |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Write a method that uses this.
-2. Know this pitfalls in callbacks (name).
-3. Prefer functions plus records if this confuses.
-4. A class is optional sugar.
-5. Do not require inheritance.
+### Minutes 0–10 — Retrieve (quiz)
+
+Hand out the Lecture 12 quiz. Mark one item together. Then:
+
+**Say:** A method is a function stored on an object. `this` is the receiver. Inheritance is skipped — composition: a sprite **has** a point.
+
+**Ask:** In `p.dist(q)`, what is `this`? Wait. Want: `p`.
+
+**Board:** parked strip. Then object with a method arrow.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *tiny OOP, methods*.
+
+**Do not:** Deep inheritance for a homework.
+
+### Minutes 10–12 — Frame
+
+**Say:** `class` is optional sugar. Records plus functions are enough for IGWT math kernels. Demo `this` lost in a callback once; do not spend the hour on it.
+
+**Ask:** Why skip inheritance this term?
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** `counter.inc()` mutates. Prefer `add` that returns a **new** vector for the lab.
+
+**Board:** has-a vs is-a. Point method box.
+
+**Say:** BankAccount deposit/withdraw as the live-coding story; then Point.dist.
+
+**Ask:** Write dist of two points in one line with hypot.
+
+**They do:** On paper: a Vector add that returns new, does not mutate.
+
+**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+
+### Minutes 35–50 — Show
+
+**Say:** BankAccount, then Point. Plant an unbound `this`. Name it. Fix or avoid.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** Vector object with add (returns new). No inheritance. Tests.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Homework: `this` in one paragraph; Point class **or** record+functions, tests. Quiz: what is this, why no inheritance, dist. Next week is studio — freeze scope.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
-
-## 1. Methods
-
-`counter.inc()` mutates. this is the receiver. Losing this in a callback is a later JS course topic — demo once.
-
-## 2. class
-
-`class Point { constructor(x,y){...} dist(){...} }`. Optional. Records + functions are enough for IGWT math kernels.
-
-## 3. Inheritance
-
-Skip. Composition: a sprite has a point.
 
 ## Live coding (60 min)
 
-A `BankAccount` with deposit/withdraw; then a `Point.dist`.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | BankAccount | Negative withdraw policy. |
+| 15–40 | Point.dist | Plant this unbound. |
+| 40–50 | Has-a sprite | No extends. |
+| 50–60 | They write Vector.add | Circulate. |
+
+Point them at `Programming/code/11-point.html` as the after-class check, not as the lecture.
 
 ---
 
@@ -61,11 +140,12 @@ A `BankAccount` with deposit/withdraw; then a `Point.dist`.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting (they hear this now)
 
 1. What is this (3)
 2. Why inheritance is skipped (3)
 3. dist of two points (4)
+
 
 ## Snippet
 
@@ -78,15 +158,31 @@ class Point {
 
 ---
 
-## Common mistakes
+## Extra exercises
 
-- Deep inheritance for a homework.
-- this unbound.
+See [[Programming/exercises/Week 13]].
 
 ---
 
-## Board drawings
+## Notes you may still need (from the outline)
 
-1. Point method.
-2. Has-a vs is-a.
+**1. Methods.** `counter.inc()` mutates. this is the receiver. Losing this in a callback is a later JS course topic — demo once.
 
+**2. class.** `class Point { constructor(x,y){...} dist(){...} }`. Optional. Records + functions are enough for IGWT math kernels.
+
+**3. Inheritance.** Skip. Composition: a sprite has a point.
+
+---
+
+## Common mistakes
+
+1. Deep inheritance for a homework.
+2. this unbound.
+
+## If we run long, cut
+
+Getters. Keep this + no inheritance.
+
+## If we run short, add
+
+`#private` name only.

@@ -3,7 +3,7 @@
 Parent plan: [[27 Capstone Project]]  
 Semester 6 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 Week 8 is a demo checkpoint (15%). Week 15 is the defense. Invented frame rates still fail the budget section.
 

@@ -6,6 +6,33 @@
 **Board first:** two overlapping squares, straight alpha vs premultiplied  
 **Success check:** they can write the `over` formula and the byte index `(y * width + x) * 4`.
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/02-checker.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — two overlapping squares, straight alpha vs premultiplied.
+- Parked strip: `Lecture 2 | Color, pixels, and the framebuffer | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+two overlapping squares, straight alpha vs premultiplied
+Two squares, over.
+sRGB curve sketch (not to scale; labeled).
+Letterbox vs stretch.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Classroom moves (75 min)
 
 | Min | Phase | Say / board / slide / they do |
@@ -145,3 +172,8 @@ Done when over of opaque red on blue is red, and over of alpha 0 does not change
 1. Two squares, over.
 2. sRGB curve sketch (not to scale; labeled).
 3. Letterbox vs stretch.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 02]].

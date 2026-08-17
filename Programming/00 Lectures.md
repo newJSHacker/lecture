@@ -5,7 +5,7 @@ Semester 1 · IGWT
 
 Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
 
-The left column is the **week** (calendar, due dates). The files are **Lecture 1–15** (the meeting). Lectures 1–2 are full **session guides** (Say / Board / Slide). The rest follow the same machine; write them to that standard using [[Teaching/24 Session Guides]].
+The left column is the **week** (calendar, due dates). The files are **Lecture 1–15** (the meeting). All fifteen are **session guides** (Say / Board / Slide / They do): [[Teaching/24 Session Guides]]. Lectures 8 / 14 / 15 are midterm, studio, and presentations — not content lectures.
 
 Language: JavaScript unless the department already standardized on Python.
 

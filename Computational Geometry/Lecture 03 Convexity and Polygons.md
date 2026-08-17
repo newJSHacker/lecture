@@ -6,6 +6,34 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computational Geometry/code/03-segments.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — convex set vs convex polygon vs simple polygon.
+- Parked strip: `Lecture 3 | Convexity and polygons | Invariant: predicates before constructions; degeneracy is the course`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+convex set vs convex polygon vs simple polygon
+Convex set definition (segment stays inside).
+Four-polygon taxonomy.
+One reflex vertex with the two incident edges and a marked interior.
+Shoelace as sum of signed triangles from the origin.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |

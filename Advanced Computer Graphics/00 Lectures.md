@@ -3,7 +3,7 @@
 Parent plan: [[26 Advanced Computer Graphics]]  
 Semester 6 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 spp and ms must be measured. AI summaries of papers are not reading notes.
 

@@ -1,49 +1,76 @@
 # Lecture 14 — Project studio
 
-**Course:** Interactive Experience Development  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** interactive experience  
-**Board first:** headings
+**Week 14 of 15** · Interactive Experience Development  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** interactive experience  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Interactive Experience/code/02-two-clocks.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: 3D and DOM are two clocks`
+
+## Board at the end (they photograph this)
+
+```
+headings
+Headings.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Freeze beats.
-2. HUD + 3D.
-3. a11y path.
-4. Measured dpr/draws.
-5. Report.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk review: two clocks and HUD.
 
 ---
 
-## 1. Project
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Configurator teaser, museum object, audio viz, or scroll product.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Cuts
+### Minutes 65–75 — Land
 
-Drop physics. Keep Canvas + HUD + one beat.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. R3F vs vanilla
+**Do not:** “Any questions?” End on the clock.
 
-Vanilla Three.js is allowed if the HUD is still DOM — say why.
+---
 
 ## Live coding (60 min)
 
-Desk review: two clocks and HUD.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: interactive experience | Plant the first common mistake. |
+| 10–30 | Desk review: two clocks and HUD. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -59,19 +86,24 @@ Desk review: two clocks and HUD.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Interactive Experience/exercises/Week 14]].
 
-- no HUD, no keyboard.
+## Notes from the outline
 
----
+**1. Project.** Configurator teaser, museum object, audio viz, or scroll product.
+**2. Cuts.** Drop physics. Keep Canvas + HUD + one beat.
+**3. R3F vs vanilla.** Vanilla Three.js is allowed if the HUD is still DOM — say why.
 
-## Board drawings
+## If we run long, cut
 
-1. Headings.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computational Geometry/code/05-aabb.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — sort by x, build lower hull, build upper hull.
+- Parked strip: `Lecture 5 | Convex hull II (Graham and Andrew) | Invariant: predicates before constructions; degeneracy is the course`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+sort by x, build lower hull, build upper hull
+Graham polar sort around p0.
+Andrew: sorted list, lower stack, upper stack, join.
+AABB vs true hull around a diagonal stick (AABB is huge; hull is tight).
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |

@@ -1,49 +1,77 @@
 # Lecture 13 — Polish freeze approaching
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** bugs only  
-**Board first:** bug list vs feature list
+**Week 13 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** bugs only  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 13 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+bug list vs feature list
+Triage columns.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Triage: ship / fix / known.
-2. Don't a new renderer.
-3. Visual QA contact sheet.
-4. Licenses final.
-5. a11y pass.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Triage meeting recorded in README.
 
 ---
 
-## 1. Freeze policy
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Week 14 is freeze. This week is last polish. Features that are not musts become won't.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. QA
+### Minutes 65–75 — Land
 
-Two devices if you claimed them.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Known issues
+**Do not:** “Any questions?” End on the clock.
 
-A honest list is adult; hiding is not.
+---
 
 ## Live coding (60 min)
 
-Triage meeting recorded in README.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: bugs only | Plant the first common mistake. |
+| 10–30 | Triage meeting recorded in README. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,22 +88,24 @@ Triage meeting recorded in README.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. known issue (3)
-2. new renderer (4)
-3. two devices (3)
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Capstone/exercises/Week 13]].
 
-- scope creep 'while we're here'.
-- empty known issues and a crash.
+## Notes from the outline
 
----
+**1. Freeze policy.** Week 14 is freeze. This week is last polish. Features that are not musts become won't.
+**2. QA.** Two devices if you claimed them.
+**3. Known issues.** A honest list is adult; hiding is not.
 
-## Board drawings
+## If we run long, cut
 
-1. Triage columns.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

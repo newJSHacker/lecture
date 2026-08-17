@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/09-scene-graph.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — clip cube → square NDC → canvas, plus a y-flip.
+- Parked strip: `Lecture 9 | Clip, NDC, viewport, depth buffer | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+clip cube → square NDC → canvas, plus a y-flip
+Clip cube, divide, square.
+NDC y-up vs canvas y-down.
+Z-buffer as a second image.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -130,3 +157,8 @@ Done when a TA rotates the cube (slider) and holes do not pop from missing depth
 1. Clip cube, divide, square.
 2. NDC y-up vs canvas y-down.
 3. Z-buffer as a second image.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 09]].

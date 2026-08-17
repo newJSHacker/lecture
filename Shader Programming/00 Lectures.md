@@ -3,7 +3,7 @@
 Parent plan: [[20 Shader Programming]]  
 Semester 4 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 Labs may start from catalog files; the report must say what was copied.
 

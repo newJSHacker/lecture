@@ -1,49 +1,76 @@
 # Lecture 14 — Gallery studio
 
-**Course:** Shader Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** polish the four  
-**Board first:** headings
+**Week 14 of 15** · Shader Programming  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** polish the four  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Shader Programming/code/`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: a shader is a program over pixels or vertices`
+
+## Board at the end (they photograph this)
+
+```
+headings
+Headings.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Freeze GLSL.
-2. Serve locally.
-3. Citations.
-4. One debug view (uv, d, n).
-5. Report.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk review: debug view first.
 
 ---
 
-## 1. Cuts
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Drop terrain. Keep SDF + noise + gamma.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Debug
+### Minutes 65–75 — Land
 
-A key to show raw distance or normals.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Report
+**Do not:** “Any questions?” End on the clock.
 
-screenshots, uniforms table, citations.
+---
 
 ## Live coding (60 min)
 
-Desk review: debug view first.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: polish the four | Plant the first common mistake. |
+| 10–30 | Desk review: debug view first. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -59,19 +86,24 @@ Desk review: debug view first.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Shader Programming/exercises/Week 14]].
 
-- uncommented 400-line paste.
+## Notes from the outline
 
----
+**1. Cuts.** Drop terrain. Keep SDF + noise + gamma.
+**2. Debug.** A key to show raw distance or normals.
+**3. Report.** screenshots, uniforms table, citations.
 
-## Board drawings
+## If we run long, cut
 
-1. Headings.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

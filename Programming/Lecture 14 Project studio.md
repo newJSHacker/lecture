@@ -1,49 +1,80 @@
 # Lecture 14 — Project studio
 
-**Course:** Introduction to Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** console or canvas mini-game  
-**Board first:** the 8 report headings
+**Week 14 of 15** · Introduction to Programming  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** tests for the project kernel + README that runs on a lab machine  
+**Success check:** a TA can run the README and see a test or a playable loop without opening a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Programming/code/12-sandbox.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: pretty CSS without functions is a fail; freeze scope today`
+
+## Board at the end (they photograph this)
+
+```
+Report headings:
+1 Problem
+2 Functions
+3 Tests
+4 How to run
+5 Limitations
+6 Who wrote what
+
+If behind: drop graphics, keep functions + tests + README
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Clock / 12+5 rubric preview | do not paint a slide deck of features |
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Freeze scope.
-2. Have tests for the kernel.
-3. README runs on a lab machine.
-4. One teammate map.
-5. Rehearse 12+5.
+### Minutes 0–10 — Frame
+
+**Say:** This meeting is **studio**, not a content lecture. Guessing game, quiz, snake-in-console, or a tiny canvas clicker. Not Three.js.
+
+**Ask:** If you are behind, what do you cut first?
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk review: functions, tests, README. One teammate map. Rehearse 12+5.
+
+**They do:** You work. I circulate. Tests first.
+
+**Do not:** sit at the podium. Do not add features for them.
+
+### Minutes 65–75 — Land
+
+**Say:** Homework: report draft + repo. Next week presentations 12+5. No new features after freeze.
+
+**Do not:** “Any questions?” End on the clock.
 
 ---
-
-## 1. Scope
-
-Guessing game, quiz, snake-in-console, or a tiny canvas clicker. Not a Three.js game.
-
-## 2. Report
-
-Problem, functions, tests, limitations. 4–6 pages is enough at Semester 1.
-
-## 3. Cuts
-
-If behind: drop graphics, keep functions + tests + README.
 
 ## Live coding (60 min)
 
-Desk review: functions, tests, README.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Headings on the board | They photograph. |
+| 10–50 | Desk review | Kernel tests first. |
+| 50–60 | Rehearse one 60-second demo | Stop them at 60. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,27 +91,24 @@ Desk review: functions, tests, README.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week.
 
-## Snippet
+## Extra exercises
 
-```js
-console.assert(score >= 0);
-```
+See [[Programming/exercises/Week 14]].
 
----
+## Notes from the outline
 
-## Common mistakes
+**1. Scope.** Guessing game, quiz, snake-in-console, or a tiny canvas clicker. Not a Three.js game.
+**2. Report.** Problem, functions, tests, limitations. 4–6 pages is enough at Semester 1.
+**3. Cuts.** If behind: drop graphics, keep functions + tests + README.
 
-- Pretty CSS, no functions.
-- One git author, three names.
+## If we run long, cut
 
----
+New features. Keep freeze.
 
-## Board drawings
+## If we run short, add
 
-1. Headings.
-2. Clock.
-
+30s recording optional.

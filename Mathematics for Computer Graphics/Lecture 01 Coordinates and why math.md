@@ -1,49 +1,125 @@
 # Lecture 1 — Coordinates and why math
 
-**Course:** Mathematics for Computer Graphics  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** axes, points, units  
-**Board first:** x right, y up on paper; canvas y down
+**Week 1 of 15** · Mathematics for Computer Graphics  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** plot a point with y flipped; `deg * Math.PI / 180`  
+**Success check:** they can point at math +y up and canvas +y down on the same figure
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- No quiz (Lecture 1). Course contract lives in the land.
+- Demo: `Mathematics for Computer Graphics/code/01-axes.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 1 | Goal: put a point on an axis and not lie about y | Invariant: Math.cos takes radians; canvas y is down; say it every plot`
+
+## Board at the end (they photograph this)
+
+```
+math:     +x right, +y up
+canvas:   +x right, +y down     (CG I flips in the viewport)
+
+180° = π rad
+rad = deg * Math.PI / 180
+
+a cube is vertices; a camera is a matrix
+```
+
+## Slides today (cap: 6)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Optional: a canvas plot with y unflipped, labels upside-down | the bug is a photo |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Plot a point in 2D.
-2. Distinguish canvas y vs math y.
-3. Use radians in code.
-4. Name the CG I space chain as preview.
-5. Course contract.
+### Minutes 0–8 — Hook
+
+**Say:** A cube is vertices. A camera is a matrix. This course is the algebra Computer Graphics I will spend on pictures. Today: axes, points, radians.
+
+**Ask:** If you plot y = x on a canvas without flipping, which way does the line go? Wait.
+
+**Board:** parked strip. Then x right, y up on paper; canvas y down.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *axes, points, units*.
+
+**Do not:** Degrees in cos.
+
+### Minutes 8–12 — Frame
+
+**Say:** High-school algebra is enough. We freeze conventions: right-handed, Y-up on paper. Canvas is the exception we name.
+
+**Ask:** Does `Math.cos` want degrees or radians?
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** Graphics is numbers. Preview the CG I space chain as five boxes — do not derive P.
+
+**Board:** two y-axes side by side. Unit circle preview (cos, sin).
+
+**Say:** Convert on the board. Store radians in code. Degrees in `cos` is the professional disease.
+
+**Ask:** π radians in degrees? Want: 180.
+
+**They do:** Table: 30°, 45°, 90° → radians. Leave 45° as π/4, not a decimal they invent.
+
+**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+
+### Minutes 35–50 — Show
+
+**Say:** Plot 8 points on a canvas with y flipped; label axes. Demo `Mathematics for Computer Graphics/code/01-axes.html`.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** Distance between two points on paper, then in code. Eight minutes.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Lab: degree table + distance. Homework: why radians; plot y=sin(x) with the flip. Quiz: π in degrees, canvas y, point vs pixel.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
-
-## 1. Graphics is numbers
-
-A cube is vertices. A camera is a matrix. This course is the algebra Computer Graphics I will spend on pictures.
-
-## 2. Two y conventions
-
-Mathematics: +y up. HTML Canvas: +y down. CG I flips in the viewport. Say it every time a plot appears.
-
-## 3. Radians
-
-`Math.cos` takes radians. 180° = π. Convert on the board, store radians in code.
 
 ## Live coding (60 min)
 
-Plot 8 points on a canvas with y flipped; label axes.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Axes + one point | Plant y unflipped. |
+| 15–35 | Radian conversion | Plant `Math.cos(90)`. |
+| 35–50 | 8 points | Labels. |
+| 50–60 | They add distance | Circulate. |
+
+Point them at `Mathematics for Computer Graphics/code/01-axes.html` as the after-class check, not as the lecture.
 
 ---
 
@@ -61,11 +137,12 @@ Plot 8 points on a canvas with y flipped; label axes.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting (they hear this now)
 
 1. π radians in degrees (2)
 2. canvas y direction (4)
 3. point vs pixel (4)
+
 
 ## Snippet
 
@@ -75,15 +152,31 @@ const rad = deg * Math.PI / 180;
 
 ---
 
-## Common mistakes
+## Extra exercises
 
-- Degrees in cos.
-- Forgetting y-flip.
+See [[Mathematics for Computer Graphics/exercises/Week 01]].
 
 ---
 
-## Board drawings
+## Notes you may still need (from the outline)
 
-1. Two y-axes.
-2. Unit circle preview.
+**1. Graphics is numbers.** A cube is vertices. A camera is a matrix. This course is the algebra Computer Graphics I will spend on pictures.
 
+**2. Two y conventions.** Mathematics: +y up. HTML Canvas: +y down. CG I flips in the viewport. Say it every time a plot appears.
+
+**3. Radians.** `Math.cos` takes radians. 180° = π. Convert on the board, store radians in code.
+
+---
+
+## Common mistakes
+
+1. Degrees in cos.
+2. Forgetting y-flip.
+
+## If we run long, cut
+
+Space-chain preview. Keep two y’s and radians.
+
+## If we run short, add
+
+A third axis named only.

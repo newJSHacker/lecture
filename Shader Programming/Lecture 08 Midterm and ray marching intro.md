@@ -1,49 +1,76 @@
 # Lecture 8 — Midterm and ray marching intro
 
-**Course:** Shader Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** midterm; sphere trace idea  
-**Board first:** p += d * dir
+**Week 8 of 15** · Shader Programming  
+**Meeting:** written midterm, then leftover lecture + live coding  
+**Kernel (after the exam):** midterm; sphere trace idea  
+**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+
+This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Printed midterm + spare paper. No laptop for the exam.
+- Topic list was announced at the end of Lecture 7.
+- After collection: demo `Shader Programming/code/` ready (local, no CDN).
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: a shader is a program over pixels or vertices`
+
+## Midterm (about 50–60 min)
+
+Written. No laptop. Weeks 1–7.
+
+**Topics:** Sit midterm: gamma, uv, noise, fBm, SDF2D., Sphere tracing: step by d., Escape and hit thresholds., Don't start with 8 nested SDFs.
+
+Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
+
+## Board at the end (after the exam; they photograph this)
+
+```
+p += d * dir
+Ray with disks.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals
+## After the exam (~15–25 min lecture)
 
-1. Sit midterm: gamma, uv, noise, fBm, SDF2D.
-2. Sphere tracing: step by d.
-3. Escape and hit thresholds.
-4. Don't start with 8 nested SDFs.
-5. A sphere and a plane.
+**Say:** The exam is over. The leftover kernel is on the parked strip.
+
+**Ask:** Sphere tracing: step by d.
+
+**They do:** copy the leftover board.
+
+**Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
+
+**2. March.** From the camera, walk along the ray by the SDF distance. Safe if the field is a true SDF (Lipschitz). Blending/smoothmin can break safety — mention.
+
+**3. Demo.** [[WebGL/demos]] raymarch if present; else Shadertoy sphere.
+
+### Show / attempt if time
+
+**Say:** March a sphere; color by Lambert.
 
 ---
 
-## 1. Midterm
+**They do:** miss color.
 
-patterns, noise, SDF ops, gamma.
+---
 
-## 2. March
+## Live coding (remaining time)
 
-From the camera, walk along the ray by the SDF distance. Safe if the field is a true SDF (Lipschitz). Blending/smoothmin can break safety — mention.
-
-## 3. Demo
-
-[[WebGL/demos]] raymarch if present; else Shadertoy sphere.
-
-## Live coding (60 min)
-
-March a sphere; color by Lambert.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: midterm; sphere trace idea | Plant the first common mistake. |
+| 10–30 | March a sphere; color by Lambert. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
 
 ---
 
@@ -60,26 +87,18 @@ March a sphere; color by Lambert.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. None.
+None this week — midterm. Next quiz is Lecture 9.
 
-## Snippet
+## Extra exercises
 
-```glsl
-for(int i=0;i<64;i++){ float d = map(p); if(d<eps) break; p += rd*d; t+=d; if(t>far) break; }
-```
+See [[Shader Programming/exercises/Week 08]].
 
----
+## If we run long, cut
 
-## Common mistakes
+Live coding. Keep the leftover board.
 
-- fixed 0.01 steps only and calling it SDF march.
-- unbounded loops.
+## If we run short, add
 
----
-
-## Board drawings
-
-1. Ray with disks.
-
+One more worked leftover example.

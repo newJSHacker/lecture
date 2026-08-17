@@ -1,49 +1,77 @@
 # Lecture 5 — Sprint: assets and look
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** budgeted glTF  
-**Board first:** budget sheet
+**Week 5 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** budgeted glTF  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 5 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+budget sheet
+Budget.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Triangle and map budgets.
-2. One look-dev still.
-3. Don't 8k.
-4. Cite HDRI.
-5. LOD if needed.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Budget sheet + still vs engine.
 
 ---
 
-## 1. Assets
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Blender course habits. Viewer before engine.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Look
+### Minutes 65–75 — Land
 
-RTR stack: even a simple one, documented.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Legal
+**Do not:** “Any questions?” End on the clock.
 
-Licenses in a table.
+---
 
 ## Live coding (60 min)
 
-Budget sheet + still vs engine.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: budgeted glTF | Plant the first common mistake. |
+| 10–30 | Budget sheet + still vs engine. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,22 +88,24 @@ Budget sheet + still vs engine.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. tris (3)
-2. license (4)
-3. 8k (3)
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Capstone/exercises/Week 05]].
 
-- Sketchfab dump unlabeled.
-- look-dev only in Blender.
+## Notes from the outline
 
----
+**1. Assets.** Blender course habits. Viewer before engine.
+**2. Look.** RTR stack: even a simple one, documented.
+**3. Legal.** Licenses in a table.
 
-## Board drawings
+## If we run long, cut
 
-1. Budget.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

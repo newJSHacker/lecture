@@ -2,7 +2,7 @@
 
 Parent plan: [[04 Computational Geometry]]
 
-Teach these in order. Each note is one 75-minute lecture plus the live-coding, lab, homework, and quiz for that week.
+Teach these in order. Each note is one 75-minute **session guide** ([[Teaching/24 Session Guides]]) plus live-coding, lab, homework, and quiz for that week.
 
 | Week | Note |
 | ---: | --- |

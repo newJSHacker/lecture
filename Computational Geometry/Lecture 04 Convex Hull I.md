@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computational Geometry/code/04-point-in-polygon.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — rubber band around nails.
+- Parked strip: `Lecture 4 | Convex hull I (intuition and slow algorithms) | Invariant: predicates before constructions; degeneracy is the course`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+rubber band around nails
+Rubber band / extreme points.
+One full Jarvis wrap on 8 points with the candidate ray.
+Parabola reduction: points `(xi, xi²)` and the lower hull.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |

@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computational Geometry/code/01-orient.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — one picture of three points and a signed area.
+- Parked strip: `Lecture 1 | What computational geometry is | Invariant: predicates before constructions; degeneracy is the course`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+one picture of three points and a signed area
+Triangle ABC with an arrow on AB and a + / − on C.
+Four flagship problem thumbnails.
+The 15-week map as five boxes: primitives, hulls, sweep/tri, proximity/search, project.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |

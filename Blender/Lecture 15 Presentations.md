@@ -1,49 +1,58 @@
 # Lecture 15 — Presentations
 
-**Course:** Blender for Real-Time Graphics  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** 12+5  
-**Board first:** rubric: scale, UVs, engine
+**Week 15 of 15** · Blender for Real-Time Graphics  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** the demo runs; they can answer two questions  
+**Success check:** they stop on time; no new features; who wrote what is stated
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 15 | 12 min + 5 questions | Invariant: no new features`
+
+## Board at the end (they photograph this)
+
+```
+rubric: scale, UVs, engine
+Rubric.
+```
+
+## Slides today
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Learning goals
+## The meeting
 
-1. Show Blender → viewer → Three.js.
-2. State triangle count.
-3. Answer scale/normal questions.
-4. Repo with glb.
-5. Stop.
+**Say:** This meeting is presentations (12 min + 5 questions). No new features. I will cut you at the clock.
+
+**Ask (every team, two of):** Where are seams? Metalness? Why black in engine?
+
+**They do:** present. Live-coding hour is more talks.
+
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
-
-## 1. Questions
-
-Where are seams? Metalness? Why black in engine?
-
-## 2. Next
-
-Shaders and RTR will light this asset better.
-
-## 3. Habit
-
-Viewer before engine. Apply scale. Budget sheet.
 
 ## Live coding (60 min)
 
-Present.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: 12+5 | Plant the first common mistake. |
+| 10–30 | Present. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
 
 ---
 
@@ -59,19 +68,18 @@ Present.
 
 ---
 
-## Quiz (10 min)
+## Quiz
 
-1. None.
+None.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Blender/exercises/Week 15]].
 
-- Only Blender viewport, never engine.
+## If we run long, cut
 
----
+Q&A. Keep the clock.
 
-## Board drawings
+## If we run short, add
 
-1. Rubric.
-
+One extra question on tests or a limitation.

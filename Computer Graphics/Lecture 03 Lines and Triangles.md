@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/03-alpha-over.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — three points, a pixel inside, weights α, β, γ.
+- Parked strip: `Lecture 3 | Rasterizing lines and triangles in 2D | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+three points, a pixel inside, weights α, β, γ
+Triangle with α, β, γ labeled at a point.
+Two triangles of a quad; shared edge.
+Pixel-center grid overlay.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -147,3 +174,8 @@ Done when the centroid is the mix of the three vertex colors.
 1. Triangle with α, β, γ labeled at a point.
 2. Two triangles of a quad; shared edge.
 3. Pixel-center grid overlay.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 03]].

@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/04-barycentric.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — a point is not an arrow.
+- Parked strip: `Lecture 4 | Vectors, points, and frames | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+a point is not an arrow
+Point vs vector.
+Cross product right-hand rule.
+Object axes drawn in the world.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -117,3 +144,8 @@ Visualizer: draggable 2D vector, show length and a unit arrow.
 1. Point vs vector.
 2. Cross product right-hand rule.
 3. Object axes drawn in the world.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 04]].

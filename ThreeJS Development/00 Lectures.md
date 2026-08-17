@@ -3,7 +3,7 @@
 Parent plan: [[18 Three.js Development]]  
 Semester 3 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 Week 8 Raycaster is an oracle, not a BVH implementation.
 

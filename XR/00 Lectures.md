@@ -3,7 +3,7 @@
 Parent plan: [[24 Virtual and Augmented Reality]]  
 Semester 5 · IGWT
 
-Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz.
+Same weekly machine as the rest of the program: 75 min lecture, 60 min live coding, lab, homework, 10-minute quiz. Each meeting file is a **session guide** ([[Teaching/24 Session Guides]]).
 
 No jumpscares as required work. Invented 90 fps is still forbidden.
 

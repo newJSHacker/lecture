@@ -1,49 +1,59 @@
 # Lecture 13 — Survey presentations
 
-**Course:** Advanced Computer Graphics  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** the talks  
-**Board first:** rubric
+**Week 13 of 15** · Advanced Computer Graphics  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** the demo runs; they can answer two questions  
+**Success check:** they stop on time; no new features; who wrote what is stated
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 13 | 12 min + 5 questions | Invariant: no new features`
+
+## Board at the end (they photograph this)
+
+```
+rubric
+Rubric.
+```
+
+## Slides today
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
+
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Learning goals
+## The meeting
 
-1. Deliver the 12+3 talk.
-2. Questions.
-3. Notes in the repo.
-4. No new impl required this week.
-5. Listen to peers.
+**Say:** This meeting is presentations (12 min + 5 questions). No new features. I will cut you at the clock.
+
+**Ask (every team, two of):** 12 min + 3 questions. Recording optional.
+
+**They do:** present. Live-coding hour is more talks.
+
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
-
-## 1. Format
-
-12 min + 3 questions. Recording optional.
-
-## 2. Grading
-
-claim clarity, figure, limit, IGWT link.
-
-## 3. Next
-
-studio on tracer/volume/tiled — pick one line to polish.
 
 ## Live coding (60 min)
 
-Present talks.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: the talks | Plant the first common mistake. |
+| 10–30 | Present talks. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
 
 ---
 
@@ -60,19 +70,18 @@ Present talks.
 
 ---
 
-## Quiz (10 min)
+## Quiz
 
-1. None.
+None.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Advanced Computer Graphics/exercises/Week 13]].
 
-- skipping others' talks.
+## If we run long, cut
 
----
+Q&A. Keep the clock.
 
-## Board drawings
+## If we run short, add
 
-1. Rubric.
-
+One extra question on tests or a limitation.

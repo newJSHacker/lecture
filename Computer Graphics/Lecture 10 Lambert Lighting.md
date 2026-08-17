@@ -6,6 +6,33 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computer Graphics/code/10-lookat.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — `n·l` on a cube face, light arrow, clamped at 0.
+- Parked strip: `Lecture 10 | Lighting I (Lambert) | Invariant: a picture is an array; putPixel lives in pixels`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+`n·l` on a cube face, light arrow, clamped at 0
+Face with n and l, θ.
+Non-uniform scale, wrong vs right normals.
+Gouraud colors at vertices, blend inside.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
@@ -120,3 +147,8 @@ Done when rotating the light moves the terminator, and the debug-normal view is 
 1. Face with n and l, θ.
 2. Non-uniform scale, wrong vs right normals.
 3. Gouraud colors at vertices, blend inside.
+
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 10]].

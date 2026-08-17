@@ -1,49 +1,77 @@
 # Lecture 9 — Sprint: content completeness
 
-**Course:** Capstone Project  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** copy, data, beats  
-**Board first:** shot list or data schema
+**Week 9 of 15** · Capstone Project  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** copy, data, beats  
+**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Capstone/code/03-budget.html`.
+- Parked strip: `Lecture 9 | Goal: freeze and review | Invariant: the problem is users, not a tech list`
+
+## Board at the end (they photograph this)
+
+```
+shot list or data schema
+Data files.
+```
+
+## Slides today (cap: 2)
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
+
 
 ---
 
-## Learning goals
+## Lecture / studio (75 min)
 
-1. Real copy (not lorem) for the HUD.
-2. Data files, not hardcoded one-offs if you claimed data-driven.
-3. Don't placeholder Latin in the midterm-after.
-4. Citations.
-5. I18n extra.
+### Minutes 0–10 — Frame
+
+**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+
+**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Replace lorem; schema in /data.
 
 ---
 
-## 1. Content
+**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
 
-Experiences die on lorem. Museum labels, product names, units.
+**Do not:** sit at the podium. Do not add features for them.
 
-## 2. Schema
+### Minutes 65–75 — Land
 
-JSON from R3F week 10 habit.
+**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
 
-## 3. Integrity
+**Do not:** “Any questions?” End on the clock.
 
-AI copy labeled if used.
+---
 
 ## Live coding (60 min)
 
-Replace lorem; schema in /data.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Start the kernel: copy, data, beats | Plant the first common mistake. |
+| 10–30 | Replace lorem; schema in /data. | Fix on the board; they copy. |
+| 30–45 | Second pass / tests | Do not hide the error. |
+| 45–60 | They type; you circulate | Do not sit. |
+
+This slot is **more studio**, not a hidden lecture.
 
 ---
 
@@ -60,22 +88,24 @@ Replace lorem; schema in /data.
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting
 
-1. lorem OK now? (3)
-2. schema (4)
-3. AI copy (3)
+None this week.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Capstone/exercises/Week 09]].
 
-- lorem until week 15.
-- unlabeled gen text.
+## Notes from the outline
 
----
+**1. Content.** Experiences die on lorem. Museum labels, product names, units.
+**2. Schema.** JSON from R3F week 10 habit.
+**3. Integrity.** AI copy labeled if used.
 
-## Board drawings
+## If we run long, cut
 
-1. Data files.
+New features. Keep freeze.
 
+## If we run short, add
+
+One 60-second rehearsal in front of another team.

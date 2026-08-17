@@ -1,49 +1,59 @@
 # Lecture 15 — Presentations
 
-**Course:** Introduction to Programming  
-**Time:** 75 min lecture + 60 min live coding  
-**This week:** 12+5  
-**Board first:** rubric table
+**Week 15 of 15** · Introduction to Programming  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** 12 minute demo + 5 minutes questions; repo + short report  
+**Success check:** they stop at 12, name a loop and a function, and do not debug on stage
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-## Timing
+## Before you enter
 
-| Minutes | Do this |
-| ---: | --- |
-| 10 | Quiz from last week (Week 1: course contract) |
-| 25 | Core definition and one picture |
-| 45 | Worked examples / derivation |
-| 65 | Live pitfalls and policy |
-| 75 | Preview lab, then stand up for live coding |
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 15 | 12 min + 5 questions | Invariant: no new features`
+
+## Board at the end (they photograph this)
+
+```
+12 min  +  5 questions
+
+Must be able to point at: a loop, a function, a bug you fixed
+Who wrote what
+
+Rubric: demo runs · explanation · tests · honesty about limits
+```
+
+## Slides today
+
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Timer visible | not a slide of code |
+
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Learning goals
+## The meeting
 
-1. Demo the program.
-2. Answer two questions.
-3. Submit repo + short report.
-4. State who wrote what.
-5. No new features today.
+**Say:** This meeting is **presentations**. 12+5. Recording backup. No new features.
+
+**Ask (every team, two of):** 12 min + 5 questions. Recording backup.
+
+**They do:** present. Live-coding hour is more talks.
+
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
-
-## 1. Format
-
-12 min + 5 questions. Recording backup.
-
-## 2. Questions
-
-Where is a loop? A function? A bug you fixed?
-
-## 3. After
-
-This habit — name the function, test it — is the rest of IGWT.
 
 ## Live coding (60 min)
 
-None. Present.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–60 | Talks continue | Cut at 12. No debugging on stage. |
 
 ---
 
@@ -59,20 +69,18 @@ None. Present.
 
 ---
 
-## Quiz (10 min)
+## Quiz
 
-1. None.
+None.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Programming/exercises/Week 15]].
 
-- Debugging on stage.
+## If we run long, cut
 
----
+Extra features. Keep the clock.
 
-## Board drawings
+## If we run short, add
 
-1. Rubric.
-2. Clock.
-
+If a slot empties: one more question on tests.

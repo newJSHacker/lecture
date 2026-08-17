@@ -7,6 +7,34 @@
 
 ---
 
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
+
+## Before you enter
+
+- Demo: `Computational Geometry/code/10-sweep.html` (local, no CDN). Serve the folder if ES modules fail.
+- Backup: board first — three sites, three perpendicular bisectors, one Voronoi vertex.
+- Parked strip: `Lecture 10 | Voronoi diagrams | Invariant: predicates before constructions; degeneracy is the course`
+- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+
+## Board at the end (they photograph this)
+
+```
+three sites, three perpendicular bisectors, one Voronoi vertex
+Three sites, three bisectors, one vertex, empty circle.
+Hull sites with unbounded rays.
+Beach line: sweep line, two parabolas, a new site punching an arc.
+Dual teaser: connect sites whose cells share an edge — that is next week.
+```
+
+## Slides today (cap: 6)
+
+Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+
+## How to run this meeting
+
+Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
+
 ## Timing
 
 | Minutes | Do this |
