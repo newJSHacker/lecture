@@ -2,7 +2,7 @@
 
 A lesson plan is not a transcript of everything you will say. It is a sequence of **moves** with times, materials, and a fallback.
 
-The Sunday sheet below is one page. The file you teach from is a **session guide** (Say / Board / Slide / Ask / They do). Naming, template, and a worked Lecture 1: [[Teaching/24 Session Guides]]. One 40-second CS anecdote for the hook, if you want it: [[Teaching/25 Common Sense Anecdotes]].
+The Sunday sheet below is one page. The file you teach from is a **session guide** (Say / Board / Slide / Ask / They do). Naming, template, and a worked Lecture 1: [[Teaching/24 Session Guides]]. One 40-second CS anecdote for the hook, if you want it: [[Teaching/25 Common Sense Anecdotes]]. One dated field trend (not both unless they are the same point): [[Teaching/26 Field Trends]].
 
 Do not call the 15-week course markdown a “lecture plan.” That file is a **course plan**. Do not call the meeting “Week 01” when you walk in — say **Lecture 1**. Keep “Week 1 of 15” on the page for the calendar.
 

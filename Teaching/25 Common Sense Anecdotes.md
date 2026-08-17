@@ -1,6 +1,6 @@
 # 25 — Common sense and anecdotes for lectures
 
-Parent: [[Teaching/05 Lecture Craft]]. Session timing: [[Teaching/24 Session Guides]].
+Parent: [[Teaching/05 Lecture Craft]]. Session timing: [[Teaching/24 Session Guides]]. Dated field weather (WebGPU, splats, prompt-to-3D, EAA): [[Teaching/26 Field Trends]].
 
 These are **30–90 second** stories you can say out loud, then return to the kernel. They are not entertainment. Each one carries one computer-science idea that students already know from ordinary life, and that IGWT will later name.
 
@@ -374,7 +374,7 @@ If you cannot source the incident with a year and a mechanism, use the everyday 
 When you fill the one-pager in [[Teaching/03 Lesson Planning]]:
 
 1. Kernel in one noun phrase.
-2. **One** row from the fast picker above.
+2. **One** row from the fast picker above — or one trend from [[Teaching/26 Field Trends]], not a stack of both.
 3. The landing sentence written in the session guide **Say** block — not improvised from memory when you are tired.
 
 Gold-standard session guides already have a Frame. Put the anecdote there, then cut it if time dies. The kernel stays.
