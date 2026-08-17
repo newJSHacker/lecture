@@ -49,13 +49,15 @@ Teach after Mathematics for Computer Graphics and Introduction to Programming. F
 
 ### 4. Computer Graphics I
 
-- Rendering Pipeline
-- Coordinate Systems
-- Transformations
-- Cameras
-- Lighting
-- Rasterization
+Full plan: [[10 Computer Graphics I]] · lecture notes: [[Computer Graphics/00 Lectures]]
+
+- Rendering pipeline of spaces (object → pixel)
+- Software rasterizer (Canvas `ImageData`, barycentric, z-buffer)
+- Transformations and scene graphs
+- Cameras (`lookAt`) and projection
+- Lambert / Blinn-Phong, gamma
 - Textures
+- Map the same scene onto WebGL / Three.js in Week 13 (not the weekly engine)
 
 ---
 

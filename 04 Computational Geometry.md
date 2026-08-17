@@ -19,7 +19,7 @@ Teach it in **Semester 2**, after:
 - [[01 subjects#3. Mathematics for Computer Graphics]]
 - [[01 subjects#1. Introduction to Programming]]
 
-It should run **alongside or just before Computer Graphics I**. Students then reuse these algorithms in WebGL, Three.js, collision, meshes, terrain, and XR.
+It should run **alongside or just before** [[10 Computer Graphics I]]. Students then reuse these algorithms in WebGL, Three.js, collision, meshes, terrain, and XR.
 
 | Prerequisite | Why it is required |
 | --- | --- |

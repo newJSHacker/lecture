@@ -254,37 +254,28 @@ Responsive business website
 
 # Course 4 — Computer Graphics I
 
-This course is where things become exciting.
+Full plan and weekly notes: [[10 Computer Graphics I]] · [[Computer Graphics/00 Lectures]]
+
+This course is where things become exciting. Students implement a **tiny software renderer** first. Three.js is a named map of that pipeline in Week 13, not the weekly lab. GPU catalogs: [[07 WebGL and Shader Snippets]], [[08 Three.js Snippets]].
 
 ---
 
 Professor Preparation
 
-Animations
-
-Rendering pipeline diagrams
-
-GPU visualizations
-
-Interactive demos
-
-Three.js examples — start from [[08 Three.js Snippets]]
+- Pipeline posters (spaces; triangle → pixels)
+- Shared `vec3` / `mat4` / barycentric kernel
+- Software rasterizer starter (`ImageData`)
+- Course cube (12 triangles) reused from Week 6
+- Recorded 8-minute demos for Weeks 1–9
+- Three.js orbit demo as a **5-minute oracle** in Week 7 only
 
 ---
 
 Lecture Example
 
-Coordinate Systems
+Coordinate Systems (Week 7 / 9)
 
-Instead of drawing on PowerPoint...
-
-Professor opens Three.js.
-
-Moves the camera.
-
-Moves the cube.
-
-Shows
+Instead of drawing on PowerPoint only, the professor runs the **student** `lookAt` and PVM product so the cube moves. Optionally open Three.js for five minutes and say: this is the same V and P with different names. Then close it.
 
 World Space
 
@@ -298,29 +289,27 @@ Clip Space
 
 ↓
 
-Screen Space
-
-Students literally see the transformations.
+NDC → pixels
 
 ---
 
 Lab
 
-Create
+Weeks 1–12: `putPixel` through textured z-buffered cube.
 
-Rotating cube
+Week 13: same cube on WebGL2.
 
 ---
 
 Homework
 
-Solar system
+Solar system is **Week 6** (scene graph), not a substitute for the rasterizer.
 
 ---
 
 Project
 
-Interactive 3D Scene
+Interactive 3D scene **they can explain as a pipeline**. Rubric in [[10 Computer Graphics I]].
 
 ---
 
