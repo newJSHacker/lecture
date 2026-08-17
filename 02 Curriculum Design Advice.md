@@ -1,0 +1,668 @@
+
+Your curriculum is already at the level of a modern specialization rather than a traditional computer science program. The biggest challenge now is **how to teach each course**, not what topics to include.
+
+A good university course should be built around five pillars:
+
+1. **Theory** (Why?)
+    
+2. **Demonstration** (How?)
+    
+3. **Hands-on Practice** (Do it yourself)
+    
+4. **Project** (Apply the knowledge)
+    
+5. **Assessment** (Prove mastery)
+    
+
+I would standardize every course around the same structure so students always know what to expect.
+
+---
+
+# Standard Structure for Every Course
+
+Every week should include:
+
+|Part|Duration|Purpose|
+|---|---|---|
+|Lecture|60–90 min|Explain concepts|
+|Live Coding / Demo|60 min|Show implementation|
+|Lab|2–3 hours|Students practice|
+|Homework|4–8 hours|Individual work|
+|Weekly Quiz|10–15 min|Reinforce theory|
+
+Every semester should end with a substantial project rather than only a written examination.
+
+---
+
+# Example Course Design
+
+## Course 1 — Introduction to Programming
+
+### Goal
+
+Students learn computational thinking.
+
+---
+
+### Professor Preparation
+
+Before the semester:
+
+- Lecture slides
+    
+- Python examples
+    
+- Programming exercises
+    
+- Auto-grading system
+    
+- Coding standards
+    
+
+---
+
+### Weekly Lecture
+
+Week 1
+
+Variables
+
+Professor:
+
+- explains variables
+    
+- demonstrates examples
+    
+- shows common mistakes
+    
+
+Lab:
+
+Students build
+
+- calculator
+    
+- temperature converter
+    
+
+Homework:
+
+Simple calculator
+
+---
+
+Week 2
+
+Conditions
+
+Live coding
+
+```
+if
+else
+```
+
+Lab
+
+Guessing game
+
+Homework
+
+Rock-paper-scissors
+
+---
+
+Week 3
+
+Loops
+
+Live coding
+
+Pattern printing
+
+Homework
+
+Prime number finder
+
+---
+
+Continue similarly until
+
+- functions
+    
+- files
+    
+- OOP
+    
+- algorithms
+    
+
+---
+
+Final Project
+
+Console game
+
+or
+
+Task manager
+
+---
+
+Assessment
+
+30% Labs
+
+30% Homework
+
+10% Quiz
+
+30% Final Project
+
+---
+
+# Course 2 — Web Technologies
+
+Goal
+
+Understand how browsers work.
+
+---
+
+Professor prepares
+
+Slides
+
+Browser DevTools demos
+
+Code examples
+
+Assignments
+
+---
+
+Lecture
+
+Instead of
+
+"This is HTML"
+
+The professor writes HTML from scratch.
+
+Students watch.
+
+Then students repeat.
+
+---
+
+Example
+
+```
+HTML
+
+↓
+
+Browser Parser
+
+↓
+
+DOM
+
+↓
+
+CSSOM
+
+↓
+
+Layout
+
+↓
+
+Paint
+
+↓
+
+Composite
+```
+
+Students actually inspect DevTools.
+
+---
+
+Lab
+
+Create
+
+Portfolio website
+
+---
+
+Homework
+
+Clone Apple's homepage
+
+(Not perfectly,  
+just layout)
+
+---
+
+Project
+
+Responsive business website
+
+---
+
+# Course 4 — Computer Graphics I
+
+This course is where things become exciting.
+
+---
+
+Professor Preparation
+
+Animations
+
+Rendering pipeline diagrams
+
+GPU visualizations
+
+Interactive demos
+
+Three.js examples
+
+---
+
+Lecture Example
+
+Coordinate Systems
+
+Instead of drawing on PowerPoint...
+
+Professor opens Three.js.
+
+Moves the camera.
+
+Moves the cube.
+
+Shows
+
+World Space
+
+↓
+
+View Space
+
+↓
+
+Clip Space
+
+↓
+
+Screen Space
+
+Students literally see the transformations.
+
+---
+
+Lab
+
+Create
+
+Rotating cube
+
+---
+
+Homework
+
+Solar system
+
+---
+
+Project
+
+Interactive 3D Scene
+
+---
+
+# Course 7 — WebGL Programming
+
+Students should NOT begin with frameworks.
+
+They should struggle a little.
+
+Professor prepares
+
+- shader examples
+    
+- WebGL boilerplate
+    
+- debugging guide
+    
+
+---
+
+Lecture
+
+Explain
+
+GPU
+
+↓
+
+Vertex Buffer
+
+↓
+
+Vertex Shader
+
+↓
+
+Rasterizer
+
+↓
+
+Fragment Shader
+
+↓
+
+Framebuffer
+
+Every lecture should draw this pipeline.
+
+---
+
+Lab
+
+Draw
+
+Triangle
+
+Square
+
+Cube
+
+Textured Cube
+
+Lighting
+
+---
+
+Project
+
+Mini WebGL Engine
+
+---
+
+# Course 10 — Shader Programming
+
+Probably the signature course.
+
+Professor Preparation
+
+Many visual demonstrations.
+
+Never only equations.
+
+---
+
+Lecture Example
+
+Noise
+
+Professor changes one line.
+
+Students instantly see
+
+Clouds
+
+Fire
+
+Water
+
+Terrain
+
+---
+
+Lab
+
+Create
+
+Animated Lava
+
+---
+
+Homework
+
+Procedural Galaxy
+
+---
+
+Project
+
+Shader Gallery
+
+Each student creates
+
+5 original shaders.
+
+---
+
+# Course 13 — Interactive Experience Development
+
+Now students combine everything.
+
+Lecture
+
+Architecture
+
+React
+
+↓
+
+React Three Fiber
+
+↓
+
+Three.js
+
+↓
+
+WebGL
+
+---
+
+Professor demonstrates
+
+Interactive landing page
+
+Scroll animations
+
+Audio
+
+Physics
+
+Model loading
+
+---
+
+Project
+
+Award-style website
+
+Like
+
+Codrops
+
+Awwwards
+
+FWA
+
+---
+
+# Course 17 — Capstone
+
+This should resemble a professional software project.
+
+Students work in teams of 3–5.
+
+---
+
+Every week
+
+Sprint planning
+
+↓
+
+Code review
+
+↓
+
+Presentation
+
+↓
+
+Feedback
+
+---
+
+Deliverables
+
+Proposal
+
+Research
+
+Prototype
+
+Alpha
+
+Beta
+
+Final Release
+
+Presentation
+
+Documentation
+
+GitHub repository
+
+Deployment
+
+---
+
+# Professor Responsibilities
+
+Every instructor should prepare the following before the semester begins:
+
+### 1. Lecture Slides
+
+Not text-heavy.
+
+Lots of diagrams.
+
+Animations.
+
+---
+
+### 2. Live Coding Examples
+
+Every lecture includes coding.
+
+Students learn by watching experts think.
+
+---
+
+### 3. Lab Manual
+
+Step-by-step exercises.
+
+Expected output.
+
+Hints.
+
+Common mistakes.
+
+---
+
+### 4. Homework
+
+Increasing difficulty.
+
+Should require independent thinking.
+
+---
+
+### 5. Project Specification
+
+Requirements
+
+Rubric
+
+Examples
+
+Deadline
+
+Evaluation criteria
+
+---
+
+### 6. Video Recordings
+
+Record every lecture.
+
+Students can review difficult concepts.
+
+---
+
+### 7. GitHub Repository
+
+Each course has
+
+```
+course/
+
+lecture1/
+
+lecture2/
+
+starter-code/
+
+solutions/
+
+assignments/
+
+resources/
+```
+
+---
+
+# Teaching Philosophy
+
+A good ratio for this specialization is:
+
+|Activity|Percentage|
+|---|--:|
+|Theory|25%|
+|Live Demonstration|25%|
+|Hands-on Labs|35%|
+|Project Work|15%|
+
+Graphics, WebGL, shaders, and interactive systems are learned primarily by building rather than memorizing.
+
+## Additional recommendations for an IGWT program
+
+To make **Interactive Graphics and Web Technologies (IGWT)** distinctive and industry-aligned, consider adding these program-wide elements:
+
+- **Version Control & Collaboration:** Introduce Git and GitHub in Semester 1 and require them in every project.
+    
+- **Software Engineering Practices:** Cover debugging, testing, code reviews, documentation, and project organization beginning in Semester 2.
+    
+- **Portfolio Development:** Require students to publish a portfolio website and document each major project. By graduation, each student should have 8–10 polished portfolio pieces.
+    
+- **Industry Integration:** Invite guest lecturers from graphics, visualization, game, XR, and creative technology companies each semester.
+    
+- **Open-Source Contribution:** Encourage students in the later semesters to contribute to libraries such as Three.js, React Three Fiber, or creative coding projects.
+    
+- **Research and Ethics:** In AI-related courses, discuss copyright, responsible AI use, accessibility, performance, and sustainability alongside technical implementation.
+    
+
+With these additions, graduates would be prepared not only as web developers, but as specialists in interactive graphics, real-time rendering, visualization, XR, and AI-enhanced creative technologies. This combination remains uncommon in many computer science departments and would give the program a clear identity.
