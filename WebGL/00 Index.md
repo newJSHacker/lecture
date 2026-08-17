@@ -33,6 +33,7 @@ Open files under `WebGL/demos/`. They load `demos/_gl.js` with a classic `<scrip
 | `demos/23-gpgpu-pingpong.html` | Two textures, particle integrate | 12 |
 | `demos/24-matcap.html` | View-space normal → matcap UV | 10 |
 | `demos/25-webgl1-triangle.html` | Same triangle in WebGL1 / GLSL 100 | 7 |
+| `shadertoy/index.html` | Fire, water, waterfall, ocean, … (Shadertoy `mainImage`) | 10 |
 
 ## GLSL / JS catalogs (copy-paste)
 
@@ -48,6 +49,7 @@ Open files under `WebGL/demos/`. They load `demos/_gl.js` with a classic `<scrip
 | [[WebGL/15 Postprocess]] | Fullscreen FX |
 | [[WebGL/16 Effects]] | Fog, fire, triplanar, … |
 | [[WebGL/17 Particles and GPGPU]] | Points, instancing, ping-pong |
+| [[WebGL/18 Shadertoy Effects]] | How to paste fire/water into Shadertoy |
 
 ## How to use in a lab
 

@@ -71,6 +71,8 @@ vec3 N = normalize(vec3(-hx, 2.0 * e, -hz));
 
 Demo: `20-water.html`.
 
+Full-screen Shadertoy versions (fire, lava, waterfall, ocean): [[WebGL/18 Shadertoy Effects]] and `WebGL/shadertoy/`.
+
 ## Fire / lava
 
 ```glsl

@@ -20,7 +20,8 @@ This repository is teaching material. The sample theses are reference documents,
 | [Teaching/](Teaching/) | Pedagogy, labs, feedback, integrity, supervision |
 | [Teaching.pdf](Teaching.pdf) | Printable handbook (all Teaching notes) |
 | [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md) | WebGL2 / GLSL catalog |
-| [WebGL/](WebGL/) | 25 runnable demos + copy-paste GLSL |
+| [WebGL/](WebGL/) | Pipeline demos + GLSL catalogs |
+| [WebGL/shadertoy/](WebGL/shadertoy/) | Fire, water, waterfall, ocean (Shadertoy-style) |
 | [WebGL.pdf](WebGL.pdf) | Printable snippet catalogs |
 
 ## Computational geometry
@@ -29,7 +30,7 @@ Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20L
 
 ## WebGL and shaders
 
-Start at [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md). Open [WebGL/demos/index.html](WebGL/demos/index.html) for the triangle-through-PBR sequence. Copy functions from [WebGL/glsl/](WebGL/glsl/).
+Start at [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md). Open [WebGL/demos/index.html](WebGL/demos/index.html) for the triangle-through-PBR sequence. For fire, water, and waterfall, open [WebGL/shadertoy/index.html](WebGL/shadertoy/index.html) (same `mainImage` contract as [Shadertoy](https://www.shadertoy.com)). Copy functions from [WebGL/glsl/](WebGL/glsl/).
 
 ## Becoming a good teacher
 

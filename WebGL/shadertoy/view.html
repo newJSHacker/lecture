@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Shadertoy player — IGWT</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;right:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+         background:rgba(0,0,0,.55);padding:8px 10px;border-radius:8px;max-width:46rem}
+    select,button{font:inherit;background:#222;color:#eee;border:1px solid #555;border-radius:4px;padding:4px 8px}
+    a{color:#9cf}
+    .warn{color:#fc6}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <a href="index.html">gallery</a>
+    <select id="pick"></select>
+    <span id="note"></span>
+    <span>Paste <code id="file"></code> on Shadertoy Image tab.</span>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="../demos/_gl.js"></script>
+  <script src="player.js"></script>
+  <script src="embed.js"></script>
+  <script>
+    const pick = document.getElementById("pick");
+    const params = new URLSearchParams(location.search);
+    const start = params.get("s") || "fire";
+    (window.SHADERTOY_LIST || []).forEach((s) => {
+      const o = document.createElement("option");
+      o.value = s.id; o.textContent = s.title + (s.warn ? " (flicker)" : "");
+      if (s.id === start) o.selected = true;
+      pick.appendChild(o);
+    });
+    let running = null;
+    function load(id) {
+      const src = window.SHADERTOY_SHADERS[id];
+      if (!src) { document.getElementById("note").textContent = "missing " + id; return; }
+      const meta = (window.SHADERTOY_LIST || []).find((x) => x.id === id);
+      document.getElementById("file").textContent = id + ".glsl";
+      document.getElementById("note").innerHTML = meta && meta.warn
+        ? "<span class='warn'>May flicker — look away if needed.</span>" : "";
+      if (running) running.stop();
+      const old = document.getElementById("c");
+      const next = old.cloneNode();
+      old.parentNode.replaceChild(next, old);
+      try { running = Shadertoy.run(next, src); }
+      catch (e) { document.getElementById("note").textContent = String(e); }
+    }
+    pick.addEventListener("change", () => {
+      history.replaceState(null, "", "view.html?s=" + encodeURIComponent(pick.value));
+      load(pick.value);
+    });
+    load(pick.value);
+  </script>
+</body>
+</html>

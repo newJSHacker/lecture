@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>IGWT Shadertoy-style effects</title>
+  <style>
+    body{font:16px/1.5 "Segoe UI",sans-serif;max-width:52rem;margin:2rem auto;padding:0 1rem;color:#222;background:#f6f6f6}
+    h1{font-size:1.5rem}
+    a{color:#1a4f8b}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:0.7rem;margin:1.2rem 0}
+    .card{display:block;background:#fff;border:1px solid #ddd;border-radius:8px;padding:0.8rem 0.9rem;text-decoration:none;color:inherit}
+    .card:hover{border-color:#1a4f8b}
+    .warn{color:#a40;font-size:0.8rem}
+    code{font-size:0.85em}
+  </style>
+</head>
+<body>
+  <h1>Shadertoy-style effects</h1>
+  <p>Fire, water, waterfall, and related Image shaders. Each file pastes into
+    <a href="https://www.shadertoy.com">shadertoy.com</a> (Image tab, no textures).
+    Local player uses the same <code>mainImage</code> / <code>iTime</code> contract.</p>
+  <p><a href="../demos/index.html">WebGL pipeline demos</a> ·
+     <a href="../18 Shadertoy Effects.md">teaching notes</a></p>
+  <p class="warn">Lightning, plasma, and fire can flicker. Warn the room first.</p>
+  <div class="grid" id="grid"></div>
+  <script src="embed.js"></script>
+  <script>
+    const g = document.getElementById("grid");
+    (window.SHADERTOY_LIST || []).forEach((s) => {
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = "view.html?s=" + encodeURIComponent(s.id);
+      a.innerHTML = "<strong>" + s.title + "</strong><br><code>" + s.id + ".glsl</code>"
+        + (s.warn ? "<div class='warn'>may flicker</div>" : "");
+      g.appendChild(a);
+    });
+  </script>
+</body>
+</html>

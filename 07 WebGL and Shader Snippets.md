@@ -25,12 +25,14 @@ These are teaching snippets, not a production engine. Each demo is one idea. Ope
 | [[WebGL/15 Postprocess]] | Fullscreen pass, bloom-lite, FX, color |
 | [[WebGL/16 Effects]] | Fog, dissolve, water, fire, triplanar, matcap, barycentric |
 | [[WebGL/17 Particles and GPGPU]] | Points, ping-pong, instancing |
+| [[WebGL/18 Shadertoy Effects]] | Fire, water, waterfall, Shadertoy contract |
 | [[WebGL/demos/]] | Self-contained HTML you can open and edit |
+| `WebGL/shadertoy/` | 22 Image shaders + local player |
 
 ## Teaching use
 
 - Course 7: demos 01–08, then [[WebGL/10 Pipeline]]
-- Course 10: demos 09–12, 16, 20–21 and [[WebGL/13 Noise]], [[WebGL/14 SDF and Ray Marching]]
+- Course 10: demos 09–12, 16, 20–21, [[WebGL/13 Noise]], [[WebGL/14 SDF and Ray Marching]], and `WebGL/shadertoy/` (fire / water / waterfall)
 - Course 11: demos 13, 16, 22 and [[WebGL/12 Lighting]], [[WebGL/15 Postprocess]]
 - Course 12: demos 14–15, 23 and [[WebGL/17 Particles and GPGPU]]
 
