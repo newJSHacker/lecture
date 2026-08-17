@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>08 Rotate about center</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>08 — Rotate about center</h1>
+  <p class="hint">T(c) * R * T(−c). Without the sandwich the triangle orbits the origin.</p>
+  <button data-toggle="aboutC">Toggle about-center</button>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    Raster.boot({
+      state: { aboutC: true },
+      draw(img, s) {
+        CG.clear(img, 24, 24, 28);
+        const c = { x: 0.8, y: 0.2, z: 0 };
+        const Tc = CG.m4translate(c.x, c.y, c.z);
+        const Tm = CG.m4translate(-c.x, -c.y, -c.z);
+        const R = CG.m4rotateZ(s.t);
+        const M = s.aboutC ? CG.m4mul(Tc, CG.m4mul(R, Tm)) : R;
+        const V = CG.m4lookAt({x:0,y:0,z:4},{x:0,y:0,z:0},{x:0,y:1,z:0});
+        const P = CG.m4ortho(-2, 2, -1.25, 1.25, 0.1, 20);
+        const PVM = CG.m4mul(P, CG.m4mul(V, M));
+        const verts = [[c.x-0.4,c.y-0.25,0],[c.x+0.4,c.y-0.25,0],[c.x,c.y+0.35,0]];
+        const pa = CG.projectTri({ p: verts, uv:[[0,0],[1,0],[0,1]] }, PVM, img.width, img.height);
+        if (pa) CG.fillTriangle(img, pa[0], pa[1], pa[2], [240,200,70], [240,200,70], [240,120,40]);
+        CG.drawWorldAxes(img, CG.m4mul(P, V), 1);
+      },
+      status(s) { return s.aboutC ? "T(c) R T(-c)  spin in place" : "R only  orbits origin"; }
+    });
+  </script>
+</body>
+</html>

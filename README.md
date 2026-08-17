@@ -14,6 +14,10 @@ This repository is teaching material. The sample theses are reference documents,
 | [04 Computational Geometry.md](04%20Computational%20Geometry.md) | 15-week computational geometry plan |
 | [10 Computer Graphics I.md](10%20Computer%20Graphics%20I.md) | 15-week Computer Graphics I plan |
 | [Computer Graphics/](Computer%20Graphics/) | CG I lecture notes, weeks 1–15 |
+| [Computer Graphics/exercises/](Computer%20Graphics/exercises/) | Extra written + coding exercises per week |
+| [Computer Graphics/code/](Computer%20Graphics/code/) | Software-rasterizer kernel + 18 demos |
+| [11 Computer Graphics Snippets.md](11%20Computer%20Graphics%20Snippets.md) | Demo catalog + copy-paste kernel |
+| [Computer Graphics.pdf](Computer%20Graphics.pdf) | Printable notes + exercises + kernel |
 | [Computational Geometry/](Computational%20Geometry/) | Full lecture notes, weeks 1–15 |
 | [Computational Geometry.pdf](Computational%20Geometry.pdf) | Printable notes + exercises + kernel |
 | [Computational Geometry/exercises/](Computational%20Geometry/exercises/) | Extra written + coding exercises per week |
@@ -39,7 +43,7 @@ Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20L
 
 ## Computer Graphics I
 
-Start at [Computer Graphics/00 Lectures.md](Computer%20Graphics/00%20Lectures.md). Parent plan: [10 Computer Graphics I.md](10%20Computer%20Graphics%20I.md). Software rasterizer first (Canvas `ImageData`); WebGL / Three.js in Week 13 as the same pipeline with GPU names.
+Start at [Computer Graphics/00 Lectures.md](Computer%20Graphics/00%20Lectures.md). Parent plan: [10 Computer Graphics I.md](10%20Computer%20Graphics%20I.md). Extra exercises: [exercises/00 Index.md](Computer%20Graphics/exercises/00%20Index.md). Open [code/index.html](Computer%20Graphics/code/index.html) for `putPixel` through a WebGL2 cube (software rasterizer first).
 
 ## WebGL and shaders
 

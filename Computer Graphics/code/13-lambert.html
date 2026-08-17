@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>13 Lambert</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>13 — Lambert lighting</h1>
+  <p class="hint">max(0, n·l) in world space. Debug: normals as color. Culling ≠ a black face.</p>
+  <label>light yaw <input id="yaw" type="range" min="0" max="6.28" step="0.02" value="0.8"/></label>
+  <button data-toggle="dbgN">Toggle normals view</button>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    Raster.boot({
+      state: { dbgN: false },
+      draw(img, s) {
+        CG.clear(img, 16, 16, 20);
+        const yaw = +document.getElementById("yaw").value;
+        const L = CG.vnormalize({ x: Math.cos(yaw), y: 0.35, z: Math.sin(yaw) });
+        const V = CG.m4lookAt({x:2.2,y:1.5,z:4},{x:0,y:0,z:0},{x:0,y:1,z:0});
+        const P = CG.m4perspective(0.8, img.width/img.height, 0.2, 40);
+        const M = CG.m4mul(CG.m4rotateY(s.t * 0.35), CG.m4rotateX(0.3));
+        const nM = CG.m4normal(M);
+        const PVM = CG.m4mul(P, CG.m4mul(V, M));
+        const depth = CG.makeDepth(img.width, img.height);
+        CG.cubeMesh().forEach((tri) => {
+          const nw = CG.m4mulVec(nM, tri.n.x, tri.n.y, tri.n.z, 0);
+          const n = CG.vnormalize({ x: nw.x, y: nw.y, z: nw.z });
+          const I = CG.lambert(n, L);
+          const col = s.dbgN
+            ? [(n.x*0.5+0.5)*255, (n.y*0.5+0.5)*255, (n.z*0.5+0.5)*255]
+            : [I*200, I*160, I*90];
+          const pts = CG.projectTri(tri, PVM, img.width, img.height);
+          if (pts) CG.fillTriangleDepth(img, depth, pts[0], pts[1], pts[2], col, col, col);
+        });
+      },
+      status(s) { return s.dbgN ? "debug: n*0.5+0.5" : "Lambert  ka=0.15  kd=0.8"; }
+    });
+  </script>
+</body>
+</html>

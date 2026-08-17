@@ -24,4 +24,7 @@ Conventions for the whole term: [[WebGL/01 Conventions]] (right-handed, Y-up, ca
 | 14 | [[Computer Graphics/Week 14 Project Studio]] |
 | 15 | [[Computer Graphics/Week 15 Presentations]] |
 
-Software renderer lives in the course repo (`cg1/raster`). WebGL and Three.js catalogs are **Semester 3** tools; use them as oracles in Weeks 7 and 13 only.
+Software renderer lives in [code/index.html](code/index.html) (`kernel.js`: `putPixel`, `mat4`, `lookAt`, z-buffer, Lambert, texture). WebGL and Three.js catalogs are **Semester 3** tools; use them as oracles in Weeks 7 and 13 only.
+
+**Extra exercises:** [[Computer Graphics/exercises/00 Index]]  
+**Snippet catalog:** [[11 Computer Graphics Snippets]]

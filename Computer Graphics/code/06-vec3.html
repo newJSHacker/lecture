@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>06 vec3</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>06 — Vectors and frames</h1>
+  <p class="hint">Rotate a 2D point with cos/sin and with a matrix. Same picture. Do not add two points.</p>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    function line(img, x0, y0, x1, y1, rgb) {
+      const n = 80;
+      for (let i = 0; i <= n; i++) {
+        const t = i / n;
+        CG.putPixel(img, x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, rgb[0], rgb[1], rgb[2]);
+      }
+    }
+    Raster.boot({
+      draw(img, s) {
+        CG.clear(img, 24, 24, 28);
+        const ox = 320, oy = 200, th = s.t;
+        const c = Math.cos(th), si = Math.sin(th);
+        line(img, ox, oy, ox + c * 120, oy - si * 120, [220, 70, 70]);
+        line(img, ox, oy, ox + (-si) * 80, oy - c * 80, [70, 200, 90]);
+        const px = 90 * c, py = 90 * si;
+        CG.putPixel(img, ox + px, oy - py, 255, 220, 80);
+        CG.putPixel(img, ox + px + 1, oy - py, 255, 220, 80);
+      },
+      status(s) {
+        const th = s.t;
+        return "θ = " + th.toFixed(2) + " rad\nred = rotated +X   green = rotated +Y\nyellow = point (1,0) after 2D rotation";
+      }
+    });
+  </script>
+</body>
+</html>

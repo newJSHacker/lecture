@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>14 Blinn-Phong</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>14 — Blinn-Phong + gamma</h1>
+  <p class="hint">Highlight depends on v (camera). Gamma-encode at the end. This is not PBR.</p>
+  <label>shininess <input id="sh" type="range" min="4" max="128" value="32"/></label>
+  <button data-toggle="gamma">Toggle gamma encode</button>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    Raster.boot({
+      state: { gamma: true },
+      draw(img, s) {
+        CG.clear(img, 10, 10, 14);
+        const eye = { x: 2.4, y: 1.6, z: 4.2 };
+        const L = CG.vnormalize({ x: 0.4, y: 0.7, z: 0.5 });
+        const Vmat = CG.m4lookAt(eye, {x:0,y:0,z:0}, {x:0,y:1,z:0});
+        const P = CG.m4perspective(0.8, img.width/img.height, 0.2, 40);
+        const M = CG.m4mul(CG.m4rotateY(s.t * 0.4), CG.m4rotateX(0.25));
+        const nM = CG.m4normal(M);
+        const PVM = CG.m4mul(P, CG.m4mul(Vmat, M));
+        const depth = CG.makeDepth(img.width, img.height);
+        const shin = +document.getElementById("sh").value;
+        CG.cubeMesh().forEach((tri) => {
+          const nw = CG.m4mulVec(nM, tri.n.x, tri.n.y, tri.n.z, 0);
+          const n = CG.vnormalize({ x: nw.x, y: nw.y, z: nw.z });
+          const c0 = CG.m4mulVec(M, tri.p[0][0], tri.p[0][1], tri.p[0][2], 1);
+          const v = CG.vnormalize(CG.vsub(eye, { x: c0.x, y: c0.y, z: c0.z }));
+          let I = CG.blinnPhong(n, L, v, 0.55, 0.45, shin);
+          const rgb = s.gamma ? CG.toSrgb(I) : CG.clamp(I, 0, 1) * 255;
+          const col = [rgb, rgb * 0.92, rgb * 0.75];
+          const pts = CG.projectTri(tri, PVM, img.width, img.height);
+          if (pts) CG.fillTriangleDepth(img, depth, pts[0], pts[1], pts[2], col, col, col);
+        });
+      },
+      status(s) { return "shininess = " + document.getElementById("sh").value + "\ngamma encode " + s.gamma + "  (linear lighting, sRGB out)"; }
+    });
+  </script>
+</body>
+</html>

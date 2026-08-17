@@ -6,7 +6,9 @@ Students learn how an image is made: pixels, transforms, cameras, rasterization,
 
 Source of teaching format: [[02 Curriculum Design Advice]]
 
-**Lecture notes (teach from these):** [[Computer Graphics/00 Lectures]]
+**Lecture notes (teach from these):** [[Computer Graphics/00 Lectures]]  
+**Extra exercises:** [[Computer Graphics/exercises/00 Index]]  
+**Code snippets / software rasterizer:** [[11 Computer Graphics Snippets]] · [Computer Graphics/code/index.html](Computer%20Graphics/code/index.html)
 
 Related later courses (do not steal their labs):
 

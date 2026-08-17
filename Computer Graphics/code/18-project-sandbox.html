@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>18 Project sandbox</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>18 — Project sandbox</h1>
+  <p class="hint">Week 14: freeze a debug view. Toggle normals / depth / UV. Paste your mesh in <code>draw()</code>.</p>
+  <button data-toggle="dbgN">Normals</button>
+  <button data-toggle="tex">Texture</button>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    const tex = CG.checkerTex(32);
+    Raster.boot({
+      state: { dbgN: false, tex: true },
+      draw(img, s) {
+        CG.clear(img, 12, 12, 16);
+        const eye = { x: 2.5, y: 1.8, z: 4.4 };
+        const L = CG.vnormalize({ x: 0.35, y: 0.75, z: 0.45 });
+        const V = CG.m4lookAt(eye, {x:0,y:0,z:0}, {x:0,y:1,z:0});
+        const P = CG.m4perspective(0.75, img.width/img.height, 0.2, 40);
+        const M = CG.m4mul(CG.m4rotateY(s.t * 0.4), CG.m4rotateX(0.3));
+        const nM = CG.m4normal(M);
+        const PVM = CG.m4mul(P, CG.m4mul(V, M));
+        const depth = CG.makeDepth(img.width, img.height);
+        CG.cubeMesh().forEach((tri) => {
+          const pts = CG.projectTri(tri, PVM, img.width, img.height);
+          if (!pts) return;
+          const nw = CG.m4mulVec(nM, tri.n.x, tri.n.y, tri.n.z, 0);
+          const n = CG.vnormalize({ x: nw.x, y: nw.y, z: nw.z });
+          const I = CG.lambert(n, L);
+          const col = s.dbgN
+            ? [(n.x*0.5+0.5)*255,(n.y*0.5+0.5)*255,(n.z*0.5+0.5)*255]
+            : s.tex
+              ? (function(){ const sm = CG.sampleNearest(tex, 0.5, 0.5); return [sm[0]*I, sm[1]*I, sm[2]*I]; })()
+              : [I*210, I*170, I*90];
+          CG.fillTriangleDepth(img, depth, pts[0], pts[1], pts[2], col, col, col);
+        });
+        CG.drawWorldAxes(img, CG.m4mul(P, V), 1.3);
+      },
+      status(s) { return "debugN=" + s.dbgN + " tex=" + s.tex + "\nLeave this as the desk-review reset if the project is a cube viewer."; }
+    });
+  </script>
+</body>
+</html>

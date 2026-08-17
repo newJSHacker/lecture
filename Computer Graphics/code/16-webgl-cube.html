@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>16 WebGL cube</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>16 — Same cube on WebGL2</h1>
+  <p class="hint">Vertex shader = P*V*M. Fragment = Lambert. Depth test on. Black-screen checklist: [[WebGL/01 Conventions]]. Not Three.js.</p>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = canvas.getContext("webgl2", { antialias: true, alpha: false });
+    const out = document.getElementById("out");
+    if (!gl) { out.textContent = "WebGL2 not available"; throw new Error("no webgl2"); }
+
+    const vs = `#version 300 es
+    in vec3 a_pos; in vec3 a_n;
+    uniform mat4 u_p, u_v, u_m, u_n;
+    out vec3 v_n;
+    void main() {
+      v_n = mat3(u_n) * a_n;
+      gl_Position = u_p * u_v * u_m * vec4(a_pos, 1.0);
+    }`;
+    const fs = `#version 300 es
+    precision highp float;
+    in vec3 v_n; uniform vec3 u_l;
+    out vec4 o;
+    void main() {
+      vec3 n = normalize(v_n);
+      float d = max(0.0, dot(n, normalize(u_l)));
+      vec3 c = vec3(0.15) + vec3(0.85, 0.7, 0.35) * d;
+      o = vec4(pow(c, vec3(1.0/2.2)), 1.0);
+    }`;
+    function sh(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+
+    const pos = [], nrm = [];
+    CG.cubeMesh().forEach((t) => {
+      t.p.forEach((p) => pos.push(p[0], p[1], p[2]));
+      nrm.push(t.n.x, t.n.y, t.n.z, t.n.x, t.n.y, t.n.z, t.n.x, t.n.y, t.n.z);
+    });
+    function buf(data, loc, n) {
+      const b = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, b);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, n, gl.FLOAT, false, 0, 0);
+    }
+    buf(pos, gl.getAttribLocation(prog, "a_pos"), 3);
+    buf(nrm, gl.getAttribLocation(prog, "a_n"), 3);
+    gl.enable(gl.DEPTH_TEST);
+    gl.enable(gl.CULL_FACE);
+
+    function uMat(name, m) { gl.uniformMatrix4fv(gl.getUniformLocation(prog, name), false, m); }
+    let t0 = 0;
+    function frame(now) {
+      if (!t0) t0 = now;
+      const t = (now - t0) / 1000;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(0.07, 0.07, 0.09, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      const M = CG.m4mul(CG.m4rotateY(t * 0.5), CG.m4rotateX(0.35));
+      const V = CG.m4lookAt({x:2.2,y:1.5,z:4},{x:0,y:0,z:0},{x:0,y:1,z:0});
+      const P = CG.m4perspective(0.8, canvas.width/canvas.height, 0.2, 40);
+      uMat("u_m", M); uMat("u_v", V); uMat("u_p", P); uMat("u_n", CG.m4normal(M));
+      gl.uniform3f(gl.getUniformLocation(prog, "u_l"), 0.4, 0.7, 0.5);
+      gl.drawArrays(gl.TRIANGLES, 0, pos.length / 3);
+      out.textContent = "gl_Position = u_p * u_v * u_m * vec4(a_pos,1)\nDEPTH_TEST on  CULL_FACE CCW";
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

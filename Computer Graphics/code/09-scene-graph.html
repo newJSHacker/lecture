@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>09 Scene graph</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>09 — Sun–Earth–Moon</h1>
+  <p class="hint">world = parentWorld * local. RGB axes are world X/Y/Z, not a planet’s local frame.</p>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    function body(img, P, V, M, color, s) {
+      const PVM = CG.m4mul(P, CG.m4mul(V, CG.m4mul(M, CG.m4scale(s,s,s))));
+      const depth = CG.makeDepth(img.width, img.height);
+      CG.cubeMesh().forEach((tri) => {
+        const pts = CG.projectTri(tri, PVM, img.width, img.height);
+        if (pts) CG.fillTriangleDepth(img, depth, pts[0], pts[1], pts[2], color, color, color);
+      });
+    }
+    Raster.boot({
+      draw(img, s) {
+        CG.clear(img, 8, 8, 14);
+        const V = CG.m4lookAt({x:0,y:2.2,z:6},{x:0,y:0,z:0},{x:0,y:1,z:0});
+        const P = CG.m4perspective(0.7, img.width/img.height, 0.2, 40);
+        const sun = CG.m4rotateY(s.t * 0.4);
+        const earth = CG.m4mul(CG.m4rotateY(s.t), CG.m4translate(2.2, 0, 0));
+        const moon = CG.m4mul(earth, CG.m4mul(CG.m4rotateY(s.t * 3), CG.m4translate(0.7, 0, 0)));
+        body(img, P, V, sun, [240, 180, 40], 0.45);
+        body(img, P, V, earth, [70, 140, 230], 0.18);
+        body(img, P, V, moon, [200, 200, 210], 0.08);
+        CG.drawWorldAxes(img, CG.m4mul(P, V), 1.5);
+      },
+      status() { return "sun local = spin\nearth = orbit * offset\nmoon = earthWorld * smallOrbit"; }
+    });
+  </script>
+</body>
+</html>

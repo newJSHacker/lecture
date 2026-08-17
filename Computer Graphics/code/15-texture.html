@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>15 Texture</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>15 — UV / nearest sample</h1>
+  <p class="hint">Texture is albedo; still multiply by Lambert. Affine UV in screen space will look wrong on a perspective floor — extra credit to fix.</p>
+  <button data-toggle="uvdbg">Toggle UV debug</button>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    const tex = CG.checkerTex(64);
+    Raster.boot({
+      state: { uvdbg: false },
+      draw(img, s) {
+        CG.clear(img, 16, 16, 20);
+        const L = CG.vnormalize({ x: 0.3, y: 0.8, z: 0.4 });
+        const V = CG.m4lookAt({x:2.3,y:1.7,z:4.2},{x:0,y:0,z:0},{x:0,y:1,z:0});
+        const P = CG.m4perspective(0.8, img.width/img.height, 0.2, 40);
+        const M = CG.m4mul(CG.m4rotateY(s.t * 0.35), CG.m4rotateX(0.25));
+        const nM = CG.m4normal(M);
+        const PVM = CG.m4mul(P, CG.m4mul(V, M));
+        const depth = CG.makeDepth(img.width, img.height);
+        CG.cubeMesh().forEach((tri) => {
+          const pts = CG.projectTri(tri, PVM, img.width, img.height);
+          if (!pts) return;
+          const nw = CG.m4mulVec(nM, tri.n.x, tri.n.y, tri.n.z, 0);
+          const n = CG.vnormalize({ x: nw.x, y: nw.y, z: nw.z });
+          const I = CG.lambert(n, L);
+          const minX = Math.max(0, Math.floor(Math.min(pts[0].x, pts[1].x, pts[2].x)));
+          const maxX = Math.min(img.width - 1, Math.ceil(Math.max(pts[0].x, pts[1].x, pts[2].x)));
+          const minY = Math.max(0, Math.floor(Math.min(pts[0].y, pts[1].y, pts[2].y)));
+          const maxY = Math.min(img.height - 1, Math.ceil(Math.max(pts[0].y, pts[1].y, pts[2].y)));
+          const a = pts[0], b = pts[1], c = pts[2];
+          if (CG.cross2(b.x-a.x,b.y-a.y,c.x-a.x,c.y-a.y) <= 0) return;
+          for (let y = minY; y <= maxY; y++) {
+            for (let x = minX; x <= maxX; x++) {
+              const w = CG.barycentric({ x: x + 0.5, y: y + 0.5 }, a, b, c);
+              if (!w || w.a < -1e-5 || w.b < -1e-5 || w.g < -1e-5) continue;
+              const z = w.a * a.z + w.b * b.z + w.g * c.z;
+              const di = y * img.width + x;
+              if (z >= depth[di]) continue;
+              depth[di] = z;
+              const u = w.a * a.uv[0] + w.b * b.uv[0] + w.g * c.uv[0];
+              const v = w.a * a.uv[1] + w.b * b.uv[1] + w.g * c.uv[1];
+              let col;
+              if (s.uvdbg) col = [u * 255, v * 255, 40];
+              else {
+                const sm = CG.sampleNearest(tex, u, v, "repeat");
+                col = [sm[0] * I, sm[1] * I, sm[2] * I];
+              }
+              CG.putPixel(img, x, y, col[0], col[1], col[2]);
+            }
+          }
+        });
+      },
+      status(s) { return s.uvdbg ? "UV as color (u,v,0)" : "nearest sample × Lambert"; }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><title>03 Alpha over</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — Alpha over</h1>
+  <p class="hint">Straight alpha. out = src * a + dst * (1−a). Byte 128 is not linear half-light.</p>
+  <label>source alpha <input id="a" type="range" min="0" max="255" value="140"/></label>
+  <canvas id="c" width="640" height="400"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="raster.js"></script>
+  <script>
+    const slider = document.getElementById("a");
+    Raster.boot({
+      draw(img) {
+        CG.clear(img, 30, 50, 90);
+        for (let y = 80; y < 280; y++)
+          for (let x = 80; x < 320; x++) CG.putPixel(img, x, y, 40, 40, 40);
+        const sa = +slider.value;
+        for (let y = 120; y < 320; y++)
+          for (let x = 220; x < 500; x++) CG.overPixel(img, x, y, 220, 70, 50, sa);
+        for (let x = 0; x < img.width; x++) {
+          const t = x / (img.width - 1);
+          const srgb = t * 255;
+          const lin = Math.pow(t, 1 / 2.2) * 255;
+          CG.putPixel(img, x, 20, srgb, srgb, srgb);
+          CG.putPixel(img, x, 36, lin, lin, lin);
+        }
+      },
+      status() { return "src alpha = " + slider.value + "\ntop ramp = sRGB lerp  black→white\nsecond ramp = pow(t, 1/2.2)  (not physical; just a picture)"; }
+    });
+  </script>
+</body>
+</html>
