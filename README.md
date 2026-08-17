@@ -1,6 +1,6 @@
 # IGWT Lectures
 
-Course notes for **Interactive Graphics and Web Technologies (IGWT)**, including a 15-week computational geometry course, sample graduation theses, and a handbook on becoming a good teacher.
+Course notes for **Interactive Graphics and Web Technologies (IGWT)**, including a 15-week computational geometry course, sample graduation theses, a teaching handbook, and WebGL / GLSL snippet demos.
 
 This repository is teaching material. The sample theses are reference documents, not submissions for academic credit. Timing tables in the short thesis are templates, not measured data.
 
@@ -19,10 +19,17 @@ This repository is teaching material. The sample theses are reference documents,
 | [06 Becoming a Good Teacher.md](06%20Becoming%20a%20Good%20Teacher.md) | Why the teaching handbook exists |
 | [Teaching/](Teaching/) | Pedagogy, labs, feedback, integrity, supervision |
 | [Teaching.pdf](Teaching.pdf) | Printable handbook (all Teaching notes) |
+| [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md) | WebGL2 / GLSL catalog |
+| [WebGL/](WebGL/) | 25 runnable demos + copy-paste GLSL |
+| [WebGL.pdf](WebGL.pdf) | Printable snippet catalogs |
 
 ## Computational geometry
 
 Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20Lectures.md).
+
+## WebGL and shaders
+
+Start at [07 WebGL and Shader Snippets.md](07%20WebGL%20and%20Shader%20Snippets.md). Open [WebGL/demos/index.html](WebGL/demos/index.html) for the triangle-through-PBR sequence. Copy functions from [WebGL/glsl/](WebGL/glsl/).
 
 ## Becoming a good teacher
 

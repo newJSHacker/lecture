@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>06 phong cube — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>06 — Blinn-Phong</strong><br/>
+    World-space N, L, V, H. Specular is gated by ndotl so the back is dark.
+    <div><a href="05-canvas-texture.html">prev</a> · <a href="07-orbit-camera.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    gl.enable(gl.DEPTH_TEST);
+    gl.enable(gl.CULL_FACE);
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    layout(location=1) in vec3 a_normal;
+    uniform mat4 u_proj, u_view, u_model;
+    uniform mat3 u_normal;
+    out vec3 v_pos, v_n;
+    void main(){
+      vec4 w = u_model * vec4(a_position, 1.0);
+      v_pos = w.xyz;
+      v_n = u_normal * a_normal;
+      gl_Position = u_proj * u_view * w;
+    }`;
+    const fs = `#version 300 es
+    precision highp float;
+    in vec3 v_pos, v_n;
+    uniform vec3 u_eye, u_light;
+    out vec4 outColor;
+    void main(){
+      vec3 N = normalize(v_n);
+      vec3 V = normalize(u_eye - v_pos);
+      vec3 L = normalize(u_light - v_pos);
+      vec3 H = normalize(L + V);
+      vec3 albedo = vec3(0.75, 0.22, 0.18);
+      float nd = max(dot(N, L), 0.0);
+      float spec = pow(max(dot(N, H), 0.0), 48.0) * step(0.0, nd);
+      vec3 col = albedo * (0.12 + 0.9 * nd) + vec3(1.0) * spec * 0.6;
+      outColor = vec4(pow(col, vec3(1.0/2.2)), 1.0);
+    }`;
+    const prog = GL.program(gl, vs, fs);
+    const u = GL.uniforms(gl, prog);
+    const mesh = GL.cube();
+    const vao = GL.vao(gl, () => {
+      GL.buffer(gl, mesh.pos); GL.enableAttrib(gl, 0, 3);
+      GL.buffer(gl, mesh.nor); GL.enableAttrib(gl, 1, 3);
+      GL.buffer(gl, mesh.idx, gl.ELEMENT_ARRAY_BUFFER);
+    });
+    const light = [2.2, 2.4, 2.0];
+    GL.loop((_, t) => {
+      const aspect = GL.resize(gl);
+      gl.clearColor(0.10, 0.10, 0.12, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      const eye = [Math.cos(t * 0.3) * 4, 1.4, Math.sin(t * 0.3) * 4];
+      const model = GL.mat4Ident();
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(u.u_proj, false, GL.mat4Perspective(Math.PI / 3, aspect, 0.1, 50));
+      gl.uniformMatrix4fv(u.u_view, false, GL.mat4LookAt(eye, [0, 0, 0], [0, 1, 0]));
+      gl.uniformMatrix4fv(u.u_model, false, model);
+      gl.uniformMatrix3fv(u.u_normal, false, GL.mat3Normal(model));
+      gl.uniform3fv(u.u_eye, eye);
+      gl.uniform3fv(u.u_light, light);
+      gl.bindVertexArray(vao);
+      gl.drawElements(gl.TRIANGLES, mesh.count, gl.UNSIGNED_SHORT, 0);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>14 instancing — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>14 — Instancing</strong><br/>
+    One cube mesh, 400 translations. <code>vertexAttribDivisor(3, 1)</code>.
+    <div><a href="13-framebuffer-post.html">prev</a> · <a href="15-particles.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE);
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    layout(location=1) in vec3 a_normal;
+    layout(location=3) in vec3 a_off;
+    layout(location=4) in vec3 a_col;
+    uniform mat4 u_proj,u_view; uniform float u_time;
+    out vec3 v_n,v_col;
+    void main(){
+      float s = 0.18 + 0.04*sin(u_time*2.0 + a_off.x);
+      vec3 p = a_position * s + a_off;
+      v_n = a_normal; v_col = a_col;
+      gl_Position = u_proj * u_view * vec4(p,1);
+    }`;
+    const fs = `#version 300 es
+    precision highp float; in vec3 v_n,v_col; out vec4 outColor;
+    void main(){ float l=max(dot(normalize(v_n),normalize(vec3(.3,1,.4))),.15);
+      outColor=vec4(v_col*l,1); }`;
+    const prog = GL.program(gl, vs, fs);
+    const u = GL.uniforms(gl, prog);
+    const mesh = GL.cube();
+    const N = 400;
+    const off = new Float32Array(N * 3);
+    const col = new Float32Array(N * 3);
+    let i = 0;
+    for (let z = 0; z < 20; z++) for (let x = 0; x < 20; x++, i++) {
+      off[i*3] = (x - 9.5) * 0.55;
+      off[i*3+1] = 0;
+      off[i*3+2] = (z - 9.5) * 0.55;
+      col[i*3] = 0.3 + 0.6 * (x / 19);
+      col[i*3+1] = 0.25;
+      col[i*3+2] = 0.3 + 0.6 * (z / 19);
+    }
+    const vao = GL.vao(gl, () => {
+      GL.buffer(gl, mesh.pos); GL.enableAttrib(gl, 0, 3);
+      GL.buffer(gl, mesh.nor); GL.enableAttrib(gl, 1, 3);
+      GL.buffer(gl, mesh.idx, gl.ELEMENT_ARRAY_BUFFER);
+      GL.buffer(gl, off);
+      GL.enableAttrib(gl, 3, 3);
+      gl.vertexAttribDivisor(3, 1);
+      GL.buffer(gl, col);
+      GL.enableAttrib(gl, 4, 3);
+      gl.vertexAttribDivisor(4, 1);
+    });
+    const cam = GL.orbit(canvas, { dist: 14, pitch: 0.7, target: [0, 0, 0] });
+    GL.loop((_, t) => {
+      const aspect = GL.resize(gl);
+      gl.clearColor(0.10,0.10,0.12,1);
+      gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(u.u_proj,false,GL.mat4Perspective(Math.PI/3,aspect,0.1,80));
+      gl.uniformMatrix4fv(u.u_view,false,GL.mat4LookAt(cam.eye(),cam.target,[0,1,0]));
+      gl.uniform1f(u.u_time, t);
+      gl.bindVertexArray(vao);
+      gl.drawElementsInstanced(gl.TRIANGLES, mesh.count, gl.UNSIGNED_SHORT, 0, N);
+    });
+  </script>
+</body>
+</html>

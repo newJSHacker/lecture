@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>15 particles — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>15 — Point particles</strong><br/>
+    CPU integrate, additive blend, circular discard. Reset <code>depthMask</code>.
+    <div><a href="14-instancing.html">prev</a> · <a href="16-pbr-direct.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    layout(location=1) in float a_life;
+    uniform mat4 u_proj,u_view;
+    out float v_life;
+    void main(){
+      v_life = a_life;
+      gl_Position = u_proj * u_view * vec4(a_position,1);
+      gl_PointSize = 18.0 * a_life / max(gl_Position.w, 0.2);
+    }`;
+    const fs = `#version 300 es
+    precision highp float; in float v_life; out vec4 outColor;
+    void main(){
+      vec2 p = gl_PointCoord*2.0-1.0;
+      float d = dot(p,p);
+      if(d>1.0) discard;
+      float a = (1.0-d) * v_life;
+      outColor = vec4(1.0, 0.45+0.4*v_life, 0.15, a);
+    }`;
+    const prog = GL.program(gl, vs, fs);
+    const u = GL.uniforms(gl, prog);
+    const N = 800;
+    const pos = new Float32Array(N * 3);
+    const vel = new Float32Array(N * 3);
+    const life = new Float32Array(N);
+    function spawn(i) {
+      pos[i*3] = (Math.random()-0.5)*0.2;
+      pos[i*3+1] = 0;
+      pos[i*3+2] = (Math.random()-0.5)*0.2;
+      vel[i*3] = (Math.random()-0.5)*0.8;
+      vel[i*3+1] = 1.2 + Math.random()*1.4;
+      vel[i*3+2] = (Math.random()-0.5)*0.8;
+      life[i] = 0.6 + Math.random()*0.8;
+    }
+    for (let i = 0; i < N; i++) spawn(i);
+    const posBuf = GL.buffer(gl, pos, gl.ARRAY_BUFFER, gl.DYNAMIC_DRAW);
+    const lifeBuf = GL.buffer(gl, life, gl.ARRAY_BUFFER, gl.DYNAMIC_DRAW);
+    const vao = GL.vao(gl, () => {
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); GL.enableAttrib(gl, 0, 3);
+      gl.bindBuffer(gl.ARRAY_BUFFER, lifeBuf); GL.enableAttrib(gl, 1, 1);
+    });
+    const cam = GL.orbit(canvas, { dist: 5, pitch: 0.3, target: [0, 1, 0] });
+    GL.loop((dt) => {
+      dt = Math.min(dt, 0.033);
+      for (let i = 0; i < N; i++) {
+        vel[i*3+1] -= 1.6 * dt;
+        pos[i*3] += vel[i*3]*dt;
+        pos[i*3+1] += vel[i*3+1]*dt;
+        pos[i*3+2] += vel[i*3+2]*dt;
+        life[i] -= dt * 0.45;
+        if (life[i] <= 0 || pos[i*3+1] < 0) spawn(i);
+      }
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+      gl.bindBuffer(gl.ARRAY_BUFFER, lifeBuf);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, life);
+      const aspect = GL.resize(gl);
+      gl.clearColor(0.04,0.04,0.06,1);
+      gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.depthMask(false);
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(u.u_proj,false,GL.mat4Perspective(Math.PI/3,aspect,0.1,50));
+      gl.uniformMatrix4fv(u.u_view,false,GL.mat4LookAt(cam.eye(),cam.target,[0,1,0]));
+      gl.bindVertexArray(vao);
+      gl.drawArrays(gl.POINTS, 0, N);
+      gl.depthMask(true);
+      gl.disable(gl.BLEND);
+    });
+  </script>
+</body>
+</html>

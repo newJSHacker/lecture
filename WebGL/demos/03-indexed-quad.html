@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>03 indexed quad — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>03 — Indexed quad</strong><br/>
+    Four vertices, six indices. Change an index to see a broken triangle.
+    <div><a href="02-colored-triangle.html">prev</a> · <a href="04-rotating-cube.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const gl = GL.createGL(document.getElementById("c"));
+    const vs = `#version 300 es
+    layout(location=0) in vec2 a_position;
+    layout(location=1) in vec2 a_uv;
+    out vec2 v_uv;
+    void main(){
+      v_uv = a_uv;
+      gl_Position = vec4(a_position, 0.0, 1.0);
+    }`;
+    const fs = `#version 300 es
+    precision highp float;
+    in vec2 v_uv;
+    out vec4 outColor;
+    void main(){ outColor = vec4(v_uv, 0.25, 1.0); }`;
+    const prog = GL.program(gl, vs, fs);
+    const pos = new Float32Array([-0.6,-0.6, 0.6,-0.6, 0.6,0.6, -0.6,0.6]);
+    const uv = new Float32Array([0,0, 1,0, 1,1, 0,1]);
+    const idx = new Uint16Array([0,1,2, 0,2,3]);
+    const vao = GL.vao(gl, () => {
+      GL.buffer(gl, pos); GL.enableAttrib(gl, 0, 2);
+      GL.buffer(gl, uv); GL.enableAttrib(gl, 1, 2);
+      GL.buffer(gl, idx, gl.ELEMENT_ARRAY_BUFFER);
+    });
+    function draw() {
+      GL.resize(gl);
+      gl.clearColor(0.10, 0.10, 0.12, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(prog);
+      gl.bindVertexArray(vao);
+      gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+    }
+    draw();
+    window.addEventListener("resize", draw);
+  </script>
+</body>
+</html>

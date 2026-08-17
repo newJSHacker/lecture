@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>20 water — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>20 — Sum-of-sines water</strong><br/>
+    Vertex displacement + normal from finite differences.
+    <div><a href="19-dissolve.html">prev</a> · <a href="21-sky.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE);
+    function grid(n) {
+      const pos=[], idx=[];
+      for (let z=0; z<=n; z++) for (let x=0; x<=n; x++) {
+        pos.push((x/n)*4-2, 0, (z/n)*4-2);
+      }
+      for (let z=0; z<n; z++) for (let x=0; x<n; x++) {
+        const a=z*(n+1)+x;
+        idx.push(a, a+n+1, a+1, a+1, a+n+1, a+n+2);
+      }
+      return { pos:new Float32Array(pos), idx:new Uint16Array(idx), count:idx.length };
+    }
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    uniform mat4 u_proj,u_view; uniform float u_time;
+    out vec3 v_pos,v_n;
+    float wave(vec2 p, vec2 dir, float f, float a, float s){
+      return sin(dot(p,dir)*f + u_time*s)*a;
+    }
+    float h(vec2 p){
+      return wave(p,normalize(vec2(1.0,0.35)),3.5,0.06,1.7)
+           + wave(p,normalize(vec2(-0.4,1.0)),6.5,0.03,2.3)
+           + wave(p,normalize(vec2(0.7,-0.7)),9.0,0.015,3.1);
+    }
+    void main(){
+      vec3 p=a_position;
+      p.y=h(p.xz);
+      float e=0.08;
+      float hx=h(p.xz+vec2(e,0.0))-h(p.xz-vec2(e,0.0));
+      float hz=h(p.xz+vec2(0.0,e))-h(p.xz-vec2(0.0,e));
+      v_n=normalize(vec3(-hx,2.0*e,-hz));
+      v_pos=p;
+      gl_Position=u_proj*u_view*vec4(p,1);
+    }`;
+    const fs = `#version 300 es
+    precision highp float;
+    in vec3 v_pos,v_n; uniform vec3 u_eye; out vec4 outColor;
+    void main(){
+      vec3 N=normalize(v_n), V=normalize(u_eye-v_pos), L=normalize(vec3(0.4,0.8,0.3));
+      float nd=max(dot(N,L),0.0);
+      float spec=pow(max(dot(N,normalize(L+V)),0.0), 80.0);
+      float fres=pow(1.0-max(dot(N,V),0.0), 3.0);
+      vec3 water=mix(vec3(0.02,0.12,0.18), vec3(0.1,0.45,0.55), nd);
+      vec3 col=water + vec3(0.8)*spec*0.7 + vec3(0.6,0.8,1.0)*fres*0.35;
+      outColor=vec4(pow(col,vec3(1.0/2.2)),1);
+    }`;
+    const prog = GL.program(gl, vs, fs);
+    const u = GL.uniforms(gl, prog);
+    const mesh = grid(80);
+    const vao = GL.vao(gl, () => {
+      GL.buffer(gl, mesh.pos); GL.enableAttrib(gl, 0, 3);
+      GL.buffer(gl, mesh.idx, gl.ELEMENT_ARRAY_BUFFER);
+    });
+    const cam = GL.orbit(canvas, { dist: 5, pitch: 0.55, target: [0, 0, 0] });
+    GL.loop((_, t) => {
+      const aspect = GL.resize(gl);
+      gl.clearColor(0.06,0.08,0.1,1);
+      gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      const eye = cam.eye();
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(u.u_proj,false,GL.mat4Perspective(Math.PI/3,aspect,0.1,50));
+      gl.uniformMatrix4fv(u.u_view,false,GL.mat4LookAt(eye,cam.target,[0,1,0]));
+      gl.uniform1f(u.u_time, t);
+      gl.uniform3fv(u.u_eye, eye);
+      gl.bindVertexArray(vao);
+      gl.drawElements(gl.TRIANGLES, mesh.count, gl.UNSIGNED_SHORT, 0);
+    });
+  </script>
+</body>
+</html>

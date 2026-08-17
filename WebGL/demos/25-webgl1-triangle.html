@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>25 WebGL1 triangle — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>25 — Same triangle in WebGL1</strong><br/>
+    GLSL ES 1.00: <code>attribute</code>, <code>gl_FragColor</code>, no VAO required.
+    <div><a href="24-matcap.html">prev</a> · <a href="01-triangle.html">back to 01</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = canvas.getContext("webgl", { antialias: true, alpha: false });
+    if (!gl) throw new Error("WebGL1 not available");
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    }
+    const vs = "attribute vec2 a_position; void main(){ gl_Position=vec4(a_position,0.0,1.0); }";
+    const fs = "precision mediump float; void main(){ gl_FragColor=vec4(0.91,0.31,0.22,1.0); }";
+    const p = gl.createProgram();
+    gl.attachShader(p, compile(gl.VERTEX_SHADER, vs));
+    gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0,0.65,-0.7,-0.55,0.7,-0.55]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(p, "a_position");
+    function draw() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(canvas.clientWidth * dpr);
+      canvas.height = Math.floor(canvas.clientHeight * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(0.10, 0.10, 0.12, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(p);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    draw();
+    window.addEventListener("resize", draw);
+  </script>
+</body>
+</html>

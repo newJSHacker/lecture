@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>22 shadow map — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>22 — Shadow map</strong><br/>
+    Light-space depth in a color FBO, then compare. Tweak <code>bias</code> if you see acne.
+    <div><a href="21-sky.html">prev</a> · <a href="23-gpgpu-pingpong.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    const dvs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    uniform mat4 u_lightPV, u_model;
+    void main(){ gl_Position = u_lightPV * u_model * vec4(a_position,1); }`;
+    const dfs = `#version 300 es
+    precision highp float; out vec4 outColor;
+    void main(){ outColor = vec4(gl_FragCoord.z, 0.0, 0.0, 1.0); }`;
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    layout(location=1) in vec3 a_normal;
+    uniform mat4 u_proj,u_view,u_model,u_lightPV; uniform mat3 u_normal;
+    out vec3 v_n,v_pos; out vec4 v_ls;
+    void main(){
+      vec4 w=u_model*vec4(a_position,1);
+      v_pos=w.xyz; v_n=u_normal*a_normal; v_ls=u_lightPV*w;
+      gl_Position=u_proj*u_view*w;
+    }`;
+    const fs = `#version 300 es
+    precision highp float;
+    in vec3 v_n,v_pos; in vec4 v_ls;
+    uniform sampler2D u_shadow; uniform vec3 u_light; uniform vec3 u_albedo;
+    out vec4 outColor;
+    void main(){
+      vec3 ndc = v_ls.xyz / v_ls.w * 0.5 + 0.5;
+      float closest = texture(u_shadow, ndc.xy).r;
+      float current = ndc.z;
+      float inMap = step(0.0, ndc.x)*step(ndc.x,1.0)*step(0.0,ndc.y)*step(ndc.y,1.0)*step(0.0,ndc.z)*step(ndc.z,1.0);
+      float bias = 0.005;
+      float shadow = (current - bias > closest) ? 0.35 : 1.0;
+      shadow = mix(1.0, shadow, inMap);
+      vec3 N=normalize(v_n), L=normalize(u_light-v_pos);
+      float nd=max(dot(N,L),0.0);
+      vec3 col=u_albedo*(0.12+0.88*nd*shadow);
+      outColor=vec4(pow(col,vec3(1.0/2.2)),1);
+    }`;
+    const depthP = GL.program(gl, dvs, dfs);
+    const sceneP = GL.program(gl, vs, fs);
+    const du = GL.uniforms(gl, depthP);
+    const su = GL.uniforms(gl, sceneP);
+    const cube = GL.cube();
+    function plane() {
+      const pos = new Float32Array([-6,0,-6, 6,0,-6, 6,0,6, -6,0,6]);
+      const nor = new Float32Array([0,1,0, 0,1,0, 0,1,0, 0,1,0]);
+      const idx = new Uint16Array([0,1,2, 0,2,3]);
+      return { pos, nor, idx, count: 6 };
+    }
+    const fl = plane();
+    function meshVAO(m) {
+      return GL.vao(gl, () => {
+        GL.buffer(gl, m.pos); GL.enableAttrib(gl, 0, 3);
+        if (m.nor) { GL.buffer(gl, m.nor); GL.enableAttrib(gl, 1, 3); }
+        GL.buffer(gl, m.idx, gl.ELEMENT_ARRAY_BUFFER);
+      });
+    }
+    const cubeVAO = meshVAO(cube);
+    const floorVAO = meshVAO(fl);
+    const shadow = GL.fbo(gl, 1024, 1024, true);
+    const lightPos = [4, 6, 3];
+    const cam = GL.orbit(canvas, { dist: 8, pitch: 0.45, target: [0, 0.5, 0] });
+
+    function drawMesh(prog, u, vao, mesh, model, lightPV, alsoScene) {
+      gl.useProgram(prog);
+      if (u.u_lightPV) gl.uniformMatrix4fv(u.u_lightPV, false, lightPV);
+      if (u.u_model) gl.uniformMatrix4fv(u.u_model, false, model);
+      if (alsoScene) {
+        gl.uniformMatrix3fv(u.u_normal, false, GL.mat3Normal(model));
+      }
+      gl.bindVertexArray(vao);
+      gl.drawElements(gl.TRIANGLES, mesh.count, gl.UNSIGNED_SHORT, 0);
+    }
+
+    GL.loop((_, t) => {
+      const aspect = GL.resize(gl);
+      const cubeModel = GL.mat4Mul(GL.mat4T(0, 1.0, 0), GL.mat4Ry(t * 0.4));
+      const floorModel = GL.mat4Ident();
+      const lightPV = GL.mat4Mul(
+        GL.mat4Perspective(Math.PI / 3.5, 1, 1.0, 20),
+        GL.mat4LookAt(lightPos, [0, 0, 0], [0, 1, 0])
+      );
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, shadow.fb);
+      gl.viewport(0, 0, shadow.w, shadow.h);
+      gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE);
+      gl.clearColor(1,1,1,1);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.cullFace(gl.FRONT);
+      drawMesh(depthP, du, cubeVAO, cube, cubeModel, lightPV, false);
+      drawMesh(depthP, du, floorVAO, fl, floorModel, lightPV, false);
+      gl.cullFace(gl.BACK);
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      gl.clearColor(0.10,0.10,0.12,1);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.useProgram(sceneP);
+      gl.uniformMatrix4fv(su.u_proj, false, GL.mat4Perspective(Math.PI / 3, aspect, 0.1, 50));
+      gl.uniformMatrix4fv(su.u_view, false, GL.mat4LookAt(cam.eye(), cam.target, [0, 1, 0]));
+      gl.uniform3fv(su.u_light, lightPos);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, shadow.color);
+      gl.uniform1i(su.u_shadow, 0);
+      gl.uniform3fv(su.u_albedo, [0.75, 0.25, 0.18]);
+      drawMesh(sceneP, su, cubeVAO, cube, cubeModel, lightPV, true);
+      gl.uniform3fv(su.u_albedo, [0.45, 0.45, 0.42]);
+      drawMesh(sceneP, su, floorVAO, fl, floorModel, lightPV, true);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>13 framebuffer post — IGWT WebGL</title>
+  <style>
+    html,body{margin:0;height:100%;background:#111;color:#e8e8e8;font:14px/1.45 "Segoe UI",sans-serif}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:fixed;left:12px;top:12px;max-width:38rem;background:rgba(0,0,0,.55);padding:10px 12px;border-radius:8px}
+    a{color:#9cf}
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <strong>13 — Render to texture + vignette</strong><br/>
+    Scene FBO, then a fullscreen pass. Swap the post shader to identity to debug.
+    <div><a href="12-toon-fresnel.html">prev</a> · <a href="14-instancing.html">next</a></div>
+  </div>
+  <canvas id="c"></canvas>
+  <script src="_gl.js"></script>
+  <script>
+    const canvas = document.getElementById("c");
+    const gl = GL.createGL(canvas);
+    const vs = `#version 300 es
+    layout(location=0) in vec3 a_position;
+    layout(location=1) in vec3 a_normal;
+    uniform mat4 u_proj,u_view,u_model;
+    out vec3 v_n;
+    void main(){ v_n=mat3(u_model)*a_normal; gl_Position=u_proj*u_view*u_model*vec4(a_position,1); }`;
+    const fs = `#version 300 es
+    precision highp float; in vec3 v_n; out vec4 outColor;
+    void main(){ float l=max(dot(normalize(v_n),normalize(vec3(.4,1,.3))),.12);
+      outColor=vec4(vec3(.9,.4,.22)*l,1); }`;
+    const pvs = `#version 300 es
+    const vec2 V[3]=vec2[3](vec2(-1,-1),vec2(3,-1),vec2(-1,3));
+    out vec2 v_uv; void main(){ vec2 p=V[gl_VertexID]; v_uv=p*0.5+0.5; gl_Position=vec4(p,0,1); }`;
+    const pfs = `#version 300 es
+    precision highp float; in vec2 v_uv; uniform sampler2D u_tex; out vec4 outColor;
+    void main(){
+      vec3 c=texture(u_tex,v_uv).rgb;
+      vec2 d=(v_uv-0.5)*0.004;
+      c.r=texture(u_tex,v_uv+d).r; c.b=texture(u_tex,v_uv-d).b;
+      float vig=v_uv.x*v_uv.y*(1.0-v_uv.x)*(1.0-v_uv.y);
+      c*=pow(vig*15.0,0.35);
+      outColor=vec4(c,1);
+    }`;
+    const scene = GL.program(gl, vs, fs);
+    const post = GL.program(gl, pvs, pfs);
+    const su = GL.uniforms(gl, scene);
+    const pu = GL.uniforms(gl, post);
+    const mesh = GL.cube();
+    const vao = GL.vao(gl, () => {
+      GL.buffer(gl, mesh.pos); GL.enableAttrib(gl, 0, 3);
+      GL.buffer(gl, mesh.nor); GL.enableAttrib(gl, 1, 3);
+      GL.buffer(gl, mesh.idx, gl.ELEMENT_ARRAY_BUFFER);
+    });
+    let rt = null, rw = 0, rh = 0;
+    function ensureRT() {
+      const w = gl.canvas.width, h = gl.canvas.height;
+      if (rt && rw === w && rh === h) return;
+      rt = GL.fbo(gl, w, h, true);
+      rw = w; rh = h;
+    }
+    const cam = GL.orbit(canvas, { dist: 4 });
+    GL.loop((_, t) => {
+      const aspect = GL.resize(gl);
+      ensureRT();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, rt.fb);
+      gl.viewport(0, 0, rt.w, rt.h);
+      gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE);
+      gl.clearColor(0.10,0.10,0.12,1);
+      gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+      const model = GL.mat4Mul(GL.mat4Ry(t*0.5), GL.mat4Rx(0.4));
+      gl.useProgram(scene);
+      gl.uniformMatrix4fv(su.u_proj,false,GL.mat4Perspective(Math.PI/3,aspect,0.1,50));
+      gl.uniformMatrix4fv(su.u_view,false,GL.mat4LookAt(cam.eye(),[0,0,0],[0,1,0]));
+      gl.uniformMatrix4fv(su.u_model,false,model);
+      gl.bindVertexArray(vao);
+      gl.drawElements(gl.TRIANGLES, mesh.count, gl.UNSIGNED_SHORT, 0);
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      gl.disable(gl.DEPTH_TEST);
+      gl.useProgram(post);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, rt.color);
+      gl.uniform1i(pu.u_tex, 0);
+      gl.bindVertexArray(null);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    });
+  </script>
+</body>
+</html>

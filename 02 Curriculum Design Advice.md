@@ -332,11 +332,11 @@ They should struggle a little.
 
 Professor prepares
 
-- shader examples
+- shader examples — start from [[07 WebGL and Shader Snippets]]
     
-- WebGL boilerplate
+- WebGL boilerplate — `WebGL/demos/_gl.js` and demo 01
     
-- debugging guide
+- debugging guide — [[WebGL/01 Conventions]] black-screen checklist
     
 
 ---
@@ -399,7 +399,7 @@ Probably the signature course.
 
 Professor Preparation
 
-Many visual demonstrations.
+Many visual demonstrations — [[WebGL/13 Noise]], [[WebGL/14 SDF and Ray Marching]], demos 09–12 and 19–21.
 
 Never only equations.
 

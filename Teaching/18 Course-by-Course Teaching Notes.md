@@ -92,7 +92,7 @@ Full plan: [[04 Computational Geometry]]. Notes: [[Computational Geometry/00 Lec
 
 **Freeze:** raw WebGL (or a 50-line wrapper you wrote). No Three.js this course.
 
-**Do:** triangle → square → cube → texture → light. Draw the pipeline every time.
+**Do:** triangle → square → cube → texture → light. Draw the pipeline every time. Live-code from [[07 WebGL and Shader Snippets]] demos 01–08.
 
 **Do not:** start with a 1,000-line engine.
 
@@ -122,7 +122,7 @@ Full plan: [[04 Computational Geometry]]. Notes: [[Computational Geometry/00 Lec
 
 **Hard:** they copy Book of Shaders aesthetics without a model of the pipeline.
 
-**Do:** one change → one picture. Noise, then a use (terrain, fire). Warn for flashing.
+**Do:** one change → one picture. Noise, then a use (terrain, fire). Warn for flashing. Starters: [[07 WebGL and Shader Snippets]] demos 09–12.
 
 **Assess:** five small shaders with comments on the math, or two deeper ones. Oral: “what is in the fragment?”
 
