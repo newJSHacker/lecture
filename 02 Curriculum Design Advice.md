@@ -666,3 +666,24 @@ To make **Interactive Graphics and Web Technologies (IGWT)** distinctive and ind
     
 
 With these additions, graduates would be prepared not only as web developers, but as specialists in interactive graphics, real-time rendering, visualization, XR, and AI-enhanced creative technologies. This combination remains uncommon in many computer science departments and would give the program a clear identity.
+
+---
+
+# Becoming a good teacher (not only a course designer)
+
+This note is the **course machine**: lecture, live coding, lab, homework, quiz, project. It does not by itself make someone a good instructor.
+
+For classroom craft, feedback, inclusion, integrity, TAs, time, and supervision, use [[06 Becoming a Good Teacher]] and the handbook starting at [[Teaching/00 How to Use These Notes]].
+
+A short map:
+
+| If you need | Read |
+| --- | --- |
+| How students actually learn | [[Teaching/02 How Students Learn]] |
+| Next week’s plan | [[Teaching/03 Lesson Planning]] |
+| Live coding without hiding the work | [[Teaching/06 Live Coding Pedagogy]] |
+| Labs and critiques | [[Teaching/07 Labs and Studio]] |
+| Rubrics and comments | [[Teaching/08 Feedback and Rubrics]] |
+| AI and copying | [[Teaching/12 Academic Integrity and AI]] |
+| Printable checklists | [[Teaching/19 Checklists and Templates]] |
+| First year on the job | [[Teaching/23 First Year as an Instructor]] |
