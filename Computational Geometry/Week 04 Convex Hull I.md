@@ -209,3 +209,24 @@ Done when the circle case is visibly slower than the cloud for the same n.
 1. Rubber band / extreme points.
 2. One full Jarvis wrap on 8 points with the candidate ray.
 3. Parabola reduction: points `(xi, xi²)` and the lower hull.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 04]] · Demo: [07-jarvis.html](code/07-jarvis.html)
+
+1. Fill Θ(n h) for: circle; triangle+cloud; expected Gaussian.
+2. Start at a random interior point. What breaks?
+3. 50 duplicate copies of 5 hull points. What infinite loop looks like.
+4. Measure cloud vs circle in the demo. Do not invent milliseconds.
+
+```js
+// Jarvis: start lowest-then-leftmost; on collinear take the farthest (drop middles).
+let q = firstPointNotP;
+for (const r of P) {
+  const o = orient(p, q, r);
+  if (o < 0) q = r;
+  else if (o === 0 && dist2(p, r) > dist2(p, q)) q = r;
+}
+```

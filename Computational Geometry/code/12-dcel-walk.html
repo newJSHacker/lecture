@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>12 DCEL walk</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>12 — DCEL face walk</h1>
+  <p class="hint">Ear-clip the polygon, build half-edges, walk face 0 with <code>next</code>. Click to reshape.</p>
+  <button id="reset">Reset</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    Viz.boot({
+      points: [{x:140,y:100},{x:660,y:80},{x:700,y:400},{x:400,y:460},{x:120,y:360},{x:260,y:240}],
+      draw(ctx, s) {
+        const tris = CG.earClip(s.points);
+        const pal = ["rgba(26,79,139,0.2)","rgba(46,160,90,0.2)","rgba(230,126,34,0.25)"];
+        tris.forEach((t, i) => Viz.poly(ctx, t, pal[i % pal.length]));
+        if (!tris.length) return;
+        const dcel = CG.trianglesToDCEL(tris);
+        const face = CG.walkFace(dcel, 0);
+        if (face.length) {
+          ctx.lineWidth = 4;
+          Viz.poly(ctx, face, null, "#c0392b");
+        }
+      },
+      status(s) {
+        const tris = CG.earClip(s.points);
+        if (!tris.length) return "Need a simple polygon.";
+        const dcel = CG.trianglesToDCEL(tris);
+        const face = CG.walkFace(dcel, 0);
+        return [
+          "triangles = " + tris.length,
+          "half-edges = " + dcel.half.length,
+          "vertices = " + dcel.verts.length,
+          "walk face 0 = " + face.map((p) => "(" + p.x.toFixed(0) + "," + p.y.toFixed(0) + ")").join(" → "),
+        ].join("\n");
+      }
+    });
+  </script>
+</body>
+</html>

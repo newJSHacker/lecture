@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>08 Andrew</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>08 — Andrew monotone chain</h1>
+  <p class="hint">Sort by (x,y). Lower hull left→right, upper hull right→left. <code>orient ≤ 0</code> drops collinear middles.</p>
+  <button id="reset">Reset</button>
+  <button id="colin">Collinear edge</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const demo = Viz.boot({
+      points: [{x:80,y:400},{x:200,y:300},{x:320,y:420},{x:400,y:120},{x:520,y:280},{x:640,y:90},{x:720,y:380}],
+      draw(ctx, s) {
+        const h = CG.andrew(s.points);
+        Viz.poly(ctx, h, "rgba(46,160,90,0.18)", "#2ea05a");
+        const sorted = s.points.slice().sort((u,v) => u.x - v.x || u.y - v.y);
+        for (let i = 1; i < sorted.length; i++) Viz.segment(ctx, sorted[i-1], sorted[i], "rgba(0,0,0,0.12)", 1);
+      },
+      status(s) {
+        const t0 = performance.now();
+        const h = CG.andrew(s.points);
+        const ms = performance.now() - t0;
+        const j = CG.jarvis(s.points);
+        return "Andrew h = " + h.length + "  (" + ms.toFixed(2) + " ms)\nJarvis h = " + j.length + "\nCourse policy: drop intermediate collinear hull points.";
+      }
+    });
+    document.getElementById("colin").onclick = () => demo.reset([
+      {x:100,y:400},{x:250,y:400},{x:400,y:400},{x:550,y:400},{x:700,y:400},{x:400,y:120}
+    ]);
+  </script>
+</body>
+</html>

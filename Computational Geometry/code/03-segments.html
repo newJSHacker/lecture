@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>03 Segment intersection</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>03 — Segment intersection</h1>
+  <p class="hint">Four endpoints: AB (blue) and CD (orange). Classify first; construct the point only if proper or touch.</p>
+  <button id="reset">Reset</button>
+  <button data-case="proper">Proper</button>
+  <button data-case="touch">Touch</button>
+  <button data-case="overlap">Overlap</button>
+  <button data-case="none">AABB overlap, miss</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const cases = {
+      proper: [{x:140,y:140},{x:640,y:380},{x:140,y:380},{x:640,y:140}],
+      touch: [{x:140,y:260},{x:500,y:260},{x:500,y:120},{x:500,y:400}],
+      overlap: [{x:160,y:260},{x:520,y:260},{x:360,y:260},{x:680,y:260}],
+      none: [{x:180,y:140},{x:420,y:380},{x:380,y:140},{x:620,y:380}],
+    };
+    const colors = { proper:"#2ea05a", touch:"#e67e22", overlap:"#8e44ad", none:"#888" };
+    const demo = Viz.boot({
+      points: cases.proper.map((p) => ({...p})),
+      maxPoints: 4,
+      labels: (i) => "ABCD"[i],
+      draw(ctx, s) {
+        const [A,B,C,D] = s.points;
+        if (!D) return;
+        const r = CG.segmentsIntersect(A,B,C,D);
+        Viz.box(ctx, CG.aabb([A,B]), "#9bb");
+        Viz.box(ctx, CG.aabb([C,D]), "#db9");
+        Viz.segment(ctx, A, B, "#1a4f8b", 3);
+        Viz.segment(ctx, C, D, "#d35400", 3);
+        if (r.point) Viz.dot(ctx, r.point, colors[r.type], 7);
+      },
+      status(s) {
+        const [A,B,C,D] = s.points;
+        if (!D) return "Need 4 points.";
+        const r = CG.segmentsIntersect(A,B,C,D);
+        return "type = " + r.type + (r.point ? "\npoint = (" + r.point.x.toFixed(1) + ", " + r.point.y.toFixed(1) + ")" : "");
+      }
+    });
+    document.querySelectorAll("[data-case]").forEach((btn) => {
+      btn.onclick = () => demo.reset(cases[btn.dataset.case]);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>07 Jarvis</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>07 — Jarvis march</h1>
+  <p class="hint">Θ(n h). Circle (h ≈ n) is slow; cloud with a triangular hull is fast.</p>
+  <button id="reset">Reset</button>
+  <button id="cloud">Cloud</button>
+  <button id="circ">Circle</button>
+  <button id="tri">Triangle + cloud</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    function cloud(n) {
+      const pts = [];
+      for (let i = 0; i < n; i++) pts.push({ x: 120 + Math.random()*560, y: 80 + Math.random()*360 });
+      return pts;
+    }
+    function circle(n) {
+      const pts = [];
+      for (let i = 0; i < n; i++) {
+        const t = (i / n) * Math.PI * 2;
+        pts.push({ x: 400 + 220 * Math.cos(t), y: 260 + 180 * Math.sin(t) });
+      }
+      return pts;
+    }
+    function triCloud() {
+      const pts = [{x:80,y:460},{x:720,y:460},{x:400,y:40}];
+      for (let i = 0; i < 80; i++) pts.push({ x: 220 + Math.random()*360, y: 180 + Math.random()*220 });
+      return pts;
+    }
+    const demo = Viz.boot({
+      points: cloud(40),
+      draw(ctx, s) {
+        const h = CG.jarvis(s.points);
+        Viz.poly(ctx, h, "rgba(26,79,139,0.15)", "#1a4f8b");
+        const start = CG.lowestThenLeftmost(s.points);
+        Viz.dot(ctx, start, "#e67e22", 6);
+      },
+      status(s) {
+        const t0 = performance.now();
+        const h = CG.jarvis(s.points);
+        const ms = performance.now() - t0;
+        return "n = " + s.points.length + "\nh = " + h.length + "\nJarvis ms = " + ms.toFixed(2) + "\nstart = lowest-then-leftmost (orange)";
+      }
+    });
+    document.getElementById("cloud").onclick = () => demo.reset(cloud(80));
+    document.getElementById("circ").onclick = () => demo.reset(circle(80));
+    document.getElementById("tri").onclick = () => demo.reset(triCloud());
+  </script>
+</body>
+</html>

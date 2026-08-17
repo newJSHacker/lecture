@@ -176,3 +176,25 @@ Done when dragging a site updates the coloring live.
 2. Hull sites with unbounded rays.
 3. Beach line: sweep line, two parabolas, a new site punching an arc.
 4. Dual teaser: connect sites whose cells share an edge — that is next week.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 10]] · Demo: [14-voronoi-discrete.html](code/14-voronoi-discrete.html)
+
+1. Empty-circle property in one sentence.
+2. Unbounded cell iff the site is on the hull. Check by eye in the demo.
+3. Fortune event types (name only). We still do not implement Fortune.
+4. Nearest-site query vs brute `argmin dist`.
+
+```js
+function nearestSite(p, sites) {
+  let best = sites[0], bestD = dist2(p, sites[0]);
+  for (let i = 1; i < sites.length; i++) {
+    const d = dist2(p, sites[i]);
+    if (d < bestD) { bestD = d; best = sites[i]; }
+  }
+  return best;
+}
+```

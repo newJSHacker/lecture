@@ -21,3 +21,8 @@ Teach these in order. Each note is one 75-minute lecture plus the live-coding, l
 | 13 | [[Computational Geometry/Week 13 Graphics Applications]] |
 | 14 | [[Computational Geometry/Week 14 Project Studio]] |
 | 15 | [[Computational Geometry/Week 15 Presentations]] |
+
+**Extra exercises** (recitation / exam bank): [[Computational Geometry/exercises/00 Index]]  
+**Runnable snippets:** [code/index.html](code/index.html) · [[09 Computational Geometry Snippets]]
+
+Click to add a point, drag to move, right-click to delete. The shared kernel is `code/kernel.js` (`orient`, intersection, hulls, sweep, ears, kd-tree, Voronoi, Delaunay, closest pair, BVH).

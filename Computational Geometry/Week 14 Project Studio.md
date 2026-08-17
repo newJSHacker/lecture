@@ -148,3 +148,26 @@ Write only:
 1. The 8 report headings
 2. The 8 defense questions
 3. The 12 + 5 clock
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 14]] · Sandbox: [20-project-sandbox.html](code/20-project-sandbox.html)
+
+Desk-review drills (write answers in the repo, not a new essay):
+
+1. Freeze a degenerate input as the sandbox reset state.
+2. Point to the test that fails if `orient` flips sign.
+3. Complexity and the n you **measured**. Do not invent timings.
+4. If behind: cut Fortune → discrete Voronoi + Delaunay dual; cut shaders → unlit canvas + correct kernel.
+
+```js
+assert(andrew([
+  {x:0,y:0},{x:1,y:0},{x:2,y:0},{x:1,y:1}
+]).length === 3); // drop collinear middle
+
+assert(segmentsIntersect(
+  {x:0,y:0},{x:4,y:0},{x:2,y:0},{x:2,y:3}
+).type === "touch");
+```

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>09 Naive intersections</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>09 — Naive segment intersections</h1>
+  <p class="hint">Points come in pairs: (0,1), (2,3), … Each pair is a segment. Θ(n²) pairs.</p>
+  <button id="reset">Reset</button>
+  <button id="rand">Random 12</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    function segsFrom(pts) {
+      const segs = [];
+      for (let i = 0; i + 1 < pts.length; i += 2) segs.push({ a: pts[i], b: pts[i+1] });
+      return segs;
+    }
+    function randomPairs(n) {
+      const pts = [];
+      for (let i = 0; i < n * 2; i++) pts.push({ x: 60 + Math.random()*680, y: 50 + Math.random()*420 });
+      return pts;
+    }
+    const demo = Viz.boot({
+      points: [{x:80,y:80},{x:720,y:200},{x:80,y:400},{x:720,y:280},{x:200,y:40},{x:200,y:480},{x:500,y:40},{x:620,y:480}],
+      draw(ctx, s) {
+        const segs = segsFrom(s.points);
+        segs.forEach((sg) => Viz.segment(ctx, sg.a, sg.b, "#333", 2));
+        CG.naiveSegmentIntersections(segs).forEach((h) => {
+          if (h.point) Viz.dot(ctx, h.point, h.type === "proper" ? "#2ea05a" : "#e67e22", 5);
+        });
+      },
+      status(s) {
+        const segs = segsFrom(s.points);
+        const hits = CG.naiveSegmentIntersections(segs);
+        return "segments n = " + segs.length + "\nhits = " + hits.length + "\n" + hits.map((h) => h.type + " " + h.i + "∩" + h.j).join("\n");
+      }
+    });
+    document.getElementById("rand").onclick = () => demo.reset(randomPairs(12));
+  </script>
+</body>
+</html>

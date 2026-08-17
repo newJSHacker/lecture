@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>01 Orientation</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>01 — Orientation</h1>
+  <p class="hint">Three points A, B, C. Color is the sign of (B−A)×(C−A). Do not use <code>atan2</code>.</p>
+  <button id="reset">Reset</button>
+  <button id="colin">Make C collinear</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const start = [{x:180,y:360},{x:520,y:340},{x:380,y:140}];
+    const demo = Viz.boot({
+      points: start,
+      maxPoints: 3,
+      labels: (i) => "ABC"[i],
+      draw(ctx, s) {
+        const [A,B,C] = s.points;
+        if (!C) return;
+        const o = CG.orient(A,B,C);
+        const fill = o > 0 ? "rgba(46,160,90,0.35)" : o < 0 ? "rgba(192,57,43,0.35)" : "rgba(120,120,120,0.35)";
+        Viz.poly(ctx, [A,B,C], fill);
+        Viz.segment(ctx, A, B, "#111", 3);
+      },
+      status(s) {
+        const [A,B,C] = s.points;
+        if (!C) return "Need 3 points.";
+        const cr = CG.cross(A,B,C);
+        const o = CG.orient(A,B,C);
+        const name = o > 0 ? "LEFT (CCW)" : o < 0 ? "RIGHT (CW)" : "COLLINEAR";
+        return [
+          "cross = " + cr.toFixed(4),
+          "orient = " + o + "  →  " + name,
+          "signed area = " + CG.signedArea3(A,B,C).toFixed(2),
+          "dist(A,B) = " + CG.dist(A,B).toFixed(2),
+        ].join("\n");
+      }
+    });
+    document.getElementById("colin").onclick = () => {
+      const [A,B,C] = demo.state.points;
+      const t = 0.65;
+      C.x = A.x + t * (B.x - A.x);
+      C.y = A.y + t * (B.y - A.y);
+      demo.draw();
+    };
+  </script>
+</body>
+</html>

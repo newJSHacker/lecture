@@ -247,3 +247,22 @@ Done when the TA can put a point on a vertex and get `BOUNDARY`, not a flicker b
 1. The four intersection types.
 2. Ray casting with a vertex hit, then the same figure with the half-open rule marked.
 3. AABB of two disjoint crossing-looking segments that do not meet.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 02]] · Demos: [03-segments](code/03-segments.html), [04-point-in-polygon](code/04-point-in-polygon.html)
+
+1. A=(0,0), B=(4,0), C=(4,1), D=(4,−1). Type? Why not `proper`?
+2. Identical segments. Zero-length segment vs a proper edge. Course answers?
+3. Draw a C-shape and a +x ray through a vertex. Half-open rule in one paragraph.
+4. Boxes overlap, segments miss. Drag it in the demo and freeze a screenshot for the lab README.
+
+```js
+function onSegment(c, a, b, eps = 1e-9) {
+  if (orient(a, b, c, eps) !== 0) return false;
+  return c.x >= Math.min(a.x, b.x) - eps && c.x <= Math.max(a.x, b.x) + eps
+      && c.y >= Math.min(a.y, b.y) - eps && c.y <= Math.max(a.y, b.y) + eps;
+}
+```

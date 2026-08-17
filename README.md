@@ -13,6 +13,9 @@ This repository is teaching material. The sample theses are reference documents,
 | [Graduation Requirements.md](Graduation%20Requirements.md) | Thesis, capstone, defense |
 | [04 Computational Geometry.md](04%20Computational%20Geometry.md) | 15-week course plan |
 | [Computational Geometry/](Computational%20Geometry/) | Full lecture notes, weeks 1–15 |
+| [Computational Geometry/exercises/](Computational%20Geometry/exercises/) | Extra written + coding exercises per week |
+| [Computational Geometry/code/](Computational%20Geometry/code/) | Kernel + 20 Canvas demos |
+| [09 Computational Geometry Snippets.md](09%20Computational%20Geometry%20Snippets.md) | Demo catalog + copy-paste kernel |
 | [05 Sample Graduation Thesis.md](05%20Sample%20Graduation%20Thesis.md) | 20–30 page sample thesis |
 | [Sample Thesis/](Sample%20Thesis/) | Chapters of the short thesis |
 | [Thesis/](Thesis/) | Longer reference-thesis draft |
@@ -29,7 +32,7 @@ This repository is teaching material. The sample theses are reference documents,
 
 ## Computational geometry
 
-Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20Lectures.md).
+Start at [Computational Geometry/00 Lectures.md](Computational%20Geometry/00%20Lectures.md). Extra problem sets: [exercises/00 Index.md](Computational%20Geometry/exercises/00%20Index.md). Open [code/index.html](Computational%20Geometry/code/index.html) for orientation through BVH picking (JavaScript + Canvas, no Three.js required).
 
 ## WebGL and shaders
 

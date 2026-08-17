@@ -110,3 +110,18 @@ None. Grades close when the report and repo are in.
 ## Board
 
 The rubric table. The clock. Nothing else.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 15]] · Tests: [19-kernel-tests.html](code/19-kernel-tests.html)
+
+Rehearse the 12 + 5 once with a TA timer. Each teammate answers one:
+
+1. Predicate, three return values.
+2. Test that fails if it flips.
+3. Library file vs student file.
+4. Degeneracy you actually shipped.
+
+Do not add algorithms this week.

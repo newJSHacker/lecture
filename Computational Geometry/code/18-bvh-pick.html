@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>18 BVH pick</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>18 — BVH picking</h1>
+  <p class="hint">Polygon is triangulated. Last point is the pick query. Parent AABB miss ⇒ never test children. Three.js Raycaster may be an oracle, not this algorithm.</p>
+  <button id="reset">Reset</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    Viz.boot({
+      points: [
+        {x:80,y:80},{x:300,y:60},{x:520,y:90},{x:720,y:200},{x:680,y:420},{x:400,y:480},{x:120,y:400},{x:200,y:220},
+        {x:400,y:240}
+      ],
+      draw(ctx, s) {
+        const q = s.points[s.points.length - 1];
+        const P = s.points.slice(0, -1);
+        const tris = CG.earClip(P).map((t) => ({ a: t[0], b: t[1], c: t[2] }));
+        if (!tris.length) return;
+        const bvh = CG.buildBVH(tris);
+        Viz.box(ctx, bvh.box, "#888");
+        const hits = [];
+        CG.pickBVH(bvh, q, hits);
+        tris.forEach((t, i) => {
+          const hit = hits.some((h) => h.i === i);
+          Viz.poly(ctx, [t.a, t.b, t.c], hit ? "rgba(46,160,90,0.45)" : "rgba(26,79,139,0.12)");
+        });
+        Viz.dot(ctx, q, "#c0392b", 7);
+      },
+      status(s) {
+        const q = s.points[s.points.length - 1];
+        const P = s.points.slice(0, -1);
+        const tris = CG.earClip(P).map((t) => ({ a: t[0], b: t[1], c: t[2] }));
+        const bvh = CG.buildBVH(tris);
+        const hits = [];
+        CG.pickBVH(bvh, q, hits);
+        return "triangles = " + tris.length + "\nhits = " + hits.map((h) => h.i).join(", ") + "\npoint-in-polygon = " + CG.pointInPolygon(q, P);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -206,3 +206,24 @@ Done when oracle matches and the strip scan is visibly not n².
 2. δ/2 disks packed in the 2δ × δ neighborhood.
 3. Minkowski: square ⊕ disk = rounded square; polygon ⊕ robot = C-obstacle.
 4. Two obstacles, start, goal, a few visibility edges.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 12]] · Demo: [17-closest-pair.html](code/17-closest-pair.html)
+
+1. Packing: why only O(1) strip comparisons per point.
+2. Presort Px, Py. Do not sort inside every recursive call.
+3. DC distance must match brute on n = 200.
+4. Survey: Minkowski = robot ⊕ obstacle. Visibility graph is a project, not this lab.
+
+```js
+const strip = Py.filter((p) => Math.abs(p.x - midX) < best.dist);
+for (let i = 0; i < strip.length; i++) {
+  for (let j = i + 1; j <= i + 7 && j < strip.length; j++) {
+    if (strip[j].y - strip[i].y >= best.dist) break;
+    // maybe update best
+  }
+}
+```

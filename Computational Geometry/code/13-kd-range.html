@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>13 kd-tree range</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>13 — kd-tree range query</h1>
+  <p class="hint">Points are the set. Drag the last two points as the query rectangle corners. Closed range: include the boundary.</p>
+  <button id="reset">Random 40</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    function cloud() {
+      const pts = [];
+      for (let i = 0; i < 40; i++) pts.push({ x: 80 + Math.random()*640, y: 60 + Math.random()*400 });
+      pts.push({x:220,y:140},{x:560,y:360});
+      return pts;
+    }
+    function splitBoxes(node, boxes) {
+      if (!node || node.leaf) return;
+      boxes.push(node.box);
+      splitBoxes(node.left, boxes);
+      splitBoxes(node.right, boxes);
+    }
+    Viz.boot({
+      points: cloud(),
+      draw(ctx, s) {
+        if (s.points.length < 3) return;
+        const pts = s.points.slice(0, -2);
+        const a = s.points[s.points.length - 2];
+        const b = s.points[s.points.length - 1];
+        const R = { minX: Math.min(a.x,b.x), minY: Math.min(a.y,b.y), maxX: Math.max(a.x,b.x), maxY: Math.max(a.y,b.y) };
+        const tree = CG.buildKd(pts, 0);
+        const boxes = [];
+        splitBoxes(tree, boxes);
+        boxes.forEach((bx) => Viz.box(ctx, bx, "rgba(0,0,0,0.15)"));
+        Viz.box(ctx, R, "#c0392b");
+        const hit = [];
+        CG.rangeQuery(tree, R, hit);
+        pts.forEach((p) => Viz.dot(ctx, p, "#888", 4));
+        hit.forEach((p) => Viz.dot(ctx, p, "#2ea05a", 6));
+      },
+      status(s) {
+        const pts = s.points.slice(0, -2);
+        const a = s.points[s.points.length - 2];
+        const b = s.points[s.points.length - 1];
+        const R = { minX: Math.min(a.x,b.x), minY: Math.min(a.y,b.y), maxX: Math.max(a.x,b.x), maxY: Math.max(a.y,b.y) };
+        const tree = CG.buildKd(pts, 0);
+        const hit = [];
+        CG.rangeQuery(tree, R, hit);
+        const brute = pts.filter((p) => CG.aabbContains(R, p));
+        return "n = " + pts.length + "\nkd hits = " + hit.length + "\nbrute hits = " + brute.length + "\nThey must match.";
+      }
+    });
+  </script>
+</body>
+</html>

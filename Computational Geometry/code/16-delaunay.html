@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>16 Delaunay</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>16 — Bowyer–Watson Delaunay</h1>
+  <p class="hint">Incremental insertion with a super-triangle. Empty circumcircle. Not a constrained CDT.</p>
+  <button id="reset">Reset</button>
+  <button id="rand">Random 18</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const demo = Viz.boot({
+      points: [{x:120,y:400},{x:260,y:140},{x:400,y:360},{x:520,y:80},{x:680,y:300},{x:300,y:480},{x:600,y:460}],
+      draw(ctx, s) {
+        const tris = CG.bowyerWatson(s.points);
+        tris.forEach((t) => Viz.poly(ctx, [t.a, t.b, t.c], "rgba(26,79,139,0.12)", "#1a4f8b"));
+        const hull = CG.andrew(s.points);
+        Viz.poly(ctx, hull, null, "#c0392b");
+      },
+      status(s) {
+        const t0 = performance.now();
+        const tris = CG.bowyerWatson(s.points);
+        const ms = performance.now() - t0;
+        return "n = " + s.points.length + "\ntriangles = " + tris.length + "\n" + ms.toFixed(2) + " ms\nHull edges (red) are Delaunay.";
+      }
+    });
+    document.getElementById("rand").onclick = () => {
+      const pts = [];
+      for (let i = 0; i < 18; i++) pts.push({ x: 80 + Math.random()*640, y: 60 + Math.random()*400 });
+      demo.reset(pts);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>04 Point in polygon</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>04 — Point in polygon</h1>
+  <p class="hint">Left-click adds polygon vertices. The last point is the query q. Right-click deletes. C-shape starter included.</p>
+  <button id="reset">Reset C-shape</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const Cshape = [
+      {x:140,y:80},{x:620,y:80},{x:620,y:440},{x:140,y:440},
+      {x:140,y:360},{x:500,y:360},{x:500,y:160},{x:140,y:160},
+      {x:360,y:260}
+    ];
+    Viz.boot({
+      points: Cshape,
+      labels: (i, p, s) => i === (Viz._last.state.points.length - 1) ? "q" : String(i),
+      draw(ctx, s) {
+        if (s.points.length < 2) return;
+        const q = s.points[s.points.length - 1];
+        const P = s.points.slice(0, -1);
+        const loc = P.length >= 3 ? CG.pointInPolygon(q, P) : "OUTSIDE";
+        const fill = loc === "INSIDE" ? "rgba(46,160,90,0.25)" : loc === "BOUNDARY" ? "rgba(230,126,34,0.3)" : "rgba(0,0,0,0.06)";
+        Viz.poly(ctx, P, fill);
+        ctx.setLineDash([6, 4]);
+        Viz.segment(ctx, q, {x: 790, y: q.y}, "#888", 1);
+        ctx.setLineDash([]);
+        Viz.dot(ctx, q, loc === "INSIDE" ? "#2ea05a" : loc === "BOUNDARY" ? "#e67e22" : "#c0392b", 7);
+      },
+      status(s) {
+        if (s.points.length < 4) return "Need a polygon (≥3) plus query q.";
+        const q = s.points[s.points.length - 1];
+        const P = s.points.slice(0, -1);
+        return "q is " + CG.pointInPolygon(q, P) + "\nvertices = " + P.length + "\nPut q on a vertex: must be BOUNDARY.";
+      }
+    });
+  </script>
+</body>
+</html>

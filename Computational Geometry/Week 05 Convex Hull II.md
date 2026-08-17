@@ -217,3 +217,25 @@ Done when all-collinear returns the two endpoints only (drop policy).
 1. Graham polar sort around p0.
 2. Andrew: sorted list, lower stack, upper stack, join.
 3. AABB vs true hull around a diagonal stick (AABB is huge; hull is tight).
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 05]] · Demo: [08-andrew.html](code/08-andrew.html)
+
+1. Why is the scan O(n) after sorting?
+2. Lower-hull condition: write `while |h| ≥ 2 and orient(h[-2], h[-1], p) <= 0`. What does `<= 0` drop?
+3. Oracle: Andrew vertex set equals Jarvis vertex set (rotation allowed).
+4. Collinear bottom edge of 5 points + one apex. Hull size 3.
+
+```js
+function build(seq) {
+  const h = [];
+  for (const p of seq) {
+    while (h.length >= 2 && orient(h.at(-2), h.at(-1), p) <= 0) h.pop();
+    h.push(p);
+  }
+  return h;
+}
+```

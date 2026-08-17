@@ -197,3 +197,27 @@ Project only. Before Week 14:
 2. Inconsistent epsilon orientations (three points, three disagreeing signs).
 3. Ray vs AABB vs triangle.
 4. BVH: miss the parent box, never see the children.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 13]] · Demo: [18-bvh-pick.html](code/18-bvh-pick.html)
+
+1. Configurator: click → ray/point → BVH → triangle → barycentric → part.
+2. EPS is a thick line, not exact arithmetic. Inconsistent orientations exist.
+3. Three.js `Raycaster` is an oracle, not the student BVH.
+4. Count box tests vs triangle tests on a far miss.
+
+```js
+function pickBVH(node, q, hits) {
+  if (!aabbContains(node.box, q)) return;
+  if (node.leaf) {
+    const t = node.item.t;
+    if (pointInTriangle(q, t.a, t.b, t.c) !== "OUTSIDE") hits.push(node.item);
+    return;
+  }
+  pickBVH(node.left, q, hits);
+  pickBVH(node.right, q, hits);
+}
+```

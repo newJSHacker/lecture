@@ -195,3 +195,27 @@ Done when a known 6-point example matches a reference screenshot (provide one).
 2. Illegal edge and the flip, with both circumcircles.
 3. Insert p, cavity, retriangulate to p.
 4. Skinny ear-clip triangle vs a flipped Delaunay pair.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 11]] · Demos: [15-incircle](code/15-incircle.html), [16-delaunay](code/16-delaunay.html)
+
+1. Duality: Delaunay edge ↔ Voronoi edge. Delaunay triangle ↔ Voronoi vertex.
+2. Illegal iff incircle contains the opposite vertex. Draw both circumcircles.
+3. Delaunay maximizes min angle. It is not always minimum-weight. Do not claim that.
+4. After Bowyer–Watson, no site lies in any remaining circumcircle (epsilon).
+
+```js
+function incircle(a, b, c, d) {
+  const adx = a.x - d.x, ady = a.y - d.y;
+  const bdx = b.x - d.x, bdy = b.y - d.y;
+  const cdx = c.x - d.x, cdy = c.y - d.y;
+  const det =
+    (adx*adx + ady*ady) * (bdx*cdy - cdx*bdy) -
+    (bdx*bdx + bdy*bdy) * (adx*cdy - cdx*ady) +
+    (cdx*cdx + cdy*cdy) * (adx*bdy - bdx*ady);
+  return orient(a, b, c) < 0 ? -det : det;
+}
+```

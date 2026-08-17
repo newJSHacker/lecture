@@ -6,7 +6,9 @@ Students learn to turn geometric problems into algorithms they can implement, vi
 
 Source of teaching format: [[02 Curriculum Design Advice]]
 
-**Lecture notes (teach from these):** [[Computational Geometry/00 Lectures]]
+**Lecture notes (teach from these):** [[Computational Geometry/00 Lectures]]  
+**Extra exercises:** [[Computational Geometry/exercises/00 Index]]  
+**Code snippets / Canvas demos:** [[09 Computational Geometry Snippets]] · [Computational Geometry/code/index.html](Computational%20Geometry/code/index.html)
 
 ---
 

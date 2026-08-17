@@ -199,3 +199,26 @@ None this week.
 1. Half-edge with arrows: `origin`, `twin`, `next`, `face`.
 2. Two triangles, every half-edge labeled.
 3. `walkVertex` = `twin.next` loop.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 08]] · Demo: [12-dcel-walk.html](code/12-dcel-walk.html)
+
+Makeup drills (new numbers): A=(0,0), B=(6,0), C=(2,4), D=(2,−1).
+
+1. `orient(A,B,C)` and type of AB ∩ CD.
+2. 15-gon: triangles and diagonals.
+3. Walk face 0 in the demo after ear-clip. Write the vertex cycle.
+4. Split-edge thought experiment: which DCEL fields change?
+
+```js
+function walkFace(dcel, faceIndex) {
+  const start = dcel.half.findIndex((h) => h.face === faceIndex);
+  let e = start, ids = [];
+  do { ids.push(dcel.half[e].origin); e = dcel.half[e].next; }
+  while (e !== start);
+  return ids;
+}
+```

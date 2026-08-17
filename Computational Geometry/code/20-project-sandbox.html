@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>20 Project sandbox</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>20 — Project sandbox</h1>
+  <p class="hint">Empty canvas + the whole kernel. Week 14: paste <em>your</em> algorithm in <code>run()</code>. Show one degenerate input.</p>
+  <button id="reset">Clear</button>
+  <label>mode
+    <select id="mode">
+      <option value="hull">hull (Andrew)</option>
+      <option value="delaunay">Delaunay</option>
+      <option value="voronoi">discrete Voronoi</option>
+      <option value="closest">closest pair</option>
+      <option value="pip">point in polygon (last = q)</option>
+    </select>
+  </label>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    const mode = document.getElementById("mode");
+    const demo = Viz.boot({
+      points: [],
+      draw(ctx, s) {
+        run(ctx, s, mode.value);
+      },
+      status(s) {
+        return "n = " + s.points.length + "\nmode = " + mode.value + "\nRight-click deletes. Add a known degenerate set before the desk review.";
+      }
+    });
+    mode.onchange = () => demo.draw();
+
+    function run(ctx, s, m) {
+      const P = s.points;
+      if (P.length < 2) return;
+      if (m === "hull" && P.length >= 3) Viz.poly(ctx, CG.andrew(P), "rgba(46,160,90,0.2)", "#2ea05a");
+      if (m === "delaunay" && P.length >= 3) {
+        CG.bowyerWatson(P).forEach((t) => Viz.poly(ctx, [t.a,t.b,t.c], "rgba(26,79,139,0.12)", "#1a4f8b"));
+      }
+      if (m === "voronoi") {
+        const step = 10;
+        for (let y = 0; y < ctx.canvas.height; y += step) {
+          for (let x = 0; x < ctx.canvas.width; x += step) {
+            const site = CG.nearestSite({x,y}, P);
+            const i = P.indexOf(site);
+            ctx.fillStyle = "hsl(" + (i * 47 % 360) + " 50% 80%)";
+            ctx.fillRect(x, y, step, step);
+          }
+        }
+      }
+      if (m === "closest") {
+        const b = CG.closestPair(P);
+        if (b) Viz.segment(ctx, b.a, b.b, "#c0392b", 3);
+      }
+      if (m === "pip" && P.length >= 4) {
+        const q = P[P.length - 1];
+        const poly = P.slice(0, -1);
+        const loc = CG.pointInPolygon(q, poly);
+        Viz.poly(ctx, poly, loc === "INSIDE" ? "rgba(46,160,90,0.25)" : "rgba(0,0,0,0.06)");
+        Viz.dot(ctx, q, loc === "BOUNDARY" ? "#e67e22" : "#c0392b", 7);
+      }
+    }
+  </script>
+</body>
+</html>

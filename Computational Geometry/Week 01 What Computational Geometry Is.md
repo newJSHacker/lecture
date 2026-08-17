@@ -305,3 +305,25 @@ Due start of Week 2.
 1. Triangle ABC with an arrow on AB and a + / − on C.
 2. Four flagship problem thumbnails.
 3. The 15-week map as five boxes: primitives, hulls, sweep/tri, proximity/search, project.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 01]] · Demo: [01-orient.html](code/01-orient.html)
+
+Recitation picks (do not replace the homework):
+
+1. Translate ABC by (1000, −50). Does `orient` change? Why is that better than comparing `atan2`?
+2. Predicate or construction: left-of-line, intersection point, circumcenter.
+3. Reduce point-in-triangle to three `orient` tests. Boundary policy?
+4. Student writes `if (cross === 0)`. What policy did they just invent?
+
+```js
+function orient(a, b, c, eps = 1e-9) {
+  const v = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  if (v > eps) return 1;
+  if (v < -eps) return -1;
+  return 0;
+}
+```

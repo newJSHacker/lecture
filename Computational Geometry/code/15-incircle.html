@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>15 Incircle</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>15 — Incircle / illegal edge</h1>
+  <p class="hint">A,B,C form a triangle. D is the query. If D is inside the circumcircle, shared edge AC would be illegal in a quad.</p>
+  <button id="reset">Reset</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    Viz.boot({
+      points: [{x:220,y:360},{x:400,y:80},{x:580,y:360},{x:400,y:280}],
+      maxPoints: 4,
+      labels: (i) => "ABCD"[i],
+      draw(ctx, s) {
+        const [A,B,C,D] = s.points;
+        Viz.poly(ctx, [A,B,C], "rgba(26,79,139,0.12)");
+        const cc = CG.circumcenter(A,B,C);
+        if (cc) {
+          const r = CG.dist(cc, A);
+          ctx.beginPath();
+          ctx.arc(cc.x, cc.y, r, 0, Math.PI * 2);
+          ctx.strokeStyle = "#888";
+          ctx.stroke();
+          Viz.dot(ctx, cc, "#888", 3);
+        }
+        Viz.segment(ctx, A, C, "#c0392b", 3);
+        if (D) Viz.dot(ctx, D, CG.incircle(A,B,C,D) > 0 ? "#c0392b" : "#2ea05a", 7);
+      },
+      status(s) {
+        const [A,B,C,D] = s.points;
+        const det = CG.incircle(A,B,C,D);
+        return [
+          "incircle(A,B,C,D) = " + det.toFixed(2),
+          det > 1e-6 ? "D INSIDE circle → edge AC illegal if this is a quad" : det < -1e-6 ? "D OUTSIDE → AC legal" : "cocircular",
+          "orient(A,B,C) = " + CG.orient(A,B,C),
+        ].join("\n");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>19 Kernel tests</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>19 — Kernel unit tests</h1>
+  <p class="hint">Hidden-fixture style. Students should own a file like this. Failures print in red.</p>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script>
+    const out = [];
+    let pass = 0, fail = 0;
+    function assert(name, cond) {
+      if (cond) { pass++; out.push("PASS  " + name); }
+      else { fail++; out.push("FAIL  " + name); }
+    }
+    const A = {x:0,y:0}, B = {x:4,y:0}, C = {x:1,y:3}, D = {x:1,y:-2};
+    assert("orient left", CG.orient(A,B,C) === 1);
+    assert("orient right", CG.orient(A,B,D) === -1);
+    assert("orient collinear", CG.orient(A,B,{x:2,y:0}) === 0);
+    assert("orient C=A", CG.orient(A,B,A) === 0);
+    assert("onSegment between", CG.onSegment({x:2,y:0}, A, B));
+    assert("onSegment beyond", !CG.onSegment({x:5,y:0}, A, B));
+    assert("onSegment off line", !CG.onSegment(C, A, B));
+    const X = CG.segmentsIntersect(A,B,{x:2,y:2},{x:2,y:-2});
+    assert("proper cross", X.type === "proper");
+    const T = CG.segmentsIntersect(A,B,{x:4,y:1},{x:4,y:-1});
+    assert("touch endpoint", T.type === "touch");
+    const O = CG.segmentsIntersect(A,B,{x:2,y:0},{x:6,y:0});
+    assert("overlap collinear", O.type === "overlap");
+    const N = CG.segmentsIntersect({x:0,y:0},{x:2,y:2},{x:2,y:0},{x:4,y:2});
+    assert("AABB overlap miss", N.type === "none");
+    const sq = [{x:0,y:0},{x:4,y:0},{x:4,y:4},{x:0,y:4}];
+    assert("PIP inside", CG.pointInPolygon({x:2,y:2}, sq) === "INSIDE");
+    assert("PIP outside", CG.pointInPolygon({x:5,y:2}, sq) === "OUTSIDE");
+    assert("PIP vertex", CG.pointInPolygon({x:0,y:0}, sq) === "BOUNDARY");
+    assert("PIP edge", CG.pointInPolygon({x:2,y:0}, sq) === "BOUNDARY");
+    const tri = [{x:0,y:0},{x:4,y:0},{x:0,y:4}];
+    assert("shoelace CCW", Math.abs(CG.shoelace(tri) - 8) < 1e-9);
+    assert("class convex", CG.classifyPolygon(tri) === "convex");
+    const cshape = [{x:0,y:0},{x:4,y:0},{x:4,y:4},{x:2,y:4},{x:2,y:2},{x:0,y:2}];
+    assert("class concave", CG.classifyPolygon(cshape) === "simple-concave");
+    const bow = [{x:0,y:0},{x:2,y:2},{x:0,y:2},{x:2,y:0}];
+    assert("class bowtie", CG.classifyPolygon(bow) === "self-intersecting");
+    const hullPts = [{x:0,y:0},{x:1,y:0},{x:2,y:0},{x:1,y:1},{x:0.5,y:0.2}];
+    const ah = CG.andrew(hullPts);
+    assert("andrew drops middle collinear", ah.length === 3);
+    const ears = CG.earClip(cshape);
+    assert("ear count n-2", ears.length === cshape.length - 2);
+    const sites = [{x:0,y:0},{x:4,y:0},{x:2,y:3}];
+    const del = CG.bowyerWatson(sites);
+    assert("delaunay 3 pts → 1 tri", del.length === 1);
+    const cp = CG.closestPair([{x:0,y:0},{x:10,y:0},{x:1,y:0.1},{x:8,y:8}]);
+    assert("closest pair near (0,0)-(1,0.1)", cp.dist < 1.1);
+    const kd = CG.buildKd([{x:0,y:0},{x:2,y:2},{x:1,y:0},{x:0,y:2}], 0);
+    const hit = [];
+    CG.rangeQuery(kd, {minX: -0.1, minY: -0.1, maxX: 1.1, maxY: 0.1}, hit);
+    assert("kd range", hit.length === 2);
+
+    document.getElementById("out").textContent =
+      pass + " passed, " + fail + " failed\n\n" + out.join("\n");
+    document.getElementById("out").style.color = fail ? "#ffb4b4" : "#b8f0c8";
+  </script>
+</body>
+</html>

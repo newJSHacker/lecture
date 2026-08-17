@@ -206,3 +206,25 @@ Done when the oracle always matches and at least one query prunes ≥ 40% of poi
 2. kd-tree splits on 8 points.
 3. A query rectangle vs a node cell: disjoint / contained / overlap.
 4. BVH of three triangles.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 09]] · Demo: [13-kd-range.html](code/13-kd-range.html)
+
+1. Axis at depth 3?
+2. When do we prune? When must we visit both children?
+3. Closed range: boundary points count. Say it in the README.
+4. kd hits must equal brute hits on 50 random rectangles.
+
+```js
+function rangeQuery(node, R, out) {
+  if (!node || !aabbOverlap(node.box, R)) return;
+  if (aabbContains(R, node.p)) out.push(node.p);
+  if (!node.leaf) {
+    rangeQuery(node.left, R, out);
+    rangeQuery(node.right, R, out);
+  }
+}
+```

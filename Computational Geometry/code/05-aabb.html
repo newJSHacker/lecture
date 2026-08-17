@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>05 AABB</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>05 — AABB is a reject test</h1>
+  <p class="hint">Boxes overlap, segments need not. Broad phase ≠ intersection.</p>
+  <button id="reset">Reset</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    Viz.boot({
+      points: [{x:160,y:120},{x:400,y:400},{x:360,y:120},{x:620,y:400}],
+      maxPoints: 4,
+      labels: (i) => "ABCD"[i],
+      draw(ctx, s) {
+        const [A,B,C,D] = s.points;
+        const ba = CG.aabb([A,B]), bb = CG.aabb([C,D]);
+        Viz.box(ctx, ba, "#1a4f8b");
+        Viz.box(ctx, bb, "#d35400");
+        const r = CG.segmentsIntersect(A,B,C,D);
+        Viz.segment(ctx, A, B, "#1a4f8b", 3);
+        Viz.segment(ctx, C, D, "#d35400", 3);
+        if (r.point) Viz.dot(ctx, r.point, "#2ea05a", 6);
+      },
+      status(s) {
+        const [A,B,C,D] = s.points;
+        const ov = CG.aabbOverlap(CG.aabb([A,B]), CG.aabb([C,D]));
+        const r = CG.segmentsIntersect(A,B,C,D);
+        return "AABB overlap = " + ov + "\nsegment type = " + r.type + "\nIf overlap is true and type is none, the box is not the algorithm.";
+      }
+    });
+  </script>
+</body>
+</html>

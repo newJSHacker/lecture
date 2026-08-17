@@ -226,3 +226,27 @@ No Voronoi, no kd-tree, no DCEL on the midterm.
 2. One ear, one interior point that invalidates a candidate.
 3. Split / merge vertex sketches.
 4. Same point set: a bad skinny triangulation vs a Delaunay preview.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 07]] · Demo: [11-ear-clip.html](code/11-ear-clip.html)
+
+1. n = 12: triangles? diagonals?
+2. Reflex vertex: why it is never an ear tip.
+3. Assert `|T| = n − 2` on a C-shape. If short, the polygon is not simple.
+4. Point-in-**triangle**, not point-in-polygon, for the interior-vertex test.
+
+```js
+function isEar(P, i, ccw) {
+  const a = P.at(i - 1), b = P[i], c = P[(i + 1) % P.length];
+  const o = orient(a, b, c);
+  if (ccw ? o <= 0 : o >= 0) return false;
+  for (const q of P) {
+    if (q === a || q === b || q === c) continue;
+    if (pointInTriangle(q, a, b, c) !== "OUTSIDE") return false;
+  }
+  return true;
+}
+```

@@ -208,3 +208,20 @@ Done when the oracle and the sweep agree on a random 80-segment instance.
 1. Sweep line, three active segments, T listed by y.
 2. Event timeline: LEFT, LEFT, INTER, RIGHT, …
 3. Two segments that cross, status before and after swap.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 06]] · Demos: [09-naive](code/09-naive-intersect.html), [10-sweep](code/10-sweep.html)
+
+1. Three event types and one action each.
+2. If I = n²/4, is sweep better than naive?
+3. Status is y-order along L, not endpoint y. Counterexample picture.
+4. Naive vs `teachingSweep` hit-pair sets must match on 16 random segments.
+
+```js
+for (let i = 0; i < n; i++)
+  for (let j = i + 1; j < n; j++)
+    report(segmentsIntersect(S[i].a, S[i].b, S[j].a, S[j].b));
+```

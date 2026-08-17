@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>17 Closest pair</title>
+  <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+  <nav><a href="index.html">All demos</a></nav>
+  <h1>17 — Closest pair</h1>
+  <p class="hint">Divide and conquer with the strip. Brute force is the oracle. They must agree.</p>
+  <button id="reset">Random 30</button>
+  <canvas id="c" width="800" height="520"></canvas>
+  <pre id="out"></pre>
+  <script src="kernel.js"></script>
+  <script src="viz.js"></script>
+  <script>
+    function cloud(n) {
+      const pts = [];
+      for (let i = 0; i < n; i++) pts.push({ x: 70 + Math.random()*660, y: 50 + Math.random()*420 });
+      return pts;
+    }
+    Viz.boot({
+      points: cloud(30),
+      draw(ctx, s) {
+        const best = CG.closestPair(s.points);
+        if (best) Viz.segment(ctx, best.a, best.b, "#c0392b", 3);
+      },
+      status(s) {
+        const t0 = performance.now();
+        const dc = CG.closestPair(s.points);
+        const t1 = performance.now();
+        const br = CG.bruteClosestPair(s.points);
+        const t2 = performance.now();
+        return [
+          "n = " + s.points.length,
+          "DC dist = " + dc.dist.toFixed(3) + "  (" + (t1-t0).toFixed(2) + " ms)",
+          "brute dist = " + br.dist.toFixed(3) + "  (" + (t2-t1).toFixed(2) + " ms)",
+          "match = " + (Math.abs(dc.dist - br.dist) < 1e-6),
+        ].join("\n");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -225,3 +225,25 @@ Done when the bowtie is not reported as convex.
 2. Four-polygon taxonomy.
 3. One reflex vertex with the two incident edges and a marked interior.
 4. Shoelace as sum of signed triangles from the origin.
+
+---
+
+## Extra exercises and snippets
+
+Sheet: [[Computational Geometry/exercises/Week 03]] · Demo: [06-shoelace.html](code/06-shoelace.html)
+
+1. Intersection of two convex sets is convex. Union? Give a picture.
+2. Turn signs of a bowtie. Why same-turn without simplicity is not “convex.”
+3. Shoelace of a 2×3 rectangle, then reversed vertices.
+4. Implement `classifyPolygon`. Skip adjacent edges when testing self-intersection.
+
+```js
+function shoelace(P) {
+  let s = 0;
+  for (let i = 0; i < P.length; i++) {
+    const a = P[i], b = P[(i + 1) % P.length];
+    s += a.x * b.y - a.y * b.x;
+  }
+  return 0.5 * s; // positive ⇒ CCW
+}
+```
