@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** domain, lookup, noise  
-**Success check:** Read [[WebGL/18 Shadertoy Effects]] and one of fire/water/smoke glsl.
+**Kernel:** domain warp uv; fBm as mask; study then shrink a catalog look  
+**Success check:** they ship a ~40-line fire/water/smoke with a citation and one original uniform
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: domain, lookup, noise | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 10 | Goal: one look you can explain | Invariant: unread 400-line paste is a clip; a paused uniform is a program`
 
 ## Board at the end (they photograph this)
 
 ```
-uv distortion + fBm mask
-Layers of fire.
+uv' = uv + k * noise(uv)
+
+fire:  warp + fBm mask + palette
+water: height fBm → n; fresnel name; sky gradient
+
+cite what you copied
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Layers of fire.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Catalog. Students **study** then **shrink**.
+**Say:** Read the catalog, then shrink. Pasting aurora.glsl as homework fails integrity. Water: normals from height, fresnel as a name, reflection as a gradient sky — not a path tracer.
 
-**Ask:** Read [[WebGL/18 Shadertoy Effects]] and one of fire/water/smoke glsl? Wait seven seconds. Take two answers.
+**Ask:** What do you write in the comment if you started from fire.glsl? Wait. Want: the source.
 
-**Board:** parked strip. Then uv distortion + fBm mask.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: domain, lookup, noise. Kernel: domain, lookup, noise. We freeze conventions and we do not invent timings.
+**Say:** Domain, lookup, noise. One parameter that is yours — a uniform they can pause. No CDN; local glsl.
 
-**Ask:** What would a wrong version of this look like? Want: pasting aurora.glsl as the homework.
+**Ask:** Why a 40-line fire instead of 400?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Catalog. Students **study** then **shrink**.
+**Say:** Warp the domain. Mask with fBm. Palette is a mix, not a 4K texture from the internet.
 
-**Say:** Water. Normals from height fBm; fresnel name; reflection as a gradient sky.
+**Board:** layers. Circle citation.
 
-**Say:** Ethics. Comment what was copied.
+**Say:** Ethics: comment the copy. Teaching/12.
 
-**Ask:** Read [[WebGL/18 Shadertoy Effects]] and one of fire/water/smoke glsl? Wait seven seconds. Take two answers.
+**Ask:** Fresnel in one sentence (name-level)?
 
-**They do:** On paper: one parameter that is yours.
+**They do:** On paper: three functions you will reuse, named.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 40-line fire or water; cite the catalog.. Zoom 140%. Read errors out loud.
+**Say:** A 40-line fire or water from WebGL/shadertoy; cite. Plant aurora.glsl paste. Pause time; one slider that is theirs.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** one parameter that is yours.
+**Say:** One original uniform. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: one parameter that is yours.; screenshot.. Homework: Written: three functions you reused.; Your GLSL.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: your parameter + screenshot. Homework: three reused functions; your GLSL. Quiz: domain warp, why cite, fresnel name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: domain, lookup, noise | Plant the first common mistake. |
-| 10–30 | A 40-line fire or water; cite the catalog. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Warp uv | Plant unread 400 lines. |
+| 10–30 | 40-line fire/water | Plant no citation. |
+| 30–45 | Pause + one slider | Their parameter. |
+| 45–60 | They comment the source | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. domain warp (3)
-2. why cite (4)
-3. fresnel name (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +158,7 @@ See [[Shader Programming/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Catalog.** Students **study** then **shrink**. A 30-line fire is the lab, not 400 unread lines.
-
-**2. Water.** Normals from height fBm; fresnel name; reflection as a gradient sky.
-
-**3. Ethics.** Comment what was copied. Integrity: [[Teaching/12 Academic Integrity and AI]].
+_none_
 
 ---
 
@@ -171,8 +169,8 @@ See [[Shader Programming/exercises/Week 10]].
 
 ## If we run long, cut
 
-Ethics
+Full Navier–Stokes. Keep warp + cite + one uniform.
 
 ## If we run short, add
 
-screenshot.
+Palette as mix of three colors.

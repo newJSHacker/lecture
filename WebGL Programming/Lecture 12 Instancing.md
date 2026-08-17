@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** divisor, one draw  
-**Success check:** instance attribute.
+**Kernel:** vertexAttribDivisor(1); drawArraysInstanced — one draw, many M  
+**Success check:** they instance 100 cubes, color per instance, and compare to 100 draw calls by measuring on this machine
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: divisor, one draw | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 12 | Goal: one draw for a forest | Invariant: divisor 1 means the attrib advances per instance; do not invent fps`
 
 ## Board at the end (they photograph this)
 
 ```
-gl.drawArraysInstanced
-Forest.
+per-vertex attrib     divisor 0
+per-instance attrib   divisor 1
+
+gl.vertexAttribDivisor(loc, 1)
+gl.drawArraysInstanced(..., instanceCount)
+
+measure 100 draws vs 1   (this machine; no invented fps)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Forest.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** GPU repetition. Forest, particles, bolts.
+**Say:** Week 10 was a CPU loop. Today the GPU repeats. Forest, particles, bolts. Demo 14-instancing.html. If they do not measure, instancing is a religion.
 
-**Ask:** instance attribute? Wait seven seconds. Take two answers.
+**Ask:** Does divisor go on the position attrib of the cube? Wait. Want: no — on the instance offset/color.
 
-**Board:** parked strip. Then gl.drawArraysInstanced.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: divisor, one draw. Kernel: divisor, one draw. We freeze conventions and we do not invent timings.
+**Say:** Still upload the instance buffer when it changes. Attribute slot limits named. n=3 on a quiz is 'three instances.'
 
-**Ask:** What would a wrong version of this look like? Want: instancing without measuring.
+**Ask:** When does instancing lose to a loop of three unique meshes?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** GPU repetition. Forest, particles, bolts.
+**Say:** Same geometry, different instance attribs.
 
-**Say:** CPU. Still upload instance buffer when it changes.
+**Board:** divisor 0 vs 1. drawInstanced.
 
-**Say:** Limits. Attribute slots.
+**Say:** Color per instance as the lab kernel.
 
-**Ask:** instance attribute? Wait seven seconds. Take two answers.
+**Ask:** What does instanceCount mean in drawArraysInstanced?
 
-**They do:** On paper: color per instance.
+**They do:** On paper: which attribs get divisor 1.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: 100 cubes instanced vs 100 draw calls (measure).. Zoom 140%. Read errors out loud.
+**Say:** 100 cubes instanced vs 100 draw calls — log times or info, no invented fps. Demo 14-instancing.html. Plant divisor on the wrong attrib.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** color per instance.
+**Say:** Color per instance. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: color per instance.; measured table.. Homework: Written: when instancing wins.; Code: instanced.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: color per instance; measured table. Homework: when instancing wins; instanced. Quiz: divisor, drawInstanced, n=3.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: divisor, one draw | Plant the first common mistake. |
-| 10–30 | 100 cubes instanced vs 100 draw calls (measure). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Instance buffer of offsets | Plant STATIC then never update. |
+| 10–30 | divisor 1 + instanced draw | Plant divisor on a_pos. |
+| 30–45 | Measure loop vs instance | No invented fps. |
+| 45–60 | They color instances | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. divisor (4)
-2. drawInstanced (3)
-3. n=3 (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. GPU repetition.** Forest, particles, bolts. Demo 14.
-
-**2. CPU.** Still upload instance buffer when it changes.
-
-**3. Limits.** Attribute slots.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[WebGL Programming/exercises/Week 12]].
 
 ## If we run long, cut
 
-Limits
+Indirect draw. Keep divisor + one draw + measure.
 
 ## If we run short, add
 
-measured table.
+Measured table: loop vs instanced on this GPU.

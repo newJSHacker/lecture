@@ -46,11 +46,11 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 **Ask:** Why is P+Q not a point? Wait. Want: two locations do not add; their difference is a vector.
 
-**Board:** parked strip. Then arrow not a point.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *magnitude, add, scale*.
+**They do:** write today’s question in their notes: *vec2 add, sub, scale, len, normalize; refuse p+q*.
 
 **Do not:** Normalizing zero.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 **They do:** On paper: |(3,4)|. Want: 5.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/02-add.html` as the after-
 
 ## Quiz next meeting (they hear this now)
 
-1. | (3,4) | (2)
-2. unit of (0,2) (3)
-3. p minus p (5)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Point vs vector.** A point is a location. A vector is a displacement. CG I Week 4 is this with 3D and w.
-
-**2. Operations.** a+b parallelogram. s*a stretch. |a| = hypot.
-
-**3. Normalization.** unit vector. Zero vector: do not divide.
+_none_
 
 ---
 

@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** emission, absorption, scatter  
-**Success check:** Beer–Lambert absorption.
+**Kernel:** homogeneous fog: Beer–Lambert T = exp(−σ t); emission/absorption/scatter named  
+**Success check:** they can march a homogeneous fog toward a sun disk and move a density slider
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: emission, absorption, scatter | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 5 | Goal: transmittance along a ray | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-T = exp(-σ t); in-scatter
-Ray through fog.
+emission · absorption · scatter
+T = exp(−σ t)     Beer–Lambert
+
+Henyey–Greenstein named
+OpenVDB / 3D tex inhomogeneous  ≠  week 5 required
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Ray through fog.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** Participating media. Fog, smoke, clouds, skin (SSS name).
+**Say:** Participating media: fog, smoke, clouds, SSS as a name. Homogeneous fog is the lab. OpenVDB as required fails. Inhomogeneous 3D tex as week 5 required fails.
 
-**Ask:** Beer–Lambert absorption? Wait seven seconds. Take two answers.
+**Ask:** If σ doubles, what happens to T? Wait. Want: it decays faster.
 
-**Board:** parked strip. Then T = exp(-σ t); in-scatter.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: emission, absorption, scatter. Kernel: emission, absorption, scatter. We freeze conventions and we do not invent timings.
+**Say:** Phase function named. Height fog / volumetric lighting as realtime names. Emission extra.
 
-**Ask:** What would a wrong version of this look like? Want: OpenVDB as required.
+**Ask:** What is scatter vs absorb?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Participating media. Fog, smoke, clouds, skin (SSS name).
+**Say:** Media. Three verbs.
 
-**Say:** Phase. Henyey–Greenstein name.
+**Board:** Beer–Lambert. Sun disk through fog.
 
-**Say:** Realtime. Height fog, volumetric lighting names in games.
+**Say:** Homogeneous first. Heterogeneous next week.
 
-**Ask:** Beer–Lambert absorption? Wait seven seconds. Take two answers.
+**Ask:** Why is OpenVDB a cut?
 
-**They do:** On paper: density slider.
+**They do:** On paper: T at two σ values.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Ray march a homogeneous fog toward a sun disk; Beer–Lambert.. Zoom 140%. Read errors out loud.
+**Say:** Ray march homogeneous fog toward a sun disk. Plant OpenVDB required. Density slider.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** density slider.
+**Say:** exp(-sigma*t) along a ray. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: density slider.; emission extra.. Homework: Written: T = exp(-σt).; demo (Canvas or shader).. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: density slider; emission extra. Homework: Beer–Lambert. Quiz: T, three verbs, homogeneous.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: emission, absorption, scatter | Plant the first common mistake. |
-| 10–30 | Ray march a homogeneous fog toward a sun disk; Beer–Lambert. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Three verbs | Plant OpenVDB. |
+| 15–40 | Beer–Lambert march | Plant inhomogeneous required. |
+| 40–55 | Density slider | They move σ. |
+| 55–60 | Emission extra if time | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. Beer-Lambert (4)
-2. scatter vs absorb (3)
-3. HG name (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Advanced Computer Graphics/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Participating media.** Fog, smoke, clouds, skin (SSS name). Homogeneous fog is the lab: transmittance along a ray.
-
-**2. Phase.** Henyey–Greenstein name. Isotropic extra.
-
-**3. Realtime.** Height fog, volumetric lighting names in games.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Advanced Computer Graphics/exercises/Week 05]].
 
 ## If we run long, cut
 
-Realtime
+HG phase impl. Keep homogeneous T.
 
 ## If we run short, add
 
-emission extra.
+Emission extra.

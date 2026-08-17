@@ -45,11 +45,11 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 **Ask:** How many times does `for (let i = 0; i < 10; i++)` run? Wait. Want: 10, not 9, not 11.
 
-**Board:** parked strip. Then i from 0 to n-1.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *for, while, off-by-one*.
+**They do:** write today’s question in their notes: *`for (let i = 0; i < n; i++)` and an 8×8 checkerboard in the console*.
 
 **Do not:** `i <= a.length` and crash.
 
@@ -79,7 +79,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 **They do:** On paper: trace `s = 0; for i in 0..3: s += i`. What is s?
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -140,9 +140,7 @@ Point them at `Programming/code/04-checker.html` as the after-class check, not a
 
 ## Quiz next meeting (they hear this now)
 
-1. How many times does `i < 10` run from 0? (2)
-2. Infinite loop cause (3)
-3. Nested loop count for n×n (5)
+None this meeting.
 
 
 ## Snippet
@@ -161,11 +159,7 @@ See [[Programming/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. for is the default.** `for (let i = 0; i < n; i++)` is the graphics loop over pixels and vertices. while is for unknown count.
-
-**2. Off-by-one.** Fenceposts. Inclusive vs exclusive end. Draw 4 posts, 3 rails.
-
-**3. Nested loops.** A checkerboard is nested loops. This is Week 2 of Computer Graphics I later. Do it in text first: print `#.` rows.
+_none_
 
 ---
 

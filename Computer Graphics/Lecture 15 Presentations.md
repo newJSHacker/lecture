@@ -1,108 +1,84 @@
 # Lecture 15 — Project presentations
 
-**Time:** full session of 12 + 5 minute slots  
-**No new lecture**  
-**Deliverables:** live demo, repo, 6–8 page report, 30-second recording
+**Week 15 of 15** · Computer Graphics I  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** 12+5; live demo of the student pipeline; point at M,V,P and a debug view  
+**Success check:** they stop at 12; if the demo dies, play the recording — do not debug five minutes on stage
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. This meeting is **presentations** (12+5), not a content lecture.
-
 ## Before you enter
 
-- Demo: `Computer Graphics/code/15-texture.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — today's picture.
-- Parked strip: `Lecture 15 | Project presentations | Invariant: a picture is an array; putPixel lives in pixels`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 15 | 12 min + 5 questions | Invariant: no new features`
 
 ## Board at the end (they photograph this)
 
 ```
-Project presentations
+12 + 5
+Show: M V P product · divide by w · one debug view
+No new shaders on stage
+Software rasterizers first, then WebGL ports
 ```
 
-## Slides today (cap: 6)
+## Slides today
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Timer | not a slide of PBR |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Before the session
-
-- Room: projector + spare dongle.
-- Load each team’s recording as backup.
-- Print the rubric one sheet per team.
-- Order: software rasterizers first, then WebGL ports, so comparison is fair.
-- A TA keeps time: 10-minute warning, 12-minute stop.
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Slot format
+## The meeting
 
-| Time | Who | What |
-| --- | --- | --- |
-| 12 min | team | problem, pipeline, live demo, limitations |
-| 5 min | examiner | two questions from the Week 14 list, plus one specific to their code |
-| 1 min | — | switch |
+**Say:** Presentations. 12+5. Repo, 6–8 page report, 30s recording. Order: software first, then GPU ports. Graphics in this program is naming the space, writing the product, looking at a debug view, only then switching on a library.
 
-If the demo dies, play the recording. Do not debug for five minutes in front of the class.
+**Ask (every team, two of):** Where is the kernel? What did you cut? Who wrote what?
 
----
+**They do:** present. Live-coding hour is more talks.
 
-## Required deliverables
-
-1. **Live demo** of the student pipeline (software and/or WebGL they can explain).
-2. **Repository** with README, math kernel or shaders, debug view, library note.
-3. **Report** 6–8 pages, captions on figures.
-4. **30-second recording** for the IGWT portfolio.
-
-Late report: department rule from Week 1. Suggested: −10% per 24 hours, zero after 72 hours.
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
 
-## Rubric (copy to a sheet)
+## Live coding (60 min)
 
-| Criterion | Weight | 0–5 notes |
-| --- | --- | --- |
-| Correct pipeline (tests + debug view) | 30% | |
-| Visual explanation of a stage | 20% | |
-| Code quality and repository | 15% | |
-| Report | 20% | |
-| Presentation and live demo | 15% | |
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–60 | Talks | Cut at 12. Play recording if HDMI dies. |
 
 ---
 
-## After the last talk
+## Lab
 
-Say:
-
-Computer graphics in this program is not a catalog of engine checkboxes.
-
-It is the habit of:
-
-1. naming the space,
-2. writing the matrix product,
-3. looking at a debug view,
-4. only then switching on a library.
-
-That habit is what they take into WebGL, Three.js, Real-Time Rendering, and the capstone.
+_(none this meeting)_
 
 ---
 
-## Quiz / homework
+## Homework
 
-None. Grades close when the report and repo are in.
+_(none this meeting)_
 
 ---
 
-## Board
+## Quiz
 
-The rubric table. The clock. Nothing else.
-
+None.
 
 ## Extra exercises
 
 See [[Computer Graphics/exercises/Week 15]].
+
+## If we run long, cut
+
+Debugging on stage.
+
+## If we run short, add
+
+One question: what would break in a left-handed API?

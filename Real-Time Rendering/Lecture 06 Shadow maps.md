@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** depth from light  
-**Success check:** Render depth from the light.
+**Kernel:** shadow-map pass: depth from light; shade pass: compare z  
+**Success check:** they can render a depth map from the light, compare, and show the map as grayscale
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: depth from light | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 6 | Goal: two cameras: eye and light | Invariant: a camera at the light is a named pass; CSM without one map is a speech`
 
 ## Board at the end (they photograph this)
 
 ```
-light P V → depth tex → compare
-Two cameras.
+PASS 1  light camera  →  depth tex     (ortho if directional)
+PASS 2  eye shade     →  compare zLight vs mapZ + bias
+
+bias 0.1 is huge
+mapSize: measure 512 vs 2048 on this device, or omit
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Two cameras.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Algorithm. A camera at the light.
+**Say:** Algorithm: store depth from the light. If the main pixel is farther than the map, it is in shadow. WebGL DEPTH_COMPONENT. Three.js does this — they still draw the light frustum.
 
-**Ask:** Render depth from the light? Wait seven seconds. Take two answers.
+**Ask:** Who renders the shadow map — the eye or the light? Wait. Want: the light.
 
-**Board:** parked strip. Then light P V → depth tex → compare.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: depth from light. Kernel: depth from light. We freeze conventions and we do not invent timings.
+**Say:** Ortho for directional, perspective for spot. Frustum too tight → acne, too loose → jaggy. Bias is a uniform they will plant wrong.
 
-**Ask:** What would a wrong version of this look like? Want: CSM speech without a single map.
+**Ask:** Why ortho for a directional light?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Algorithm. A camera at the light.
+**Say:** Two cameras. Two frustums.
 
-**Say:** Projection. Ortho for directional.
+**Board:** light P V → depth → compare. Circle bias.
 
-**Say:** WebGL. DEPTH_COMPONENT texture.
+**Say:** Show the map as grayscale extra. mapSize change is a measurement row, not a claimed fps.
 
-**Ask:** Render depth from the light? Wait seven seconds. Take two answers.
+**Ask:** Write the compare in one line (teaching).
 
-**They do:** On paper: show shadow map as grayscale extra.
+**They do:** On paper: pass 1 vs pass 2.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Plane + cube; directional shadow; bias slider.. Zoom 140%. Read errors out loud.
+**Say:** Plane + cube; directional shadow; bias slider. Plant CSM speech. Plant bias 0.1. Grayscale map.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** show shadow map as grayscale extra.
+**Say:** Show shadow map as grayscale. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: show shadow map as grayscale extra.; mapSize 512 vs 2048 measured.. Homework: Written: compare function.; Code or three.js with explanation of bias.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: grayscale + mapSize 512 vs 2048 measured. Homework: compare function; bias paragraph. Quiz: who renders the map, bias, ortho why.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: depth from light | Plant the first common mistake. |
-| 10–30 | Plane + cube; directional shadow; bias slider. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Light-depth pass | Plant CSM without a map. |
+| 10–30 | Compare + bias | Plant bias 0.1. |
+| 30–45 | Grayscale debug | Named extra view. |
+| 45–60 | 512 vs 2048 table | Device + resolution; no invented fps. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. who renders the map (4)
-2. bias (3)
-3. ortho why (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Real-Time Rendering/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Algorithm.** A camera at the light. Store depth. If the main pixel is farther than the map, it's in shadow.
-
-**2. Projection.** Ortho for directional. Perspective for spot. Frustum must cover the scene — too tight acne, too loose jaggy.
-
-**3. WebGL.** DEPTH_COMPONENT texture. Three.js does this; students should still draw the light frustum.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Real-Time Rendering/exercises/Week 06]].
 
 ## If we run long, cut
 
-WebGL
+Cascades. Keep one directional map + named passes.
 
 ## If we run short, add
 
-mapSize 512 vs 2048 measured.
+Spot perspective as a name.

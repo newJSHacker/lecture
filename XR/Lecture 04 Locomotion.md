@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** teleport vs smooth  
-**Success check:** Teleport to a nav mesh or plane.
+**Kernel:** teleport + snap turn as default policy; smooth optional behind a setting  
+**Success check:** they can teleport to a floor hit and snap 30°; smooth is not the only path
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: teleport vs smooth | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 4 | Goal: locomotion that does not assume a stomach | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-arc teleport; vignette optional
-Arc + fade.
+default:  teleport  +  snap ~30°
+optional: smooth     behind a setting
+never:    fly by default
+
+raycast floor → on select, move rig to hit
+vignette named extra
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Arc + fade.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Comfort. Vection makes people sick.
+**Say:** Vection makes people sick. Teleport + snap is the student policy unless they document otherwise. Smooth-only is a fail. Flying by default is a fail.
 
-**Ask:** Teleport to a nav mesh or plane? Wait seven seconds. Take two answers.
+**Ask:** Who is the locomotion for — the demo reel or the person in the chair? Wait.
 
-**Board:** parked strip. Then arc teleport; vignette optional.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: teleport vs smooth. Kernel: teleport vs smooth. We freeze conventions and we do not invent timings.
+**Say:** A plane is enough; navmesh named. Blink fade extra. Inline: click-to-move on the plane. Comfort leftover in week 8.
 
-**Ask:** What would a wrong version of this look like? Want: smooth locomotion only, no option.
+**Ask:** Why hide smooth behind a setting?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Comfort. Vection makes people sick.
+**Say:** Comfort first. Policy on the board.
 
-**Say:** Nav. A plane is enough.
+**Board:** teleport vs smooth. Snap 30°.
 
-**Say:** Blink. Fade on teleport extra.
+**Say:** Seated still works. No headset lottery for the lab.
 
-**Ask:** Teleport to a nav mesh or plane? Wait seven seconds. Take two answers.
+**Ask:** What is snap turn for?
 
-**They do:** On paper: disable smooth or hide behind a setting.
+**They do:** Sketch floor hit → rig move; mark snap.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Teleport on select-hit a floor; snap turn 30°.. Zoom 140%. Read errors out loud.
+**Say:** Teleport on select-hit; snap 30°. Plant smooth-only. Plant flying. Inline click-to-move.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** disable smooth or hide behind a setting.
+**Say:** Teleport to plane hit (or inline analog). Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: disable smooth or hide behind a setting.; vignette extra.. Homework: Written: why teleport default.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: disable smooth or hide it; vignette extra. Homework: policy paragraph. Quiz: default locomotion, snap, no fly.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: teleport vs smooth | Plant the first common mistake. |
-| 10–30 | Teleport on select-hit a floor; snap turn 30°. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Policy: teleport+snap | Plant smooth-only. |
+| 15–40 | Floor hit → move | Plant fly. |
+| 40–55 | Inline click-to-move | Lottery plant. |
+| 55–60 | They add snap | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. vection (4)
-2. snap turn (3)
-3. navmesh (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[XR/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Comfort.** Vection makes people sick. Teleport + snap turn is the default student policy unless they document otherwise.
-
-**2. Nav.** A plane is enough. Navmesh name.
-
-**3. Blink.** Fade on teleport extra.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[XR/exercises/Week 04]].
 
 ## If we run long, cut
 
-Blink
+Blink shader. Keep teleport + policy.
 
 ## If we run short, add
 
-vignette extra.
+Vignette name extra.

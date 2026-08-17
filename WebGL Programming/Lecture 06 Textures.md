@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** upload, UV, sampling  
-**Success check:** texImage2D.
+**Kernel:** texImage2D upload, UV, NEAREST vs LINEAR; uv as color debug  
+**Success check:** they sample a local image after onload and can debug UV as color
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: upload, UV, sampling | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 6 | Goal: a textured quad you can debug | Invariant: sampling before upload is black; UV is the map, not the mesh`
 
 ## Board at the end (they photograph this)
 
 ```
-uv as color debug
-UV.
+img.onload → texImage2D → generateMipmap (named)
+outColor = texture(u_tex, v_uv);
+
+DEBUG: outColor = vec4(v_uv, 0, 1);
+
+NEAREST vs LINEAR     REPEAT vs CLAMP_TO_EDGE
+UNPACK_FLIP_Y_WEBGL
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ UV.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Upload. async image onload.
+**Say:** A missing texture is an async bug until you prove UV. uv as color is the flashlight. Local file, no CDN. Demos 05-canvas-texture.html and 08-uv-debug.html.
 
-**Ask:** texImage2D? Wait seven seconds. Take two answers.
+**Ask:** If the quad is black, is it the shader or onload? Wait. Want: often onload — sampling before upload.
 
-**Board:** parked strip. Then uv as color debug.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: upload, UV, sampling. Kernel: upload, UV, sampling. We freeze conventions and we do not invent timings.
+**Say:** Upload from Image or canvas. Premultiply named. Filtering: NEAREST vs LINEAR; mips named. flipY surprises PNG vs WebGL.
 
-**Ask:** What would a wrong version of this look like? Want: sampling before upload done.
+**Ask:** What does UV (0,0) mean on the image?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Upload. async image onload.
+**Say:** Async. Draw a placeholder color until the texture is ready.
 
-**Say:** Debug. uv as color.
+**Board:** uv as color. Then texture().
 
-**Say:** Filtering. NEAREST vs LINEAR.
+**Say:** wrap REPEAT vs CLAMP. One axis at a time.
 
-**Ask:** texImage2D? Wait seven seconds. Take two answers.
+**Ask:** Why not fetch a texture from a CDN in this program?
 
-**They do:** On paper: uv debug.
+**They do:** On paper: the onload → texImage2D sequence.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Textured quad then cube.. Zoom 140%. Read errors out loud.
+**Say:** Textured quad then cube. Plant sampling before upload. Plant wrong flipY. Demo 05-canvas-texture.html, 08-uv-debug.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** uv debug.
+**Say:** uv debug as color, then sample. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: uv debug.; wrap repeat vs clamp.. Homework: Written: flipY.; Code: sample.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: uv debug; wrap repeat vs clamp. Homework: flipY; sample. Quiz: texImage2D, uv debug, NEAREST.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: upload, UV, sampling | Plant the first common mistake. |
-| 10–30 | Textured quad then cube. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Create texture + bind | Plant TEXTURE0 vs uniform 1. |
+| 10–30 | Canvas texture 05 | Plant draw before onload. |
+| 30–45 | uv as color 08 | They see stretch. |
+| 45–60 | They sample | Circulate. Local only. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. texImage2D (3)
-2. uv debug (4)
-3. NEAREST (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Upload.** async image onload. Premultiply options.
-
-**2. Debug.** uv as color. [[WebGL/08 uv debug]] if present, else shader.
-
-**3. Filtering.** NEAREST vs LINEAR. Mips named.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[WebGL Programming/exercises/Week 06]].
 
 ## If we run long, cut
 
-Filtering
+sRGB framebuffer details. Keep upload + uv debug.
 
 ## If we run short, add
 
-wrap repeat vs clamp.
+wrap REPEAT vs CLAMP on one axis.

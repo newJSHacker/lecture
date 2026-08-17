@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** tree, tags, a first page  
-**Success check:** Write a valid skeleton.
+**Kernel:** <!DOCTYPE html> skeleton; html > head + body tree  
+**Success check:** they indent a nested list and the validator in their head matches the indent
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/01-skeleton.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: tree, tags, a first page | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 2 | Goal: a first page that is a tree | Invariant: HTML is a tree, not Photoshop`
 
 ## Board at the end (they photograph this)
 
 ```
-html > head + body
-Tree.
-Skeleton.
+html
+  head   title, meta charset
+  body   heading, p, ul, a
+
+<!DOCTYPE html>
+<html lang="en"> … </html>
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ Skeleton.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Tags and tree. HTML is a tree, not a canvas.
+**Say:** Last time: a request. Today: the document the server sent. Tags nest. If you do not indent, you will not see a broken tree.
 
-**Ask:** a valid skeleton? Wait seven seconds. Take two answers.
+**Ask:** Where does <title> show — in the page body or the tab? Wait.
 
-**Board:** parked strip. Then html > head + body.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: tree, tags, a first page. Kernel: tree, tags, a first page. We freeze conventions and we do not invent timings.
+**Say:** Skeleton: doctype, html lang, head charset, title, body. Purpose of charset: the browser must not guess. lang matters for a11y later.
 
-**Ask:** What would a wrong version of this look like? Want: div soup already.
+**Ask:** Why indent?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Tags and tree. HTML is a tree, not a canvas.
+**Say:** Tree on the board: html splits into head and body. Head is not visible text.
 
-**Say:** head vs body. title, charset, viewport meta.
+**Board:** skeleton. Closing tags as matching brackets.
 
-**Say:** Semantics preview. h1–h6, p, a, img.
+**Say:** Heading, paragraph, list, link. A personal page is enough. We do not paint in a visual editor.
 
-**Ask:** a valid skeleton? Wait seven seconds. Take two answers.
+**Ask:** Purpose of charset?
 
-**They do:** On paper: About-me page.
+**They do:** On paper: nest ul inside a section, indent.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Build a one-screen personal page: heading, paragraph, list, link.. Zoom 140%. Read errors out loud.
+**Say:** Build a one-screen personal page live: heading, paragraph, list, link. Plant an unclosed <p>. Read the tree in Elements.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** About-me page.
+**Say:** About-me page. Validate nesting by indenting. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: About-me page.; Validate nesting by indenting.. Homework: Clone a simple Wikipedia intro layout (structure only).. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: about-me + indent. Homework: Wikipedia intro layout, structure only. Quiz: charset, where title shows, why indent.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: tree, tags, a first page | Plant the first common mistake. |
-| 10–30 | Build a one-screen personal page: heading, paragraph, list, link. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Skeleton | Plant missing charset. |
+| 10–30 | Personal page | Plant unclosed tag. |
+| 30–45 | Elements tree | They match indent to DOM. |
+| 45–60 | They finish about-me | Circulate. |
 
 Point them at `Web Technologies/code/01-skeleton.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Web Technologies/code/01-skeleton.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. Purpose of charset (2)
-2. Where does title show (3)
-3. Why indent (5)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +163,7 @@ See [[Web Technologies/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Tags and tree.** HTML is a tree, not a canvas. Mismatched tags are the DOM cousin of a broken mesh.
-
-**2. head vs body.** title, charset, viewport meta. Body is visible content.
-
-**3. Semantics preview.** h1–h6, p, a, img. Semantic week is next; this week structure.
+_none_
 
 ---
 
@@ -177,8 +174,8 @@ See [[Web Technologies/exercises/Week 02]].
 
 ## If we run long, cut
 
-Semantics preview
+Every HTML5 sectioning element. Keep skeleton + tree.
 
 ## If we run short, add
 
-Validate nesting by indenting.
+One <img> with alt, local file, no CDN.

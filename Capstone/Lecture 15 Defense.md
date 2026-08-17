@@ -2,8 +2,8 @@
 
 **Week 15 of 15** · Capstone Project  
 **Meeting:** defense — not a content lecture  
-**Kernel:** the demo runs; they can answer two questions  
-**Success check:** they stop on time; no new features; who wrote what is stated
+**Kernel:** defense 12+5: users, verb, measure, limits; who wrote what; no new features  
+**Success check:** they stop at 12; the path runs; they can answer as individuals
 
 Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,15 +19,17 @@ Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-rubric: problem, verb, measure, limits
-Rubric.
+12 + 5  public defense
+Show: users · verb · path · budget/oracles · what you cut
+who wrote what
+individual questions
 ```
 
 ## Slides today
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | Timer | not a startup pitch |
 
 Student decks are their problem. Yours is a timer.
 
@@ -35,9 +37,9 @@ Student decks are their problem. Yours is a timer.
 
 ## The meeting
 
-**Say:** This meeting is presentations (defense). No new features. I will cut you at the clock.
+**Say:** Defense. 12+5 public. Same energy as Graduation Requirements. No new features. I will cut you at the clock. The deck is not the product.
 
-**Ask (every team, two of):** Public. Questions from staff and peers. Same energy as [[Graduation Requirements]].
+**Ask (every team, two of):** Who is the user? What is the verb? What did you cut? Who wrote the loader? Where did you measure?
 
 **They do:** present. Live-coding hour is more talks.
 
@@ -49,10 +51,7 @@ Student decks are their problem. Yours is a timer.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: 12+5 public | Plant the first common mistake. |
-| 10–30 | Defend. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–60 | Defenses | Cut at 12. No debug on stage. |
 
 ---
 
@@ -79,8 +78,8 @@ See [[Capstone/exercises/Week 15]].
 
 ## If we run long, cut
 
-Q&A. Keep the clock.
+Q&A beyond the clock.
 
 ## If we run short, add
 
-One extra question on tests or a limitation.
+One extra individual question on an oracle or a cut.

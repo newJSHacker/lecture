@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** measure + keyboard  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** measure on a named device; keyboard path; no invented fps  
+**Success check:** they can show a before/after row and tab to the verb
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,10 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-table + checklist
-Two tables.
+device | before | cut | after
+fps only if measured
+focus visible     keyboard does the verb
+Cuts: bloom, extra instances, not the verb
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +38,9 @@ Two tables.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: performance and a11y). Invented frame rates fail the budget section. Keyboard still required. Demo 03-budget.html.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If you did not measure, what do you write? Want: omit — not 60.
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +48,15 @@ Two tables.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Fill tables; fix the worst row.
+**Say:** Fill tables; fix the worst row. Focus visible. Reduced-motion if they animate.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Worst row first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Before/after in README. Next week is the midterm demo — public checkpoint, not a written exam.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +66,9 @@ Two tables.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: measure + keyboard | Plant the first common mistake. |
-| 10–30 | Fill tables; fix the worst row. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Table headings | Photograph. |
+| 10–50 | Desk review | Measure or omit. |
+| 50–60 | Keyboard pass | Invented-fps plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +97,12 @@ See [[Capstone/exercises/Week 07]].
 
 ## Notes from the outline
 
-**1. Perf.** RTR/R3F habits. Cuts with screenshots.
-**2. a11y.** Teaching handbook. Canvas-only fails if you claimed a product.
-**3. XR.** Comfort defaults if XR.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New post stack. Keep table + keyboard.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Focus-visible pass.

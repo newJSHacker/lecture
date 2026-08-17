@@ -46,11 +46,11 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 **Ask:** Six spaces, in order? Wait. Fill slowly.
 
-**Board:** parked strip. Then object→world→view→clip.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *PVM preview*.
+**They do:** write today’s question in their notes: *recite object → world → view → clip → NDC → pixels; p_clip = P V M p*.
 
 **Do not:** Claiming they already wrote a GPU.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 **They do:** One-page map: math week → CG I week (start in class, finish in lab).
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/10-pvm.html` as the after-
 
 ## Quiz next meeting (they hear this now)
 
-1. six spaces (5)
-2. w of a point (2)
-3. which course implements z-buffer (3)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Map.** Vectors, matrices, frames, lerp → renderer.
-
-**2. PVM.** p' = P V M p. Do not derive P today.
-
-**3. Geometry course.** orient and barycentric are this week's cross and areas.
+_none_
 
 ---
 

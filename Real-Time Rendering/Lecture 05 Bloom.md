@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** bright pass + blur + add  
-**Success check:** Extract highlights.
+**Kernel:** bloom: bright-pass → blur pass(es) → add; on HDR, named  
+**Success check:** they can extract highlights, blur, combine, and toggle the three passes
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: bright pass + blur + add | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 5 | Goal: three named bloom passes | Invariant: bloom is leftover HDR energy, not a substitute for lighting`
 
 ## Board at the end (they photograph this)
 
 ```
-threshold → blur → combine
-Three FBOs.
+PASS  bright    max(c - t, 0)   on HDR
+PASS  blur      separable H then V   (not naive 12×12)
+PASS  add       combine  (policy: before or after tonemap — freeze one)
+
+half-res  is a budget  (measure if you claim)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Three FBOs.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** Pipeline. Same as WebGL post.
+**Say:** Same FBO idea as WebGL post. Draw the boxes before UnrealBloomPass. Fireflies and a huge kernel are artifacts. We do not invent fps; half-res is a named cut.
 
-**Ask:** Extract highlights? Wait seven seconds. Take two answers.
+**Ask:** Which pass extracts the sun? Wait. Want: bright / threshold.
 
-**Board:** parked strip. Then threshold → blur → combine.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: bright pass + blur + add. Kernel: bright pass + blur + add. We freeze conventions and we do not invent timings.
+**Say:** Threshold on HDR. Separable blur. Combine policy frozen in README. Three.js UnrealBloomPass is the oracle after the boxes.
 
-**Ask:** What would a wrong version of this look like? Want: bloom as a substitute for lighting.
+**Ask:** Why HDR before bloom?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Pipeline. Same as WebGL post.
+**Say:** Three FBO boxes. Label each pass.
 
-**Say:** Artifacts. Fireflies, threshold too low, huge kernel.
+**Board:** threshold → blur → add. Circle separable.
 
-**Say:** Three.js. UnrealBloomPass as oracle **after** they draw the boxes.
+**Say:** Threshold slider is a uniform. Toggle the add pass.
 
-**Ask:** Extract highlights? Wait seven seconds. Take two answers.
+**Ask:** Why not a naive 2D 12-tap?
 
-**They do:** On paper: threshold slider.
+**They do:** On paper: the three pass names in order.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Bloom a bright sphere; toggle.. Zoom 140%. Read errors out loud.
+**Say:** Bloom a bright sphere; toggle. Plant bloom as lighting. Half-res extra — if they claim speed, they measure on this machine.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** threshold slider.
+**Say:** Threshold slider. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: threshold slider.; half-res extra.. Homework: Written: three passes.; screenshots on/off.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: threshold + half-res extra. Homework: three passes written; on/off screenshots. Quiz: bright pass, separable, why HDR first.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: bright pass + blur + add | Plant the first common mistake. |
-| 10–30 | Bloom a bright sphere; toggle. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name bright pass | Plant bloom as lighting. |
+| 10–30 | Separable blur | Plant naive 12×12. |
+| 30–45 | Add + toggle | Freeze combine policy. |
+| 45–60 | Half-res if time | Measure or omit fps. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. bright pass (3)
-2. separable (4)
-3. why HDR first (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Real-Time Rendering/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Pipeline.** Same as WebGL post. Threshold on HDR. Blur. Combine after tonemap or before — pick a policy and stick to it.
-
-**2. Artifacts.** Fireflies, threshold too low, huge kernel.
-
-**3. Three.js.** UnrealBloomPass as oracle **after** they draw the boxes.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Real-Time Rendering/exercises/Week 05]].
 
 ## If we run long, cut
 
-Three.js
+UnrealBloomPass internals. Keep three named passes.
 
 ## If we run short, add
 
-half-res extra.
+Half-res as a documented budget.

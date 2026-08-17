@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Interactive Experience Development  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; Suspense  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** midterm; then Suspense / useLoader with a fallback and a missing-file error  
+**Success check:** after the exam they can show a fallback while a glTF loads and a visible error if it 404s
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -20,15 +20,19 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm: reconciler, state vs frame, HUD, scroll, audio, physics-oracle., useLoader / Suspense., Progress bar., Don't freeze the tab on a 50MB glb.
+**Topics:** reconciler/Canvas; two clocks; HUD pointer-events; scroll 0–1; one motion library + camera owner; analyser gesture; physics as oracle.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-fallback = progress
-Fallback.
+<Suspense fallback={placeholder}>
+  <Model />
+</Suspense>
+
+missing glTF  →  visible error, not a black canvas
+useProgress  =  name; % is measured, not invented
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +45,21 @@ Fallback.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then loading UX. No laptop for the exam. After: a black screen while a glTF loads is not mysterious — it is missing Suspense.
 
-**Ask:** useLoader / Suspense.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Loading.** drei `useProgress`. Placeholder cube. Compress glb (Blender course).
 
-**3. UX.** Timeout message. Reduce motion still applies.
 
 ### Show / attempt if time
 
-**Say:** Suspense fallback while a glTF loads (or a fake delay).
+**Say:** Suspense fallback while a glTF loads, or a fake delay. Plant a missing file and a silent hang. Fix: error + placeholder cube.
 
----
-
-**They do:** error if missing file.
+**They do:** Fallback cube; error text if missing. Compress later (Blender).
 
 ---
 
@@ -67,10 +67,9 @@ Fallback.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; Suspense | Plant the first common mistake. |
-| 10–30 | Suspense fallback while a glTF loads (or a fake delay). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Suspense fallback | Plant black canvas. |
+| 15–40 | Missing glTF error | Plant silent 404. |
+| 40–60 | Placeholder cube | They type. Circulate. |
 
 ---
 
@@ -97,8 +96,8 @@ See [[Interactive Experience/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+drei useProgress UI kit. Keep fallback + error.
 
 ## If we run short, add
 
-One more worked leftover example.
+Timeout message name.

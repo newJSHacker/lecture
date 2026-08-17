@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** README, video, report outline  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** README a TA can follow; video draft; report outline; labeled oracles  
+**Success check:** a TA runs from README alone and finds who-wrote-what
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,11 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-8 headings of the report
-Headings.
+README: problem, run, verb, oracles, budget, licenses
+video draft
+report outline
+who wrote what
+Demo: Capstone/code/02-readme.html
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +39,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: documentation). A TA using only the README is the test. Demo 02-readme.html as a skeleton, not a CDN template.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If the TA cannot serve it in three commands, whose bug is it?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +49,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** README review with a TA using only the README.
+**Say:** README review with a TA hat. Video draft. Outline. Oracles labeled.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. README first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Video draft + outline committed. Next: rehearsal 12+5.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +67,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: README, video, report outline | Plant the first common mistake. |
-| 10–30 | README review with a TA using only the README. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | README headings | Photograph. |
+| 10–50 | Cold TA run | Missing-run plant. |
+| 50–60 | Who wrote what | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +98,12 @@ See [[Capstone/exercises/Week 11]].
 
 ## Notes from the outline
 
-**1. Report.** 6–10 pages typical; follow department if longer. Figures: architecture, stack, budget.
-**2. Video.** Backup for defense. Captions.
-**3. Authorship.** Per-file or per-module.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+Report prose polish. Keep run + oracles.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Video draft even if rough.

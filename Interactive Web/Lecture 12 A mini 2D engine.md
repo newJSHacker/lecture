@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** entities, loop, input  
-**Success check:** Entity {update,render}.
+**Kernel:** entities with update(dt) and render(ctx); input as a keys set; a cap on n  
+**Success check:** they spawn on click into a list the loop updates, without an 800-line god object
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: entities, loop, input | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 12 | Goal: a mini 2D engine, not Unity | Invariant: the loop is shared; each entity is a small object; physics is not inside render`
 
 ## Board at the end (they photograph this)
 
 ```
-entity list update render
-Boxes.
+entities.forEach(e => e.update(dt));
+entities.forEach(e => e.render(ctx));
+
+keys = new Set()     keydown add / keyup delete
+n ≈ 200 circles OK     n = 200000 not this course
+
+god object 800 lines   =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Boxes.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Architecture. Enough to later map onto Three.js scenes.
+**Say:** Architecture enough to later map onto a Three.js scene: objects, a loop, input. Today it is Canvas 2D bouncers and a WASD player. Full engines are skipped on purpose.
 
-**Ask:** Entity {update,render}? Wait seven seconds. Take two answers.
+**Ask:** If render draws and also writes vx, what breaks pause? Wait. Want: pause cannot skip sim independently.
 
-**Board:** parked strip. Then entity list update render.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: entities, loop, input. Kernel: entities, loop, input. We freeze conventions and we do not invent timings.
+**Say:** Entity {update, render}. Input: a set of keys, not one global lastKey. Bounds: freeze a cap n. Collision can be naive. Pause is a flag in the loop from week 2.
 
-**Ask:** What would a wrong version of this look like? Want: god object 800 lines.
+**Ask:** Who calls requestAnimationFrame — each entity or the engine?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Architecture. Enough to later map onto Three.js scenes.
+**Say:** List of entities. Engine owns time and clear. Mapping to later 3D: mesh ≈ entity, not this week’s kernel.
 
-**Say:** Input. keys set.
+**Board:** update vs render. keys set. cap n.
 
-**Say:** Bounds. n=200 circles fine; n=200000 not.
+**Say:** Spawn on click using week 3 mapping. Do not paste an engine from the internet.
 
-**Ask:** Entity {update,render}? Wait seven seconds. Take two answers.
+**Ask:** Why a Set for keys instead of wasd booleans only?
 
-**They do:** On paper: spawn on click.
+**They do:** On paper: spawn on click — push entity with vx,vy,r.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Bouncers with WASD player.. Zoom 140%. Read errors out loud.
+**Say:** Bouncers with WASD player. Demo Interactive Web/code/07-engine.html. Plant physics in render. Plant one 800-line script.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** spawn on click.
+**Say:** Spawn on click. Pause. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: spawn on click.; pause.. Homework: Written: entity table.; Code: mini engine.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: spawn + pause. Homework: entity table; mini engine. Quiz: update vs render, input map, cap n.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: entities, loop, input | Plant the first common mistake. |
-| 10–30 | Bouncers with WASD player. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | entity list + rAF | Plant god object. |
+| 10–30 | bouncers dt | Plant sim in render. |
+| 30–45 | WASD keys set | keyup missing plant. |
+| 45–60 | They spawn on click | Circulate. Cap n. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. update vs render (4)
-2. input map (3)
-3. cap n (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +162,7 @@ See [[Interactive Web/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Architecture.** Enough to later map onto Three.js scenes.
-
-**2. Input.** keys set.
-
-**3. Bounds.** n=200 circles fine; n=200000 not.
+_none_
 
 ---
 
@@ -174,8 +173,8 @@ See [[Interactive Web/exercises/Week 12]].
 
 ## If we run long, cut
 
-Bounds
+n=200 discussion. Keep entities + loop + input.
 
 ## If we run short, add
 
-pause.
+pause flag.

@@ -46,15 +46,13 @@ T * (x,y,0) = (x,y,0)
 
 **Say:** This meeting is a **midterm**, then homogeneous coordinates. Translation does not fit 2×2 linear. Add a 1. CG I Week 5 is the 4×4 version.
 
-**Ask:** Homogeneous point vs direction.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Homogeneous.** Translation does not fit 2×2 linear. Add a 1. CG I Week 5 is the 4×4 version.
 
-**3. Directions.** w=0 ignores translation. Lights-as-directions.
 
 ### Show / attempt if time
 

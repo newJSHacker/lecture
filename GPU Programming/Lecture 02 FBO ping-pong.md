@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** A→B→A textures  
-**Success check:** Two textures.
+**Kernel:** ping-pong: read A, write B, swap — two FLOAT textures  
+**Success check:** they can draw two FBOs, swap, and debug A vs B without sampling the texture they are writing
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: A→B→A textures | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 2 | Goal: A→B→A you can pause | Invariant: a shader cannot safely read the texel it is writing; RGBA8 positions are a trap`
 
 ## Board at the end (they photograph this)
 
 ```
-read A write B; swap
-Two FBOs.
+frame n:    sample A  →  write B
+swap:       [A,B] = [B,A]
+
+A  FLOAT RGBA     B  FLOAT RGBA
+   (sim res)         (sim res)
+
+sim resolution  ≠  canvas resolution
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Two FBOs.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Why two. A shader cannot safely read the texel it is writing.
+**Say:** Ping-pong is game-of-life, blur, and particle positions. One texture in/out is a race. Unsigned byte positions die. This is still WebGL — WebGPU compute comes after the midterm.
 
-**Ask:** Two textures? Wait seven seconds. Take two answers.
+**Ask:** Why two textures? Wait. Want: cannot read what you write.
 
-**Board:** parked strip. Then read A write B; swap.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: A→B→A textures. Kernel: A→B→A textures. We freeze conventions and we do not invent timings.
+**Say:** HALF_FLOAT / FLOAT for state. Sim res ≠ canvas. Pause the swap to debug A and B as color.
 
-**Ask:** What would a wrong version of this look like? Want: one texture in/out.
+**Ask:** What is wrong with RGBA8 for positions?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why two. A shader cannot safely read the texel it is writing.
+**Say:** Two rectangles on the board. Arrows read/write.
 
-**Say:** Size. Sim resolution ≠ canvas resolution.
+**Board:** the swap line. Circle FLOAT.
 
-**Say:** Precision. HALF_FLOAT / FLOAT textures for positions.
+**Say:** Plant same-texture, then fix. Local 01-pong.html.
 
-**Ask:** Two textures? Wait seven seconds. Take two answers.
+**Ask:** Write the swap in one JS line.
 
-**They do:** On paper: show A and B debug.
+**They do:** On paper: memory layout of A and B.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Game of life or a blur ping-pong; pause.. Zoom 140%. Read errors out loud.
+**Say:** Game of life or blur ping-pong; pause. Plant one texture in/out. Plant RGBA8 positions. Show A and B debug views.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** show A and B debug.
+**Say:** Show A and B debug. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: show A and B debug.; wrong same-texture bug then fix.. Homework: Written: why two textures.; Code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: debug views + same-texture bug then fix. Homework: why two textures; code. Quiz: feedback loop, float tex, sim vs canvas.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: A→B→A textures | Plant the first common mistake. |
-| 10–30 | Game of life or a blur ping-pong; pause. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Draw A and B | Plant one texture in/out. |
+| 10–30 | Swap each frame | Plant RGBA8 state. |
+| 30–45 | Pause; show A vs B | They see the layout. |
+| 45–60 | They fix same-texture | Circulate. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. feedback loop (4)
-2. float tex (3)
-3. sim vs canvas size (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[GPU Programming/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why two.** A shader cannot safely read the texel it is writing. Ping-pong is the game-of-life / blur / particle-position pattern.
-
-**2. Size.** Sim resolution ≠ canvas resolution.
-
-**3. Precision.** HALF_FLOAT / FLOAT textures for positions. Unsigned byte is a trap.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[GPU Programming/exercises/Week 02]].
 
 ## If we run long, cut
 
-Precision
+Precision formats catalog. Keep two FLOAT textures + swap.
 
 ## If we run short, add
 
-wrong same-texture bug then fix.
+Sim res as a uniform they can shrink — measure if they claim speed.

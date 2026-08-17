@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** measure, GC, hot loops  
-**Success check:** Measure with performance.now().
+**Kernel:** performance.now() before/after; allocations in a hot loop; reuse vs new  
+**Success check:** they measure two versions of a loop and refuse to ship a micro-opt without a number they just took
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,22 +14,26 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/07-loop.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: measure, GC, hot loops | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 11 | Goal: a number from the machine, not a vibe | Invariant: invented timings are forbidden; measure or omit; do not invent fps`
 
 ## Board at the end (they photograph this)
 
 ```
-performance.now()
-Timer.
-Alloc vs reuse.
+const t0 = performance.now();
+… work …
+const t1 = performance.now();   // ms, this run, this machine
+
+hot loop:  no new Vec2 per pixel
+prealloc  vs  push in a growing array
+
+Big-O name from Programming — not a substitute for a measure
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: Performance panel screenshot of two measures | photo; no fps caption you did not record |
 
 ---
 
@@ -39,11 +43,11 @@ Alloc vs reuse.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Measure. Invented timings forbidden.
+**Say:** A janky game loop is often allocations, not ‘JavaScript is slow.’ Same rule as CG reports: invented timings are a fail. Today we measure.
 
-**Ask:** Measure with performance.now()? Wait seven seconds. Take two answers.
+**Ask:** If you did not call performance.now(), may you write ‘twice as fast’ in the report? Wait. Want: no.
 
-**Board:** parked strip. Then performance.now().
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: measure, GC, hot loops. Kernel: measure, GC, hot loops. We freeze conventions and we do not invent timings.
+**Say:** Measure. GC: new objects per pixel die. Reuse vectors in a renderer. Big-O from Programming week 10 is the sketch; the lab is a table of measured runs. Profiling tab named — optional.
 
-**Ask:** What would a wrong version of this look like? Want: Optimizing unreadably without numbers.
+**Ask:** Why is new {x,y} inside a 1e7 loop a GC story?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Measure. Invented timings forbidden.
+**Say:** Two runs, same machine, same input size. Write both numbers. Do not invent fps.
 
-**Say:** Allocations. new objects per pixel is death.
+**Board:** performance.now wrap. Alloc vs reuse. Prealloc length vs push.
 
-**Say:** Big-O. From Programming week 10.
+**Say:** Unreadable micro-opt without a number is a fail. Cap the story at one rewrite.
 
-**Ask:** Measure with performance.now()? Wait seven seconds. Take two answers.
+**Ask:** What belongs in the homework table? Want: n, version A ms, version B ms — not a slogan.
 
-**They do:** On paper: Don't ship a micro-opt without a number.
+**They do:** On paper: the measure snippet and a two-row table header.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Sum 1e7 numbers; compare push in loop vs prealloc.. Zoom 140%. Read errors out loud.
+**Say:** Sum 1e7 numbers; compare push in loop vs prealloc. Demo Modern JavaScript/code/07-loop.html for a dt-capped rAF — we do not quote fps from it. Read the two now() deltas out loud.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Don't ship a micro-opt without a number.
+**Say:** Don't ship a micro-opt without a number. One GC-friendly rewrite. Eight minutes to fill the table even if the rewrite is incomplete.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Don't ship a micro-opt without a number.; One GC-friendly rewrite.. Homework: Written: when not to optimize.; Code: measured table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: measured pair + one GC-friendly rewrite. Homework: when not to optimize; measured table. Quiz: performance.now, alloc in pixel loop, prealloc.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: measure, GC, hot loops | Plant the first common mistake. |
-| 10–30 | Sum 1e7 numbers; compare push in loop vs prealloc. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | now() wrap | Plant a claimed speedup with no numbers. |
+| 10–30 | push vs prealloc 1e7 | Read both times. No fps. |
+| 30–45 | alloc in a fake pixel loop | Reuse one object. |
+| 45–60 | They fill a two-row table | Circulate. |
 
 Point them at `Modern JavaScript/code/07-loop.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Modern JavaScript/code/07-loop.html` as the after-class check, no
 
 ## Quiz next meeting (they hear this now)
 
-1. performance.now (3)
-2. alloc in pixel loop (4)
-3. prealloc (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Modern JavaScript/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Measure.** Invented timings forbidden. Same rule as CG reports.
-
-**2. Allocations.** new objects per pixel is death. Reuse vecs in a renderer.
-
-**3. Big-O.** From Programming week 10. Profiling tab name.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Modern JavaScript/exercises/Week 11]].
 
 ## If we run long, cut
 
-Big-O
+Big-O recap. Keep measure + one alloc rewrite.
 
 ## If we run short, add
 
-One GC-friendly rewrite.
+One GC-friendly rewrite they can screenshot.

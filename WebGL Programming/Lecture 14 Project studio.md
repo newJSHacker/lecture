@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · WebGL Programming  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** mini WebGL engine  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** mini WebGL engine: cube + orbit + Lambert + texture; README serves  
+**Success check:** a TA can serve the folder and see P*V*M in a shader without Three.js
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,14 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `WebGL Programming/code/`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: freeze; drop FBO; tests are 'does it draw and can they name gl_Position'`
 
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: WebGL2 · P*V*M · CCW cube · Lambert · one texture
+Cuts: drop FBO / instancing; keep orbit + logs
+README: python -m http.server    no CDN    no Three.js
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Mini engine. Not a Three.js port.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first? Want: FBO and instancing.
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: shaders and PVM first.
+**Say:** Desk review: shaders and PVM first. Compile logs. Then texture onload. Report: pipeline figure, uniforms table.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Serve first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. They must answer gl_Position and depth.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: mini WebGL engine | Plant the first common mistake. |
-| 10–30 | Desk review: shaders and PVM first. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings: pipeline, uniforms | Photograph. |
+| 10–50 | Desk review | Serve + logs + PVM. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,9 +94,7 @@ See [[WebGL Programming/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** [[02 Curriculum Design Advice]] mini engine.
-**2. Cuts.** Drop FBO. Keep cube+orbit+Lambert+texture.
-**3. Report.** pipeline figure, uniforms table.
+_none_
 
 ## If we run long, cut
 
@@ -106,4 +102,4 @@ New features. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60-second rehearsal of the two oral questions.

@@ -147,7 +147,7 @@ GOLD: dict[tuple[str, int], dict] = {}
 
 
 def gold_load() -> None:
-    """Fill GOLD for Programming 3–15 and Math 1–15."""
+    """Fill GOLD for Programming 3–15 and Math 1–15, then extra catalogs."""
     P = "Introduction to Programming"
     M = "Mathematics for Computer Graphics"
 
@@ -1135,6 +1135,12 @@ Habit: name the object — vector, matrix, frame
         cut="Slides of Wikipedia.",
         add="One extra question on a missed formula.",
     )
+    extra = Path(__file__).resolve().parent
+    for p in sorted(extra.glob("gold_*.py")):
+        ns: dict = {}
+        exec(p.read_text(encoding="utf-8"), ns)
+        if callable(ns.get("register")):
+            ns["register"](GOLD)
 
 
 def list_after(heading: str, text: str) -> list[str]:
@@ -1186,6 +1192,9 @@ def parse(text: str, folder: str) -> dict:
     cm = re.search(r"\*\*Course:\*\*\s*(.+)", text)
     if cm:
         course = cm.group(1).strip()
+    wm = re.search(r"\*\*Week \d+ of 15\*\*\s*[·.]\s*(.+)", text)
+    if wm:
+        course = wm.group(1).strip()
     this_week = ""
     m = re.search(r"\*\*This week:\*\*\s*(.+)", text)
     if m:
@@ -1198,6 +1207,11 @@ def parse(text: str, folder: str) -> dict:
     m = re.search(r"\*\*Kernel this week:\*\*\s*(.+)", text)
     if m:
         kernel_line = m.group(1).strip()
+    m = re.search(r"\*\*Kernel(?: \(after the exam\))?:\*\*\s*(.+)", text)
+    if m and not kernel_line:
+        kernel_line = m.group(1).strip()
+    if kernel_line and not this_week:
+        this_week = kernel_line
     success = ""
     m = re.search(r"\*\*Success check:\*\*\s*(.+)", text)
     if m:
@@ -1964,31 +1978,26 @@ def process_file(path: Path) -> str:
     text = path.read_text(encoding="utf-8")
     if folder not in FOLDER_COURSE:
         return "skip-folder"
-    if is_gold_session(text) and not is_thin(text):
+    if folder == "Programming" and path.name in {
+        "Lecture 01 What a program is.md",
+        "Lecture 02 Variables and strings.md",
+    }:
         return "skip-gold"
     p = parse(text, folder)
     if p["week"] == 0:
         return "skip-parse"
     g = GOLD.get((p["course"], p["week"]), {})
     kind = kind_of(p, g)
-    if is_thin(text) or g:
-        if kind == "midterm":
-            out = render_midterm(p, g)
-        elif kind == "studio":
-            out = render_studio(p, g)
-        elif kind == "presentations":
-            out = render_presentations(p, g)
-        else:
-            out = render_content(p, g)
-        path.write_text(out.replace("\r\n", "\n"), encoding="utf-8")
-        return "rewrite"
-    if folder in ("Computer Graphics", "Computational Geometry"):
-        if "## Before you enter" in text:
-            return "skip-rich"
-        out = wrap_rich(text, p)
-        path.write_text(out.replace("\r\n", "\n"), encoding="utf-8")
-        return "wrap"
-    return "skip-other"
+    if kind == "midterm":
+        out = render_midterm(p, g)
+    elif kind == "studio":
+        out = render_studio(p, g)
+    elif kind == "presentations":
+        out = render_presentations(p, g)
+    else:
+        out = render_content(p, g)
+    path.write_text(out.replace("\r\n", "\n"), encoding="utf-8")
+    return "rewrite"
 
 
 def main() -> None:

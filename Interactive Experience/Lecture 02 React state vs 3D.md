@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** useState, useFrame  
-**Success check:** useFrame for motion.
+**Kernel:** useState is the UI clock; useFrame + ref is the 3D clock  
+**Success check:** they can show jank from setState every frame and move rotation onto a ref
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: useState, useFrame | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 2 | Goal: select in React; spin in useFrame | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-state = discrete; frame = 60Hz
-Two clocks.
+React clock     useState / click     re-render
+WebGL clock     useFrame(_, dt)      mesh.ref
+
+setState({ t }) every frame  =  jank
+new Material() every render  =  leak
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Two clocks.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Two clocks. React re-renders are for **UI**.
+**Say:** Last time: a graph. Today: two clocks. React re-renders are for HUD. The WebGL loop is useFrame. Mixing them is the live-coding crime of this course.
 
-**Ask:** useFrame for motion? Wait seven seconds. Take two answers.
+**Ask:** If a cube must spin, do you put t in useState? Wait. Want: no — ref + dt.
 
-**Board:** parked strip. Then state = discrete; frame = 60Hz.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: useState, useFrame. Kernel: useState, useFrame. We freeze conventions and we do not invent timings.
+**Say:** Click selects (state). Spin uses useRef on the mesh. Lifting: selected id in React; color on the mesh from that id. We do not invent fps.
 
-**Ask:** What would a wrong version of this look like? Want: setState({t}) every frame.
+**Ask:** Why does a new material every render hurt?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Two clocks. React re-renders are for **UI**.
+**Say:** Discrete UI vs per-frame motion. Write both clocks.
 
-**Say:** refs. `useRef` on a mesh to spin in useFrame without React render.
+**Board:** setState({t}) crossed out. useFrame += dt on ref.current.rotation.
 
-**Say:** Lifting state. Selected part id in React; color on the mesh from that id.
+**Say:** Plant jank, then fix. Demo 02-two-clocks.html if R3F is down — same split: button vs rAF.
 
-**Ask:** useFrame for motion? Wait seven seconds. Take two answers.
+**Ask:** When is useState correct for 3D?
 
-**They do:** On paper: jank demo: setState in useFrame then fix.
+**They do:** On paper: selected id in React; rotation in useFrame. Two arrows.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Click a box to select (state); spin in useFrame via ref.. Zoom 140%. Read errors out loud.
+**Say:** Click a box to select; spin via ref. Plant setState in useFrame. Read the hitch out loud. Do not quote fps.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** jank demo: setState in useFrame then fix.
+**Say:** Move rotation onto a ref. Leave selected in useState. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: jank demo: setState in useFrame then fix.; dpr.. Homework: Written: when setState is wrong.; code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: jank demo then fix; dpr. Homework: when setState is wrong. Quiz: useFrame vs useState, why ref, what jank is.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: useState, useFrame | Plant the first common mistake. |
-| 10–30 | Click a box to select (state); spin in useFrame via ref. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Click = state | Plant t in useState. |
+| 10–30 | Spin via ref + dt | Plant setState every frame. |
+| 30–45 | New material every render | Fix: one material. |
+| 45–60 | They split the clocks | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. useFrame vs useState (4)
-2. why ref (3)
-3. jank (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Interactive Experience/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Two clocks.** React re-renders are for **UI**. The WebGL loop is `useFrame`. Mixing them janks.
-
-**2. refs.** `useRef` on a mesh to spin in useFrame without React render.
-
-**3. Lifting state.** Selected part id in React; color on the mesh from that id.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Interactive Experience/exercises/Week 02]].
 
 ## If we run long, cut
 
-Lifting state
+Lifting state across routes. Keep two clocks.
 
 ## If we run short, add
 
-dpr.
+dpr reminder on the Canvas.

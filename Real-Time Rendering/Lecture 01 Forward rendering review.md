@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** one pass, lights in FS  
-**Success check:** Restate the forward path.
+**Kernel:** forward: one geometry pass; lights add in the FS  
+**Success check:** they can draw the forward path and count draw calls without inventing fps
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: one pass, lights in FS | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 1 | Goal: name the forward pass | Invariant: a frame is a named pass plus a budget; unnamed lights are not a path`
 
 ## Board at the end (they photograph this)
 
 ```
-for each light: add
-Forward boxes.
+PASS: forward shade
+  for each object:
+    for each light:  add in FS
+
+HDR leftover energy  →  later tonemap pass
+do not invent fps
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +40,11 @@ Forward boxes.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Where we are. CG I and WebGL already light a cube.
+**Say:** CG I and WebGL already light a cube. This course is production looks: PBR, HDR, shadows, a post stack you can name, and numbers you measured. A look without a stack graph is a screenshot.
 
-**Ask:** Restate the forward path? Wait seven seconds. Take two answers.
+**Ask:** Is deferred this week? Wait. Want: no.
 
-**Board:** parked strip. Then for each light: add.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +54,9 @@ Forward boxes.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: one pass, lights in FS. Kernel: one pass, lights in FS. We freeze conventions and we do not invent timings.
+**Say:** Forward: each object, for each light, add. Simple. Dies with many lights — clustered/deferred later. Lambert+Blinn can exceed 1; that is why HDR exists, not because we quote 60 fps.
 
-**Ask:** What would a wrong version of this look like? Want: 10 lights on day one.
+**Ask:** Where do the lights run — CPU draw per light, or a loop in the FS?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +68,21 @@ Forward boxes.
 
 ### Minutes 12–35 — Build
 
-**Say:** Where we are. CG I and WebGL already light a cube.
+**Say:** One pass box. Lights live in the FS this week — two is enough.
 
-**Say:** Forward. Each object, for each light, add.
+**Board:** for-each-light add. Circle 'name the pass'.
 
-**Say:** Energy. Lambert + Blinn can exceed 1.
+**Say:** Saturated LDR vs a fake HDR multiply. No CDN. Three.js is an oracle after the picture, not instead of it.
 
-**Ask:** Restate the forward path? Wait seven seconds. Take two answers.
+**Ask:** Why can Lambert+Blinn exceed 1?
 
-**They do:** On paper: draw call count.
+**They do:** On paper: draw-call count for 1 cube, 2 lights, forward FS loop.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A WebGL or Three.js cube with two lights; show saturated LDR vs a fake HDR multiply.. Zoom 140%. Read errors out loud.
+**Say:** WebGL or Three.js cube, two lights. Saturated LDR vs HDR multiply. Plant ten lights on day one. Do not quote fps.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +92,7 @@ Forward boxes.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** draw call count.
+**Say:** Draw-call count. Light loop in shader vs CPU. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +102,7 @@ Forward boxes.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: draw call count.; light loop in shader vs CPU.. Homework: Written: forward vs 'just add another Mesh'.; screenshot clip vs no clip.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: draw calls + loop place. Homework: forward vs another Mesh; clip vs no clip screenshot. Quiz: forward path, why HDR, deferred this week?
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +114,10 @@ Forward boxes.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one pass, lights in FS | Plant the first common mistake. |
-| 10–30 | A WebGL or Three.js cube with two lights; show saturated LDR vs a fake HDR multiply. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name the forward pass | Plant ten lights. |
+| 10–30 | Two lights in FS | Plant '60 fps' with no table. |
+| 30–45 | LDR clip vs HDR | They see >1 energy. |
+| 45–60 | They count draw calls | Circulate. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -135,9 +139,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. forward path (4)
-2. why HDR (3)
-3. deferred this week? (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +158,7 @@ See [[Real-Time Rendering/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Where we are.** CG I and WebGL already light a cube. This course is **production looks**: PBR, HDR, shadows, AO names, a post stack, and how to **profile**.
-
-**2. Forward.** Each object, for each light, add. Simple. Dies with many lights — clustered/deferred later and in Advanced CG.
-
-**3. Energy.** Lambert + Blinn can exceed 1. HDR buffers store that; tonemap at the end.
+_none_
 
 ---
 
@@ -171,8 +169,8 @@ See [[Real-Time Rendering/exercises/Week 01]].
 
 ## If we run long, cut
 
-Energy
+Energy conservation proof. Keep named forward pass + two lights.
 
 ## If we run short, add
 
-light loop in shader vs CPU.
+Light loop in FS vs extra draws — still no invented timings.

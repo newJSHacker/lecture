@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** gen → glTF/Three  
-**Success check:** Generate or mock an albedo.
+**Kernel:** prompt → image → Three map; human picks among retries; cite model+date  
+**Success check:** they can apply a generated or mock albedo and fill one asset-table row
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: gen → glTF/Three | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 3 | Goal: look-dev with a dice roll, still PBR slots | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-png → TextureLoader
-Prompt → map.
+prompt → image → map (sRGB)
+human picks among 4     not first-output-wins
+
+| file | source | license | gen? | prompt/model | edits |
+
+budget 1024     not 8k
+one diffuse ≠ full PBR
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Prompt → map.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Pipeline. Prompt → image → Three.js map.
+**Say:** This is look-dev with a dice roll. They still know albedo vs roughness from RTR/Blender. Claiming PBR from one diffuse fails. Demo 02-asset-table.html.
 
-**Ask:** Generate or mock an albedo? Wait seven seconds. Take two answers.
+**Ask:** If the map is 8k, what did we forget? Wait. Want: budget.
 
-**Board:** parked strip. Then png → TextureLoader.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: gen → glTF/Three. Kernel: gen → glTF/Three. We freeze conventions and we do not invent timings.
+**Say:** colorSpace sRGB for albedo. Seed, size, retries. Cite prompt + model + date. Reject three images on purpose.
 
-**Ask:** What would a wrong version of this look like? Want: 8k gens.
+**Ask:** What column is required if generated? is yes?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Pipeline. Prompt → image → Three.js map.
+**Say:** Pipeline. Then the table — even for a mock PNG.
 
-**Say:** Control. Seed, size, retries.
+**Board:** asset table header. Circle gen? and prompt.
 
-**Say:** Cite. Prompt + model + date in README.
+**Say:** Second sphere handmade color for comparison.
 
-**Ask:** Generate or mock an albedo? Wait seven seconds. Take two answers.
+**Ask:** Why not first-output-wins in the report?
 
-**They do:** On paper: reject 3 images.
+**They do:** Fill one asset-table row for the lab map.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Apply a generated/mock albedo to a sphere; second sphere with a hand-made color for comparison.. Zoom 140%. Read errors out loud.
+**Say:** Mock or real albedo on a sphere; handmade neighbor. Plant 8k. Plant 'I modeled this'. Fill the table.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** reject 3 images.
+**Say:** Apply map + one table row. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: reject 3 images.; budget 1024.. Homework: Written: what you still had to fix by hand.; screenshots.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: reject 3; budget 1024. Homework: cite the model. Quiz: sRGB, table, not full PBR.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: gen → glTF/Three | Plant the first common mistake. |
-| 10–30 | Apply a generated/mock albedo to a sphere; second sphere with a hand-made color for comparison. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Image → map | Plant client key again. |
+| 15–40 | Asset table row | Plant unlabeled Midjourney. |
+| 40–55 | 1024 budget | 8k plant. |
+| 55–60 | They compare handmade | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. sRGB (3)
-2. why pick among 4 (4)
-3. normal map space (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[AI for Interactive Graphics/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Pipeline.** Prompt → image → Three.js map. This is look-dev with a dice roll. Students still know PBR slots from RTR/Blender.
-
-**2. Control.** Seed, size, retries. A human picks among 4, not first-output-wins for the report.
-
-**3. Cite.** Prompt + model + date in README.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[AI for Interactive Graphics/exercises/Week 03]].
 
 ## If we run long, cut
 
-Cite
+Full material gen. Keep albedo + table.
 
 ## If we run short, add
 
-budget 1024.
+Budget 1024 on the board.

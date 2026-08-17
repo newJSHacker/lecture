@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** figures first, claims, threats  
-**Success check:** Pick a TOG/I3D/EGSR paper (or a chapter).
+**Kernel:** figures first; claim; limitation; IGWT connection; no ChatGPT summary as the note  
+**Success check:** they can write a 1-page note on a named paper they opened, with one figure redrawn
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: figures first, claims, threats | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 11 | Goal: read, do not summarize unseen | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-question → method → figure → limit
-Claim / figure / limit.
+1 claim
+1 algorithm picture (drawn)
+1 limitation / threat
+1 IGWT connection
+BibTeX later
+
+AI summary without opening the PDF  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Claim / figure / limit.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Reading. Students will fake-read.
+**Say:** Undergraduates drown in papers. Force: claim, picture, limit, connection. ChatGPT summary as the note fails. A paper they did not open fails. Skip proofs they cannot do; they must still say what is integrated.
 
-**Ask:** Pick a TOG/I3D/EGSR paper (or a chapter)? Wait seven seconds. Take two answers.
+**Ask:** If you cannot redraw figure 3, did you read it? Wait. Want: not yet.
 
-**Board:** parked strip. Then question → method → figure → limit.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: figures first, claims, threats. Kernel: figures first, claims, threats. We freeze conventions and we do not invent timings.
+**Say:** TOG/I3D/EGSR or a PBRT chapter. One question for the authors extra.
 
-**Ask:** What would a wrong version of this look like? Want: ChatGPT summary as the note.
+**Ask:** What is a threat to validity here?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Reading. Students will fake-read.
+**Say:** Figures first.
 
-**Say:** Math. Skip proofs they cannot yet do; they must still say what is being integrated.
+**Board:** four lines of a reading note.
 
-**Say:** Cite. BibTeX in the report later.
+**Say:** Name the paper on the parked strip.
 
-**Ask:** Pick a TOG/I3D/EGSR paper (or a chapter)? Wait seven seconds. Take two answers.
+**Ask:** What may you skip, and what must you still say?
 
-**They do:** On paper: draw their figure from memory.
+**They do:** Redraw one figure from memory after a short look.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 1-page reading note on a **named** paper.. Zoom 140%. Read errors out loud.
+**Say:** 1-page note on a named paper. Plant AI summary. Plant unread paper. Draw their figure.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** draw their figure from memory.
+**Say:** Four lines: claim, picture, limit, IGWT. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: draw their figure from memory.; one question for the authors.. Homework: Reading note due.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: draw the figure; one author question. Homework: full page. Quiz: four lines, no fake-read. Next: prepare talks.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: figures first, claims, threats | Plant the first common mistake. |
-| 10–30 | A 1-page reading note on a **named** paper. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Named paper | Plant unread. |
+| 15–40 | Four-line note | Plant ChatGPT note. |
+| 40–55 | Redraw a figure | They draw. |
+| 55–60 | IGWT connection | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. claim (4)
-2. limit (3)
-3. IGWT link (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +153,7 @@ See [[Advanced Computer Graphics/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Reading.** Students will fake-read. Force: claim, one algorithm picture, one limitation, one IGWT connection.
-
-**2. Math.** Skip proofs they cannot yet do; they must still say what is being integrated.
-
-**3. Cite.** BibTeX in the report later.
+_none_
 
 ---
 
@@ -165,8 +164,8 @@ See [[Advanced Computer Graphics/exercises/Week 11]].
 
 ## If we run long, cut
 
-Cite
+Proof reconstruction. Keep four lines.
 
 ## If we run short, add
 
-one question for the authors.
+One question for the authors.

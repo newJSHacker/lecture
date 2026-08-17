@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** viewport, meters, save  
-**Success check:** Navigate the 3D viewport.
+**Kernel:** viewport navigation; scene unit = meter; save .blend; apply scale as a name  
+**Success check:** they can orbit the viewport, set metric 1.0, and say a 100 m mug will fail in Three.js
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `Blender/code/01-units.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: viewport, meters, save | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 1 | Goal: meters before modeling | Invariant: units, facing, and budget travel with the asset`
 
 ## Board at the end (they photograph this)
 
 ```
-grid = meters; origin at 0
-Meter grid.
-Outliner.
+Scene unit = 1 meter
+character ~1.7 m     mug in centimeters (0.08 m)
+
+Object vs Edit     Outliner     N-panel     numpad views
+
+Ctrl+A Rotation & Scale   (name this week; do it before export)
+Face orientation overlay     Statistics: triangles
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +40,11 @@ Outliner.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Why Blender in IGWT. Semester 3 already has WebGL and Three.js.
+**Say:** This course supplies assets that survive in a real-time engine — not a Cycles feature film. Wrong scale is the #1 Three.js import bug. Checklist: Blender/code/01-units.html.
 
-**Ask:** Navigate the 3D viewport? Wait seven seconds. Take two answers.
+**Ask:** If a mug is 100 units tall in Blender, what happens in a Y-up meter world? Wait. Want: it is a building.
 
-**Board:** parked strip. Then grid = meters; origin at 0.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +54,9 @@ Outliner.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: viewport, meters, save. Kernel: viewport, meters, save. We freeze conventions and we do not invent timings.
+**Say:** Metric, unit scale 1.0. Outliner names. Delete the default cube only after duplicating a backup. Never model at 'looks good' scale.
 
-**Ask:** What would a wrong version of this look like? Want: Modeling in whatever scale 'looks good'.
+**Ask:** Object mode vs Edit mode — which moves the origin?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +68,21 @@ Outliner.
 
 ### Minutes 12–35 — Build
 
-**Say:** Why Blender in IGWT. Semester 3 already has WebGL and Three.js.
+**Say:** Why Blender in IGWT: topology, UVs, Principled, glTF.
 
-**Say:** Units. Scene unit = 1 meter.
+**Board:** meters. 1.7 m human. Outliner.
 
-**Say:** UI. Outliner, Properties, Timeline.
+**Say:** Face orientation and statistics overlays on day one so they exist.
 
-**Ask:** Navigate the 3D viewport? Wait seven seconds. Take two answers.
+**Ask:** Why apply scale later?
 
-**They do:** On paper: Rename objects in the outliner.
+**They do:** On paper: three objects with intended sizes in meters.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Create a 2 m cube, a 0.2 m cube, and a camera. Screenshot the dimensions panel. Save `week01.blend`.. Zoom 140%. Read errors out loud.
+**Say:** Set units; scale a cube to 1.7 m; screenshot outliner. Demo 01-units.html as the checklist. Plant modeling at unknown scale.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +92,7 @@ Outliner.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Rename objects in the outliner.
+**Say:** Rename objects in the outliner. Duplicate cube before delete. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +102,7 @@ Outliner.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Rename objects in the outliner.; Delete the default cube only after duplicating a backup.. Homework: Written: why meters.; A numbered screenshot of your outliner.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: rename; backup cube. Homework: why meters; numbered outliner screenshot. Quiz: default unit, Object vs Edit, 100 m mug.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +114,10 @@ Outliner.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: viewport, meters, save | Plant the first common mistake. |
-| 10–30 | Create a 2 m cube, a 0.2 m cube, and a camera. Screenshot the dimensions panel. Save `week01.blend`. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Orbit / numpad / outliner | Plant only watching YouTube. |
+| 10–30 | Metric 1.0 + 1.7 m cube | Plant 'looks good' scale. |
+| 30–45 | Face orientation overlay | Red faces named. |
+| 45–60 | They rename + save | Circulate. 01-units.html. |
 
 Point them at `Blender/code/01-units.html` as the after-class check, not as the lecture.
 
@@ -135,9 +139,7 @@ Point them at `Blender/code/01-units.html` as the after-class check, not as the 
 
 ## Quiz next meeting (they hear this now)
 
-1. Default unit (2)
-2. Object vs Edit (4)
-3. Why a 100 m mug fails in Three.js (4)
+None this meeting.
 
 
 ## Snippet
@@ -154,11 +156,7 @@ See [[Blender/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why Blender in IGWT.** Semester 3 already has WebGL and Three.js. This course supplies **assets** that survive in a real-time engine: clean topology, UVs, PBR maps, and glTF. It is not a film-lighting course.
-
-**2. Units.** Scene unit = 1 meter. A character is ~1.7 m. A product is centimeters. Wrong scale is the #1 Three.js import bug.
-
-**3. UI.** Outliner, Properties, Timeline. N-panel. Numpad views. Edit vs Object. Students who only watch YouTube never learn the outliner.
+_none_
 
 ---
 
@@ -169,8 +167,8 @@ See [[Blender/exercises/Week 01]].
 
 ## If we run long, cut
 
-UI
+Every keymap. Keep units + outliner.
 
 ## If we run short, add
 
-Delete the default cube only after duplicating a backup.
+Delete default cube only after duplicating a backup.

@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** ARRAY_BUFFER, layout  
-**Success check:** createBuffer.
+**Kernel:** ARRAY_BUFFER, vertexAttribPointer layout, ELEMENT_ARRAY_BUFFER  
+**Success check:** they can createBuffer, upload, enable the attrib, and draw an indexed quad
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: ARRAY_BUFFER, layout | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 2 | Goal: layout you can debug | Invariant: CPU arrays are dead until uploaded; layout is size/type/stride/offset`
 
 ## Board at the end (they photograph this)
 
 ```
-attribute loc ↔ stride
-Layout.
+bind ARRAY_BUFFER → bufferData → enableVertexAttribArray
+vertexAttribPointer(loc, size, FLOAT, false, stride, offset)
+
+stride 0  =  tightly packed
+interleaved pos+color: stride 24, color offset 12
+
+ELEMENT_ARRAY_BUFFER → drawElements
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Layout.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** GPU memory. CPU arrays are uploaded.
+**Say:** Last time: a triangle that was already clip. Today the GPU must be told how bytes become a_position. A wrong stride is a Picasso, not a math bug.
 
-**Ask:** createBuffer? Wait seven seconds. Take two answers.
+**Ask:** What does stride 0 mean? Wait. Want: tightly packed; GPU infers from size*sizeof(type).
 
-**Board:** parked strip. Then attribute loc ↔ stride.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: ARRAY_BUFFER, layout. Kernel: ARRAY_BUFFER, layout. We freeze conventions and we do not invent timings.
+**Say:** createBuffer, bindBuffer, bufferData STATIC_DRAW. Location −1 means the name is unused or misspelled. Demo 02 colored triangle, 03 indexed quad.
 
-**Ask:** What would a wrong version of this look like? Want: never enabling the attrib.
+**Ask:** Why enableVertexAttribArray?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** GPU memory. CPU arrays are uploaded.
+**Say:** CPU Float32Array is not GPU memory until bufferData.
 
-**Say:** Layout. size, type, stride, offset.
+**Board:** interleaved vs separate. Numbers: 3 floats pos + 3 color = 24 bytes.
 
-**Say:** Demo. 02 colored triangle, 03 indexed quad.
+**Say:** Indexed quad: four verts, six indices. UNSIGNED_SHORT.
 
-**Ask:** createBuffer? Wait seven seconds. Take two answers.
+**Ask:** bindBuffer — which target for indices?
 
-**They do:** On paper: Indexed quad.
+**They do:** On paper: pointer for interleaved pos+color. Two lines.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Interleaved pos+color; draw.. Zoom 140%. Read errors out loud.
+**Say:** Interleaved pos+color from 02-colored-triangle.html then 03-indexed-quad.html. Plant never enabling the attrib. Plant WebGL1 attribute vs in mix.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Indexed quad.
+**Say:** Indexed quad. Then a wrong stride, then fix. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Indexed quad.; A wrong stride bug then fix.. Homework: Written: stride.; Code: indexed quad.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: indexed quad + stride bug. Homework: stride paragraph; indexed quad. Quiz: bindBuffer, stride 0, location −1.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: ARRAY_BUFFER, layout | Plant the first common mistake. |
-| 10–30 | Interleaved pos+color; draw. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | createBuffer + bind | Plant forgot bind. |
+| 10–30 | Interleaved pos+color; draw | Plant stride 0 when data is interleaved. |
+| 30–45 | drawElements quad | UNSIGNED_BYTE by accident. |
+| 45–60 | They index a quad | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. bindBuffer (3)
-2. stride 0 meaning (4)
-3. location -1 (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. GPU memory.** CPU arrays are uploaded. Changing every frame is allowed but cost.
-
-**2. Layout.** size, type, stride, offset.
-
-**3. Demo.** 02 colored triangle, 03 indexed quad.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[WebGL Programming/exercises/Week 02]].
 
 ## If we run long, cut
 
-Demo
+VAO theory dump. Keep pointer + indexed quad.
 
 ## If we run short, add
 
-A wrong stride bug then fix.
+A wrong stride bug then fix, on purpose.

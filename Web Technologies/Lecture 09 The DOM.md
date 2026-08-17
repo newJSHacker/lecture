@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** nodes, createElement  
-**Success check:** Walk parent/children.
+**Kernel:** createElement, append, textContent; a list built from an array  
+**Success check:** they can build three <li> from an array without writing HTML strings
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/07-toggle.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: nodes, createElement | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 9 | Goal: nodes, not HTML soup | Invariant: the DOM is a tree you mutate; strings of tags are a last resort`
 
 ## Board at the end (they photograph this)
 
 ```
-tree with a new li
-DOM tree.
-li append.
+document.createElement('li')
+li.textContent = item
+ul.append(li)
+
+querySelector  →  one
+querySelectorAll → list
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ li append.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** The tree is live. Elements tab is the DOM after JS.
+**Say:** A scene graph later is the same idea: create a node, append it. Today the node is an element.
 
-**Ask:** Walk parent/children? Wait seven seconds. Take two answers.
+**Ask:** Why not ul.innerHTML += '<li>'+item? Wait. Want: escaping, slowness, XSS.
 
-**Board:** parked strip. Then tree with a new li.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: nodes, createElement. Kernel: nodes, createElement. We freeze conventions and we do not invent timings.
+**Say:** createElement, append, remove. textContent. querySelectorAll forEach.
 
-**Ask:** What would a wrong version of this look like? Want: innerHTML += in a loop (slow and XSS).
+**Ask:** append vs innerHTML for a list from data?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** The tree is live. Elements tab is the DOM after JS.
+**Say:** Document is the root. Body is a child.
 
-**Say:** Create vs clone. createElement for one item.
+**Board:** create / append. Array of strings → ul.
 
-**Say:** Lists. A todo list is the lab.
+**Say:** innerHTML of trusted static chrome is a maybe; never for user data.
 
-**Ask:** Walk parent/children? Wait seven seconds. Take two answers.
+**Ask:** What does querySelectorAll return?
 
-**They do:** On paper: Filter done items.
+**They do:** On paper: steps to add one li.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Todo: add item, remove item, no framework.. Zoom 140%. Read errors out loud.
+**Say:** Build a todo list from ['a','b','c']. Demo 07-toggle.html or 08-todo.html. Plant innerHTML.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Filter done items.
+**Say:** Render three people names as li. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Filter done items.; Do not use innerHTML to build the list from a string of tags if the text is user-provided — textContent on a created li.. Homework: Written: source vs DOM.; Code: list of 20 items created in a loop.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: list from array. Homework: remove a node. Quiz: createElement, why not innerHTML, querySelectorAll.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: nodes, createElement | Plant the first common mistake. |
-| 10–30 | Todo: add item, remove item, no framework. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | createElement | Plant innerHTML +=. |
+| 15–40 | Array → ul | Forgot textContent. |
+| 40–55 | Remove one | They try. |
+| 55–60 | They render names | Circulate. |
 
 Point them at `Web Technologies/code/07-toggle.html` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `Web Technologies/code/07-toggle.html` as the after-class check, n
 
 ## Quiz next meeting (they hear this now)
 
-1. createElement (3)
-2. appendChild (3)
-3. Why not innerHTML for user text (4)
+None this meeting.
 
 
 ## Snippet
@@ -161,11 +162,7 @@ See [[Web Technologies/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. The tree is live.** Elements tab is the DOM after JS. View-source is not.
-
-**2. Create vs clone.** createElement for one item. templates later.
-
-**3. Lists.** A todo list is the lab. This is the scene graph of the document.
+_none_
 
 ---
 
@@ -175,8 +172,8 @@ See [[Web Technologies/exercises/Week 09]].
 
 ## If we run long, cut
 
-Lists
+DocumentFragment. Keep create+append.
 
 ## If we run short, add
 
-Do not use innerHTML to build the list from a string of tags if the text is user-provided — textContent on a created li.
+cloneNode name.

@@ -39,7 +39,7 @@ Student decks are their problem. Yours is a timer.
 
 **Say:** Presentations. 12+5. Repo. Stop at 12.
 
-**Ask (every team, two of):** dot meaning? det 0? homogeneous w?
+**Ask (every team, two of):** Where is the kernel? What did you cut? Who wrote what?
 
 **They do:** present. Live-coding hour is more talks.
 

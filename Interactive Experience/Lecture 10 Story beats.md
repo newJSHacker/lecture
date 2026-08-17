@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** shot list, camera, light  
-**Success check:** A 3-beat storyboard.
+**Kernel:** shot list as data: {id, copy, cam}; three beats  
+**Success check:** they can run a 3-beat story from JSON without burying copy in JSX
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: shot list, camera, light | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 10 | Goal: an experience, not a cube demo | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-beat = camera + copy + mesh
-Storyboard.
+[{ id, copy, cam }]     ←  data, not JSX soup
+
+beat 1  hero
+beat 2  detail
+beat 3  HUD / CTA
+
+one light setup per beat or lerp; budget
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Storyboard.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Experience vs demo. A cube is a demo.
+**Say:** A cube is a demo. A beat is a shot. Capstone energy: visitors do something in time. Novels in tooltips fail.
 
-**Ask:** A 3-beat storyboard? Wait seven seconds. Take two answers.
+**Ask:** If I delete your JSX copy, does the story still exist in data? Wait.
 
-**Board:** parked strip. Then beat = camera + copy + mesh.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: shot list, camera, light. Kernel: shot list, camera, light. We freeze conventions and we do not invent timings.
+**Say:** JSON array. Camera per beat. Lights budgeted. Cinematic 4-minute take is a cut. Screenshot a contact sheet.
 
-**Ask:** What would a wrong version of this look like? Want: novel in tooltips.
+**Ask:** Why not bury strings only in JSX?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Experience vs demo. A cube is a demo.
+**Say:** Experience vs demo. Write three beats.
 
-**Say:** Data. JSON array of {t, cam, text}.
+**Board:** JSON row. cam as a triple.
 
-**Say:** Lights. One setup per beat or lerp.
+**Say:** One light rig or lerp. Do not add a film lighting course.
 
-**Ask:** A 3-beat storyboard? Wait seven seconds. Take two answers.
+**Ask:** What is a beat in one sentence?
 
-**They do:** On paper: JSON driven.
+**They do:** On paper: three {id, copy, cam} rows.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Three beats on a product or a tiny museum object.. Zoom 140%. Read errors out loud.
+**Say:** Three beats on a product or museum object. Plant copy only in JSX. Move to JSON.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** JSON driven.
+**Say:** JSON-driven beat 1→2. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: JSON driven.; screenshot contact sheet.. Homework: Written: shot list.; app.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: JSON; contact sheet. Homework: shot list. Quiz: beat, data vs JSX, budgeted lights.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: shot list, camera, light | Plant the first common mistake. |
-| 10–30 | Three beats on a product or a tiny museum object. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Three beats on paper | Plant a novel. |
+| 15–40 | JSON → camera | Plant JSX-only copy. |
+| 40–55 | Contact sheet | They screenshot. |
+| 55–60 | They add beat 3 | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. beat (3)
-2. why JSON (4)
-3. max beats this week (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Interactive Experience/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Experience vs demo.** A cube is a demo. A beat is a **shot**. Capstone energy starts here.
-
-**2. Data.** JSON array of {t, cam, text}. Don't bury copy in JSX only.
-
-**3. Lights.** One setup per beat or lerp. Budget.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Interactive Experience/exercises/Week 10]].
 
 ## If we run long, cut
 
-Lights
+Film lighting. Keep three beats + JSON.
 
 ## If we run short, add
 
-screenshot contact sheet.
+Contact sheet of the three cameras.

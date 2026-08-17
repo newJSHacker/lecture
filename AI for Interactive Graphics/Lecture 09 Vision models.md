@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** image in, labels out  
-**Success check:** Send a canvas snapshot (downscaled) to a mock/real vision endpoint.
+**Kernel:** button-captured 256px snapshot to mock/real vision; never 30 fps of classmates  
+**Success check:** they can capture a downscaled canvas still, show a label, and state the privacy note
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: image in, labels out | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 9 | Goal: one shot, a label, not a webcam firehose | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-frame → API → HUD
-Snapshot button.
+button → canvas.toBlob jpeg q~0.7 → proxy/mock → HUD label
+256px crop
+not every frame
+not webcam-to-vendor of classmates
+throttle
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Snapshot button.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Snapshot. Capture the canvas (or a crop) at 256px.
+**Say:** Vision is image in, labels out. Webcam 30 fps of the room to a vendor fails ethics and budget. One shot on a button. Privacy note. No medical diagnosis labels as a product.
 
-**Ask:** Send a canvas snapshot (downscaled) to a mock/real vision endpoint? Wait seven seconds. Take two answers.
+**Ask:** Why not send every frame? Wait. Want: cost, latency, privacy.
 
-**Board:** parked strip. Then frame → API → HUD.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: image in, labels out. Kernel: image in, labels out. We freeze conventions and we do not invent timings.
+**Say:** Use: describe a part, QR, a11y captions. Proxy still holds the key. Throttle.
 
-**Ask:** What would a wrong version of this look like? Want: webcam to vendor 30fps class demo on classmates.
+**Ask:** What is the privacy sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Snapshot. Capture the canvas (or a crop) at 256px.
+**Say:** Snapshot. Downscale.
 
-**Say:** Use. Describe a part, detect a QR, accessibility captions.
+**Board:** button, 256px, label. Strike 30 fps class demo.
 
-**Say:** Cost/latency. One shot on button, not every frame.
+**Say:** Harm: we do not claim a diagnostic.
 
-**Ask:** Send a canvas snapshot (downscaled) to a mock/real vision endpoint? Wait seven seconds. Take two answers.
+**Ask:** When is a mock label enough?
 
-**They do:** On paper: privacy note.
+**They do:** Privacy note + throttle on paper.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Button: capture 256px snapshot; show returned label (mock OK).. Zoom 140%. Read errors out loud.
+**Say:** Capture 256px; show mock label. Plant 4k PNG. Plant classmate webcam stream. Plant medical label.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** privacy note.
+**Say:** toBlob + mock label on HUD. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: privacy note.; throttle.. Homework: Written: why not every frame.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: privacy note; throttle. Homework: why not every frame. Quiz: 256px, button, no classmate firehose.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: image in, labels out | Plant the first common mistake. |
-| 10–30 | Button: capture 256px snapshot; show returned label (mock OK). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | 256px capture | Plant 4k. |
+| 15–40 | Mock label HUD | Plant every-frame. |
+| 40–55 | Privacy + no medical claim | Webcam plant. |
+| 55–60 | They add throttle | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. downscale (3)
-2. privacy (4)
-3. throttle (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[AI for Interactive Graphics/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Snapshot.** Capture the canvas (or a crop) at 256px. Send to a mock or real vision endpoint. Show the label on the HUD.
-
-**2. Use.** Describe a part, detect a QR, accessibility captions.
-
-**3. Cost/latency.** One shot on button, not every frame.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[AI for Interactive Graphics/exercises/Week 09]].
 
 ## If we run long, cut
 
-Cost/latency
+Cost spreadsheets. Keep one-shot + privacy.
 
 ## If we run short, add
 
-throttle.
+Throttle on the button.

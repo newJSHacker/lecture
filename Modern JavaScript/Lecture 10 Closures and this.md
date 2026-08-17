@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** factory, bind  
-**Success check:** Write a closure counter.
+**Kernel:** closure = function + environment; factory; this lost on a callback  
+**Success check:** they write makeCounter and fix a button handler that lost this — arrow or bind
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/06-closure.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: factory, bind | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 10 | Goal: private state without a global | Invariant: a closure remembers bindings, not a photocopy of values at call time unless you wrap them`
 
 ## Board at the end (they photograph this)
 
 ```
-inner function remembering n
-Environment box.
+function makeCounter() {
+  let n = 0;
+  return () => ++n;     // closes over n
+}
+
+this  in a method = the receiver
+lost on callback →  arrow  or  .bind(this)
+not window
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Environment box.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Closure. Function + environment.
+**Say:** Module state is a closure. A GL context held in a closure is common and easy to leak — we name that, we do not open WebGL. Today: factory and this.
 
-**Ask:** a closure counter? Wait seven seconds. Take two answers.
+**Ask:** After const inc = makeCounter(); inc(); inc(); what does the third inc() return? Wait. Want: 3.
 
-**Board:** parked strip. Then inner function remembering n.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: factory, bind. Kernel: factory, bind. We freeze conventions and we do not invent timings.
+**Say:** Function plus the environment it was created in. Closures are not magic. this is the receiver of a method; passing obj.method as a listener loses it. Arrow lexical this, or bind. No this = window hacks.
 
-**Ask:** What would a wrong version of this look like? Want: Closures as magic.
+**Ask:** Does an arrow inside makeCounter close over n? Want: yes.
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Closure. Function + environment.
+**Say:** Environment box on the board: n lives after makeCounter returns.
 
-**Say:** this. Methods.
+**Board:** makeCounter. Then a class-or-object method handed to addEventListener.
 
-**Say:** Graphics. A closure over a GL context is common and easy to leak — mention.
+**Say:** Graphics: closing over a heavy context — mention leak. Week 13 will put state in one object instead of a pile of closures.
 
-**Ask:** a closure counter? Wait seven seconds. Take two answers.
+**Ask:** bind vs arrow — name one difference (teaching-level).
 
-**They do:** On paper: Once function extra.
+**They do:** On paper: once(fn) — extra factory that runs fn at most once.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: makeCounter(); then a button this bug and fix.. Zoom 140%. Read errors out loud.
+**Say:** makeCounter(); then a button this bug and fix. Demo Modern JavaScript/code/06-closure.html. Plant this as window. Fix with arrow or bind.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Once function extra.
+**Say:** once(fn) extra. Tests for counter: 1,2,3. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Once function extra.; Tests for counter.. Homework: Written: closure vs global.; Code: fix this.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: once + counter tests. Homework: closure vs global; fix this. Quiz: what a closure keeps, this in arrow, bind.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: factory, bind | Plant the first common mistake. |
-| 10–30 | makeCounter(); then a button this bug and fix. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | makeCounter | Plant a global n. Then hide n in the factory. |
+| 10–30 | button this bug | Plant obj.method as listener. Read undefined. |
+| 30–45 | arrow or bind | They pick one and freeze it. |
+| 45–60 | They write once(fn) | Circulate. |
 
 Point them at `Modern JavaScript/code/06-closure.html` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `Modern JavaScript/code/06-closure.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. what a closure keeps (4)
-2. this in arrow (3)
-3. bind (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[Modern JavaScript/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Closure.** Function + environment. Private counters. Module state.
-
-**2. this.** Methods. Losing this on callback — arrow or bind.
-
-**3. Graphics.** A closure over a GL context is common and easy to leak — mention.
+_none_
 
 ---
 
@@ -173,8 +173,8 @@ See [[Modern JavaScript/exercises/Week 10]].
 
 ## If we run long, cut
 
-Graphics
+GL leak mention. Keep factory + this fix.
 
 ## If we run short, add
 
-Tests for counter.
+Tests for counter: three asserts.

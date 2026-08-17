@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Capstone Project  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** one path that works  
-**Success check:** One happy path on the target device.
+**Kernel:** one happy path on the target device; placeholders beat waiting for art  
+**Success check:** a TA can complete the path without the team in the room
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Capstone/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: one path that works | Invariant: the problem is users, not a tech list`
+- Parked strip: `Lecture 4 | Goal: a slice that exists | Invariant: the problem is users, not a tech list`
 
 ## Board at the end (they photograph this)
 
 ```
-load → see → interact → reset
-Path arrows.
+happy path  =  the project
+placeholders: boxes with labels
+slideware without a path  =  fail
+uncommitted assets  =  fail
+30s recording extra
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Path arrows.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Slice. If the slice is not there, the project is a wish.
+**Say:** If the slice is not there, the project is a wish. Graphics capstones die on loaders and cameras. Slideware fails. A TA completes the path alone.
 
-**Ask:** One happy path on the target device? Wait seven seconds. Take two answers.
+**Ask:** If Blender is late, is the slice allowed to be boxes? Wait. Want: yes — labeled placeholders.
 
-**Board:** parked strip. Then load → see → interact → reset.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: one path that works. Kernel: one path that works. We freeze conventions and we do not invent timings.
+**Say:** 5 min demo to class or TA. Bug list. 30s recording extra. Still the lab laptop.
 
-**Ask:** What would a wrong version of this look like? Want: slideware instead of a path.
+**Ask:** What is the one path in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Slice. If the slice is not there, the project is a wish.
+**Say:** Slice. Load, see, do the verb.
 
-**Say:** Placeholders. Boxes with labels beat waiting for Blender.
+**Board:** path arrows. Placeholder box.
 
-**Say:** Demo. A TA can complete the path without the team in the room.
+**Say:** Commit the glTF or the box. Uncommitted is a fail.
 
-**Ask:** One happy path on the target device? Wait seven seconds. Take two answers.
+**Ask:** Why record 30s?
 
-**They do:** On paper: bug list.
+**They do:** Happy-path steps numbered 1–5.
 
-**Do not:** start in an engine before the problem statement.
+**Do not:** Start in an engine before the problem statement.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Happy path demo to the class (5 min) or TA.. Zoom 140%. Read errors out loud.
+**Say:** Happy path demo. Plant slideware. Plant uncommitted assets. Plant engine-not-problem.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** bug list.
+**Say:** Run the path from a cold serve. Eight minutes of fixing loaders, not features.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: bug list.; 30s recording.. Homework: Slice tagged in git.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: bug list; 30s extra. Homework: slice README. Quiz: path, placeholders, TA-alone. Next: sprints.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one path that works | Plant the first common mistake. |
-| 10–30 | Happy path demo to the class (5 min) or TA. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Name the path | Plant slideware. |
+| 15–40 | Cold serve the slice | Plant uncommitted. |
+| 40–55 | Bug list | They write. |
+| 55–60 | Placeholder labels | Circulate. |
 
 Point them at `Capstone/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -136,9 +139,7 @@ Point them at `Capstone/code/03-budget.html` as the after-class check, not as th
 
 ## Quiz next meeting (they hear this now)
 
-1. happy path (4)
-2. placeholder OK? (3)
-3. TA alone (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -149,11 +150,7 @@ See [[Capstone/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Slice.** If the slice is not there, the project is a wish. Graphics capstones die on loaders and cameras.
-
-**2. Placeholders.** Boxes with labels beat waiting for Blender.
-
-**3. Demo.** A TA can complete the path without the team in the room.
+_none_
 
 ---
 
@@ -164,8 +161,8 @@ See [[Capstone/exercises/Week 04]].
 
 ## If we run long, cut
 
-Demo
+Polish. Keep the path.
 
 ## If we run short, add
 
-30s recording.
+30s recording extra.

@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** draw calls, instancing, LOD name  
-**Success check:** Count draw calls.
+**Kernel:** draw calls; InstancedMesh; LOD name; renderer.info.render  
+**Success check:** they log info.render on 200 meshes vs InstancedMesh and cap pixelRatio; they do not invent fps
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,20 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: draw calls, instancing, LOD name | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 12 | Goal: count, then cut | Invariant: a Mesh is a draw; measure on this machine; 8k on a cube is a budget fail`
 
 ## Board at the end (they photograph this)
 
 ```
-stats.js
-Budget.
+console.log(renderer.info.render)   // calls, triangles
+
+200 Mesh     =  200 draws
+1 InstancedMesh(n=200)  =  1 draw
+
+LOD.addLevel(high, 0) / (mid, 8) / (low, 18)
+pixelRatio 1 vs min(dpr, 2)
+
+measure or omit     no invented fps
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +45,11 @@ Budget.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Budgets. Blender course polycounts.
+**Say:** Blender course polycounts meet the engine. Demos 08-instancing.html and 15-lod.html. WebGL week 12 in engine form.
 
-**Ask:** Count draw calls? Wait seven seconds. Take two answers.
+**Ask:** If info.render.calls is 200, what did you probably create? Wait. Want: 200 Mesh, not InstancedMesh.
 
-**Board:** parked strip. Then stats.js.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +59,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: draw calls, instancing, LOD name. Kernel: draw calls, instancing, LOD name. We freeze conventions and we do not invent timings.
+**Say:** Frustum culling named. pixelRatio 1 vs 2 is a fill-rate lab. Stats.js optional. 8k textures on a cube forbidden.
 
-**Ask:** What would a wrong version of this look like? Want: invented fps.
+**Ask:** What is a draw call in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +73,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Budgets. Blender course polycounts.
+**Say:** Count first. Then instance or LOD.
 
-**Say:** Instancing. WebGL week 12 in engine form.
+**Board:** info.render. InstancedMesh.
 
-**Say:** Profiling. renderer.info.
+**Say:** LOD name. Distances are teaching numbers, not a promise.
 
-**Ask:** Count draw calls? Wait seven seconds. Take two answers.
+**Ask:** Why cap pixelRatio at 2?
 
-**They do:** On paper: pixelRatio 1 vs 2.
+**They do:** On paper: budget table headers: draws, tris, maps — fill later by measuring.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: 200 meshes vs InstancedMesh; log info.render.. Zoom 140%. Read errors out loud.
+**Say:** 200 meshes vs InstancedMesh; log info.render. Demos 08-instancing.html, 15-lod.html. Plant invented 60 fps. Plant 8k on a cube.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +97,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** pixelRatio 1 vs 2.
+**Say:** pixelRatio 1 vs 2. Log calls. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +107,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: pixelRatio 1 vs 2.; stats.. Homework: Written: a budget table (invented numbers forbidden — measure).; Code: instanced.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pixelRatio; stats. Homework: budget table measured; instanced. Quiz: draw call, InstancedMesh, info.render. R3F teaser next.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +119,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: draw calls, instancing, LOD name | Plant the first common mistake. |
-| 10–30 | 200 meshes vs InstancedMesh; log info.render. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | info.render on a cube | 1 call. |
+| 10–30 | 200 Mesh vs InstancedMesh | Log calls. No fps speech. |
+| 30–45 | LOD name + demo 15 | Distances as names. |
+| 45–60 | They cap pixelRatio | Circulate. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +144,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. draw call (3)
-2. InstancedMesh (4)
-3. info.render (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +163,7 @@ See [[ThreeJS Development/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Budgets.** Blender course polycounts. Mobile vs desktop.
-
-**2. Instancing.** WebGL week 12 in engine form.
-
-**3. Profiling.** renderer.info.
+_none_
 
 ---
 
@@ -173,8 +174,8 @@ See [[ThreeJS Development/exercises/Week 12]].
 
 ## If we run long, cut
 
-Profiling
+GPU profiler internals. Keep calls + instance + measure.
 
 ## If we run short, add
 
-stats.
+stats overlay or info.render dump.

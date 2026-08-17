@@ -47,11 +47,11 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 **Ask:** If the array is not sorted, may I binary search? Wait. Want: no.
 
-**Board:** parked strip. Then sorted row of numbers, mid probe.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *linear vs binary*.
+**They do:** write today’s question in their notes: *linear search and binary search on the same sorted array; log comparison counts*.
 
 **Do not:** Binary on unsorted data.
 
@@ -81,7 +81,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 **They do:** On paper: binary-search trace for 7 in `[1,3,4,7,9]`. Write lo, hi, mid each step.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -142,9 +142,7 @@ Point them at `Programming/code/08-search.html` as the after-class check, not as
 
 ## Quiz next meeting (they hear this now)
 
-1. Precondition of binary search (3)
-2. Comparisons worst case linear (3)
-3. Mid formula (4)
+None this meeting.
 
 
 ## Snippet
@@ -163,11 +161,7 @@ See [[Programming/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Linear search.** Scan until found. Always correct. Slow for large n.
-
-**2. Binary search.** Needs sorted input. Mid index, shrink left or right. Off-by-one in `hi` is the classic bug.
-
-**3. Why graphics people care.** Picking, BVH, and kd-trees (computational geometry) are search. Binary search is the warmup.
+_none_
 
 ---
 

@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** verts edges faces  
-**Success check:** Extrude, inset, loop cut.
+**Kernel:** verts, edges, faces; extrude / inset / loop cut; face orientation  
+**Success check:** they can extrude a crate and turn on face orientation; they do not sculpt a hero
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Blender/code/02-export.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: verts edges faces | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 2 | Goal: a crate, not a film character | Invariant: real-time cares about triangle count and facing; inverted normals ship as inside-out in the engine`
 
 ## Board at the end (they photograph this)
 
 ```
-quad vs triangle vs n-gon
-Quad grid.
-Red/blue faces.
+E extrude   I inset   Ctrl+R loop cut   G/S/R
+Merge by distance
+
+Face orientation: blue front / red back
+Statistics: tris     (glTF stores triangles)
+
+ngons OK on flat caps; dangerous on curves
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Red/blue faces.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Topology. Real-time cares about **triangle count** and **deformation**.
+**Say:** Film cares about subdivision beauty. We care about tris and deformation. Inverted normals shipped to Three.js are a facing bug — the engine is not the bug.
 
-**Ask:** Extrude, inset, loop cut? Wait seven seconds. Take two answers.
+**Ask:** Why turn on face orientation this week? Wait. Want: red faces will be inside-out in glTF.
 
-**Board:** parked strip. Then quad vs triangle vs n-gon.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: verts edges faces. Kernel: verts edges faces. We freeze conventions and we do not invent timings.
+**Say:** Quads on deforming surfaces; triangles are what glTF stores anyway. Ngons named. Statistics overlay. No hero sculpt as homework.
 
-**Ask:** What would a wrong version of this look like? Want: Sculpting a hero as week-2 homework.
+**Ask:** Quad vs tri in real-time — who triangulates?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Topology. Real-time cares about **triangle count** and **deformation**.
+**Say:** Operators. Overlay on.
 
-**Say:** Operators. E extrude, I inset, Ctrl+R loop cut, G/S/R.
+**Board:** E I Ctrl+R. Blue/red.
 
-**Say:** Ngons. Allowed on flat caps.
+**Say:** A table with four legs — separate objects or one mesh, they justify.
 
-**Ask:** Extrude, inset, loop cut? Wait seven seconds. Take two answers.
+**Ask:** What does red mean on face orientation?
 
-**They do:** On paper: A table with 4 legs (keep them separate objects or one mesh — justify).
+**They do:** On paper: a crate in 8–12 boxes (faces).
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Model a simple mug or crate from a cube. Show face orientation. Report triangle count.. Zoom 140%. Read errors out loud.
+**Say:** Block a crate; overlay; statistics. Plant sculpting a hero. Plant inverted faces.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** A table with 4 legs (keep them separate objects or one mesh — justify).
+**Say:** Extrude a crate. Screenshot statistics. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: A table with 4 legs (keep them separate objects or one mesh — justify).; Screenshot statistics.. Homework: Written: quad vs tri in real-time.; Blend file + triangle count.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: table with 4 legs; statistics screenshot. Homework: quad vs tri; blend + triangle count. Quiz: extrude, why face orientation, n-gon risk.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: verts edges faces | Plant the first common mistake. |
-| 10–30 | Model a simple mug or crate from a cube. Show face orientation. Report triangle count. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Face orientation on | Plant skipped overlay. |
+| 10–30 | Extrude crate | Plant ngons on a curve. |
+| 30–45 | Statistics tris | They read the number. |
+| 45–60 | They merge by distance | Circulate. |
 
 Point them at `Blender/code/02-export.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Blender/code/02-export.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. extrude (2)
-2. why face orientation (4)
-3. n-gon risk (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Blender/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Topology.** Real-time cares about **triangle count** and **deformation**. Film cares about subdivision beauty. Prefer quads on deforming surfaces; triangles are what glTF stores anyway.
-
-**2. Operators.** E extrude, I inset, Ctrl+R loop cut, G/S/R. Merge by distance. Face orientation overlay (blue/red).
-
-**3. Ngons.** Allowed on flat caps. Dangerous on curves. Overlay: Face orientation + statistics.
+_none_
 
 ---
 
@@ -174,8 +172,8 @@ See [[Blender/exercises/Week 02]].
 
 ## If we run long, cut
 
-Ngons
+Sculpt. Keep crate + facing + count.
 
 ## If we run short, add
 
-Screenshot statistics.
+Screenshot statistics on the crate.

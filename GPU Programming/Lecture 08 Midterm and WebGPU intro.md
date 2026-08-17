@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · GPU Programming  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; device/queue  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** WebGPU: adapter → device → queue; feature detect; WGSL later  
+**Success check:** after the exam they can request adapter/device or show a documented WebGL fallback
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,21 +14,28 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 - Printed midterm + spare paper. No laptop for the exam.
 - Topic list was announced at the end of Lecture 7.
 - After collection: demo `GPU Programming/code/01-pong.html` ready (local, no CDN).
-- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: data lives where the kernel runs`
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: WebGPU is after ping-pong; no Safari-only lab without a fallback; no CUDA`
 
 ## Midterm (about 50–60 min)
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm: ping-pong, particles, Euler, fluids names, reduce., Request adapter/device., Why WGSL., Don't port the whole particle system this week.
+**Topics:** throughput vs latency; ping-pong A/B; RG/BA packing; TF name; Euler+clamp; fluids names; mip reduce.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-adapter → device → queue
-Adapter box.
+navigator.gpu.requestAdapter()
+  → device
+  → queue.submit(...)
+
+WebGL program  ≈  pipeline
+uniform        ≈  bind group
+FBO            ≈  texture view
+
+feature detect  or  WebGL triangle + WGSL reading
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +48,21 @@ Adapter box.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then WebGPU intro. No laptop. After: adapter/device/queue. Do not port the whole particle system this week. Chrome. Not a Safari-only lab without a fallback.
 
-**Ask:** Request adapter/device.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. WebGPU.** Modern API. Explicit pipelines, bind groups, compute. Chrome. Not a Safari-only lab without a fallback plan.
 
-**3. Mental map.** WebGL program ≈ pipeline. Uniforms ≈ bind group. FBO ≈ texture views.
 
 ### Show / attempt if time
 
-**Say:** Hello triangle in WebGPU **or** a documented fallback WebGL triangle plus a WGSL reading.
+**Say:** Hello triangle in WebGPU **or** documented fallback WebGL triangle plus a WGSL reading. Plant no feature detect. Plant CUDA as the leftover.
 
----
-
-**They do:** feature detect.
+**They do:** Feature detect + error popup.
 
 ---
 
@@ -67,10 +70,9 @@ Adapter box.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; device/queue | Plant the first common mistake. |
-| 10–30 | Hello triangle in WebGPU **or** a documented fallback WebGL triangle plus a WGSL reading. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | adapter → device → queue | Plant skip detect. |
+| 15–40 | Hello triangle or fallback | Plant CUDA leftover. |
+| 40–60 | Error popup | They type. Circulate. |
 
 ---
 
@@ -97,8 +99,8 @@ See [[GPU Programming/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+Live coding if the exam ran long. Keep the leftover board.
 
 ## If we run short, add
 
-One more worked leftover example.
+Mental map WebGL ≈ pipeline on the board.

@@ -45,11 +45,11 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 **Ask:** cos(0)? Wait. Want: 1.
 
-**Board:** parked strip. Then unit circle.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *sin, polar, triangles*.
+**They do:** write today’s question in their notes: *`(x,y) = (r cos t, r sin t)`; N-gon vertices*.
 
 **Do not:** Sin(degrees).
 
@@ -79,7 +79,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 **They do:** Vertices of a square from polar (r, k·π/2).
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -140,9 +140,7 @@ Point them at `Mathematics for Computer Graphics/code/07-rotate.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. cos(0) (2)
-2. polar to xy (4)
-3. why sin²+cos² (4)
+None this meeting.
 
 
 ## Snippet
@@ -161,11 +159,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Unit circle.** Coordinates (cosθ, sinθ). Animation of a planet is this.
-
-**2. Polar.** r, θ → x, y. Useful for flowers, spur gears, SDF later.
-
-**3. Identities.** Only sin²+cos²=1 required. Others optional.
+_none_
 
 ---
 

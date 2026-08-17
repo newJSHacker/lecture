@@ -44,11 +44,11 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 **Ask:** How do you read y of `{x:1, y:2}`? Wait. Want: `p.y`.
 
-**Board:** parked strip. Then dot vs bracket.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *records, nested data*.
+**They do:** write today’s question in their notes: *`const p = { x, y }` and centroid of an array of points*.
 
 **Do not:** `p[x]` without quotes.
 
@@ -78,7 +78,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 **They do:** On paper: write a point and a student with three scores.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -139,9 +139,7 @@ Point them at `Programming/code/07-centroid.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. Access y of {x:1,y:2} (2)
-2. JSON of a point (4)
-3. Why not object as list (4)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +158,7 @@ See [[Programming/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Records.** A point is `{x, y}`. A student is `{name, scores: []}`. This is the mesh vertex of Semester 2.
-
-**2. Dot and bracket.** `p.x` vs `p['x']`. Brackets when the key is in a variable.
-
-**3. JSON.** Show stringify of a point. Mention that JSON cannot store functions or NaN. File I/O waits; clipboard paste is enough.
+_none_
 
 ---
 

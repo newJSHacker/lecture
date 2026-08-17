@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** VS/FS, varyings  
-**Success check:** Write a vertex shader that passes a varying.
+**Kernel:** VS writes a varying; GPU interpolates; FS reads it — v_uv as color  
+**Success check:** they can pass v_uv from VS to FS and say who interpolates
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `WebGL/shadertoy/index.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: VS/FS, varyings | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 1 | Goal: see interpolation as a program, not a filter | Invariant: a shader is a program over pixels or vertices; a clip you cannot uniform is not the lab`
 
 ## Board at the end (they photograph this)
 
 ```
-vertex → interpolate → fragment
-Pipeline.
-Varying arrows.
+VS  →  interpolate  →  FS
+
+attribute  →  varying  →  gl_FragColor / out
+uniform    (same for every vertex/pixel)
+
+gl_Position is clip space
 ```
 
 ## Slides today (cap: 6)
@@ -37,11 +40,11 @@ Varying arrows.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Two homes. Mesh shaders live in [[17 WebGL Programming]].
+**Say:** IGWT shaders are programs you pause, uniform, and debug — not a Shadertoy tab left playing. Mesh shaders live in WebGL Programming; today the same GLSL in a fullscreen triangle. If you cannot read a compile log, you will later call a missing varying a GPU driver bug.
 
-**Ask:** a vertex shader that passes a varying? Wait seven seconds. Take two answers.
+**Ask:** Who interpolates the color between three vertices — you, the VS, or the rasterizer? Wait seven seconds.
 
-**Board:** parked strip. Then vertex → interpolate → fragment.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +54,9 @@ Varying arrows.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: VS/FS, varyings. Kernel: VS/FS, varyings. We freeze conventions and we do not invent timings.
+**Say:** Two homes: mesh VS/FS, and Shadertoy-style mainImage. We freeze WebGL2: #version 300 es and precision highp float in the fragment. Desktop GLSL paste without version is a fail.
 
-**Ask:** What would a wrong version of this look like? Want: Shadertoy copy-paste into WebGL without #version.
+**Ask:** Where does a uniform live — per vertex or once for the draw?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +68,21 @@ Varying arrows.
 
 ### Minutes 12–35 — Build
 
-**Say:** Two homes. Mesh shaders live in [[17 WebGL Programming]].
+**Say:** Draw vertex → interpolate → fragment. The arrow in the middle is hardware. A step in the VS stays a step after interpolation if every vertex wrote the same edge; a step in the FS is per pixel.
 
-**Say:** Interpolation. VS outputs are interpolated.
+**Board:** varying vs uniform. Circle gl_Position: clip, not pixels.
 
-**Say:** Precision. `precision highp float` in ES fragment shaders.
+**Say:** Normals must be renormalized in the FS — interpolation shortens them. No CDN; serve the local shadertoy harness.
 
-**Ask:** a vertex shader that passes a varying? Wait seven seconds. Take two answers.
+**Ask:** Why highp in ES fragment shaders?
 
-**They do:** On paper: Break interpolation: output a step function in VS vs FS.
+**They do:** On paper: VS that outputs v_uv; FS that paints vec4(v_uv,0,1). Label who interpolates.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: WebGL2: pass v_uv and display as color. Then the same idea in a fullscreen triangle.. Zoom 140%. Read errors out loud.
+**Say:** Demo WebGL/shadertoy/index.html. Pass v_uv as color. Plant a Shadertoy paste without #version — read the compile log out loud. Then a step() in VS vs the same step in FS.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +92,7 @@ Varying arrows.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Break interpolation: output a step function in VS vs FS.
+**Say:** Break interpolation: step in VS versus step in FS. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +102,7 @@ Varying arrows.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Break interpolation: output a step function in VS vs FS.; Read compile logs.. Homework: Written: varying vs uniform.; Code: uv-as-color.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Photograph the board. Lab: interpolation break + compile logs. Homework: varying vs uniform; uv-as-color. Quiz: who interpolates, gl_Position space, precision.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +114,10 @@ Varying arrows.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: VS/FS, varyings | Plant the first common mistake. |
-| 10–30 | WebGL2: pass v_uv and display as color. Then the same idea in a fullscreen triangle. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Fullscreen triangle + v_uv | Plant Shadertoy paste without #version. |
+| 10–30 | uv as color | Plant normalize only in VS. |
+| 30–45 | Compile log | Read the error; do not hide it. |
+| 45–60 | They break interpolation | Circulate. Pause time with a uniform if the harness has one. |
 
 Point them at `WebGL/shadertoy/index.html` as the after-class check, not as the lecture.
 
@@ -136,9 +139,7 @@ Point them at `WebGL/shadertoy/index.html` as the after-class check, not as the 
 
 ## Quiz next meeting (they hear this now)
 
-1. who interpolates (4)
-2. gl_Position space (3)
-3. precision (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +160,7 @@ See [[Shader Programming/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Two homes.** Mesh shaders live in [[17 WebGL Programming]]. Fullscreen procedural live in Shadertoy-style `mainImage(out vec4, in vec2)` — [[WebGL/shadertoy/index.html]]. This course uses both.
-
-**2. Interpolation.** VS outputs are interpolated. That is why a color at three vertices becomes a gradient. Normals must be renormalized in the FS.
-
-**3. Precision.** `precision highp float` in ES fragment shaders. Desktop GLSL is looser — do not copy Shadertoy 1:1 into WebGL without version and precision.
+_none_
 
 ---
 
@@ -174,8 +171,8 @@ See [[Shader Programming/exercises/Week 01]].
 
 ## If we run long, cut
 
-Precision
+Precision sermon. Keep VS→FS + compile log.
 
 ## If we run short, add
 
-Read compile logs.
+One uniform float to freeze time — the course contract.

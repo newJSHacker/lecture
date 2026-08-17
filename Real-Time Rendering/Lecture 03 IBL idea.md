@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** irradiance + prefiltered spec  
-**Success check:** Diffuse IBL as a blurred env.
+**Kernel:** IBL: irradiance (diffuse) + prefiltered spec; mip LOD ≈ roughness  
+**Success check:** they can treat a blurred env as diffuse IBL and roughness as mip, and toggle background vs lighting
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: irradiance + prefiltered spec | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 3 | Goal: env as the other light | Invariant: the environment is a named light; a 500MB HDR is not a lab asset`
 
 ## Board at the end (they photograph this)
 
 ```
-env as the other light
-Cubemap + sphere.
+PASS: IBL lookup  (after or with direct shade)
+
+diffuse  ←  irradiance (blurred env)
+spec     ←  prefiltered cubemap, lod = roughness
+
+split-sum  Karis  (name)
+HDR env  —  IBL without HDR is a lie
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Cubemap + sphere.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Why IBL. A studio product has *environment* lighting.
+**Say:** A studio product has environment lighting. A single dir light is a lecture, not a catalog shot. Cubemap size is a budget — we do not invent fps; we pick a small local env.
 
-**Ask:** Diffuse IBL as a blurred env? Wait seven seconds. Take two answers.
+**Ask:** Is the background the same texture as the lighting? Wait. Want: often related, not always the same pass.
 
-**Board:** parked strip. Then env as the other light.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: irradiance + prefiltered spec. Kernel: irradiance + prefiltered spec. We freeze conventions and we do not invent timings.
+**Say:** Split-sum named. Implementation can be env + mip. PMREM is the Three.js name after the picture. Cost: cubemap resolution, especially mobile.
 
-**Ask:** What would a wrong version of this look like? Want: 500MB HDR.
+**Ask:** What does a higher mip mean for roughness?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why IBL. A studio product has *environment* lighting.
+**Say:** Cubemap + sphere. Two arrows: irradiance, spec.
 
-**Say:** Split sum. Karis.
+**Board:** lod = roughness. Circle HDR.
 
-**Say:** Cost. Cubemap size.
+**Say:** Intensity slider is a uniform on this lookup pass.
 
-**Ask:** Diffuse IBL as a blurred env? Wait seven seconds. Take two answers.
+**Ask:** Irradiance in one sentence?
 
-**They do:** On paper: intensity slider.
+**They do:** On paper: IBL vs dir light — two bullets.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Metallic sphere in an env; roughness 0 vs 1.. Zoom 140%. Read errors out loud.
+**Say:** Metallic sphere in a local env; roughness 0 vs 1. Plant 500MB HDR. Background vs lighting toggle.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** intensity slider.
+**Say:** Intensity slider. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: intensity slider.; background vs lighting toggle.. Homework: Written: IBL vs dir light.; screenshot pair.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: intensity + background/lighting toggle. Homework: IBL vs dir; screenshot pair. Quiz: irradiance, mip as roughness, PMREM name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: irradiance + prefiltered spec | Plant the first common mistake. |
-| 10–30 | Metallic sphere in an env; roughness 0 vs 1. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name IBL lookups | Plant IBL without HDR. |
+| 10–30 | Roughness 0 vs 1 | Plant huge HDR. |
+| 30–45 | Background vs lighting | Two toggles. |
+| 45–60 | They write the intensity uniform | Circulate. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. irradiance (3)
-2. mip as roughness (4)
-3. PMREM (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Real-Time Rendering/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why IBL.** A studio product has *environment* lighting. A single dir light is a lecture, not a catalog shot.
-
-**2. Split sum.** Karis. Name. Implementation can be an env texture + mip LOD = roughness.
-
-**3. Cost.** Cubemap size. Mobile.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Real-Time Rendering/exercises/Week 03]].
 
 ## If we run long, cut
 
-Cost
+Convolve an env from scratch. Keep names + small local env.
 
 ## If we run short, add
 
-background vs lighting toggle.
+PMREM as oracle name.

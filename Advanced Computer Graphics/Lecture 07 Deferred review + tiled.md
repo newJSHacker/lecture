@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** lights in tiles  
-**Success check:** Restate G-buffer.
+**Kernel:** G-buffer review; CPU tile lists for N lights; heatmap of overlap  
+**Success check:** they can bin lights into screen tiles and say why 1000 Mesh helpers are not the algorithm
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: lights in tiles | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 7 | Goal: many lights as a data structure | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-screen tiles → light lists
-Grid overlay.
+forward dies at many lights
+deferred: G-buffer, then lights
+tiled: light indices per screen tile
+clustered: 3D bins in the frustum (name)
+
+heatmap overlay is a valid lab
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Grid overlay.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Many lights. Deferred and clustered exist because forward dies.
+**Say:** Deferred and clustered exist because forward dies. 1000 Mesh point-light helpers are not the algorithm. No debug view fails. We do not start a production deferred engine.
 
-**Ask:** Restate G-buffer? Wait seven seconds. Take two answers.
+**Ask:** If two lights overlap a tile, what does the tile store? Wait. Want: two indices.
 
-**Board:** parked strip. Then screen tiles → light lists.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: lights in tiles. Kernel: lights in tiles. We freeze conventions and we do not invent timings.
+**Say:** Restate G-buffer from RTR. Clustered named. Cull by distance extra. Compare naive vs tiled count.
 
-**Ask:** What would a wrong version of this look like? Want: 1000 Mesh point-light helpers as the algorithm.
+**Ask:** What lives in a G-buffer?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Many lights. Deferred and clustered exist because forward dies.
+**Say:** Many lights. Why forward dies.
 
-**Say:** Clustered. 3D bins in the frustum.
+**Board:** tiles. Light AABB → tiles.
 
-**Say:** WebGL. A light heatmap overlay is a valid lab.
+**Say:** Heatmap. Count, do not invent fps.
 
-**Ask:** Restate G-buffer? Wait seven seconds. Take two answers.
+**Ask:** Clustered vs tiled in one sentence?
 
-**They do:** On paper: cull by distance extra.
+**They do:** On paper: 4 tiles, 3 lights, who overlaps.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: N point lights; heatmap of overlapping lights per tile (2D).. Zoom 140%. Read errors out loud.
+**Say:** N point lights; 2D heatmap of overlapping lights per tile. Plant Mesh helpers as the method. Plant no debug view.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** cull by distance extra.
+**Say:** Assign lights to tiles (JS). Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: cull by distance extra.; compare naive vs tiled count.. Homework: Written: why tiles.; heatmap screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: distance cull extra; naive vs tiled count. Homework: G-buffer restated. Quiz: tiles, G-buffer, not helpers. Next: midterm then shadow names.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: lights in tiles | Plant the first common mistake. |
-| 10–30 | N point lights; heatmap of overlapping lights per tile (2D). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | G-buffer recap | Plant production deferred. |
+| 15–40 | Tile lists | Plant 1000 helpers. |
+| 40–55 | Heatmap | No debug plant. |
+| 55–60 | They count overlaps | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. tile list (4)
-2. clustered (3)
-3. heatmap (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Advanced Computer Graphics/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Many lights.** Deferred and clustered exist because forward dies. Students implement a **CPU** tile list for N lights on a 2D grid, or a heatmap fake.
-
-**2. Clustered.** 3D bins in the frustum. Name.
-
-**3. WebGL.** A light heatmap overlay is a valid lab.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Advanced Computer Graphics/exercises/Week 07]].
 
 ## If we run long, cut
 
-WebGL
+WebGL deferred impl. Keep CPU tiles + heatmap.
 
 ## If we run short, add
 
-compare naive vs tiled count.
+Naive vs tiled count.

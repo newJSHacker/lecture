@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** the verb  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** the verb works on the slice; reset; keyboard; error state  
+**Success check:** a stranger can do the verb and reset without coaching
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,11 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-input → state → view
-Input-state-view.
+verb     (one sentence)
+reset
+keyboard path
+error state     (load fail later; empty state now)
+Cuts: second verb
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +39,9 @@ Input-state-view.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: interaction). Orbit-only is not a verb. If the user cannot do the job from week 1, the tech list won.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** What is the verb in one word?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +49,15 @@ Input-state-view.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Verb works on the slice; error state.
+**Say:** Desk review: happy path, reset, keyboard or documented exception, error if the mesh is missing.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Verb first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Reset + keyboard in the README. Next: measure and a11y. No invented fps.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +67,9 @@ Input-state-view.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: the verb | Plant the first common mistake. |
-| 10–30 | Verb works on the slice; error state. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Verb on the board | Photograph. |
+| 10–50 | Desk review | Stranger does the verb. |
+| 50–60 | Reset + keyboard | Orbit-only plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +98,12 @@ See [[Capstone/exercises/Week 06]].
 
 ## Notes from the outline
 
-**1. Verb.** XR/R3F/Web courses: one verb well.
-**2. State.** URL hash or JSON for the configuration — shareable extra.
-**3. Fail.** Empty states, load errors.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+Second verb. Keep one + reset.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Empty-state message.

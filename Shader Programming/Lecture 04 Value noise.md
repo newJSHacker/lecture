@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** hash, lerp  
-**Success check:** Hash a lattice point.
+**Kernel:** hash(lattice) then bilinear lerp — value noise, not Math.random  
+**Success check:** they can hash a lattice point and lerp the four corners
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: hash, lerp | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 4 | Goal: deterministic noise you can pause | Invariant: same uv → same noise; fireflies are a random() per frame`
 
 ## Board at the end (they photograph this)
 
 ```
-grid corners → bilinear
-Lattice.
-Lerp.
+i = floor(p)     f = fract(p)
+
+a--b     hash(i+corner)
+|  |     mix mix  (bilinear)
+c--d
+
+sin/dot hash  =  teaching, not crypto
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Lerp.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Why noise. Fire, water, terrain, film grain.
+**Say:** Fire, water, terrain, grain — all start here. If they call Math.random in the FS, the picture sparkles and they cannot debug a still.
 
-**Ask:** Hash a lattice point? Wait seven seconds. Take two answers.
+**Ask:** Why not random() every frame? Wait. Want: not a function of uv.
 
-**Board:** parked strip. Then grid corners → bilinear.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: hash, lerp. Kernel: hash, lerp. We freeze conventions and we do not invent timings.
+**Say:** Value noise interpolates scalars. Perlin gradients are a name; fBm next week can use either. Hash artifacts exist — show them, do not hide.
 
-**Ask:** What would a wrong version of this look like? Want: true random per frame (fireflies).
+**Ask:** What is bilinear here?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why noise. Fire, water, terrain, film grain.
+**Say:** Lattice. Four corners. Hash is a float in 0..1.
 
-**Say:** Hash. sin/dot hacks are OK for teaching.
+**Board:** bilinear. Smoothstep on f as optional fade.
 
-**Say:** Value vs gradient. Value noise interpolates scalars.
+**Say:** A 200-line noise library unread is a clip. Ten lines they can pause.
 
-**Ask:** Hash a lattice point? Wait seven seconds. Take two answers.
+**Ask:** Write hash(vec2) in one line (sin/dot is allowed).
 
-**They do:** On paper: Animate z as time extra.
+**They do:** On paper: four hashes and two mix calls.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fullscreen value noise; slider for scale.. Zoom 140%. Read errors out loud.
+**Say:** Fullscreen value noise; slider for scale (a uniform). Plant true random per frame. Overlay the lattice.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Animate z as time extra.
+**Say:** Animate z as time extra, or freeze time and change scale. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Animate z as time extra.; Show lattice overlay.. Homework: Written: why hash.; Code: noise(vec2).. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: time or lattice overlay. Homework: why hash; noise(vec2). Quiz: why no Math.random, bilinear, artifact.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: hash, lerp | Plant the first common mistake. |
-| 10–30 | Fullscreen value noise; slider for scale. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | hash(vec2) | Plant Math.random. |
+| 10–30 | Bilinear value noise | Plant copying 200 unread lines. |
+| 30–45 | Scale uniform | Pause time; debug a still. |
+| 45–60 | They add lattice overlay | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. why no Math.random (3)
-2. bilinear (4)
-3. artifact (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Shader Programming/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why noise.** Fire, water, terrain, film grain. Deterministic: same uv → same value.
-
-**2. Hash.** sin/dot hacks are OK for teaching. They are not crypto. Artifacts exist — show them.
-
-**3. Value vs gradient.** Value noise interpolates scalars. Perlin interpolates gradients — next week fBm can use either.
+_none_
 
 ---
 
@@ -174,8 +172,8 @@ See [[Shader Programming/exercises/Week 04]].
 
 ## If we run long, cut
 
-Value vs gradient
+Gradient noise proof. Keep hash + bilinear.
 
 ## If we run short, add
 
-Show lattice overlay.
+fade(t)=t*t*(3-2*t) name.

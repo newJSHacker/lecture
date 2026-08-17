@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** analyser → scale  
-**Success check:** User-gesture AudioContext.
+**Kernel:** user-gesture AudioContext; analyser bins → instance scale; mute  
+**Success check:** they can start audio from a Play button and scale bars from an analyser without autoplay
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: analyser → scale | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 6 | Goal: bars that work silent | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-byte frequency → instance scale
-Bars in 3D.
+Play (gesture)  →  AudioContext
+analyser.fftSize = 64
+bins → instance scale     cap N
+
+mute + still image     (not audio-only)
+licensed loop only
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Bars in 3D.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Gesture. Browsers block autoplay.
+**Say:** Browsers block autoplay. A surprise soundtrack is a fail. Audio is data for graphics — and a11y still needs a silent path.
 
-**Ask:** User-gesture AudioContext? Wait seven seconds. Take two answers.
+**Ask:** Why did play() throw? Wait. Want: no user gesture.
 
-**Board:** parked strip. Then byte frequency → instance scale.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: analyser → scale. Kernel: analyser → scale. We freeze conventions and we do not invent timings.
+**Say:** fftSize named. Map bins to instances, not 1024 meshes. Do not ship a copyrighted album as the asset. Captions/mute in the HUD.
 
-**Ask:** What would a wrong version of this look like? Want: autoplay surprise.
+**Ask:** If the speaker is off, is the viz still readable?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Gesture. Browsers block autoplay.
+**Say:** Gesture first. Then analyser.
 
-**Say:** Data. fftSize.
+**Board:** Play → context → bins → scale. Cap N.
 
-**Say:** a11y. Don't rely on audio only; show a mute and a visual that works silent.
+**Say:** Mute. Fallback still. Instances, not 32 Mesh objects if they already know Instances — else 32 is enough.
 
-**Ask:** User-gesture AudioContext? Wait seven seconds. Take two answers.
+**Ask:** What does fftSize change?
 
-**They do:** On paper: mute.
+**They do:** On paper: button, analyser, one bin → one bar.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Play a short licensed loop; 32 bars as boxes.. Zoom 140%. Read errors out loud.
+**Say:** Licensed short loop; 32 bars. Plant autoplay. Plant a full song file. Fix: button + tiny loop.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** mute.
+**Say:** Play button starts context; one bar follows a bin. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: mute.; fallback still image.. Homework: Written: autoplay policy.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: mute + still fallback. Homework: gesture paragraph. Quiz: autoplay, fftSize, why mute.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: analyser → scale | Plant the first common mistake. |
-| 10–30 | Play a short licensed loop; 32 bars as boxes. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Play gesture | Plant autoplay. |
+| 15–40 | Analyser → scale | Plant 1024 meshes. |
+| 40–55 | Mute / silent still | Audio-only plant. |
+| 55–60 | They cap N | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. why click first (4)
-2. fftSize (3)
-3. silent path (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Interactive Experience/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Gesture.** Browsers block autoplay. A Play button is the lab.
-
-**2. Data.** fftSize. Map bins to instances. Cap N.
-
-**3. a11y.** Don't rely on audio only; show a mute and a visual that works silent.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Interactive Experience/exercises/Week 06]].
 
 ## If we run long, cut
 
-a11y
+Beat-matching DSP. Keep gesture + bins.
 
 ## If we run short, add
 
-fallback still image.
+Fallback still image in the HUD.

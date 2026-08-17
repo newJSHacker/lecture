@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · AI for Interactive Graphics  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** AI + graphics mini  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** AI + graphics mini: proxy/mock, asset table, scored eval, no frontend secrets  
+**Success check:** a TA can run the README, see .env not in git, and read the asset table
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,9 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: proxy/mock · table · one feature · eval row · no keys in git
+Cuts: second vendor, training a model, medical/legal claims
+README: how to run with the mock
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. .env not in git. Asset table. If the key is in the repo or the asset is unlabeled, the project fails before aesthetics.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, do you cut the vendor or the table?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: .env not in git; asset table.
+**Say:** Desk review: mock path, table, eval, no medical/legal claims.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Mock first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. Be ready to show the table.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: AI + graphics mini | Plant the first common mistake. |
-| 10–30 | Desk review: .env not in git; asset table. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings | Photograph. |
+| 10–50 | Desk review | .env + table. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,14 +94,12 @@ See [[AI for Interactive Graphics/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Configurator advisor, museum RAG, texture picker, vision labeler.
-**2. Cuts.** Mock API + perfect client.
-**3. Report.** ethics, architecture, eval, costs.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New vendors. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60-second rehearsal of the feature.

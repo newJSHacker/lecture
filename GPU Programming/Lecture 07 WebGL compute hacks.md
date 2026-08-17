@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** histogram, reduce names  
-**Success check:** Mipmap as a reduction.
+**Kernel:** reduce: mip chain as average; histogram named; no getImageData 1080p loop  
+**Success check:** they can treat generateMipmap (or blit down) as a reduce and avoid readPixels every frame
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: histogram, reduce names | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 7 | Goal: a pyramid, not a readback | Invariant: WebGL FS has almost no atomics; a CPU histogram of the canvas is not GPGPU`
 
 ## Board at the end (they photograph this)
 
 ```
-mip as reduce
-Pyramid.
+scene tex
+  → mip 1
+  → mip 2
+  → …  1×1  ≈  mean luminance
+
+atomics:  WebGL2 FS ≈ none;  WebGPU compute has them
+readback: async pack name; stall if you wait
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Pyramid.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Reduce. Average luminance for auto-exposure is a mip chain.
+**Say:** Average luminance for auto-exposure is a mip chain. Teaching: generateMips or blit down. CPU loop over getImageData at 1080p is the plant. Atomics in a WebGL1 blog post do not port.
 
-**Ask:** Mipmap as a reduction? Wait seven seconds. Take two answers.
+**Ask:** Does generateMipmap reduce? Wait. Want: yes, as a teaching reduce.
 
-**Board:** parked strip. Then mip as reduce.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: histogram, reduce names. Kernel: histogram, reduce names. We freeze conventions and we do not invent timings.
+**Say:** Show mip debug. Auto-exposure-ish: log average, feed exposure — still a named pass. Do not readPixels every frame. WebGPU atomics are a reason to move after the midterm.
 
-**Ask:** What would a wrong version of this look like? Want: CPU loop over getImageData 1080p.
+**Ask:** Why almost no atomics in WebGL FS?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Reduce. Average luminance for auto-exposure is a mip chain.
+**Say:** Pyramid on the board. 1×1 is the reduce.
 
-**Say:** Atomics. WebGL2 has almost none for FS.
+**Board:** mip as reduce. Circle no getImageData.
 
-**Say:** Readback. Async pixel pack names.
+**Say:** Histogram is a name; mip is the lab.
 
-**Ask:** Mipmap as a reduction? Wait seven seconds. Take two answers.
+**Ask:** What stalls a frame?
 
-**They do:** On paper: show mip debug.
+**They do:** On paper: the pyramid sizes (power of two sketch).
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Auto-exposure-ish: downsample a scene tex; log average; feed exposure.. Zoom 140%. Read errors out loud.
+**Say:** Downsample a scene tex; log average; feed exposure. Plant getImageData 1080p. Plant readPixels every frame. Mip debug view.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** show mip debug.
+**Say:** Show mip debug. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: show mip debug.; don't readPixels every frame.. Homework: Written: reduce.; demo or Three.js + explanation.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: mip debug + don't readPixels every frame. Homework: reduce paragraph; demo. Quiz: mip reduce, why atomics, stall. Midterm next week.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: histogram, reduce names | Plant the first common mistake. |
-| 10–30 | Auto-exposure-ish: downsample a scene tex; log average; feed exposure. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Mip pyramid | Plant getImageData loop. |
+| 10–30 | 1×1 as mean | Plant readPixels every frame. |
+| 30–45 | Exposure feed | Named, not a fps claim. |
+| 45–60 | They debug mips | Circulate. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. mip reduce (4)
-2. why atomics (3)
-3. stall (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[GPU Programming/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Reduce.** Average luminance for auto-exposure is a mip chain. Teaching: generateMips or blit down.
-
-**2. Atomics.** WebGL2 has almost none for FS. WebGPU compute has atomics. That's a reason to move.
-
-**3. Readback.** Async pixel pack names. Stall if you wait.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[GPU Programming/exercises/Week 07]].
 
 ## If we run long, cut
 
-Readback
+A real histogram SSBO. Keep mip reduce + no stall.
 
 ## If we run short, add
 
-don't readPixels every frame.
+Async pixel pack as a name.

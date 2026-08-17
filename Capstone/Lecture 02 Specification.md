@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Capstone Project  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** must / should / skip  
-**Success check:** Must/should/could/won't.
+**Kernel:** MoSCoW is the grading contract; lab laptop first; explicit skips  
+**Success check:** they can show Must/Should/Could/Won't plus five risks on one page
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Capstone/code/02-readme.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: must / should / skip | Invariant: the problem is users, not a tech list`
+- Parked strip: `Lecture 2 | Goal: a spec a TA can mark | Invariant: the problem is users, not a tech list`
 
 ## Board at the end (they photograph this)
 
 ```
-MoSCoW table
-MoSCoW.
+Must / Should / Could / Won't
+Devices: lab laptop first     headset extra     phone extra
+Skip: no multiplayer, no accounts, … (named)
+
+risk table  5 rows
+spec as a novel  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ MoSCoW.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Spec. This is the grading contract.
+**Say:** TAs cannot mark a dream. The spec is the contract. Novel-length specs fail. No risks fail. Demo 01-moscow.html.
 
-**Ask:** Must/should/could/won't? Wait seven seconds. Take two answers.
+**Ask:** If Must cannot run on the lab laptop, whose problem is that? Wait. Want: the spec's — cut or change Must.
 
-**Board:** parked strip. Then MoSCoW table.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: must / should / skip. Kernel: must / should / skip. We freeze conventions and we do not invent timings.
+**Say:** Wireframe HUD extra. Asset list extra. Headset extra, not Must, unless staff said so.
 
-**Ask:** What would a wrong version of this look like? Want: spec as a novel.
+**Ask:** What belongs in Won't?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Spec. This is the grading contract.
+**Say:** MoSCoW. Must is the slice.
 
-**Say:** Devices. Lab laptop first.
+**Board:** four lists. Devices. Skips.
 
-**Say:** Skip list. IGWT habit: explicit skips (no multiplayer, no backend user accounts, …).
+**Say:** Five risks. Likelihood × impact teaching-level.
 
-**Ask:** Must/should/could/won't? Wait seven seconds. Take two answers.
+**Ask:** Why list skips?
 
-**They do:** On paper: wireframe HUD.
+**They do:** Must vs Won't for their team, five lines each max.
 
-**Do not:** start in an engine before the problem statement.
+**Do not:** Start in an engine before the problem statement.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: MoSCoW 1 page + risk table (5 rows).. Zoom 140%. Read errors out loud.
+**Say:** MoSCoW one page + 5-row risk table. Plant novel spec. Plant no risks. Plant headset as Must without staff.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** wireframe HUD.
+**Say:** Must list ≤ 7 bullets. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: wireframe HUD.; asset list.. Homework: Spec v1 in repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: HUD wireframe; asset list. Homework: spec page. Quiz: Must, skip, lab-laptop-first.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: must / should / skip | Plant the first common mistake. |
-| 10–30 | MoSCoW 1 page + risk table (5 rows). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | MoSCoW | Plant novel. |
+| 15–40 | Devices + skips | Plant headset Must. |
+| 40–55 | Five risks | Plant no risks. |
+| 55–60 | They freeze Must | Circulate. |
 
 Point them at `Capstone/code/02-readme.html` as the after-class check, not as the lecture.
 
@@ -136,9 +140,7 @@ Point them at `Capstone/code/02-readme.html` as the after-class check, not as th
 
 ## Quiz next meeting (they hear this now)
 
-1. must vs could (3)
-2. device (3)
-3. skip (4)
+None this meeting.
 
 
 ## Extra exercises
@@ -149,11 +151,7 @@ See [[Capstone/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Spec.** This is the grading contract. TAs cannot mark a dream.
-
-**2. Devices.** Lab laptop first. Headset extra. Phone extra.
-
-**3. Skip list.** IGWT habit: explicit skips (no multiplayer, no backend user accounts, …).
+_none_
 
 ---
 
@@ -164,8 +162,8 @@ See [[Capstone/exercises/Week 02]].
 
 ## If we run long, cut
 
-Skip list
+Skip-list philosophy. Keep MoSCoW + risks.
 
 ## If we run short, add
 
-asset list.
+Asset list extra.

@@ -46,11 +46,11 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 **Ask:** Is AB the same as BA? Wait. Want: no.
 
-**Board:** parked strip. Then rows × columns.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *multiply, identity*.
+**They do:** write today’s question in their notes: *multiply 2×2 by hand and in code; show AB ≠ BA on a square*.
 
 **Do not:** Row-vector formulas mixed.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 **They do:** Multiply two 2×2 matrices by hand.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/06-matmul.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. I times A (2)
-2. AB vs BA (4)
-3. 2×2 rotate 90 of (1,0) (4)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. What a matrix is.** A linear function. Columns are where basis vectors go.
-
-**2. Multiply.** Composition. AB ≠ BA. Same story as CG I T R vs R T.
-
-**3. Code.** Write mul2 later as nested loops; this week by hand and a tiny function.
+_none_
 
 ---
 

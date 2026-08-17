@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** bubble, preventDefault  
-**Success check:** addEventListener.
+**Kernel:** addEventListener('click'); preventDefault on a submit; bubbling named  
+**Success check:** they can stop a form from navigating and handle the click on a parent with bubbling
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/07-toggle.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: bubble, preventDefault | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 10 | Goal: clicks without inline onclick | Invariant: the browser fires events; you listen; preventDefault stops the default verb`
 
 ## Board at the end (they photograph this)
 
 ```
-click on button inside form
-Bubble arrows.
-Canvas clicks.
+el.addEventListener('click', handler)
+
+form submit  →  preventDefault()   or the page reloads
+
+bubble:  target → … → body
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +41,11 @@ Canvas clicks.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** The event object. type, target, currentTarget.
+**Say:** WebGL picking is an event. A HUD button is an event. onclick= in HTML is forbidden in this course.
 
-**Ask:** addEventListener? Wait seven seconds. Take two answers.
+**Ask:** Why did the page flash and clear when I clicked Submit? Wait. Want: default form GET.
 
-**Board:** parked strip. Then click on button inside form.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +55,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: bubble, preventDefault. Kernel: bubble, preventDefault. We freeze conventions and we do not invent timings.
+**Say:** addEventListener. preventDefault. stopPropagation named, not required. Touch = pointer later in Interactive Web.
 
-**Ask:** What would a wrong version of this look like? Want: onclick attributes.
+**Ask:** Where do you put the listener — inline attribute or script?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +69,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** The event object. type, target, currentTarget.
+**Say:** Target vs currentTarget teaching-level.
 
-**Say:** Delegation. One listener on ul for many li.
+**Board:** bubble arrows. preventDefault on submit.
 
-**Say:** Default actions. Forms navigate; links navigate.
+**Say:** One listener on ul for many li — delegation idea.
 
-**Ask:** addEventListener? Wait seven seconds. Take two answers.
+**Ask:** What does preventDefault do on a link?
 
-**They do:** On paper: Keyboard move a box.
+**They do:** On paper: handler that logs the clicked li text.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Canvas or div: click to place a dot (DOM or Canvas 2D).. Zoom 140%. Read errors out loud.
+**Say:** Form that does not navigate. Then ul delegation. Demo 07-toggle.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +93,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Keyboard move a box.
+**Say:** Button increments a counter in the DOM. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +103,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Keyboard move a box.; Delegation on a list.. Homework: Written: bubble in 6 sentences.; Code: draw dots on click.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: preventDefault form + counter. Homework: bubbling paragraph. Quiz: addEventListener, preventDefault, no onclick=.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +115,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: bubble, preventDefault | Plant the first common mistake. |
-| 10–30 | Canvas or div: click to place a dot (DOM or Canvas 2D). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | click listener | Plant onclick=. |
+| 15–40 | submit + preventDefault | Page reload plant. |
+| 40–55 | Delegation on ul | They see one listener. |
+| 55–60 | They build counter | Circulate. |
 
 Point them at `Web Technologies/code/07-toggle.html` as the after-class check, not as the lecture.
 
@@ -138,9 +140,7 @@ Point them at `Web Technologies/code/07-toggle.html` as the after-class check, n
 
 ## Quiz next meeting (they hear this now)
 
-1. preventDefault why (3)
-2. target vs currentTarget (4)
-3. key vs code (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +159,7 @@ See [[Web Technologies/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. The event object.** type, target, currentTarget. Keyboard `event.key`.
-
-**2. Delegation.** One listener on ul for many li. Graphics: one pointer listener on canvas.
-
-**3. Default actions.** Forms navigate; links navigate. preventDefault when the page should stay.
+_none_
 
 ---
 
@@ -174,8 +170,8 @@ See [[Web Technologies/exercises/Week 10]].
 
 ## If we run long, cut
 
-Default actions
+Custom events. Keep click + preventDefault.
 
 ## If we run short, add
 
-Delegation on a list.
+keydown Enter on a button.

@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** 12+5 practice  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** timed 12+5 rehearsal; cut wander; question bank; backup video  
+**Success check:** they can stop at 12 in rehearsal and answer two staff questions
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,16 +19,17 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-clock; questions list
-Clock.
+12 + 5 practice
+open on users, not the stack
+backup video
+question bank: users, verb, cut, oracle, measure
 ```
 
 ## Slides today (cap: 2)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Timer | rehearsal clock |
 
 ---
 
@@ -36,9 +37,9 @@ Clock.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: rehearsal). Opening on a tech list fails. Cut two slides or two seconds of wander. Backup video if the demo dies.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** What is the first sentence — users or Three.js?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +47,15 @@ Clock.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Timed rehearsal; cut two slides or two seconds of wander.
+**Say:** Timed rehearsal. Question bank. Backup video. No new engine.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Every team rehearses.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Question bank in the repo. Next: bugs only. Freeze is coming.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +65,9 @@ Clock.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: 12+5 practice | Plant the first common mistake. |
-| 10–30 | Timed rehearsal; cut two slides or two seconds of wander. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Clock + first sentence | Photograph. |
+| 10–50 | Timed rehearsals | Tech-list open plant. |
+| 50–60 | Backup video check | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +96,12 @@ See [[Capstone/exercises/Week 12]].
 
 ## Notes from the outline
 
-**1. Defense.** Same as thesis habits. Show the verb in the first 2 minutes.
-**2. Questions.** Where is PVM? Where is state? What did you measure? What is an oracle?
-**3. Backup.** Video, laptop, cable.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New slides of architecture trivia. Keep users + path.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Question bank of five.

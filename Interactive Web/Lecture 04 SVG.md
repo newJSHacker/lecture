@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** DOM graphics, viewBox  
-**Success check:** svg + viewBox.
+**Kernel:** SVG as DOM; viewBox as the coordinate system; pick SVG vs Canvas on purpose  
+**Success check:** they build a small SVG (chart or icon) with a viewBox and can say when Canvas is the better kernel
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/04-svg.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: DOM graphics, viewBox | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 4 | Goal: a graphic you can inspect in Elements | Invariant: SVG retains nodes; Canvas retains pixels; 10k SVG particles is the wrong tool`
 
 ## Board at the end (they photograph this)
 
 ```
-svg viewBox 0 0 100 100
-viewBox.
-chart.
+<svg viewBox="0 0 100 100" width="200">
+  <circle cx="50" cy="50" r="40"/>
+</svg>
+
+viewBox  =  user space     CSS width = paint size
+Canvas   =  bitmap         SVG = DOM (hover, a11y)
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ chart.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Retained vs immediate. SVG is DOM.
+**Say:** Last week the hit was math on a bitmap. Today the hit can be a DOM node. Icons, charts, overlays: SVG. Particles and per-pixel: Canvas. We do not use SVG as a fake WebGL.
 
-**Ask:** svg + viewBox? Wait seven seconds. Take two answers.
+**Ask:** What does viewBox='0 0 100 100' mean if the SVG is 400px wide? Wait. Want: user unit 1 is 4 CSS px — coordinates stay 0..100.
 
-**Board:** parked strip. Then svg viewBox 0 0 100 100.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: DOM graphics, viewBox. Kernel: DOM graphics, viewBox. We freeze conventions and we do not invent timings.
+**Say:** Retained vs immediate. viewBox decouples coordinates from CSS size. Interop: HUD icons later. 3D stays Canvas/WebGL next semester — name only.
 
-**Ask:** What would a wrong version of this look like? Want: 10k SVG particles.
+**Ask:** Why is a 10k-particle sim a bad SVG?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Retained vs immediate. SVG is DOM.
+**Say:** Elements: circle, rect, polygon, text. You can addEventListener on a node.
 
-**Say:** viewBox. Coordinate system independent of CSS size.
+**Board:** viewBox 0 0 100 100. Stretch without viewBox = mess.
 
-**Say:** Interop. UI overlays; icons.
+**Say:** Bar chart from an array: createElementNS, set attributes. Namespace is not optional.
 
-**Ask:** svg + viewBox? Wait seven seconds. Take two answers.
+**Ask:** createElement('circle') vs createElementNS — why NS?
 
-**They do:** On paper: Interactive hover fill.
+**They do:** On paper: hover fill — CSS :hover or a pointer listener on a rect.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: An SVG bar chart from an array.. Zoom 140%. Read errors out loud.
+**Say:** An SVG bar chart from an array. Demo Interactive Web/code/04-svg.html. Plant missing viewBox stretch. Plant createElement without NS (silent fail).
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Interactive hover fill.
+**Say:** Interactive hover fill. Eight minutes. Export SVG extra if short.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Interactive hover fill.; export SVG extra.. Homework: Written: SVG vs Canvas.; Code: chart.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: hover fill; export extra. Homework: SVG vs Canvas paragraph; chart. Quiz: viewBox, when canvas, DOM node cost.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: DOM graphics, viewBox | Plant the first common mistake. |
-| 10–30 | An SVG bar chart from an array. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | svg + viewBox circle | Plant no viewBox, CSS stretch. |
+| 10–30 | bars from array | Plant HTML namespace. |
+| 30–45 | hover fill | DOM, not a pixel test. |
+| 45–60 | They add one bar | Circulate. No 10k nodes. |
 
 Point them at `Interactive Web/code/04-svg.html` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `Interactive Web/code/04-svg.html` as the after-class check, not a
 
 ## Quiz next meeting (they hear this now)
 
-1. viewBox (4)
-2. when canvas (3)
-3. DOM nodes cost (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +160,7 @@ See [[Interactive Web/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Retained vs immediate.** SVG is DOM. Canvas is a bitmap. Charts vs particles.
-
-**2. viewBox.** Coordinate system independent of CSS size.
-
-**3. Interop.** UI overlays; icons. 3D stays Canvas/WebGL.
+_none_
 
 ---
 
@@ -174,8 +171,8 @@ See [[Interactive Web/exercises/Week 04]].
 
 ## If we run long, cut
 
-Interop
+Interop lecture. Keep viewBox + one chart.
 
 ## If we run short, add
 
-export SVG extra.
+Export SVG extra (serialize or copy markup).

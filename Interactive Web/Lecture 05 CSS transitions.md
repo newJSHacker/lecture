@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** hover, states  
-**Success check:** transition property.
+**Kernel:** CSS transition on transform/opacity; hover/focus/class states; prefers-reduced-motion  
+**Success check:** they lift a button on hover with transform and can disable the motion when reduced-motion is on
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/05-css.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: hover, states | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 5 | Goal: a state change that eases, not a second animation engine | Invariant: transition specific properties; transform/opacity composite; transition:all is a smell`
 
 ## Board at the end (they photograph this)
 
 ```
-transition: transform .2s
-Lift.
-media.
+.btn { transition: transform 0.2s ease; }
+.btn:hover, .btn:focus { transform: translateY(-4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none; }
+}
+
+width / top  →  layout    transform → composite
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +44,11 @@ media.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** States. hover, focus, class on.
+**Say:** Not every motion is rAF. A HUD button that lifts is CSS. Animating width is layout tax. We name composite vs layout; we do not invent fps. Reduced motion is not optional politeness.
 
-**Ask:** transition property? Wait seven seconds. Take two answers.
+**Ask:** Is transition: all 1s a good default? Wait. Want: no — unknown properties, long layout.
 
-**Board:** parked strip. Then transition: transform .2s.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +58,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: hover, states. Kernel: hover, states. We freeze conventions and we do not invent timings.
+**Say:** States: hover, focus, class on. Properties: transform and opacity. Layout-triggering props jank. Inclusive: prefers-reduced-motion. Keyboard focus must lift too, not only hover.
 
-**Ask:** What would a wrong version of this look like? Want: transition: all 1s.
+**Ask:** Why not transition width to ‘grow’ a card?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +72,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** States. hover, focus, class on.
+**Say:** From / to are CSS states. The browser interpolates. No loop yet — that is keyframes next week.
 
-**Say:** Properties. transform and opacity composite.
+**Board:** transform lift. reduced-motion query. Circle :focus.
 
-**Say:** Motion. Respect reduced motion.
+**Say:** Class toggle from JS is the same transition. Do not start GSAP this week.
 
-**Ask:** transition property? Wait seven seconds. Take two answers.
+**Ask:** Does :hover fire on a touch phone? Want: unreliable — class or :focus-visible matters.
 
-**They do:** On paper: reduced-motion media query.
+**They do:** On paper: reduced-motion media query that kills transitions.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A button that lifts on hover; a class toggle.. Zoom 140%. Read errors out loud.
+**Say:** A button that lifts on hover; a class toggle. Demo Interactive Web/code/05-css.html shows keyframes + reduced motion — live-code the hover lift beside it. Plant transition:all. Plant width animation.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +96,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** reduced-motion media query.
+**Say:** reduced-motion query. Don't transition width — use transform. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +106,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: reduced-motion media query.; Don't transition width.. Homework: Written: why transform.; Code: card.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: reduced-motion + no width transition. Homework: why transform; card. Quiz: which props, reduced motion, transition all smell.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +118,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: hover, states | Plant the first common mistake. |
-| 10–30 | A button that lifts on hover; a class toggle. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | hover lift transform | Plant top: instead of transform. |
+| 10–30 | class toggle + :focus | Plant hover-only, no keyboard. |
+| 30–45 | reduced-motion | They toggle the OS/emulation. |
+| 45–60 | They kill transition:all | Circulate. No fps. |
 
 Point them at `Interactive Web/code/05-css.html` as the after-class check, not as the lecture.
 
@@ -138,9 +143,7 @@ Point them at `Interactive Web/code/05-css.html` as the after-class check, not a
 
 ## Quiz next meeting (they hear this now)
 
-1. which props (4)
-2. reduced motion (3)
-3. transition all smell (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +162,7 @@ See [[Interactive Web/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. States.** hover, focus, class on.
-
-**2. Properties.** transform and opacity composite. Layout-triggering props jank.
-
-**3. Motion.** Respect reduced motion. Inclusive teaching.
+_none_
 
 ---
 
@@ -174,8 +173,8 @@ See [[Interactive Web/exercises/Week 05]].
 
 ## If we run long, cut
 
-Motion
+Long motion sermon. Keep transform + reduced-motion.
 
 ## If we run short, add
 
-Don't transition width.
+Don't transition width — a side-by-side plant.

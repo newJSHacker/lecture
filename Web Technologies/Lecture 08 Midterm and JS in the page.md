@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Web Technologies  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; script and DOM intro  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** script in the page; document.querySelector; textContent  
+**Success check:** after the exam they can change a heading from a script without innerHTML of untrusted strings
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,22 +14,24 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 - Printed midterm + spare paper. No laptop for the exam.
 - Topic list was announced at the end of Lecture 7.
 - After collection: demo `Web Technologies/code/08-todo.html` ready (local, no CDN).
-- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: the browser requests, parses, then paints`
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: JS talks to the tree; innerHTML of user text is a hole`
 
 ## Midterm (about 50–60 min)
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm on HTML/CSS/HTTP., Load a script., document.querySelector., textContent vs innerHTML policy.
+**Topics:** request cycle; skeleton; labels; box model; flex vs grid; viewport.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-script at end of body
-Midterm topics.
-DOM node.
+<script src="main.js"></script>   <!-- end of body -->
+
+document.querySelector('h1').textContent = 'IGWT';
+
+textContent  not  innerHTML  for user strings
 ```
 
 ## Slides today (cap: 2)
@@ -42,25 +44,21 @@ DOM node.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then JS in the page. No laptop for the exam. After: the script is how a HUD will talk to Three.js later.
 
-**Ask:** Load a script.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. JS in the page.** querySelector, click listener. innerHTML with user strings is a security lecture — use textContent by default.
 
-**3. Order.** Script after the DOM nodes it needs, or DOMContentLoaded.
 
 ### Show / attempt if time
 
-**Say:** A button that toggles a class on the body (dark mode fake).
+**Say:** A button that toggles a class on main. Plant script in head without defer — empty querySelector. Move to end of body.
 
----
-
-**They do:** Three planted CSS bugs to fix.
+**They do:** Toggle a class. textContent only.
 
 ---
 
@@ -68,10 +66,9 @@ DOM node.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; script and DOM intro | Plant the first common mistake. |
-| 10–30 | A button that toggles a class on the body (dark mode fake). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Script at end of body | Plant head without defer. |
+| 15–40 | querySelector + textContent | Plant innerHTML. |
+| 40–60 | Toggle class | They type. Circulate. |
 
 ---
 
@@ -98,8 +95,8 @@ See [[Web Technologies/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+Modules today. Keep querySelector + textContent.
 
 ## If we run short, add
 
-One more worked leftover example.
+defer as a name.

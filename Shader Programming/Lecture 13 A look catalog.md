@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** portfolio of 4 looks  
-**Success check:** Four fullscreen looks: pattern, noise, SDF, march-or-post.
+**Kernel:** four looks: pattern, noise, SDF, march-or-post — each with pause + one slider  
+**Success check:** a contact sheet of four controlled stills, not four identical fBm screenshots
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: portfolio of 4 looks | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 13 | Goal: four looks you can defend | Invariant: a gallery is uniforms you can pause; a random Shadertoy account is not a portfolio`
 
 ## Board at the end (they photograph this)
 
 ```
-four thumbnails
-Contact sheet.
+1 pattern     fract / polar
+2 noise       value / fBm
+3 SDF         2D CSG
+4 march|post  sphere or FBO filter
+
+each:  pause time   +  one slider
+cite copies
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Contact sheet.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Craft. A shader portfolio is a set of **controlled** images, not a random Shadertoy account.
+**Say:** Craft, not a dump of tabs. RTR will put these ideas on meshes with PBR. Today: pause, uniform, debug view. Four identical fBm shots fail.
 
-**Ask:** Four fullscreen looks: pattern, noise, SDF, march-or-post? Wait seven seconds. Take two answers.
+**Ask:** If time is always running, how do you debug a look? Wait. Want: pause uniform.
 
-**Board:** parked strip. Then four thumbnails.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: portfolio of 4 looks. Kernel: portfolio of 4 looks. We freeze conventions and we do not invent timings.
+**Say:** Gallery page linking four local HTML/GLSL files. Reuse the shadertoy harness. No CDN.
 
-**Ask:** What would a wrong version of this look like? Want: four identical fBm screenshots.
+**Ask:** What is baked vs a uniform?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Craft. A shader portfolio is a set of **controlled** images, not a random Shadertoy account.
+**Say:** Contact sheet on the board. Four boxes.
 
-**Say:** Parameters. Uniforms: time pause, one slider that matters.
+**Board:** the four slots. Circle pause.
 
-**Say:** Next. RTR will put these ideas on meshes with PBR.
+**Say:** One original twist per look — a slider, not a new 400-line paste.
 
-**Ask:** Four fullscreen looks: pattern, noise, SDF, march-or-post? Wait seven seconds. Take two answers.
+**Ask:** Why pause?
 
-**They do:** On paper: pause time.
+**They do:** On paper: which four files, and one uniform each.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Gallery page linking four HTML/GLSL files (can reuse WebGL shadertoy harness).. Zoom 140%. Read errors out loud.
+**Say:** Gallery page, four links, local serve. Plant four identical fBm. Pause time on one look live.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** pause time.
+**Say:** Pause time on their first look. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: pause time.; one original twist per look.. Homework: Written: one paragraph per look.; repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pause + twist. Homework: one paragraph per look; repo. Quiz: uniform vs baked, why pause, citation. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: portfolio of 4 looks | Plant the first common mistake. |
-| 10–30 | Gallery page linking four HTML/GLSL files (can reuse WebGL shadertoy harness). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Four slots | Plant four identical fBm. |
+| 10–30 | Harness links | Plant CDN. |
+| 30–45 | Pause + slider | They feel debug. |
+| 45–60 | They cite | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. uniform vs baked (3)
-2. why pause (3)
-3. citation (4)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +153,7 @@ See [[Shader Programming/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Craft.** A shader portfolio is a set of **controlled** images, not a random Shadertoy account.
-
-**2. Parameters.** Uniforms: time pause, one slider that matters.
-
-**3. Next.** RTR will put these ideas on meshes with PBR.
+_none_
 
 ---
 
@@ -164,8 +163,8 @@ See [[Shader Programming/exercises/Week 13]].
 
 ## If we run long, cut
 
-Next
+A fifth look. Keep four + pause.
 
 ## If we run short, add
 
-one original twist per look.
+Raw distance or uv debug key as a preview of studio.

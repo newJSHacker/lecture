@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** tris, batches, maps  
-**Success check:** Count triangles.
+**Kernel:** budget sheet: tris, batches/materials, map size; measure; no invented fps  
+**Success check:** they fill Blender/code/03-budget.html with measured counts for their asset and can say why 40 materials are 40 draws
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: tris, batches, maps | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 12 | Goal: numbers you measured | Invariant: a frame is a budget; Nanite speeches on a crate are off-topic; never invent 60 fps`
 
 ## Board at the end (they photograph this)
 
 ```
-table: platform → tri cap
-Budget table.
+tris        materials/batches        maps (1024²)        device
+fill with measured numbers
+
+each material can be a draw
+atlas when you can     don't 40 materials for 40 bolts
+
+LOD / instancing  —  Three.js / WebGL courses
+no invented fps
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Budget table.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Budgets. Mobile vs desktop.
+**Say:** A student product viewer: tens of thousands of tris is plenty. Invented '60 fps' without a device is a fail. Nanite speech on a crate is a fail. Sheet: 03-budget.html.
 
-**Ask:** Count triangles? Wait seven seconds. Take two answers.
+**Ask:** If you have 40 unique materials on 40 bolts, what happens at draw-call time? Wait. Want: up to 40 draws.
 
-**Board:** parked strip. Then table: platform → tri cap.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: tris, batches, maps. Kernel: tris, batches, maps. We freeze conventions and we do not invent timings.
+**Say:** Mobile vs desktop as a column, not a fps. Decimate extra and compare measured tris. renderer.info is next week in Three — this week the written sheet.
 
-**Ask:** What would a wrong version of this look like? Want: Invented '60 fps' without a device.
+**Ask:** Why atlas?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Budgets. Mobile vs desktop.
+**Say:** Budget columns. Device named (their laptop).
 
-**Say:** Batches. Each material can be a draw.
+**Board:** the table from 03-budget.html.
 
-**Say:** Measure. Three.js `renderer.info` next week.
+**Say:** Plant invented 60 fps. Plant Nanite.
 
-**Ask:** Count triangles? Wait seven seconds. Take two answers.
+**Ask:** What do you write if you have not measured?
 
-**They do:** On paper: Decimate extra and compare.
+**They do:** Fill the table headers; leave numbers blank until they count.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fill a budget sheet for your crate/mug: tris, maps, materials.. Zoom 140%. Read errors out loud.
+**Say:** Count tris on the crate; count materials; map sizes. Demo 03-budget.html. Plant 60 fps. Plant Nanite.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Decimate extra and compare.
+**Say:** Decimate extra and compare measured tris. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Decimate extra and compare.; One atlas vs three materials.. Homework: Written: budget table with **measured** counts.; If you cut, what you cut.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: decimate compare; one atlas vs three materials. Homework: budget table measured; what you cut. Quiz: draw call, why atlas, LOD name. Three.js import next.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: tris, batches, maps | Plant the first common mistake. |
-| 10–30 | Fill a budget sheet for your crate/mug: tris, maps, materials. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Statistics tris | Write the number. |
+| 10–30 | Materials = batches | Plant 40 bolt mats. |
+| 30–45 | map 1024 vs 4k | Budget, not flex. |
+| 45–60 | They fill 03-budget.html | No invented fps. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. draw call (3)
-2. why atlas (4)
-3. LOD (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[Blender/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Budgets.** Mobile vs desktop. A student product viewer: tens of thousands of tris is plenty. A city: LOD and instancing (Three.js / WebGL courses).
-
-**2. Batches.** Each material can be a draw. Atlas when you can. Don't make 40 materials for 40 bolts.
-
-**3. Measure.** Three.js `renderer.info` next week. This week: a written budget for *their* asset.
+_none_
 
 ---
 
@@ -173,7 +173,7 @@ See [[Blender/exercises/Week 12]].
 
 ## If we run long, cut
 
-Measure
+City-scale LOD design. Keep their asset's sheet.
 
 ## If we run short, add
 

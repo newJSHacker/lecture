@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** then catch finally  
-**Success check:** Create a Promise.
+**Kernel:** Promise states; then / catch / finally; Promise.all of two loads  
+**Success check:** they construct a timeout Promise and attach catch; they can name the three states
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/03-promise.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: then catch finally | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 4 | Goal: one async value with an error path | Invariant: a Promise is pending, fulfilled, or rejected — once; then without catch loses the failure`
 
 ## Board at the end (they photograph this)
 
 ```
-pending fulfilled rejected
-State machine.
+pending  →  fulfilled(value)
+         →  rejected(error)
+
+p.then(onOk).catch(onErr).finally(cleanup)
+
+Promise.all([a, b])     allSettled  (name)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ State machine.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** States. Pending, fulfilled, rejected.
+**Say:** Fetch returns a Promise. A texture load is a Promise. If they only then(), the rejection is an unhandled scream later. Today: the state machine.
 
-**Ask:** Create a Promise? Wait seven seconds. Take two answers.
+**Ask:** Does then() run if the Promise already fulfilled? Wait. Want: yes — it still schedules.
 
-**Board:** parked strip. Then pending fulfilled rejected.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: then catch finally. Kernel: then catch finally. We freeze conventions and we do not invent timings.
+**Say:** new Promise((resolve, reject) => …). Do not wrap already-sync math in a Promise. all waits for every success; one reject fails the all. allSettled named for later.
 
-**Ask:** What would a wrong version of this look like? Want: then without catch.
+**Ask:** What is the return type of fetch('data.json') before you call json()?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** States. Pending, fulfilled, rejected.
+**Say:** Three states. You cannot un-fulfill. finally runs either way — good for a spinner name.
 
-**Say:** Composition. then chains.
+**Board:** then chain. Circle catch. Forgotten catch = unhandled rejection.
 
-**Say:** Errors. Forgotten catch.
+**Say:** Fake load: setTimeout inside new Promise. Then Promise.all of two fakes.
 
-**Ask:** Create a Promise? Wait seven seconds. Take two answers.
+**Ask:** all vs allSettled in one sentence?
 
-**They do:** On paper: Promise.all of two fake loads.
+**They do:** On paper: Promise.all of two fake loads; what prints if the second rejects.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fake load with setTimeout wrapped in a Promise; then fetch data.json.. Zoom 140%. Read errors out loud.
+**Say:** Fake load with setTimeout wrapped in a Promise; then fetch data.json under a local server. Demo Modern JavaScript/code/03-promise.html. Plant then without catch on a reject.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Promise.all of two fake loads.
+**Say:** Promise.all of two timeout Promises. Eight minutes. Then add one catch that writes a visible error.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Promise.all of two fake loads.; Error path UI.. Homework: Written: why promises vs callbacks.; Code: timeout promise.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: Promise.all + error-path UI. Homework: why promises vs callbacks; timeout promise. Quiz: three states, fetch return type, unhandled rejection.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: then catch finally | Plant the first common mistake. |
-| 10–30 | Fake load with setTimeout wrapped in a Promise; then fetch data.json. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | pending → fulfill | Plant resolve twice — second is ignored. |
+| 10–30 | timeout Promise + then/catch | Plant missing catch. |
+| 30–45 | fetch data.json | Plant file://. Serve. 04-async.html is next week’s await. |
+| 45–60 | They all() two fakes | Circulate. |
 
 Point them at `Modern JavaScript/code/03-promise.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Modern JavaScript/code/03-promise.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. three states (3)
-2. fetch return type (3)
-3. unhandled rejection (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Modern JavaScript/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. States.** Pending, fulfilled, rejected.
-
-**2. Composition.** then chains. all vs allSettled names.
-
-**3. Errors.** Forgotten catch. async week next.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Modern JavaScript/exercises/Week 04]].
 
 ## If we run long, cut
 
-Errors
+allSettled details. Keep states + catch.
 
 ## If we run short, add
 
-Error path UI.
+Error path UI: a <pre> that shows the rejection message.

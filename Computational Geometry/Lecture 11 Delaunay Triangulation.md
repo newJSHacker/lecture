@@ -1,179 +1,132 @@
 # Lecture 11 — Delaunay triangulation
 
-**Time:** 75 min lecture + 60 min live coding  
-**Algorithm this week:** incremental insertion + legalize / edge flip  
-**Board first:** two adjacent triangles, one illegal edge, the flip
+**Week 11 of 15** · Computational Geometry  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** Delaunay: empty circumcircle; illegal edge ⇔ incircle; flip; insert+legalize (n≤80); not minimum-weight  
+**Success check:** a known 6-point example matches the reference; they can flip an illegal diagonal and not flip a hull edge
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/11-ear-clip.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — two adjacent triangles, one illegal edge, the flip.
-- Parked strip: `Lecture 11 | Delaunay triangulation | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Quiz from Lecture 10 (10 min, paper or LMS).
+- Demo: `Computational Geometry/code/11-ear-clip.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 11 | Goal: the mesh they will actually use in terrain and interpolation | Invariant: predicates before constructions; degeneracy is the course`
 
 ## Board at the end (they photograph this)
 
 ```
-two adjacent triangles, one illegal edge, the flip
-Dual: VD in dashed lines, DT in solid, one circle.
-Illegal edge and the flip, with both circumcircles.
-Insert p, cavity, retriangulate to p.
-Skinny ear-clip triangle vs a flipped Delaunay pair.
+DT ⇔ every triangle circumcircle empty of sites
+dual: DT edge ↔ VD edge     DT triangle ↔ VD vertex
+
+illegal: opposite vertex in circumcircle
+         (angle sum >180° opposite the shared edge)
+flip ad → bc     then legalize recursively
+hull edges: never flip
+
+incircle: force CCW or the sign flips
+Delaunay maximizes min angle     shorter ≠ Delaunay
+CDT: keep given edges; ear-clip can sliver
 ```
 
 ## Slides today (cap: 6)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–10 | Quiz Week 10 |
-| 10–25 | Dual of Voronoi; empty circumcircle |
-| 25–50 | Legal / illegal edges and flips |
-| 50–65 | Incremental insertion (Bowyer–Watson teaching level) |
-| 65–75 | Constrained Delaunay; graphics uses |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Define the Delaunay triangulation via the empty circumcircle.
-2. State the duality with the Voronoi diagram.
-3. Test an edge for legality and flip it.
-4. Insert a point and restore the Delaunay property.
-5. Know what a constrained Delaunay triangulation is for.
+### Minutes 0–10 — Retrieve (quiz)
 
----
+Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-## 1. Definition and dual (15 min)
+**Say:** Week 10’s empty circle at a Voronoi vertex is this week’s empty circumcircle. Ear clipping can produce slivers; show the same polygon, ear vs CDT. Do not claim minimum-weight.
 
-A triangulation T of a point set S (plus the hull edges) is **Delaunay** if every triangle’s circumcircle contains **no site of S in its interior**.
+**Ask:** Does Delaunay always minimize total edge length? Wait. Want: no.
 
-**Duality.**  
-Connect two sites by a Delaunay edge iff their Voronoi cells share an edge.  
-A Delaunay triangle corresponds to a Voronoi vertex (the circumcenter).  
-Unbounded Voronoi cells correspond to hull sites; hull edges are Delaunay.
+**Board:** parked strip. Then two adjacent triangles, one illegal edge, the flip.
 
-So: Week 10’s empty circle at a Voronoi vertex **is** the empty circumcircle of a Delaunay triangle.
+**Slide:** none unless the table above has a photograph.
 
-**Why we care.** Among all triangulations of S, the Delaunay triangulation maximizes the minimum angle (no skinnier triangle can be improved by a flip). That is the right default mesh for terrain and interpolation. It is **not** always the minimum-weight (shortest total edge length) triangulation. Do not claim that.
+**They do:** write today’s question in their notes: *Delaunay triangulation*.
 
----
+**Do not:** Flipping a hull edge.
 
-## 2. Legal edges and flips (25 min)
+### Minutes 10–12 — Frame
 
-Consider two triangles abd and acd that share edge ad.  
-(Or abc and adc — pick one labeling and stick to it.)
+**Say:** Locate triangle: n≤80 brute point-in-triangle; walk toward p is nicer. Super-triangle: clip from the display. Bowyer–Watson cavity: delete triangles whose circle contains p, star-shaped hole, connect p — equivalent to split+legalize. Naive lab O(n²) is fine.
 
-Edge ad is **illegal** if the circumcircle of one triangle contains the opposite vertex of the other.
+**Ask:** When is a shared edge illegal?
 
-**Incircle test (predicate).**  
-For triangle abc (CCW) and point d:
+**Board:** today’s question in one line.
 
-```
-incircle(a, b, c, d) > 0  ⇒  d is inside the circumcircle of abc
-```
+**Slide:** none.
 
-The exact 4×4 determinant is in de Berg / Shewchuk. For the lab, a geometric construction is acceptable if you invert a well-tested circumcenter and compare distances — but **state that it is unstable**. Prefer the determinant if you can.
+**They do:** copy the parked invariant.
 
-```
-// teaching form: compare angles
-// ad is illegal iff angle at b + angle at c > 180°
-// (the two angles opposite the shared edge)
-```
+**Do not:** skip the attempt later to “cover more.”
 
-The angle test is the one to draw: if the two angles opposite ad sum to more than 180°, flip.
+### Minutes 12–35 — Build
 
-**Flip.**  
-Replace diagonal ad by the other diagonal bc. The two triangles become abc and bdc (relabel to match your figure).
+**Say:** A triangulation is Delaunay iff every interior edge is legal. Flips terminate (min angle increases).
 
-**Theorem (teaching).**  
-A triangulation is Delaunay iff every interior edge is legal.  
-Repeatedly flipping illegal edges terminates at the Delaunay triangulation (each flip increases the min angle; there are finitely many triangulations).
+**Board:** VD dashed, DT solid, one circle. Illegal edge + both circumcircles. Insert p, cavity. Skinny ear vs flipped pair.
 
-```
-legalize(edge ad):
-    if ad is a hull edge: return
-    let abc, adc be the two triangles
-    if incircle(a, b, c, d) > 0:   // d inside abc, or the symmetric test
-        flip ad → bc
-        legalize(ab); legalize(ac)  // new edges may be illegal
-        // (the exact pair is the edges of the new triangles that are not the flip)
-```
+**Say:** Graphics: terrain, remesh, cloth, lightmaps, cities.
 
----
+**Ask:** A Delaunay edge corresponds to what in VD?
 
-## 3. Incremental insertion (15 min)
+**They do:** Connect Week 10 proof to today. Honest paragraph: shorter ≠ Delaunay. CDT vs ear clip for a navmesh.
 
-**Bowyer–Watson, teaching version.**
+**Do not:** Skip the attempt.
 
-Maintain a Delaunay triangulation of the points inserted so far. Start with a huge bounding triangle that contains S.
+### Minutes 35–50 — Show
 
-```
-insert(p):
-    find the triangle t that contains p          // walk or walk+barycentric
-    if p is inside t:
-        split t into three triangles
-        legalize the three new interior edges
-    if p is on an edge e:
-        split the one or two triangles of e into two each
-        legalize the new edges
-```
+**Say:** n≤40 click-insert. Circumcircle under mouse. Illegal edges red. Animate a flip. Script: four points one keypress flip; fifth point three legalize calls; class shouts ‘illegal’ when a point sits in a circle. Demos 15-incircle.html, 16-delaunay.html. Plant flipping a hull edge. Plant leaving the super-triangle in the terrain mesh. Plant calling ear clipping Delaunay.
 
-**Locate t.** For n ≤ 80, test every triangle (point-in-triangle from Week 2 / 7). For a nicer demo, walk from a random triangle toward p (good in practice, worst-case linear).
+**Slide:** none. Live editor or local demo. Zoom 140%.
 
-**Bowyer–Watson cavity form (picture).**  
-Delete every triangle whose circumcircle contains p. The hole is a star-shaped polygon. Connect p to every boundary vertex. That is equivalent to split-and-legalize.
+**They do:** watch hands; then the same kernel on their machine when you say so.
 
-Complexity: expected O(n log n) with a good location structure; a naive lab is O(n²), which is fine for n ≤ 80.
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
 
----
+### Minutes 50–65 — Attempt
 
-## 4. Constrained Delaunay and graphics (10 min)
+**Say:** incircle (or angle-sum) on one quad. Eight minutes. Force CCW.
 
-A **constrained Delaunay triangulation (CDT)** must include a given set of edges (a polygon boundary, a river, a road). Edges that are not constraints still satisfy a constrained empty-circle property.
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
-Use: triangulate a polygon *and* keep it well-shaped; game navmeshes; GIS.
+**Board:** after they struggle, write one correct fragment.
 
-| Use | Why Delaunay |
-| --- | --- |
-| Terrain | interpolate height; avoid slivers |
-| Remeshing | better triangles before shading |
-| Cloth / simulation | more stable elements |
-| Lightmap packing | well-distributed vertices |
-| Procedural cities | dual of Voronoi cells |
+**Do not:** live-code the attempt for them before they try.
 
-Week 7’s ear clipping can produce slivers. Show one picture: same polygon, ear-clip vs CDT.
+### Minutes 65–75 — Land
+
+**Say:** Lab: flip+legalize a JSON triangulation; incremental n≤80; clip super-triangle; match a reference screenshot. Homework: edge flip. Quiz: empty circle, dual, illegal, what flip replaces, not min-weight.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
 
 ## Live coding (60 min)
 
-n ≤ 40 points, click to insert.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Dual on last week’s three sites | Same circle. |
+| 15–40 | One illegal, one flip | Both circumcircles drawn. |
+| 40–50 | Insert inside a triangle | Three new edges, legalize. |
+| 50–60 | They legalize a fixture | Circulate. |
 
-Draw:
-
-- triangles
-- circumcircle of the triangle under the mouse
-- illegal edges in red
-- a flip as an animation (old diagonal fades, new one appears)
-
-Script:
-
-1. Four points, one illegal diagonal, one keypress flip.
-2. Insert a fifth point inside a triangle, three legalize calls.
-3. Show a circumcircle that contains a point — students should shout “illegal.”
+Point them at `Computational Geometry/code/11-ear-clip.html` as the after-class check, not as the lecture.
 
 ---
 
@@ -183,8 +136,6 @@ Script:
 2. Given a triangulation (JSON), legalize until none remain. Draw before/after.
 3. Incremental insert for n ≤ 80 with visible flips.
 4. Super-triangle: clip it from the final display.
-
-Done when a known 6-point example matches a reference screenshot (provide one).
 
 ---
 
@@ -197,7 +148,7 @@ Done when a known 6-point example matches a reference screenshot (provide one).
 
 ---
 
-## Quiz (10 min)
+## Quiz next meeting (they hear this now)
 
 1. Empty circumcircle property. (2 pts)
 2. Dual: a Delaunay edge corresponds to what in VD? (2 pts)
@@ -205,45 +156,81 @@ Done when a known 6-point example matches a reference screenshot (provide one).
 4. What does a flip replace? (2 pts)
 5. Does Delaunay always minimize total edge length? Yes/no. (2 pts)
 
+
+## Extra exercises
+
+See [[Computational Geometry/exercises/Week 11]].
+
+---
+
+## Notes you may still need (from the outline)
+
+**1. Definition and dual (15 min).** A triangulation T of a point set S (plus the hull edges) is **Delaunay** if every triangle’s circumcircle contains **no site of S in its interior**.
+**Duality.**  
+Connect two sites by a Delaunay edge iff their Voronoi cells share an edge.  
+A Delaunay triangle corresponds to a Voronoi vertex (the circumcenter).  
+Unbounded Voronoi cells correspond to hull sites; hull edges are Delaunay.
+So: Week 10’s empty circle at a Voronoi vertex **is** the empty circumcircle of a Delaunay triangle.
+**Why we care.** Among all triangulations of S, the Delaunay triangulation maximizes the minimum angle (no skinnier triangle can be improved by a flip). That is the right default mesh for terrain and interpolation. It is **not** always the minimum-weight (shortest total edge length) triangulation. Do not cl
+
+**2. Legal edges and flips (25 min).** Consider two triangles abd and acd that share edge ad.  
+(Or abc and adc — pick one labeling and stick to it.)
+Edge ad is **illegal** if the circumcircle of one triangle contains the opposite vertex of the other.
+**Incircle test (predicate).**  
+For triangle abc (CCW) and point d:
+```
+incircle(a, b, c, d) > 0  ⇒  d is inside the circumcircle of abc
+```
+The exact 4×4 determinant is in de Berg / Shewchuk. For the lab, a geometric construction is acceptable if you invert a well-tested circumcenter and compare distances — but **state that it is unstable**. Prefer the determinant if you can.
+```
+// teaching form: compare angles
+// ad is illegal iff angle at b + angle at c > 180°
+// (the two angles opposite the shared edge)
+```
+The angle test is the one to draw: if the two angles opposite ad sum
+
+**3. Incremental insertion (15 min).** **Bowyer–Watson, teaching version.**
+Maintain a Delaunay triangulation of the points inserted so far. Start with a huge bounding triangle that contains S.
+```
+insert(p):
+    find the triangle t that contains p          // walk or walk+barycentric
+    if p is inside t:
+        split t into three triangles
+        legalize the three new interior edges
+    if p is on an edge e:
+        split the one or two triangles of e into two each
+        legalize the new edges
+```
+**Locate t.** For n ≤ 80, test every triangle (point-in-triangle from Week 2 / 7). For a nicer demo, walk from a random triangle toward p (good in practice, worst-case linear).
+**Bowyer–Watson cavity form (picture).**  
+Delete every triangle whose circumcircle contains p. The hole is a star-shaped polygon. Connect p to every bo
+
+**4. Constrained Delaunay and graphics (10 min).** A **constrained Delaunay triangulation (CDT)** must include a given set of edges (a polygon boundary, a river, a road). Edges that are not constraints still satisfy a constrained empty-circle property.
+Use: triangulate a polygon *and* keep it well-shaped; game navmeshes; GIS.
+| Use | Why Delaunay |
+| --- | --- |
+| Terrain | interpolate height; avoid slivers |
+| Remeshing | better triangles before shading |
+| Cloth / simulation | more stable elements |
+| Lightmap packing | well-distributed vertices |
+| Procedural cities | dual of Voronoi cells |
+Week 7’s ear clipping can produce slivers. Show one picture: same polygon, ear-clip vs CDT.
+---
+
 ---
 
 ## Common mistakes
 
-- Flipping a hull edge.
-- Incircle with the wrong orientation (sign flips; force CCW before the test).
-- Forgetting to legalize recursively after a flip.
-- Leaving the super-triangle in the mesh used for area/terrain.
-- Calling ear clipping “Delaunay.”
+1. Flipping a hull edge.
+2. Incircle with the wrong orientation (sign flips; force CCW before the test).
+3. Forgetting to legalize recursively after a flip.
+4. Leaving the super-triangle in the mesh used for area/terrain.
+5. Calling ear clipping “Delaunay.”
 
----
+## If we run long, cut
 
-## Board drawings
+Full Bowyer–Watson robustness. Keep incircle + flip + insert.
 
-1. Dual: VD in dashed lines, DT in solid, one circle.
-2. Illegal edge and the flip, with both circumcircles.
-3. Insert p, cavity, retriangulate to p.
-4. Skinny ear-clip triangle vs a flipped Delaunay pair.
+## If we run short, add
 
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 11]] · Demos: [15-incircle](code/15-incircle.html), [16-delaunay](code/16-delaunay.html)
-
-1. Duality: Delaunay edge ↔ Voronoi edge. Delaunay triangle ↔ Voronoi vertex.
-2. Illegal iff incircle contains the opposite vertex. Draw both circumcircles.
-3. Delaunay maximizes min angle. It is not always minimum-weight. Do not claim that.
-4. After Bowyer–Watson, no site lies in any remaining circumcircle (epsilon).
-
-```js
-function incircle(a, b, c, d) {
-  const adx = a.x - d.x, ady = a.y - d.y;
-  const bdx = b.x - d.x, bdy = b.y - d.y;
-  const cdx = c.x - d.x, cdy = c.y - d.y;
-  const det =
-    (adx*adx + ady*ady) * (bdx*cdy - cdx*bdy) -
-    (bdx*bdx + bdy*bdy) * (adx*cdy - cdx*ady) +
-    (cdx*cdx + cdy*cdy) * (adx*bdy - bdx*ady);
-  return orient(a, b, c) < 0 ? -det : det;
-}
-```
+Show ear-clip slivers vs DT on one polygon.

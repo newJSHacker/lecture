@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** fill rate, foveation name  
-**Success check:** Stereo is two draws or multiview name.
+**Kernel:** stereo cost; framebuffer scale factor; cut bloom in VR; do not invent fps  
+**Success check:** they can setFramebufferScaleFactor and write a table: device, scale, what they cut
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: fill rate, foveation name | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 9 | Goal: a cheaper frame, honestly measured | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-two views = ~2×
-Two frustums.
+two eyes     MSAA expensive     overdraw hurts
+renderer.xr.setFramebufferScaleFactor(0.8)
+
+cut bloom in VR     shadow map 512
+
+device | scale | cut     — fps only if measured
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Two frustums.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Cost. Two eyes.
+**Say:** Two eyes. Desktop bloom stacks in VR are a common fail. Invented fps still forbidden. Scale 1.0 vs 0.7 is a look-vs-cost experiment — on a headset or a TA video, plus the same code path inline.
 
-**Ask:** Stereo is two draws or multiview name? Wait seven seconds. Take two answers.
+**Ask:** Does stereo mean two draws? Wait. Want: often yes, or multiview as a name.
 
-**Board:** parked strip. Then two views = ~2×.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: fill rate, foveation name. Kernel: fill rate, foveation name. We freeze conventions and we do not invent timings.
+**Say:** Multiview named. Quest targets documented, not invented. Student table required.
 
-**Ask:** What would a wrong version of this look like? Want: desktop bloom stack unchanged in VR.
+**Ask:** What do you cut first — bloom or the verb?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Cost. Two eyes.
+**Say:** Fill rate. Overdraw. Two eyes.
 
-**Say:** Three.js. `renderer.xr.setFramebufferScaleFactor`.
+**Board:** setFramebufferScaleFactor. Empty fps if unmeasured.
 
-**Say:** Quest. Documented targets.
+**Say:** Shadow 512. Bloom off in VR.
 
-**Ask:** Stereo is two draws or multiview name? Wait seven seconds. Take two answers.
+**Ask:** Why is desktop bloom a VR trap?
 
-**They do:** On paper: cut bloom in VR.
+**They do:** Fill the three-column table on paper.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Scale factor 1.0 vs 0.7; note the look vs cost (headset or video).. Zoom 140%. Read errors out loud.
+**Say:** Scale 1.0 vs 0.7; note look vs cost. Do not quote fps unless measured here. Plant bloom-on. Plant 90.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** cut bloom in VR.
+**Say:** setFramebufferScaleFactor and log it. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: cut bloom in VR.; shadow map 512.. Homework: Written: stereo cost.; table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: cut bloom; shadow 512. Homework: table. Quiz: two eyes, scale factor, no invented fps.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: fill rate, foveation name | Plant the first common mistake. |
-| 10–30 | Scale factor 1.0 vs 0.7; note the look vs cost (headset or video). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Stereo cost | Plant 90 fps. |
+| 15–40 | Scale factor | Plant bloom stack. |
+| 40–55 | Table on a named device | They write. |
+| 55–60 | They cut bloom | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. why two views (3)
-2. foveation (4)
-3. scale factor (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[XR/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Cost.** Two eyes. MSAA expensive. Overdraw hurts more.
-
-**2. Three.js.** `renderer.xr.setFramebufferScaleFactor`.
-
-**3. Quest.** Documented targets. Student table: device, scale factor, what they cut.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[XR/exercises/Week 09]].
 
 ## If we run long, cut
 
-Quest
+Foveation implementation. Keep scale + table.
 
 ## If we run short, add
 
-shadow map 512.
+Shadow map 512.

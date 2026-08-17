@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** constraints, seeds  
-**Success check:** A seedable random.
+**Kernel:** one seed, one palette, one motion; cite assets  
+**Success check:** they can type a seed and regenerate a small composition without fifty sliders
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: constraints, seeds | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 12 | Goal: choice under constraint | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-seed → scene
-Seed box.
+seed  →  rand(i)  →  pose / color
+
+palette of 5
+one motion
+
+cite:  models, HDRI, shaders, AI textures
+leva is optional; it does not replace a story
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Seed box.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Craft. Creative coding is **choice under constraint**.
+**Say:** Creative coding is not 50 sliders. One seed, one palette, one motion. Unlicensed assets fail. AI textures: still cite — AI course later, same table.
 
-**Ask:** A seedable random? Wait seven seconds. Take two answers.
+**Ask:** If I change the seed, do I get the same piece? Wait. Want: a different piece, deterministically.
 
-**Board:** parked strip. Then seed → scene.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: constraints, seeds. Kernel: constraints, seeds. We freeze conventions and we do not invent timings.
+**Say:** Deterministic rand. PNG export extra. Integrity: shaders and models cited.
 
-**Ask:** What would a wrong version of this look like? Want: 50 sliders, no taste.
+**Ask:** What belongs in the asset table this week?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Craft. Creative coding is **choice under constraint**.
+**Say:** Constraint is the craft.
 
-**Say:** Tools. leva sliders OK if they don't replace a story.
+**Board:** seed → rand → composition. Palette of 5.
 
-**Say:** Integrity. Shaders and models cited.
+**Say:** leva is a tool. A story beat still wins.
 
-**Ask:** A seedable random? Wait seven seconds. Take two answers.
+**Ask:** Why is an unseeded Math.random a problem for a report?
 
-**They do:** On paper: palette of 5.
+**They do:** On paper: seed field + three parameters it drives.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Seed field regenerates a small composition.. Zoom 140%. Read errors out loud.
+**Say:** Seed field regenerates a composition. Plant 50 sliders. Plant an unlicensed HDRI. Cite or cut.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** palette of 5.
+**Say:** Seed + palette of 5. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: palette of 5.; png export extra.. Homework: Written: constraints you chose.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: palette; png extra. Homework: citations. Quiz: seed, palette, cite. Next: critique.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: constraints, seeds | Plant the first common mistake. |
-| 10–30 | Seed field regenerates a small composition. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Seeded rand | Plant Math.random soup. |
+| 15–40 | Palette of 5 | Plant 50 sliders. |
+| 40–55 | Cite the HDRI | Unlicensed plant. |
+| 55–60 | They regenerate | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. seed (3)
-2. leva risk (3)
-3. cite (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Interactive Experience/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Craft.** Creative coding is **choice under constraint**. One seed, one palette, one motion.
-
-**2. Tools.** leva sliders OK if they don't replace a story.
-
-**3. Integrity.** Shaders and models cited. AI textures: AI course later, still cite.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Interactive Experience/exercises/Week 12]].
 
 ## If we run long, cut
 
-Integrity
+Full generative-art syllabus. Keep seed + cite.
 
 ## If we run short, add
 
-png export extra.
+PNG export extra.

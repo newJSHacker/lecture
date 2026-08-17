@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** instancing, dpr, draw calls  
-**Success check:** InstancedMesh / Instances.
+**Kernel:** instance lists; cap dpr; count draw calls; do not invent fps  
+**Success check:** they can replace a naive list of meshes with Instances and write a table without a fake fps number
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: instancing, dpr, draw calls | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 11 | Goal: a budget table, not a vibes number | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-drei Instances; info.render
-Budget.
+each <mesh> is an object
+1k trees  →  InstancedMesh / <Instances>
+
+dpr 1 vs 2     (cap)
+draw calls     (count)
+
+measure on a named device     or omit fps
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Budget.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** R3F cost. Each `<mesh>` is an object.
+**Say:** A janky HUD over WebGL is last term. Today: R3F cost. Each mesh is an object. Invented fps still fail this program.
 
-**Ask:** InstancedMesh / Instances? Wait seven seconds. Take two answers.
+**Ask:** Is 200 <mesh> trees the same as 200 instances? Wait. Want: no.
 
-**Board:** parked strip. Then drei Instances; info.render.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: instancing, dpr, draw calls. Kernel: instancing, dpr, draw calls. We freeze conventions and we do not invent timings.
+**Say:** Textures still follow Blender budgets. Strict mode double-mount: do not panic; dispose. Dev vs prod named.
 
-**Ask:** What would a wrong version of this look like? Want: invented fps.
+**Ask:** What do you write if you did not measure?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** R3F cost. Each `<mesh>` is an object.
+**Say:** Count meshes. Then instance.
 
-**Say:** Textures. Blender budgets still apply.
+**Board:** naive vs Instances. dpr cap. empty fps cell if unmeasured.
 
-**Say:** Dev vs prod. Strict mode double-mount.
+**Say:** One table: device, dpr, what you cut. No fantasy 200 fps.
 
-**Ask:** InstancedMesh / Instances? Wait seven seconds. Take two answers.
+**Ask:** Why 500 MeshStandardMaterials hurt?
 
-**They do:** On paper: dpr 1 vs 2.
+**They do:** On paper: two-row table, fps column blank or measured.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: 200 trees: naive vs instanced; log counts.. Zoom 140%. Read errors out loud.
+**Say:** 200 trees naive vs instanced; log counts. Do not quote fps unless the profiler is on this machine. Plant invented 60.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** dpr 1 vs 2.
+**Say:** Instances limit={200} or a smaller N they can count. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: dpr 1 vs 2.; one table.. Homework: Written: measured table.; code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: dpr 1 vs 2; one table. Homework: budget paragraph. Quiz: Instances, dpr, do not invent fps.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: instancing, dpr, draw calls | Plant the first common mistake. |
-| 10–30 | 200 trees: naive vs instanced; log counts. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Naive list | Plant 500 materials. |
+| 15–40 | Instances | Count draw calls. |
+| 40–55 | Table, no fake fps | Plant 200 fps. |
+| 55–60 | They cap dpr | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. Instances (4)
-2. dpr (3)
-3. strict double (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Interactive Experience/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. R3F cost.** Each `<mesh>` is an object. Lists of 1k meshes should be instanced or drei `<Instances>`.
-
-**2. Textures.** Blender budgets still apply.
-
-**3. Dev vs prod.** Strict mode double-mount. Don't panic; dispose.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Interactive Experience/exercises/Week 11]].
 
 ## If we run long, cut
 
-Dev vs prod
+Renderer source dive. Keep instance + table.
 
 ## If we run short, add
 
-one table.
+One row: named device, dpr, cut.

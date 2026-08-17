@@ -41,7 +41,7 @@ Student decks are their problem. Yours is a timer.
 
 **Say:** This meeting is **presentations**. 12+5. Recording backup. No new features.
 
-**Ask (every team, two of):** 12 min + 5 questions. Recording backup.
+**Ask (every team, two of):** Where is the kernel? What did you cut? Who wrote what?
 
 **They do:** present. Live-coding hour is more talks.
 

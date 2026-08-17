@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** the three objects  
-**Success check:** Construct Scene/PerspectiveCamera/WebGLRenderer.
+**Kernel:** Scene, PerspectiveCamera, WebGLRenderer; Mesh is a draw call  
+**Success check:** they boot 01-hello-cube.html from ThreeJS/vendor/three.module.js and can map Mesh to program+VAO+draw
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `ThreeJS/demos/01-hello-cube.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: the three objects | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 1 | Goal: the three objects, mapped to WebGL | Invariant: Three.js is an engine, not the algorithm`
 
 ## Board at the end (they photograph this)
 
 ```
-scene.add(mesh)
-Three boxes.
+Scene     = graph of Object3D
+Camera    = P and V     (projectionMatrix, matrixWorldInverse)
+Renderer  = clear, bind programs, draw
+
+Mesh(geometry, material)  →  one draw call
+(WebGL: VAO + program + uniforms + drawArrays/elements)
+
+import from '../vendor/three.module.js'    no CDN
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +42,11 @@ Three boxes.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Engine as a map. Scene is a graph.
+**Say:** You already wrote gl_Position = P*V*M. Today the engine hides it. If they cannot map Mesh to a draw call, they are using a magic box. Local vendor only — ThreeJS/vendor/three.module.js. Serve the ThreeJS/ folder.
 
-**Ask:** Construct Scene/PerspectiveCamera/WebGLRenderer? Wait seven seconds. Take two answers.
+**Ask:** What WebGL call is renderer.render? Wait. Want: clear, bind program, set uniforms, draw — for each mesh.
 
-**Board:** parked strip. Then scene.add(mesh).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +56,9 @@ Three boxes.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: the three objects. Kernel: the three objects. We freeze conventions and we do not invent timings.
+**Say:** Demo 01-hello-cube.html. Standard material needs a light. Resize: setSize false, aspect, updateProjectionMatrix. pixelRatio capped at 2. outputColorSpace SRGBColorSpace.
 
-**Ask:** What would a wrong version of this look like? Want: starting IGWT in Three.js semester 2.
+**Ask:** Why did we do WebGL first?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +70,21 @@ Three boxes.
 
 ### Minutes 12–35 — Build
 
-**Say:** Engine as a map. Scene is a graph.
+**Say:** Three boxes: scene, camera, renderer. Mesh is not the GPU.
 
-**Say:** Demos. [[08 Three.js Snippets]] · [[ThreeJS/demos/index.html]] 01.
+**Board:** mapping table from ThreeJS/01 Scene Camera Renderer.
 
-**Say:** After WebGL. Students should point to uniforms they already wrote.
+**Say:** import map to vendor/. file:// will fail — python -m http.server.
 
-**Ask:** Construct Scene/PerspectiveCamera/WebGLRenderer? Wait seven seconds. Take two answers.
+**Ask:** What is camera.projectionMatrix in the shader you wrote?
 
-**They do:** On paper: resize handler.
+**They do:** On paper: Scene / Camera / Renderer / Mesh → GL names.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A cube, orbit from demo 01–02.. Zoom 140%. Read errors out loud.
+**Say:** Cube from 01-hello-cube.html, then orbit from 02-orbit.html. Plant CDN script tag. Plant unbounded pixelRatio. Plant no light on Standard.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +94,7 @@ Three boxes.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** resize handler.
+**Say:** resize handler + updateProjectionMatrix. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +104,7 @@ Three boxes.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: resize handler.; color background.. Homework: Written: Scene vs WebGL program.; Code: cube.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: resize; color background. Homework: Scene vs WebGL program; cube. Quiz: three objects, domElement, why WebGL first.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +116,10 @@ Three boxes.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: the three objects | Plant the first common mistake. |
-| 10–30 | A cube, orbit from demo 01–02. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | import vendor three.module.js | Plant CDN. Delete it. |
+| 10–30 | 01-hello-cube | Plant Standard without light. |
+| 30–45 | resize + aspect | Plant forgot updateProjectionMatrix. |
+| 45–60 | They resize | Circulate. Serve ThreeJS/. |
 
 Point them at `ThreeJS/demos/01-hello-cube.html` as the after-class check, not as the lecture.
 
@@ -135,9 +141,7 @@ Point them at `ThreeJS/demos/01-hello-cube.html` as the after-class check, not a
 
 ## Quiz next meeting (they hear this now)
 
-1. three objects (3)
-2. domElement (3)
-3. why WebGL first (4)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +160,7 @@ See [[ThreeJS Development/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Engine as a map.** Scene is a graph. Camera has P and V. Renderer is the WebGL path.
-
-**2. Demos.** [[08 Three.js Snippets]] · [[ThreeJS/demos/index.html]] 01.
-
-**3. After WebGL.** Students should point to uniforms they already wrote.
+_none_
 
 ---
 
@@ -171,8 +171,8 @@ See [[ThreeJS Development/exercises/Week 01]].
 
 ## If we run long, cut
 
-After WebGL
+OrbitControls internals. Keep three objects + Mesh→draw.
 
 ## If we run short, add
 
-color background.
+scene.background color.

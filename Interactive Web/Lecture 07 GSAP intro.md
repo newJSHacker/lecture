@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** tweens, timelines  
-**Success check:** A tween.
+**Kernel:** gsap.to tween; timeline sequence; local vendor file, no CDN  
+**Success check:** they play a 3-step timeline from a click and skip it when reduced-motion is on
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: tweens, timelines | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 7 | Goal: one timeline you can kill | Invariant: GSAP is for UI stories; the renderer loop stays rAF; no CDN`
 
 ## Board at the end (they photograph this)
 
 ```
-gsap.to(el,{x:80})
-Timeline.
+<script src="../vendor/gsap.min.js"></script>   /* local */
+
+gsap.to(el, { x: 80, duration: 0.6 });
+gsap.timeline().to(…).to(…).to(…);
+
+reduced-motion  →  skip timeline
+kill()  when leaving the scene
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Timeline.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Why a library. Timelines beat ad-hoc rAF for UI stories.
+**Say:** Timelines beat ad-hoc rAF for a three-beat UI story. Games still need week 2’s loop. Course: two weeks of taste, not certification. Loading GSAP from a CDN is a fail — vendor/gsap.min.js is in the repo.
 
-**Ask:** A tween? Wait seven seconds. Take two answers.
+**Ask:** If the motion is one hover lift, do you need GSAP? Wait. Want: no — CSS was week 5.
 
-**Board:** parked strip. Then gsap.to(el,{x:80}).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: tweens, timelines. Kernel: tweens, timelines. We freeze conventions and we do not invent timings.
+**Say:** Why a library: sequence, stagger, kill. Bundle cost: know it, do not invent KB. Reduced motion: skip. Do not tween every particle of a sim.
 
-**Ask:** What would a wrong version of this look like? Want: GSAP for every pixel of a renderer.
+**Ask:** tween vs timeline in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why a library. Timelines beat ad-hoc rAF for UI stories.
+**Say:** Local script tag. If gsap is undefined, the path is wrong — not ‘use a CDN’.
 
-**Say:** GSAP. Industry UI.
+**Board:** gsap.to. Then a 3-step timeline: fade, move, color.
 
-**Say:** Bundle. Know the cost.
+**Say:** Stagger extra. matchMedia reduced-motion like 09-gsap.html.
 
-**Ask:** A tween? Wait seven seconds. Take two answers.
+**Ask:** What does kill() prevent?
 
-**They do:** On paper: Stagger extra.
+**They do:** On paper: stagger of three boxes — one timeline or three tweens?
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 3-step timeline: fade, move, color.. Zoom 140%. Read errors out loud.
+**Say:** A 3-step timeline: fade, move, color. Demo Interactive Web/code/09-gsap.html (loads ../vendor/gsap.min.js). Plant a CDN URL. Remove it. Plant running the timeline when reduced-motion is on.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Stagger extra.
+**Say:** Stagger extra. Respect reduced motion: skip timeline. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Stagger extra.; Respect reduced motion: skip timeline.. Homework: Written: when not to GSAP.; Code: timeline.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: stagger + reduced-motion skip. Homework: when not to GSAP; timeline. Quiz: tween vs timeline, kill, CSS enough? Midterm next week: weeks 1–7.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: tweens, timelines | Plant the first common mistake. |
-| 10–30 | A 3-step timeline: fade, move, color. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | local vendor script | Plant CDN. Fix relative path. |
+| 10–30 | 3-step timeline | Play on button, not autoplay. |
+| 30–45 | reduced-motion skip | They toggle and re-click. |
+| 45–60 | They stagger | Circulate. No particle GSAP. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. tween vs timeline (4)
-2. kill (3)
-3. CSS enough? (3)
+None this meeting.
 
 
 ## Snippet
@@ -161,11 +164,7 @@ See [[Interactive Web/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why a library.** Timelines beat ad-hoc rAF for UI stories. Games still need a loop.
-
-**2. GSAP.** Industry UI. Course: 2 weeks of taste, not certification.
-
-**3. Bundle.** Know the cost. Prefer CSS if one hover.
+_none_
 
 ---
 
@@ -176,7 +175,7 @@ See [[Interactive Web/exercises/Week 07]].
 
 ## If we run long, cut
 
-Bundle
+Bundle-size talk. Keep local GSAP + timeline + reduced-motion.
 
 ## If we run short, add
 

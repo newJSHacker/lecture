@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** DOM CSSOM layout paint composite  
-**Success check:** Name DOM, CSSOM, layout, paint, composite.
+**Kernel:** DOM → CSSOM → layout → paint → composite; transform vs top as a policy  
+**Success check:** they can name the five words and say why animating top is more expensive than transform
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,22 +14,24 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/10-transform.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: DOM CSSOM layout paint composite | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 12 | Goal: name the pipeline, do not guess speed | Invariant: layout is geometry; paint is pixels; composite is layers — do not invent fps`
 
 ## Board at the end (they photograph this)
 
 ```
-the six-stage stack from Course 2 advice
-Pipeline stack.
-Layer sandwich.
+DOM  →  CSSOM  →  render tree  →  layout  →  paint  →  composite
+
+transform / opacity   (composite)
+top / width           (layout)
+
+measure if you claim speed
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: a Layers panel screenshot | photo |
 
 ---
 
@@ -39,11 +41,11 @@ Layer sandwich.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** How a pixel gets there. Parse HTML → DOM.
+**Say:** A janky HUD over WebGL is this lecture. We name the pipeline. We do not invent milliseconds.
 
-**Ask:** DOM, CSSOM, layout, paint, composite? Wait seven seconds. Take two answers.
+**Ask:** Does changing transform trigger layout? Wait. Want: usually no.
 
-**Board:** parked strip. Then the six-stage stack from Course 2 advice.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +55,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: DOM CSSOM layout paint composite. Kernel: DOM CSSOM layout paint composite. We freeze conventions and we do not invent timings.
+**Say:** Five stages. Reflow vs repaint teaching-level. will-change named as a last resort.
 
-**Ask:** What would a wrong version of this look like? Want: Animating left/top for everything.
+**Ask:** Which is cheaper to animate: top or transform?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +69,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** How a pixel gets there. Parse HTML → DOM.
+**Say:** Parse HTML → DOM. Parse CSS → CSSOM. Together: render tree.
 
-**Say:** Jank. Reading offsetWidth in a loop forces layout.
+**Board:** pipeline. Circle layout.
 
-**Say:** Layers. A WebGL canvas is often its own layer.
+**Say:** DevTools performance is optional; the policy is enough: prefer transform.
 
-**Ask:** DOM, CSSOM, layout, paint, composite? Wait seven seconds. Take two answers.
+**Ask:** What is paint?
 
-**They do:** On paper: Paint flashing experiment.
+**They do:** On paper: the five words in order.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Animate a box with transform vs top/left; feel the difference (or show paint flashing).. Zoom 140%. Read errors out loud.
+**Say:** Toggle a class that changes top vs transform. Do not quote fps. Demo 10-transform.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +93,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Paint flashing experiment.
+**Say:** Write the pipeline from memory. Then one CSS animation using transform. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +103,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Paint flashing experiment.; One forced-layout bug in a starter to fix.. Homework: Written: pipeline boxes.; Code: CSS transform animation.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: transform animation. Homework: five words. Quiz: order, transform vs top, do not invent fps.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +115,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: DOM CSSOM layout paint composite | Plant the first common mistake. |
-| 10–30 | Animate a box with transform vs top/left; feel the difference (or show paint flashing). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Five words | They copy. |
+| 15–40 | top vs transform | No invented timings. |
+| 40–55 | Layers name | Screenshot optional. |
+| 55–60 | They write the list | Circulate. |
 
 Point them at `Web Technologies/code/10-transform.html` as the after-class check, not as the lecture.
 
@@ -138,9 +140,7 @@ Point them at `Web Technologies/code/10-transform.html` as the after-class check
 
 ## Quiz next meeting (they hear this now)
 
-1. Order of layout and paint (4)
-2. Why transform (3)
-3. Name composite (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +159,7 @@ See [[Web Technologies/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. How a pixel gets there.** Parse HTML → DOM. CSS → CSSOM. Layout boxes. Paint. Composite layers. Same spirit as CG I's space chain: named stages.
-
-**2. Jank.** Reading offsetWidth in a loop forces layout. Animate transform/opacity when possible.
-
-**3. Layers.** A WebGL canvas is often its own layer. UI HTML sits on top. That is Interactive Web + R3F later.
+_none_
 
 ---
 
@@ -174,8 +170,8 @@ See [[Web Technologies/exercises/Week 12]].
 
 ## If we run long, cut
 
-Layers
+Compositor thread details. Keep five words + policy.
 
 ## If we run short, add
 
-One forced-layout bug in a starter to fix.
+contain: layout name.

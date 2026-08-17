@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Capstone Project  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** modules, data, APIs  
-**Success check:** A diagram: DOM, 3D, loaders, optional proxy.
+**Kernel:** named modules; labeled oracles; TA runs in three commands; no client secrets  
+**Success check:** they can draw DOM / 3D / loaders / optional proxy and paste npm run dev in README
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Capstone/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: modules, data, APIs | Invariant: the problem is users, not a tech list`
+- Parked strip: `Lecture 3 | Goal: architecture as a one-pager | Invariant: the problem is users, not a tech list`
 
 ## Board at the end (they photograph this)
 
 ```
-boxes: UI | scene | assets | optional AI
-Four boxes.
+ui/     scene/     assets/     (optional) proxy/
+
+oracles: physics, Raycaster, PMREM, LLM — labeled
+npm i && npm run dev
+no CDN     no secrets in client
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Four boxes.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Architecture. Same as theses: modules with names.
+**Say:** Same as theses: modules with names. Rewriting architecture weekly with no diagram fails. Secrets in client fail. How a TA runs it is part of the architecture.
 
-**Ask:** A diagram: DOM, 3D, loaders, optional proxy? Wait seven seconds. Take two answers.
+**Ask:** If the LLM is unlabeled, what is the integrity problem? Wait.
 
-**Board:** parked strip. Then boxes: UI | scene | assets | optional AI.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: modules, data, APIs. Kernel: modules, data, APIs. We freeze conventions and we do not invent timings.
+**Say:** Folder skeleton. Empty CI optional extra. Serve local. Three commands in README.
 
-**Ask:** What would a wrong version of this look like? Want: rewriting architecture weekly with no diagram.
+**Ask:** What is an oracle here?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Architecture. Same as theses: modules with names.
+**Say:** Boxes with names. Arrows are data.
 
-**Say:** Oracles. Physics, Raycaster, PMREM, LLM — labeled.
+**Board:** ui / scene / assets / proxy. Oracles listed.
 
-**Say:** Serve. How a TA runs it in 3 commands.
+**Say:** README run line. .env if AI — not in git.
 
-**Ask:** A diagram: DOM, 3D, loaders, optional proxy? Wait seven seconds. Take two answers.
+**Ask:** Why three commands, not a wiki?
 
-**They do:** On paper: folder skeleton.
+**They do:** Architecture one-pager sketch.
 
-**Do not:** start in an engine before the problem statement.
+**Do not:** Start in an engine before the problem statement.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Architecture one-pager in README.. Zoom 140%. Read errors out loud.
+**Say:** Architecture in README. Plant weekly rewrite with no diagram. Plant client key. Plant CDN Three.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** folder skeleton.
+**Say:** Folders + run line. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: folder skeleton.; empty CI extra optional.. Homework: Diagram + run instructions.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: skeleton; CI extra. Homework: one-pager in README. Quiz: modules, oracles, no client secrets.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: modules, data, APIs | Plant the first common mistake. |
-| 10–30 | Architecture one-pager in README. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Module boxes | Plant no diagram. |
+| 15–40 | Oracles labeled | Plant secret in client. |
+| 40–55 | README run | Plant CDN. |
+| 55–60 | They mkdir | Circulate. |
 
 Point them at `Capstone/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -136,9 +139,7 @@ Point them at `Capstone/code/03-budget.html` as the after-class check, not as th
 
 ## Quiz next meeting (they hear this now)
 
-1. state where (4)
-2. oracle (3)
-3. run line (3)
+None this meeting.
 
 
 ## Snippet
@@ -157,11 +158,7 @@ See [[Capstone/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Architecture.** Same as theses: modules with names. `scene/`, `ui/`, `assets/`.
-
-**2. Oracles.** Physics, Raycaster, PMREM, LLM — labeled.
-
-**3. Serve.** How a TA runs it in 3 commands.
+_none_
 
 ---
 
@@ -172,8 +169,8 @@ See [[Capstone/exercises/Week 03]].
 
 ## If we run long, cut
 
-Serve
+CI theatre. Keep diagram + run line.
 
 ## If we run short, add
 
-empty CI extra optional.
+Empty CI extra optional.

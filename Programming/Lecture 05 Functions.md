@@ -48,11 +48,11 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 **Ask:** What does a function return if you forget `return`? Wait. Want: `undefined`.
 
-**Board:** parked strip. Then box with in-arrows and one out-arrow.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *parameters, return, scope*.
+**They do:** write today’s question in their notes: *`clamp(x,a,b)` and `lerp(a,b,t)` with `console.assert`*.
 
 **Do not:** Functions that only log.
 
@@ -82,7 +82,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 **They do:** On paper: write `lerp(a,b,t)` in one line.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -143,9 +143,7 @@ Point them at `Programming/code/05-clamp.html` as the after-class check, not as 
 
 ## Quiz next meeting (they hear this now)
 
-1. What does a missing return yield? (3)
-2. Scope of let in for (3)
-3. Write clamp (4)
+None this meeting.
 
 
 ## Snippet
@@ -164,11 +162,7 @@ See [[Programming/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. A function is a named recipe.** Parameters are local. Return sends a value out. `console.log` inside is a side effect — allowed for debugging, not as the only result of a math helper.
-
-**2. Scope.** let is block-scoped. A loop `i` is not visible after the block. Closures wait until Week 11 of Modern JS; here just: inner can read outer.
-
-**3. Graphics later.** `putPixel`, `dot`, `orient` are functions. If they cannot write a `clamp(x,a,b)`, they cannot write a renderer.
+_none_
 
 ---
 

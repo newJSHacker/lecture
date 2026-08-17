@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** dir/point/ambient  
-**Success check:** Ambient + directional.
+**Kernel:** Ambient + Directional + Point named; shadowMap.enabled; castShadow / receiveShadow  
+**Success check:** they light a cube on a plane, toggle a shadow, and do not spawn ten point lights
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: dir/point/ambient | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 4 | Goal: one key light, then a shadow you can see | Invariant: a light is uniforms plus optional shadow FBO; acne is bias, not 'broken PBR'`
 
 ## Board at the end (they photograph this)
 
 ```
-shadow map size
-Light + plane.
+Ambient     =  cheap fill (no direction)
+Directional =  sun     Point = omni     Spot named
+
+renderer.shadowMap.enabled = true
+mesh.castShadow / plane.receiveShadow
+light.castShadow = true
+mapSize 512 vs 2048   (measure; not 8192)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Light + plane.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Energy. Too many lights is a later clustered topic.
+**Say:** Energy: too many lights is a later clustered topic. Demo 03-lights-shadows.html. Shadow mapping internals live in Real-Time Rendering — here we enable and see acne.
 
-**Ask:** Ambient + directional? Wait seven seconds. Take two answers.
+**Ask:** Does AmbientLight cast a shadow? Wait. Want: no.
 
-**Board:** parked strip. Then shadow map size.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: dir/point/ambient. Kernel: dir/point/ambient. We freeze conventions and we do not invent timings.
+**Say:** Helpers: DirectionalLightHelper. mapSize 8192 on integrated GPU is a freeze violation. Contact-shadow demo 20 is later.
 
-**Ask:** What would a wrong version of this look like? Want: 10 point lights as the aesthetic.
+**Ask:** What WebGL object is a shadow map?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Energy. Too many lights is a later clustered topic.
+**Say:** Three types. One key directional.
 
-**Say:** Shadows. Shadow mapping course in RTR.
+**Board:** enable shadowMap + flags.
 
-**Say:** Demo. lights demo.
+**Say:** Acne name. Bias next week deeper.
 
-**Ask:** Ambient + directional? Wait seven seconds. Take two answers.
+**Ask:** Why a ground plane this week?
 
-**They do:** On paper: light helper.
+**They do:** On paper: flags needed for a cube to shadow a plane.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Lit cube + plane; toggle shadow.. Zoom 140%. Read errors out loud.
+**Say:** Lit cube + plane; toggle shadow. Demo 03-lights-shadows.html. Plant 10 point lights. Plant mapSize 8192.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** light helper.
+**Say:** Light helper on. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: light helper.; mapSize 512 vs 2048 extra measure.. Homework: Written: acne.; Code: shadows.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: helper; mapSize 512 vs 2048 extra measure. Homework: acne; shadows. Quiz: castShadow, ambient purpose, mapSize.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: dir/point/ambient | Plant the first common mistake. |
-| 10–30 | Lit cube + plane; toggle shadow. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Hemisphere or ambient + dir | Plant only ambient. |
+| 10–30 | shadowMap + flags | Plant forgot receiveShadow. |
+| 30–45 | mapSize measure | No invented fps. |
+| 45–60 | They add helper | Circulate. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. castShadow (3)
-2. ambient purpose (3)
-3. mapSize (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[ThreeJS Development/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Energy.** Too many lights is a later clustered topic.
-
-**2. Shadows.** Shadow mapping course in RTR. Here: enable and see acne.
-
-**3. Demo.** lights demo.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[ThreeJS Development/exercises/Week 04]].
 
 ## If we run long, cut
 
-Demo
+PCFSoft internals. Keep enable + one shadow.
 
 ## If we run short, add
 
-mapSize 512 vs 2048 extra measure.
+mapSize 512 vs 2048 measured on this machine.

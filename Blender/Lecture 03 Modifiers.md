@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** mirror, array, bevel  
-**Success check:** Use Mirror with clipping.
+**Kernel:** Mirror with clipping; Array; Bevel; stack order; apply vs live  
+**Success check:** they can mirror a crate with clipping and say glTF export applies mesh modifiers
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: mirror, array, bevel | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 3 | Goal: non-destructive until export needs it | Invariant: modifiers are functions; order matters; applying every five minutes is not safety`
 
 ## Board at the end (they photograph this)
 
 ```
-stack: mirror then bevel
-Stack arrows.
+Mirror  +  clipping     (do not duplicate by hand)
+Array   after the piece is right
+Bevel   usually after Mirror
+
+live while iterating
+glTF export applies mesh modifiers
+
+Boolean: blocking only; cleanup before animation
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Stack arrows.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Non-destructive. Modifiers are the 'functions' of modeling.
+**Say:** Modifiers are the functions of modeling. Reverse the stack and you get double bevels. Demo checklist 03-budget.html is not this week's kernel — still glance at tris.
 
-**Ask:** Mirror with clipping? Wait seven seconds. Take two answers.
+**Ask:** If Mirror sits after Bevel, what goes wrong? Wait. Want: you bevel a half then mirror a seam, or double bevel — show it.
 
-**Board:** parked strip. Then stack: mirror then bevel.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: mirror, array, bevel. Kernel: mirror, array, bevel. We freeze conventions and we do not invent timings.
+**Say:** Keep live. Apply before some exports if the engine cannot see them — glTF applies mesh modifiers. Boolean named, not soup.
 
-**Ask:** What would a wrong version of this look like? Want: Applying every modifier 'to be safe' every five minutes.
+**Ask:** Apply vs live — when must it apply?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Non-destructive. Modifiers are the 'functions' of modeling.
+**Say:** Mirror clipping so the center welds.
 
-**Say:** Order. Mirror before bevel usually.
+**Board:** stack order. Array. Bevel.
 
-**Say:** Boolean. Name it.
+**Say:** Plant applying every modifier to be safe every five minutes.
 
-**Ask:** Mirror with clipping? Wait seven seconds. Take two answers.
+**Ask:** Does the engine see an unapplied Mirror if you forget export-apply?
 
-**They do:** On paper: Toggle modifier visibility.
+**They do:** On paper: a three-modifier stack for a crate.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Mirrored headset or binoculars; bevel; array of buttons.. Zoom 140%. Read errors out loud.
+**Say:** Mirror crate; reverse stack once. Plant apply-all. Plant boolean soup.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Toggle modifier visibility.
+**Say:** Toggle modifier visibility. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Toggle modifier visibility.; One boolean hole, then cleanup extra.. Homework: Written: apply vs live.; Screenshot of modifier stack.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: toggle visibility; one boolean hole extra. Homework: apply vs live; stack screenshot. Quiz: clipping, why order, export applies?.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: mirror, array, bevel | Plant the first common mistake. |
-| 10–30 | Mirrored headset or binoculars; bevel; array of buttons. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Mirror + clipping | Plant duplicate-by-hand. |
+| 10–30 | Bevel after mirror | Plant reverse stack. |
+| 30–45 | Array a bolt | They instance in Blender. |
+| 45–60 | They toggle visibility | Circulate. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. mirror clipping (3)
-2. why order (4)
-3. export applies? (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[Blender/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Non-destructive.** Modifiers are the 'functions' of modeling. Keep them live while iterating. Apply before some exports if the engine cannot see them — glTF export applies mesh modifiers.
-
-**2. Order.** Mirror before bevel usually. Array after the piece is right. Students reverse the stack and get double bevels.
-
-**3. Boolean.** Name it. Use for blocking. Retopo or cleanup before animation.
+_none_
 
 ---
 
@@ -173,7 +173,7 @@ See [[Blender/exercises/Week 03]].
 
 ## If we run long, cut
 
-Boolean
+Geometry Nodes as the course. Keep mirror/array/bevel.
 
 ## If we run short, add
 

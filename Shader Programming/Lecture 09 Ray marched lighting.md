@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** soft shadow, AO names  
-**Success check:** Secondary march toward the light.
+**Kernel:** secondary march toward L; soft = min(d/t); AO samples along n  
+**Success check:** they can march a shadow ray and toggle a cheap AO
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: soft shadow, AO names | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 9 | Goal: two rays: camera and light | Invariant: if map hits before the light, it is shadowed; AO is a fake, named`
 
 ## Board at the end (they photograph this)
 
 ```
-shadow ray toward L
-Two rays.
+cam ray  →  hit p
+shadow   →  march p → L
+  blocked if d hits before light
+
+soft: track min(d/t)
+AO:  sample SDF along n   (not SSAO unless you say so)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Two rays.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Shadows. If map(p) hits before the light, it's shadowed.
+**Say:** Last time: one ray. Today a second ray toward the light. Stencil shadows are a different course. SSAO is Real-Time Rendering — name the difference if it comes up.
 
-**Ask:** Secondary march toward the light? Wait seven seconds. Take two answers.
+**Ask:** If map(p) hits before L, is the point lit? Wait. Want: no.
 
-**Board:** parked strip. Then shadow ray toward L.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: soft shadow, AO names. Kernel: soft shadow, AO names. We freeze conventions and we do not invent timings.
+**Say:** Hard shadow is a hit. Soft is IQ's min d/t. AO darkens crevices. Material id from map() return is extra.
 
-**Ask:** What would a wrong version of this look like? Want: stencil shadows speech.
+**Ask:** Why a second march?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Shadows. If map(p) hits before the light, it's shadowed.
+**Say:** Two arrows from p: to camera origin is the first ray already done; toward L is new.
 
-**Say:** AO. Sample SDF along normal.
+**Board:** shadow() stub. Circle blocked.
 
-**Say:** Materials. Albedo per object id from the map() return.
+**Say:** Pause time; debug the shadow with a still. Uniform for AO on/off.
 
-**Ask:** Secondary march toward the light? Wait seven seconds. Take two answers.
+**Ask:** Soft shadow in one phrase?
 
-**They do:** On paper: AO toggle.
+**They do:** On paper: steps of shadow() until blocked or arrived.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Sphere+plane with a soft-ish shadow.. Zoom 140%. Read errors out loud.
+**Say:** Sphere+plane, soft-ish shadow. Plant a stencil-shadow speech. AO toggle.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** AO toggle.
+**Say:** AO toggle. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: AO toggle.; material id extra.. Homework: Written: why second march.; Code: shadow().. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: AO + material id extra. Homework: why second march; shadow(). Quiz: hit before light, soft idea, AO.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: soft shadow, AO names | Plant the first common mistake. |
-| 10–30 | Sphere+plane with a soft-ish shadow. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Shadow ray | Plant stencil speech. |
+| 10–30 | Soft min(d/t) | Plant AO called SSAO without saying. |
+| 30–45 | AO along n | Toggle uniform. |
+| 45–60 | They add material id | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. hit before light (4)
-2. soft idea (3)
-3. AO (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Shader Programming/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Shadows.** If map(p) hits before the light, it's shadowed. Soft: track minimum d/t.
-
-**2. AO.** Sample SDF along normal. Darken crevices. Fake, fast.
-
-**3. Materials.** Albedo per object id from the map() return.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Shader Programming/exercises/Week 09]].
 
 ## If we run long, cut
 
-Materials
+Production IQ shadow. Keep second march + AO name.
 
 ## If we run short, add
 
-material id extra.
+Object id from map() as extra.

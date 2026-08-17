@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Advanced Computer Graphics  
 **Meeting:** 12 min + 5 questions — not a content lecture  
-**Kernel:** the demo runs; they can answer two questions  
-**Success check:** they stop on time; no new features; who wrote what is stated
+**Kernel:** 12+5 survey talks: claim, figure, limitation; no new impl on stage  
+**Success check:** they stop at 12 and can answer what they did not implement
 
 Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,16 +19,17 @@ Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-rubric
-Rubric.
+12 + 5
+Show: claim · one figure · one limit · IGWT link
+No production tracer on stage
+Peer: one thing you learned
 ```
 
 ## Slides today
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Timer | not Wikipedia |
 
 Student decks are their problem. Yours is a timer.
 
@@ -36,9 +37,9 @@ Student decks are their problem. Yours is a timer.
 
 ## The meeting
 
-**Say:** This meeting is presentations (12 min + 5 questions). No new features. I will cut you at the clock.
+**Say:** Survey presentations. 12+5. I will cut you at the clock. If they cannot state the claim and the limitation, they copied a demo.
 
-**Ask (every team, two of):** 12 min + 3 questions. Recording optional.
+**Ask (every team, two of):** What did you not implement? What is the limitation?
 
 **They do:** present. Live-coding hour is more talks.
 
@@ -50,10 +51,7 @@ Student decks are their problem. Yours is a timer.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: the talks | Plant the first common mistake. |
-| 10–30 | Present talks. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–60 | Talks | Cut at 12. |
 
 ---
 
@@ -84,4 +82,4 @@ Q&A. Keep the clock.
 
 ## If we run short, add
 
-One extra question on tests or a limitation.
+One extra question on a missed limitation.

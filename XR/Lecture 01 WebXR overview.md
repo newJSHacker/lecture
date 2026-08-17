@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** immersive vs inline  
-**Success check:** Feature detect `navigator.xr`.
+**Kernel:** immersive-vr / immersive-ar vs inline; feature detect; lab fallback required  
+**Success check:** they can run isSessionSupported and screenshot an inline fallback — no headset lottery
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `XR/code/01-detect.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: immersive vs inline | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 1 | Goal: detect + inline; headset is extra evidence | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-session types: vr / ar
-Session boxes.
+inline          always the lab deliverable
+immersive-vr    headset extra
+immersive-ar    often missing on desktop
+
+navigator.xr?.isSessionSupported('immersive-vr')
+HTTPS / localhost     user gesture     no CDN
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +40,11 @@ Session boxes.
 
 ### Minutes 0–8 — Hook
 
-**Say:** What WebXR is. Browser API for VR/AR sessions.
+**Say:** This is interaction design + the WebXR API, not a Unity degree. If it cannot run inline in the lab, it is not the weekly deliverable. Headset is extra evidence — never a lottery for the grade.
 
-**Ask:** Feature detect `navigator.xr`? Wait seven seconds. Take two answers.
+**Ask:** If there is no Quest in the room, did you fail week 1? Wait. Want: no — inline + detect.
 
-**Board:** parked strip. Then session types: vr / ar.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +54,9 @@ Session boxes.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: immersive vs inline. Kernel: immersive vs inline. We freeze conventions and we do not invent timings.
+**Say:** Three.js XRButton wraps requestSession. Camera permission is AR later. Secure context: localhost or HTTPS. http:// LAN IP is a plant.
 
-**Ask:** What would a wrong version of this look like? Want: Quest-only homework with no fallback.
+**Ask:** Who must grant the session — a script on load, or a user gesture?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +68,21 @@ Session boxes.
 
 ### Minutes 12–35 — Build
 
-**Say:** What WebXR is. Browser API for VR/AR sessions.
+**Say:** Session types. Draw three boxes: inline, vr, ar.
 
-**Say:** Hardware. Quest, desktop HMD, phones (AR).
+**Board:** detect snippet. Circle fallback.
 
-**Say:** Permissions. Camera for AR.
+**Say:** TA headset video is evidence, not a substitute for student session code.
 
-**Ask:** Feature detect `navigator.xr`? Wait seven seconds. Take two answers.
+**Ask:** Why HTTPS?
 
-**They do:** On paper: localhost HTTPS note.
+**They do:** On paper: detect + what you screenshot if xr is undefined.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Detect XR; show session modes; start inline Three.js scene with XRButton if available.. Zoom 140%. Read errors out loud.
+**Say:** Detect modes; inline Three scene; XRButton if available. Plant Quest-only homework. Plant http://. Demo XR/code/01-detect.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +92,7 @@ Session boxes.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** localhost HTTPS note.
+**Say:** isSessionSupported + a fallback sentence on the page. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +102,7 @@ Session boxes.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: localhost HTTPS note.; fallback screenshot.. Homework: Written: session types.; detect page.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: HTTPS note; fallback screenshot. Homework: session types. Quiz: immersive-vr, HTTPS, gesture.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +114,10 @@ Session boxes.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: immersive vs inline | Plant the first common mistake. |
-| 10–30 | Detect XR; show session modes; start inline Three.js scene with XRButton if available. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Detect xr | Plant Quest-only. |
+| 10–30 | Inline scene | Plant no fallback. |
+| 30–45 | Secure context | Plant LAN http. |
+| 45–60 | They write the fallback line | Circulate. |
 
 Point them at `XR/code/01-detect.html` as the after-class check, not as the lecture.
 
@@ -135,9 +139,7 @@ Point them at `XR/code/01-detect.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. immersive-vr (3)
-2. why HTTPS (4)
-3. gesture (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +158,7 @@ See [[XR/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. What WebXR is.** Browser API for VR/AR sessions. Three.js `XRButton` / `WebXRManager` wrap it. This course is **interaction design + API**, not a Unity VR degree.
-
-**2. Hardware.** Quest, desktop HMD, phones (AR). Labs need a **non-headset path**: inline canvas + documented emulator or video of a TA headset.
-
-**3. Permissions.** Camera for AR. User gesture to `requestSession`.
+_none_
 
 ---
 
@@ -171,8 +169,8 @@ See [[XR/exercises/Week 01]].
 
 ## If we run long, cut
 
-Permissions
+Permissions deep-dive. Keep detect + fallback.
 
 ## If we run short, add
 
-fallback screenshot.
+Fallback screenshot on the board as a checklist item.

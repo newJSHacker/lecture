@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** envMap, PMREM name  
-**Success check:** RGBE/exr name.
+**Kernel:** scene.environment; PMREM name; background vs env  
+**Success check:** they put a small local env on a metallic sphere and can toggle background vs environment
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: envMap, PMREM name | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 9 | Goal: IBL as a taste, not a thesis | Invariant: Standard looks like clay without an env; 500MB HDR is not a lab`
 
 ## Board at the end (they photograph this)
 
 ```
-scene.environment
-Sphere.
+scene.environment = envTex     // lighting
+scene.background  = envTex     // picture (optional)
+
+PMREM  (name)  —  prefilter for IBL
+RGBE / EXR     (names)
+
+budget: tiny HDR or a PMREM from a cube
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Sphere.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Look. Standard material needs an env to look 'PBR'.
+**Say:** Standard needs an env to look 'PBR'. Demo 13-environment.html. Real-Time Rendering owns the integrals. Today: the knob and the cost.
 
-**Ask:** RGBE/exr name? Wait seven seconds. Take two answers.
+**Ask:** Is scene.background the same as scene.environment? Wait. Want: no — one is the picture, one is the lighting.
 
-**Board:** parked strip. Then scene.environment.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: envMap, PMREM name. Kernel: envMap, PMREM name. We freeze conventions and we do not invent timings.
+**Say:** RGBELoader name. PMREMGenerator name. Intensity. Do not download a 500MB HDR. Local vendor.
 
-**Ask:** What would a wrong version of this look like? Want: 500MB HDR as the lab.
+**Ask:** Why is a metal sphere black in a black scene?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Look. Standard material needs an env to look 'PBR'.
+**Say:** Environment lights Standard. Background is optional wallpaper.
 
-**Say:** Cost. Big HDR.
+**Board:** two assignments. PMREM name.
 
-**Say:** Demo. env.
+**Say:** Cost: big HDR. Budget sentence, no invented fps.
 
-**Ask:** RGBE/exr name? Wait seven seconds. Take two answers.
+**Ask:** What does PMREM stand for as a teaching expansion?
 
-**They do:** On paper: background vs env toggle.
+**They do:** On paper: background vs environment one line each.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A metallic sphere in an env.. Zoom 140%. Read errors out loud.
+**Say:** Metallic sphere in an env. Demo 13-environment.html. Plant 500MB HDR. Plant only background, no environment.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** background vs env toggle.
+**Say:** Toggle background vs env. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: background vs env toggle.; intensity.. Homework: Written: env vs background.; Code: env.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: toggle; intensity. Homework: env vs background; env. Quiz: environment, PMREM, budget.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: envMap, PMREM name | Plant the first common mistake. |
-| 10–30 | A metallic sphere in an env. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | metal roughness 0.1 | Black. Plant. |
+| 10–30 | environment = tex | It wakes up. |
+| 30–45 | background off | They see the split. |
+| 45–60 | They toggle | Circulate. Tiny HDR. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. environment (4)
-2. PMREM (3)
-3. budget (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[ThreeJS Development/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Look.** Standard material needs an env to look 'PBR'.
-
-**2. Cost.** Big HDR. Budget.
-
-**3. Demo.** env.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[ThreeJS Development/exercises/Week 09]].
 
 ## If we run long, cut
 
-Demo
+Write a split-sum IBL. Keep env knob + budget.
 
 ## If we run short, add
 
-intensity.
+envMapIntensity slider.

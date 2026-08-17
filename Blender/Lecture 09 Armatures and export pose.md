@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** rest pose, apply  
-**Success check:** Apply rotation and scale on meshes.
+**Kernel:** apply rotation & scale; rest pose; Z-up Blender vs Y-up glTF; no negative scale mirror  
+**Success check:** they apply rotation/scale on the mesh before parenting, document rest pose, and check axes in a viewer later
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: rest pose, apply | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 9 | Goal: a bind pose that survives export | Invariant: unapplied scale is tiny/huge in Three.js; exporter converts Z-up but they still check`
 
 ## Board at the end (they photograph this)
 
 ```
-Ctrl+A apply rotation/scale
-Axes.
-Apply menu.
+Ctrl+A Rotation & Scale   on the mesh   (backup first)
+Do not apply location if it wrecks the scene
+
+Blender Z-up     glTF / Three.js Y-up
+exporter converts — still verify in a viewer
+
+negative scale 'to mirror'  →  facing bug
+IK named, optional; FK enough
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +44,11 @@ Apply menu.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Apply transforms. Unapplied scale is the classic 'tiny model / huge model' in Three.js.
+**Say:** Unapplied scale is the classic tiny model in Three.js. Face orientation from week 2 still applies. If it is wrong in a glTF viewer, the engine is not the bug.
 
-**Ask:** Apply rotation and scale on meshes? Wait seven seconds. Take two answers.
+**Ask:** Why apply scale before parenting to a bone? Wait. Want: the bone inherits a 100× scale and the mesh becomes a building or a speck.
 
-**Board:** parked strip. Then Ctrl+A apply rotation/scale.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +58,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: rest pose, apply. Kernel: rest pose, apply. We freeze conventions and we do not invent timings.
+**Say:** Bone axes overlay. Document rest pose in README. Negative scale to mirror is forbidden. IK name only.
 
-**Ask:** What would a wrong version of this look like? Want: Applying location and losing the scene.
+**Ask:** Who is responsible for Y-up — Blender, exporter, or Three.js?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +72,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Apply transforms. Unapplied scale is the classic 'tiny model / huge model' in Three.js.
+**Say:** Apply rot/scale with a backup.
 
-**Say:** Orientation. Blender Z-up vs glTF / Three.js Y-up.
+**Board:** Z vs Y. Rest pose.
 
-**Say:** IK. Name it.
+**Say:** Plant applying location and losing the scene.
 
-**Ask:** Apply rotation and scale on meshes? Wait seven seconds. Take two answers.
+**Ask:** What is rest pose in one sentence?
 
-**They do:** On paper: Bone axes overlay.
+**They do:** On paper: checklist before export parenting.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Apply scale on last week's arm; re-parent if needed; pose two frames.. Zoom 140%. Read errors out loud.
+**Say:** Apply scale; parent; pose. Plant negative scale mirror. Plant apply location.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +96,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Bone axes overlay.
+**Say:** Bone axes overlay. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +106,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Bone axes overlay.; Document rest pose in README.. Homework: Written: Z-up vs Y-up.; Checklist screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: axes overlay; rest pose in README. Homework: Z-up vs Y-up; checklist screenshot. Quiz: apply scale why, Z vs Y, rest pose.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +118,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: rest pose, apply | Plant the first common mistake. |
-| 10–30 | Apply scale on last week's arm; re-parent if needed; pose two frames. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Unapplied scale plant | Cube is 100 m. |
+| 10–30 | Ctrl+A rot/scale | Backup first. |
+| 30–45 | Y-up talk | Viewer later. |
+| 45–60 | They document rest pose | Circulate. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -138,9 +143,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. apply scale why (4)
-2. Z vs Y (3)
-3. rest pose (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +162,7 @@ See [[Blender/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Apply transforms.** Unapplied scale is the classic 'tiny model / huge model' in Three.js. Ctrl+A → All Transforms on the mesh before parenting, with a backup.
-
-**2. Orientation.** Blender Z-up vs glTF / Three.js Y-up. Exporter converts. Students must still check in the engine.
-
-**3. IK.** Name it. Optional extra. FK is enough for a spinning sign or a simple arm.
+_none_
 
 ---
 
@@ -174,7 +173,7 @@ See [[Blender/exercises/Week 09]].
 
 ## If we run long, cut
 
-IK
+Full IK. Keep apply + rest + axes.
 
 ## If we run short, add
 

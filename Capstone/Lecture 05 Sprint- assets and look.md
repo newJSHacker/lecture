@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** budgeted glTF  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** budgeted glTF: still vs engine, license table, units/facing from Blender  
+**Success check:** a TA can open the viewer screenshot and the license table without a new engine
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,11 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-budget sheet
-Budget.
+budget:  tris · maps · draw calls   (count)
+still vs engine
+license table
+Cuts: second hero mesh, 8k maps
+no invented fps
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +39,9 @@ Budget.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: assets and look). Unlabeled dumps fail. Budget sheet + still vs engine. Demo Capstone/code/03-budget.html.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, do you cut the 8k map or the verb?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +49,15 @@ Budget.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Budget sheet + still vs engine.
+**Say:** Desk review: glTF viewer screenshot, license rows, units. No new engine.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Budget sheet first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** License table in repo. Next sprint is the verb. Do not replace the problem with a prettier mesh.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +67,9 @@ Budget.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: budgeted glTF | Plant the first common mistake. |
-| 10–30 | Budget sheet + still vs engine. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Budget headings | Photograph. |
+| 10–50 | Desk review | Still vs engine. |
+| 50–60 | License pass | Unlabeled dump plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +98,12 @@ See [[Capstone/exercises/Week 05]].
 
 ## Notes from the outline
 
-**1. Assets.** Blender course habits. Viewer before engine.
-**2. Look.** RTR stack: even a simple one, documented.
-**3. Legal.** Licenses in a table.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New hero mesh. Keep budget + licenses.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60s still-vs-engine compare.

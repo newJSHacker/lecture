@@ -1,97 +1,185 @@
 # Lecture 7 — Polygon triangulation
 
-**Time:** 75 min lecture + 60 min live coding  
-**Algorithm this week:** ear clipping  
-**Board first:** a concave polygon, one ear shaded, then the remaining polygon
+**Week 7 of 15** · Computational Geometry  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** ear: convex tip + no other vertex in triangle(v−1,v,v+1); clip → n−2 triangles, O(n²); fail on bowtie  
+**Success check:** a C-shape yields n−2 triangles that fill; a bowtie throws; they have the midterm list
 
-Also today: hand out the **midterm topic list** (end of this note).
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/07-jarvis.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — a concave polygon, one ear shaded, then the remaining polygon.
-- Parked strip: `Lecture 7 | Polygon triangulation | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Quiz from Lecture 6 (10 min, paper or LMS).
+- Demo: `Computational Geometry/code/07-jarvis.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 7 | Goal: triangulate a simple polygon because GPUs want triangles | Invariant: predicates before constructions; degeneracy is the course`
 
 ## Board at the end (they photograph this)
 
 ```
-a concave polygon, one ear shaded, then the remaining polygon
-Induction split along a diagonal.
-One ear, one interior point that invalidates a candidate.
-Split / merge vertex sketches.
-Same point set: a bad skinny triangulation vs a Delaunay preview.
+simple n-gon: n−2 triangles, n−3 diagonals
+ear tip: convex AND no other vertex in the ear triangle
+Meisters: n≥4 ⇒ at least two ears
+
+isEar: orient convex (not reflex); point-in-TRIANGLE not PIP
+holes: not handled     Chazelle O(n): name only
+
+ear clip ≠ Delaunay     CDT: name; Week 11
+
+split vs merge vertex: label on a drawing (midterm)
 ```
 
 ## Slides today (cap: 6)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–10 | Quiz Week 6 |
-| 10–25 | Why triangulate; n − 2 triangles |
-| 25–50 | Ears and ear clipping |
-| 50–65 | Monotone polygons (idea) |
-| 65–75 | Constrained vs mesh triangulation; midterm list |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Prove a simple polygon with n vertices has n − 2 triangles and n − 3 diagonals.
-2. Define an ear and Meisters’ theorem (teaching statement).
-3. Implement ear clipping and know it is O(n²).
-4. Explain why a y-monotone polygon is easier (O(n) after sort).
-5. Distinguish polygon triangulation from Delaunay (Week 11).
+### Minutes 0–10 — Retrieve (quiz)
+
+Hand out the Lecture 6 quiz. Mark one item together. Then:
+
+**Say:** Induction: a diagonal splits; triangles add to n−2. A reflex vertex is never an ear tip — the diagonal would lie outside. Hand out the midterm list today: no Voronoi, no kd-tree, no DCEL on the paper.
+
+**Ask:** How many triangles in a simple 10-gon? Wait. Want: 8. Diagonals: 7.
+
+**Board:** parked strip. Then a concave polygon, one ear shaded, then the remaining polygon.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *Polygon triangulation*.
+
+**Do not:** Testing `isEar` without the convex-turn test (a reflex “ear” diagonal is outside).
+
+### Minutes 10–12 — Frame
+
+**Say:** y-monotone: two chains, O(n) after sort. Full pipeline: monotone split O(n log n) then linear — picture of start/end/split/merge/regular; do not require the sweep. Same point set can be a skinny ear-clip or a Delaunay preview.
+
+**Ask:** Does ear clipping as taught handle holes?
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** Existence of a diagonal from an ear — draw it; write-up is homework.
+
+**Board:** induction split. Ear with an interior point that invalidates it. Split/merge sketches. Skinny vs Delaunay.
+
+**Say:** Midterm topics 1–11 on a handout. Degeneracy will appear.
+
+**Ask:** Define ear tip.
+
+**They do:** Induction n−2. A concave quad has two ears (not a convex n-gon).
+
+**Do not:** Skip the attempt.
+
+### Minutes 35–50 — Show
+
+**Say:** Step-mode ears: candidate highlighted; green legal / red point inside; faint clipped ears. C-shape: reflex refused, then accepted after a neighbor clips. Bowtie: clear error, not an infinite loop. Demo 11-ear-clip.html. Plant isEar without the convex-turn test. Plant PIP on whole P instead of the ear triangle.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** isEar for one index. Eight minutes.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Lab: earClip; number triangles; convex, C, 12-vertex room; bowtie throws. Homework: study the list. Quiz: counts, ear, O(n²), holes, vs Delaunay. Next week exam.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
 
-## 1. Why triangulate (15 min)
+## Live coding (60 min)
 
-GPUs draw triangles. A filled polygon in a canvas, a font outline, a UI blob, a roof footprint — all become triangles.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | n−2 on the board | They count a hexagon. |
+| 15–40 | Clip a C | Reflex refused. |
+| 40–50 | Fail a bowtie | No infinite loop. |
+| 50–60 | Issue midterm list | Photograph. No DCEL on it. |
 
+Point them at `Computational Geometry/code/07-jarvis.html` as the after-class check, not as the lecture.
+
+---
+
+## Lab
+
+1. Implement `earClip`.
+2. Draw diagonals and number triangles in clip order.
+3. Inputs: convex, C-shape, a 12-vertex simple room.
+4. Bowtie must throw.
+
+---
+
+## Homework
+
+1. Implement ear clipping.
+2. Written: induction that a simple n-gon has n − 2 triangles.
+3. Written: define an ear. Give a polygon with exactly two ears (a convex quadrilateral is too easy; use a convex n-gon — it has n ears — so instead use a concave quad, which has two).
+4. **Study** the midterm list below.
+
+---
+
+## Quiz next meeting (they hear this now)
+
+1. How many triangles in a simple 10-gon? How many diagonals? (2 pts)
+2. Define ear tip. (3 pts)
+3. Ear clipping time? (2 pts)
+4. Does ear clipping as taught handle holes? (1 pt)
+5. Name one difference vs Delaunay. (2 pts)
+
+
+## Extra exercises
+
+See [[Computational Geometry/exercises/Week 07]].
+
+---
+
+## Notes you may still need (from the outline)
+
+**1. Why triangulate (15 min).** GPUs draw triangles. A filled polygon in a canvas, a font outline, a UI blob, a roof footprint — all become triangles.
 **Theorem.** Every simple polygon with n ≥ 3 vertices has a triangulation: n − 2 triangles, n − 3 diagonals, using only existing vertices.
-
 **Proof sketch (induction).**
-
 n = 3: already a triangle.
-
 n > 3: a simple polygon has a diagonal (exists; we will get one from an ear). A diagonal splits P into P1, P2 with n1 + n2 = n + 2 vertices (the two endpoints are shared). By induction, triangles = (n1 − 2) + (n2 − 2) = n − 2.
-
 **Existence of a diagonal.** Every simple n > 3 polygon has at least three convex vertices. At least one of those is an **ear**: the diagonal between its neighbors lies inside P. Clipping that ear is a diagonal.
+Do not spend the whole lecture on the existenc
 
-Do not spend the whole lecture on the existence proof. Draw it. Assign the write-up as homework.
-
----
-
-## 2. Ears (25 min)
-
-Vertex vi is an **ear tip** if:
-
+**2. Ears (25 min).** Vertex vi is an **ear tip** if:
 1. vi is convex (not reflex, not a skip of a flat-only policy),
 2. the diagonal `v_{i-1} v_{i+1}` lies **inside** P,
 3. equivalently: triangle `v_{i-1} v_i v_{i+1}` contains **no other vertex** of P.
-
 Condition 3 is what we implement. Because P is simple, “no vertex inside the ear triangle” plus “vi convex” implies the diagonal is inside.
-
 ### Meisters’ theorem (state)
-
 Every simple polygon with n ≥ 4 has at least two ears.
-
 ### Ear clipping
-
 ```
 earClip(P):
     if not simple: fail
@@ -105,176 +193,42 @@ earClip(P):
                 remove vi from V
                 found = true
                 break
-        if not found: fail   // not simple, or numeric garbage
-    T.append(remaining triangle)
-    return T
+      
 
-isEar(vi, V):
-    if orient(v_{i-1}, vi, v_{i+1}) is not a convex turn: return false
-    for each vertex q in V except the three:
-        if q is inside triangle(v_{i-1}, vi, v_{i+1})
-           or on its boundary (except the three vertices):
-            return false
-    return true
-```
-
-Use Week 2 point-in-triangle: three orientation tests of the same sign (plus boundary policy).
-
-### Complexity
-
-Each of n − 3 clips may scan O(n) vertices to test ears.  
-**O(n²).** Fine for n up to a few thousand (UI shapes, font glyphs). Not fine for a 200k-vertex GIS lake.
-
-Faster: O(n log n) via monotone subdivision (below). O(n) exists (Chazelle) — mention, do not teach.
-
-### Degeneracy
-
-- Holes: ear clipping as written does **not** handle holes. Either ban holes or cut a channel to the outer boundary first.
-- Flat vertices: treat as not ears; they can be skipped or removed in a preprocess.
-- Almost-collinear “no vertex inside” with a vertex sitting on the diagonal: reject as ear (boundary case).
-
----
-
-## 3. Monotone polygons (15 min)
-
-A polygon is **y-monotone** if its boundary splits into two chains from the top vertex to the bottom vertex, and each chain is never-upward (or never-downward).
-
+**3. Monotone polygons (15 min).** A polygon is **y-monotone** if its boundary splits into two chains from the top vertex to the bottom vertex, and each chain is never-upward (or never-downward).
 A y-monotone polygon can be triangulated in **O(n)** with a stack, similar in spirit to Andrew’s hull scan.
-
 **Full O(n log n) pipeline:**
-
 1. Add diagonals to split a simple polygon into y-monotone pieces (sweep, O(n log n)).
 2. Triangulate each piece in linear time.
-
 Teach step 1 as a picture: merge/split/start/end/regular vertices. Do **not** require the sweep implementation. Students should be able to **label** a vertex as split vs merge on a drawing.
-
 | Vertex type | Local picture | Action (idea) |
 | --- | --- | --- |
 | Start | both neighbors below, interior below | new helper |
-| End | both neighbors above, interior above | close a piece |
-| Split | both neighbors below, interior above | add diagonal to helper |
-| Merge | both neighbors above, interior below | add diagonal later |
-| Regular | one neighbor up, one down | update helper |
+| End | both neighbors above, interior above | close
 
-This table is enough for the midterm at the level “what is a split vertex?”
-
----
-
-## 4. Two different triangulations (10 min)
-
-| | Polygon triangulation | Delaunay (Week 11) |
+**4. Two different triangulations (10 min).** | | Polygon triangulation | Delaunay (Week 11) |
 | --- | --- | --- |
 | Input | a simple polygon (edges are constraints) | a point set |
 | Edges | all boundary edges must appear | no boundary unless we add a hull |
 | Quality | any triangulation is allowed | empty circumcircle |
 | Use | fill a shape | well-shaped mesh, terrain |
-
 **Constrained Delaunay** sits between them: respect given edges, maximize the Delaunay property elsewhere. Name it. Project option.
-
 ---
-
-## Live coding (60 min)
-
-Ear clipping in step mode.
-
-- Current candidate vertex highlighted
-- Ear triangle filled green if legal, red if a point is inside
-- Clipped ears stay as faint triangles
-- Remaining polygon outlined
-
-Clip a C-shaped polygon. Students should see a reflex vertex refused, then accepted after its neighbor is removed.
-
-Fail on a bowtie with a clear error, not an infinite loop.
-
----
-
-## Lab
-
-1. Implement `earClip`.
-2. Draw diagonals and number triangles in clip order.
-3. Inputs: convex, C-shape, a 12-vertex simple room.
-4. Bowtie must throw.
-
-Done when the C-shape produces n − 2 triangles and the union visually fills the polygon.
-
----
-
-## Homework
-
-1. Implement ear clipping.
-2. Written: induction that a simple n-gon has n − 2 triangles.
-3. Written: define an ear. Give a polygon with exactly two ears (a convex quadrilateral is too easy; use a convex n-gon — it has n ears — so instead use a concave quad, which has two).
-4. **Study** the midterm list below.
-
----
-
-## Quiz (10 min)
-
-1. How many triangles in a simple 10-gon? How many diagonals? (2 pts)
-2. Define ear tip. (3 pts)
-3. Ear clipping time? (2 pts)
-4. Does ear clipping as taught handle holes? (1 pt)
-5. Name one difference vs Delaunay. (2 pts)
-
----
-
-## Midterm topic list (print / post today)
-
-Week 8, written, 60–75 minutes, no laptop.
-
-1. `orient`, signed area, predicates vs constructions
-2. Segment intersection types: proper / touch / overlap / none
-3. Point in polygon: even–odd and the vertex-hit rule
-4. Convex set; convex vs simple vs self-intersecting
-5. Same-turn ⇔ convex for **simple** polygons (short proof)
-6. Jarvis: idea, Θ(n h), when it is slow
-7. Andrew: sort key, stack, O(n log n), collinear policy
-8. Hull lower bound via the parabola (idea)
-9. Sweep: events, status, why neighbors only
-10. Ear: definition, n − 2 triangles, O(n²)
-11. One degeneracy question (collinear / T-junction / ray through vertex)
-
-No Voronoi, no kd-tree, no DCEL on the midterm.
 
 ---
 
 ## Common mistakes
 
-- Testing `isEar` without the convex-turn test (a reflex “ear” diagonal is outside).
-- Forgetting the polygon is cyclic.
-- Using point-in-polygon on the whole P instead of point-in-triangle.
-- Infinite loop on a self-intersecting input.
-- Claiming any triangulation is Delaunay.
+1. Testing `isEar` without the convex-turn test (a reflex “ear” diagonal is outside).
+2. Forgetting the polygon is cyclic.
+3. Using point-in-polygon on the whole P instead of point-in-triangle.
+4. Infinite loop on a self-intersecting input.
+5. Claiming any triangulation is Delaunay.
 
----
+## If we run long, cut
 
-## Board drawings
+Monotone sweep implementation. Keep ears + n−2 + the list.
 
-1. Induction split along a diagonal.
-2. One ear, one interior point that invalidates a candidate.
-3. Split / merge vertex sketches.
-4. Same point set: a bad skinny triangulation vs a Delaunay preview.
+## If we run short, add
 
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 07]] · Demo: [11-ear-clip.html](code/11-ear-clip.html)
-
-1. n = 12: triangles? diagonals?
-2. Reflex vertex: why it is never an ear tip.
-3. Assert `|T| = n − 2` on a C-shape. If short, the polygon is not simple.
-4. Point-in-**triangle**, not point-in-polygon, for the interior-vertex test.
-
-```js
-function isEar(P, i, ccw) {
-  const a = P.at(i - 1), b = P[i], c = P[(i + 1) % P.length];
-  const o = orient(a, b, c);
-  if (ccw ? o <= 0 : o >= 0) return false;
-  for (const q of P) {
-    if (q === a || q === b || q === c) continue;
-    if (pointInTriangle(q, a, b, c) !== "OUTSIDE") return false;
-  }
-  return true;
-}
-```
+Label one split vertex on a drawing.

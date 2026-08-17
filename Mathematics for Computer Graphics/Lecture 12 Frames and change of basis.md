@@ -46,11 +46,11 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 **Ask:** What is a frame, in three words? Wait. Want: origin plus axes.
 
-**Board:** parked strip. Then two frames, same point.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *origin + axes*.
+**They do:** write today’s question in their notes: *a frame = origin + axes; orthonormal 2D from one vector + perp; lookAt sketch*.
 
 **Do not:** Scaling axes and still calling them orthonormal.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 **They do:** Sketch lookAt: eye, target, up → axes.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/09-lookat.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. what is a frame (3)
-2. M columns (4)
-3. orthonormal (3)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. A frame is an origin and axes.** Object space is a frame. World is a frame. Camera is a frame.
-
-**2. Columns of M.** Where object x,y,z,origin go in world. CG I Week 6.
-
-**3. Orthonormal.** dot 0, length 1. lookAt builds one.
+_none_
 
 ---
 

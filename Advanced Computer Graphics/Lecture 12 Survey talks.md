@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** 12 min teaching talk  
-**Success check:** Each student (or pair) teaches one GI/volume/deferred topic.
+**Kernel:** prepare a 12 min teaching talk: one method, one figure, one limit, bibliography  
+**Success check:** they can rehearse 5 min with a claim sentence and a cited figure
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: 12 min teaching talk | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 12 | Goal: they can teach one name | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-one method, one figure, one limit
-Talk clock.
+12 min  +  5 questions   (next meeting)
+one method · one figure · one limit · bib
+
+topics: photon mapping, DDGI, ReSTIR names, SSS, NeRF/3DGS as survey
+NeRF: name, figure, limit (edit/dynamic) — not a required impl
+Wikipedia-on-stage  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Talk clock.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Why. Advanced course = they can **teach**.
+**Say:** Advanced course means they can teach. Next week is the talks. Today is content: structure, topics, what not to implement. Unattributed figures fail. Full NeRF training is skipped.
 
-**Ask:** Each student (or pair) teaches one GI/volume/deferred topic? Wait seven seconds. Take two answers.
+**Ask:** If you cannot state the limitation, what did you copy? Wait. Want: a demo.
 
-**Board:** parked strip. Then one method, one figure, one limit.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: 12 min teaching talk. Kernel: 12 min teaching talk. We freeze conventions and we do not invent timings.
+**Say:** Photon mapping, DDGI, ReSTIR names, SSS, neural radiance fields as survey. 3DGS: name and limit. Slides or board photos. Bib required.
 
-**Ask:** What would a wrong version of this look like? Want: reading Wikipedia on stage.
+**Ask:** What is the one sentence of the talk?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why. Advanced course = they can **teach**.
+**Say:** Why they teach. Capstone energy.
 
-**Say:** Topics. Photon mapping, DDGI, RESTIR names, neural radiance fields **as a survey** (not a full NeRF impl), SSS.
+**Board:** method / figure / limit / bib. Clock.
 
-**Say:** NeRF/3DGS. Name, one figure, limit (dynamic scenes, editing).
+**Say:** NeRF/3DGS survey only. No required impl.
 
-**Ask:** Each student (or pair) teaches one GI/volume/deferred topic? Wait seven seconds. Take two answers.
+**Ask:** What must a cited figure include?
 
-**They do:** On paper: slides or board photos.
+**They do:** Talk outline: four bullets + bib key.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Talk rehearsal 5 min in lab; feedback.. Zoom 140%. Read errors out loud.
+**Say:** 5 min rehearsal in lab; feedback. Plant Wikipedia. Plant unattributed figure. Plant NeRF impl as required.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** slides or board photos.
+**Say:** Write the claim sentence and limitation. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: slides or board photos.; bib.. Homework: Talk notes due Week 13–14 slot if needed.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: slides or board photos; bib. Homework: freeze the talk. Quiz: four parts of a talk, NeRF not required. Next: presentations.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: 12 min teaching talk | Plant the first common mistake. |
-| 10–30 | Talk rehearsal 5 min in lab; feedback. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Talk spine | Plant Wikipedia. |
+| 15–40 | 5 min rehearsal | Plant no limit. |
+| 40–55 | Bib + figure credit | Unattributed plant. |
+| 55–60 | They freeze the claim | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. one figure (3)
-2. one limit (4)
-3. citation (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +152,7 @@ See [[Advanced Computer Graphics/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why.** Advanced course = they can **teach**. Capstone energy.
-
-**2. Topics.** Photon mapping, DDGI, RESTIR names, neural radiance fields **as a survey** (not a full NeRF impl), SSS.
-
-**3. NeRF/3DGS.** Name, one figure, limit (dynamic scenes, editing). Not a required impl.
+_none_
 
 ---
 
@@ -165,8 +163,8 @@ See [[Advanced Computer Graphics/exercises/Week 12]].
 
 ## If we run long, cut
 
-NeRF/3DGS
+Second topic. Keep one talk spine.
 
 ## If we run short, add
 
-bib.
+Bib entries on the outline.

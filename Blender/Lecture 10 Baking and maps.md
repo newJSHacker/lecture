@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** normal, AO names  
-**Success check:** Know what a normal map stores.
+**Kernel:** normal map stores offset to N; AO named; BaseColor sRGB, data maps non-color  
+**Success check:** they know what a normal map stores and do not bake 8k or sRGB normals
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: normal, AO names | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 10 | Goal: maps an engine can sample | Invariant: 512–1k for student crates; 4k is a budget lecture not a flex; same colorSpace as Three.js week 7`
 
 ## Board at the end (they photograph this)
 
 ```
-high → low bake idea
-High-low arrows.
-Map slots.
+BaseColor     sRGB
+Normal / Roughness / Metal     non-color (linear)
+
+normal map = tangent-space offset to N
+AO = cheap cavity / contact (name)
+
+bake: high bevelled cube → low cube
+512–1024     not 8k
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +44,11 @@ Map slots.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Maps. BaseColor sRGB.
+**Say:** Same as Three.js colorSpace week. Baking every map at 8k is a fail. Substance is optional, not required. A subdivided bevelled cube onto a low cube is enough.
 
-**Ask:** Know what a normal map stores? Wait seven seconds. Take two answers.
+**Ask:** Is a 4k normal map on a mug a quality win? Wait. Want: usually a budget fail; texel density and distance matter.
 
-**Board:** parked strip. Then high → low bake idea.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +58,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: normal, AO names. Kernel: normal, AO names. We freeze conventions and we do not invent timings.
+**Say:** Cage, ray distance named. Color space check. Map list in README.
 
-**Ask:** What would a wrong version of this look like? Want: Baking every map at 8k.
+**Ask:** What do the channels of a normal map mean at teaching level?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +72,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Maps. BaseColor sRGB.
+**Say:** What a normal map stores. AO name.
 
-**Say:** Bake. Cage, ray distance.
+**Board:** sRGB vs non-color.
 
-**Say:** Size. 512–1k for student crates.
+**Say:** Plant sRGB normals. Plant 8k.
 
-**Ask:** Know what a normal map stores? Wait seven seconds. Take two answers.
+**Ask:** Why non-color on roughness?
 
-**They do:** On paper: Normal map on a flat plane from a high bevel extra.
+**They do:** On paper: four slots and colorSpace.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Bake or paint roughness dirt on the crate; show in Principled.. Zoom 140%. Read errors out loud.
+**Say:** Bake a bevelled high onto a low cube; assign. Plant 8k. Plant sRGB normals.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +96,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Normal map on a flat plane from a high bevel extra.
+**Say:** Color space check on the maps. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +106,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Normal map on a flat plane from a high bevel extra.; Color space check.. Homework: Written: which maps are sRGB.; Map list in README.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: normal on a flat plane extra; color space check. Homework: which maps are sRGB; map list in README. Quiz: normal channels, AO, 4k on a mug?.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +118,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: normal, AO names | Plant the first common mistake. |
-| 10–30 | Bake or paint roughness dirt on the crate; show in Principled. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | High bevel / low cube | Enough. |
+| 10–30 | Bake normal | Plant 8k. |
+| 30–45 | non-color vs sRGB | Plant sRGB normal. |
+| 45–60 | They list maps in README | Circulate. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -138,9 +143,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. normal map channels (4)
-2. AO (3)
-3. 4k on a mug? (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +162,7 @@ See [[Blender/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Maps.** BaseColor sRGB. Normal / Roughness / Metal non-color. Same as Three.js `colorSpace` week.
-
-**2. Bake.** Cage, ray distance. A subdivided bevelled cube onto a low cube is enough. Substance is optional, not required.
-
-**3. Size.** 512–1k for student crates. 4k is a budget lecture, not a flex.
+_none_
 
 ---
 
@@ -174,8 +173,8 @@ See [[Blender/exercises/Week 10]].
 
 ## If we run long, cut
 
-Size
+Substance Painter. Keep bake + colorSpace.
 
 ## If we run short, add
 
-Color space check.
+Normal on a flat plane from a high bevel extra.

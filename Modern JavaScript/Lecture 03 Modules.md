@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** export import  
-**Success check:** export function.
+**Kernel:** named export / import; type=module; serve the folder  
+**Success check:** they split lerp into math.js and import it; they can say why file:// failed
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,26 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/08-modules.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: export import | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 3 | Goal: two files, one named export | Invariant: a file is an API; no hidden globals; file:// often breaks modules`
 
 ## Board at the end (they photograph this)
 
 ```
-files as API
-Arrows between files.
+// math.js
+export function lerp(a, b, t) { return a + (b-a)*t; }
+
+// main.js   <script type="module" src="main.js">
+import { lerp } from './math.js';
+
+file://  →  often fails     python -m http.server
+named exports = course policy
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: console CORS / module error on file:// | photograph the error; do not draw Chrome |
 
 ---
 
@@ -38,11 +43,11 @@ Arrows between files.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Named exports. Course policy: named exports for kernels.
+**Say:** If it is not a module with a test, it is not a kernel. Today the file boundary is the API. Mixing a CDN script until it ‘works’ is how secrets and version skew arrive.
 
-**Ask:** export function? Wait seven seconds. Take two answers.
+**Ask:** Why did import fail when you double-clicked the HTML? Wait. Want: file:// / modules / CORS.
 
-**Board:** parked strip. Then files as API.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: export import. Kernel: export import. We freeze conventions and we do not invent timings.
+**Say:** Named exports for kernels. Default is optional, not the policy. Browsers need type=module and a local server. Bundlers preview — Vite is next week, not today.
 
-**Ask:** What would a wrong version of this look like? Want: Mixing remote script URLs with local modules until it 'works'.
+**Ask:** Relative path: './math.js' — may you omit the .js in the browser? Want: no, not without a bundler.
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Named exports. Course policy: named exports for kernels.
+**Say:** export is the public list. import names what you take. Nothing else leaks.
 
-**Say:** Browsers. file:// often fails.
+**Board:** two files, one arrow between them labeled lerp.
 
-**Say:** Bundlers preview. Vite next week.
+**Say:** Serve: python -m http.server or npx serve in the folder. No CDN. No remote script URL glued to a local import.
 
-**Ask:** export function? Wait seven seconds. Take two answers.
+**Ask:** Named vs default — which does this course write for kernels?
 
-**They do:** On paper: Three modules.
+**They do:** On paper: three modules — math.js (lerp, clamp), io.js (name only), main.js imports both.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Split lerp into math.js; import in main.js.. Zoom 140%. Read errors out loud.
+**Say:** Split lerp into math.js; import in main.js. Plant file://. Read the error. Then serve. Demo Modern JavaScript/code/08-modules.html is the reminder page — you still write the two files live.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Three modules.
+**Say:** Three modules on disk. README: how to serve. Eight minutes for lerp+import even if io.js is a stub.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Three modules.; README serve.. Homework: Written: ESM vs classic script.; Code: import.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: three modules + README serve. Homework: ESM vs classic script; import clamp. Quiz: export syntax, why serve, named vs default.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: export import | Plant the first common mistake. |
-| 10–30 | Split lerp into math.js; import in main.js. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | type=module + file:// | Plant double-click. Error out loud. |
+| 10–30 | math.js lerp + import | Plant missing .js or wrong path. |
+| 30–45 | http.server | They reload; import works. |
+| 45–60 | They add clamp export | Circulate. No CDN. |
 
 Point them at `Modern JavaScript/code/08-modules.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Modern JavaScript/code/08-modules.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. export syntax (4)
-2. why serve (3)
-3. named vs default (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Modern JavaScript/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Named exports.** Course policy: named exports for kernels. Default optional.
-
-**2. Browsers.** file:// often fails. npx serve.
-
-**3. Bundlers preview.** Vite next week.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[Modern JavaScript/exercises/Week 03]].
 
 ## If we run long, cut
 
-Bundlers preview
+Bundlers preview. Keep named export + serve.
 
 ## If we run short, add
 
-README serve.
+README serve: one command, one URL.

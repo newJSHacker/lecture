@@ -1,92 +1,185 @@
 # Lecture 4 — Convex hull I (intuition and slow algorithms)
 
-**Time:** 75 min lecture + 60 min live coding  
-**Algorithm this week:** Jarvis march (gift wrapping)  
-**Board first:** rubber band around nails
+**Week 4 of 15** · Computational Geometry  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** Jarvis: start lowest-then-leftmost; next = all-left supporting; collinear take farthest; Θ(n h)  
+**Success check:** they can wrap 8 points by hand; circle n is slower than a cloud with h=3; no atan2
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/04-point-in-polygon.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — rubber band around nails.
-- Parked strip: `Lecture 4 | Convex hull I (intuition and slow algorithms) | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Quiz from Lecture 3 (10 min, paper or LMS).
+- Demo: `Computational Geometry/code/04-point-in-polygon.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 4 | Goal: the hull as extreme points before a famous O(n log n) algorithm | Invariant: predicates before constructions; degeneracy is the course`
 
 ## Board at the end (they photograph this)
 
 ```
-rubber band around nails
-Rubber band / extreme points.
-One full Jarvis wrap on 8 points with the candidate ray.
-Parabola reduction: points `(xi, xi²)` and the lower hull.
+CH(S) = smallest convex set containing S
+extreme = hull vertex = supporting line through p, S on one side
+
+policy: unique points; drop strictly intermediate collinear
+
+start = lowest then leftmost
+o < 0: r is right of p→q → q = r
+o = 0 and farther: q = r
+
+time Θ(n h)     circle: h=n → Θ(n²)
+Ω(n log n): points (xi, xi²); hull visits sorted x
 ```
 
 ## Slides today (cap: 6)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–10 | Quiz Week 3 |
-| 10–25 | Definitions: hull, extreme points, supporting line |
-| 25–50 | Jarvis march, invariant, complexity |
-| 50–65 | Incremental construction (idea) |
-| 65–75 | Lower bound: hull is at least sorting |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-1. Define the convex hull of a finite point set.
-2. Identify extreme points and supporting lines.
-3. Run Jarvis march by hand and in code.
-4. State the complexity Θ(n h) and when that is good or bad.
-5. Explain why Ω(n log n) is a lower bound in the algebraic decision-tree sense (teaching level).
+### Minutes 0–10 — Retrieve (quiz)
+
+Hand out the Lecture 3 quiz. Mark one item together. Then:
+
+**Say:** Rubber band around nails. Jarvis is output-sensitive: great when h is tiny, quadratic when points already sit on a circle. Polar angles wrap — we use orient.
+
+**Ask:** Jarvis time in n and h? Wait. Want: Θ(n h).
+
+**Board:** parked strip. Then rubber band around nails.
+
+**Slide:** none unless the table above has a photograph.
+
+**They do:** write today’s question in their notes: *Convex hull I (intuition and slow algorithms)*.
+
+**Do not:** Starting at a random point (may be interior; the first “wrap” is undefined).
+
+### Minutes 10–12 — Frame
+
+**Say:** Incremental hull: idea only (tangents, O(n²) naive). 3D incremental is the later mental model. Lower bound is algebraic decision-tree teaching level: if hull were o(n log n), sorting would be too. Measure cloud vs circle; do not invent milliseconds.
+
+**Ask:** Why start at lowest-then-leftmost?
+
+**Board:** today’s question in one line.
+
+**Slide:** none.
+
+**They do:** copy the parked invariant.
+
+**Do not:** skip the attempt later to “cover more.”
+
+### Minutes 12–35 — Build
+
+**Say:** Interior points are not extreme. Collinear middles are not hull vertices under our policy.
+
+**Board:** rubber band. One full wrap on 8 points with the candidate ray. Parabola (xi,xi²) and the lower hull.
+
+**Say:** Invariant: polyline so far is a hull prefix; supporting ray has S on its left if we wrap CCW.
+
+**Ask:** Is Jarvis optimal for points in convex position? Why not?
+
+**They do:** Written: h=3 input and h=n input with Θ. Parabola reduction 6–8 sentences + 5 points.
+
+**Do not:** Skip the attempt.
+
+### Minutes 35–50 — Show
+
+**Say:** Step mode: N one comparison, E one edge, Space finish. Current p/q/r colored. Time n=2000 cloud vs n=400 circle. Demo 07-jarvis.html. Plant starting at a random interior point. Plant nearest collinear (cuts the edge short). Plant duplicates infinite loop.
+
+**Slide:** none. Live editor or local demo. Zoom 140%.
+
+**They do:** watch hands; then the same kernel on their machine when you say so.
+
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
+
+### Minutes 50–65 — Attempt
+
+**Say:** One wrap step: given p and candidates, pick next q. Eight minutes.
+
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
+
+**Board:** after they struggle, write one correct fragment.
+
+**Do not:** live-code the attempt for them before they try.
+
+### Minutes 65–75 — Land
+
+**Say:** Lab: Jarvis; buttons cloud/circle/triangle+cloud; print n,h,elapsed; table 100/1k/10k. Homework: collinear policy + duplicate removal. Quiz: extreme point, Θ(nh), start, convex-position, sorting reduction.
+
+**Board:** add the invariant if it is not already in the parked strip.
+
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
 
-## 1. Definitions (15 min)
+## Live coding (60 min)
 
-Let S be a finite set of n points in the plane.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Definitions + policy | Drop middle collinear. |
+| 15–40 | Step-mode wrap | q jumps when a righter point appears. |
+| 40–50 | Circle vs cloud timing | Measure; do not invent ms. |
+| 50–60 | They implement the inner for-r | Circulate. No atan2. |
 
+Point them at `Computational Geometry/code/04-point-in-polygon.html` as the after-class check, not as the lecture.
+
+---
+
+## Lab
+
+1. Implement Jarvis march.
+2. Buttons: random cloud, random circle, triangle-plus-cloud.
+3. Print n, h, elapsed milliseconds.
+4. Measure n = 100, 1_000, 10_000 on cloud and on circle. Table in the README.
+
+---
+
+## Homework
+
+1. Implement Jarvis with the course collinear policy and duplicate removal.
+2. Written: an input with h = 3 and an input with h = n. State the resulting Θ.
+3. Written: 6–8 sentences on the parabola reduction. Draw 5 points on y = x² and their hull.
+
+---
+
+## Quiz next meeting (they hear this now)
+
+1. Define extreme point. (2 pts)
+2. Jarvis time in terms of n and h. (2 pts)
+3. Why start at lowest-then-leftmost? (2 pts)
+4. Is Jarvis optimal for points in convex position? Why? (2 pts)
+5. One sentence: how sorting reduces to hull. (2 pts)
+
+
+## Extra exercises
+
+See [[Computational Geometry/exercises/Week 04]].
+
+---
+
+## Notes you may still need (from the outline)
+
+**1. Definitions (15 min).** Let S be a finite set of n points in the plane.
 The **convex hull** `CH(S)` is the smallest convex set containing S.  
 Equivalently: the intersection of all convex sets that contain S.  
 Equivalently: the set of all convex combinations of points of S.
-
 For a finite set, `CH(S)` is a convex polygon whose vertices are points of S.
-
 A point p ∈ S is **extreme** if p is a vertex of `CH(S)`. Equivalently: there exists a supporting line through p such that all of S lies on one side.
-
 **Interior / boundary / hole points:** a point strictly inside the hull is not extreme. Collinear points in the middle of a hull edge are extreme only if we keep them (policy).
-
 **Course policy (state now, keep through Week 5):**
-
 - Remove duplicate points first.
-- On a hull edge, **drop** strictly intermediate collinear points. The hull vertices are the two endpoints of that edge.
+- On a hull edge, **drop** strictly intermediate collinear
 
----
-
-## 2. Jarvis march (25 min)
-
-Also called **gift wrapping**.
-
+**2. Jarvis march (25 min).** Also called **gift wrapping**.
 ### Idea
-
 Start at a guaranteed hull point: the lowest point (smallest y; if tie, smallest x).  
 Then repeatedly wrap a supporting line around the set until we return to the start.
-
 ### Algorithm
-
 ```
 jarvis(S):
     remove duplicates
@@ -107,153 +200,36 @@ jarvis(S):
         p = q
     while p != start
     return hull
-```
 
-`farther(p, r, q)` is `dist(p,r) > dist(p,q)`.
 
-If we **drop** intermediate collinear points, the `o == 0` branch should still pick the farthest, so we jump to the end of the collinear run.
-
-### Invariant
-
-After k steps, the polyline `hull[0]…hull[k-1]` is a prefix of the hull boundary, and the current supporting ray has S on its left (if we wrap CCW).
-
-We wrap CCW if “r is more left” updates q. The code above wraps by rejecting right turns, i.e. the next edge is the one with all points to the left or on it.
-
-### Complexity
-
-Each of the h hull edges scans up to n points.  
-**Time: Θ(n h).**  
-Space: O(h) besides the input.
-
-| Input | h | Time |
-| --- | --- | --- |
-| Points in convex position (circle) | n | Θ(n²) |
-| Points with 3 extreme (triangle + cloud inside) | 3 | Θ(n) |
-| Random Gaussian | O(log n) expected | about O(n log n) |
-
-Jarvis is **output-sensitive**. Good when h is tiny. Bad when the points are already on a circle.
-
-### Trace on the board
-
-Use 8 points, 5 on the hull. Walk one candidate at a time. Students should see q jump whenever a righter (or lefter) point appears.
-
----
-
-## 3. Incremental construction (15 min)
-
-Idea only. No required implementation.
-
+**3. Incremental construction (15 min).** Idea only. No required implementation.
 Add points one by one.
-
 - Maintain `CH` of the points so far.
 - If the new point p is inside, do nothing.
 - If p is outside, find the two tangents from p to the current hull and replace the visible chain by p.
-
 Finding tangents on a convex polygon is O(log n) with binary search, or O(n) naively. A naive incremental algorithm is O(n²).
-
 This is the right mental model for 3D incremental hulls. Mention it; do not code it this week.
-
 ---
 
-## 4. Lower bound (10 min)
-
-**Claim.** Computing the convex hull in 2D takes Ω(n log n) time in the algebraic decision-tree model.
-
+**4. Lower bound (10 min).** **Claim.** Computing the convex hull in 2D takes Ω(n log n) time in the algebraic decision-tree model.
 **Reduction (teaching).**  
 To sort x1…xn, map each xi to the point `(xi, xi²)` on the parabola y = x². The hull (lower or full) visits the points in sorted x-order. If hull were o(n log n), sorting would be too.
-
 So Graham / Andrew (next week) are optimal in the worst case. Jarvis is not, unless h is small.
-
 ---
-
-## Live coding (60 min)
-
-Implement Jarvis with **step mode**.
-
-Keys:
-
-- `N` — one candidate comparison
-- `E` — finish the current hull edge
-- `Space` — run to completion
-
-Draw:
-
-- current p (blue)
-- current candidate q (orange)
-- point r being tested (black)
-- accepted hull edges (thick)
-- the full set (dots)
-
-Talk:
-
-- “I always start at lowest-then-leftmost, so I never start inside.”
-- “When three are collinear I take the farthest, so I obey the drop-middle policy.”
-
-Time a random n = 2000 run vs a circle of n = 400 so students see Θ(n h).
-
----
-
-## Lab
-
-1. Implement Jarvis march.
-2. Buttons: random cloud, random circle, triangle-plus-cloud.
-3. Print n, h, elapsed milliseconds.
-4. Measure n = 100, 1_000, 10_000 on cloud and on circle. Table in the README.
-
-Done when the circle case is visibly slower than the cloud for the same n.
-
----
-
-## Homework
-
-1. Implement Jarvis with the course collinear policy and duplicate removal.
-2. Written: an input with h = 3 and an input with h = n. State the resulting Θ.
-3. Written: 6–8 sentences on the parabola reduction. Draw 5 points on y = x² and their hull.
-
----
-
-## Quiz (10 min)
-
-1. Define extreme point. (2 pts)
-2. Jarvis time in terms of n and h. (2 pts)
-3. Why start at lowest-then-leftmost? (2 pts)
-4. Is Jarvis optimal for points in convex position? Why? (2 pts)
-5. One sentence: how sorting reduces to hull. (2 pts)
 
 ---
 
 ## Common mistakes
 
-- Starting at a random point (may be interior; the first “wrap” is undefined).
-- Taking the nearest collinear point and cutting a hull edge short.
-- Infinite loop because duplicates were not removed (`p` never returns to `start` cleanly, or `q` stays equal to `p`).
-- Using angles and hitting the ±π wrap.
+1. Starting at a random point (may be interior; the first “wrap” is undefined).
+2. Taking the nearest collinear point and cutting a hull edge short.
+3. Infinite loop because duplicates were not removed (`p` never returns to `start` cleanly, or `q` stays equal to `p`).
+4. Using angles and hitting the ±π wrap.
 
----
+## If we run long, cut
 
-## Board drawings
+Incremental code. Keep Jarvis + parabola.
 
-1. Rubber band / extreme points.
-2. One full Jarvis wrap on 8 points with the candidate ray.
-3. Parabola reduction: points `(xi, xi²)` and the lower hull.
+## If we run short, add
 
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 04]] · Demo: [07-jarvis.html](code/07-jarvis.html)
-
-1. Fill Θ(n h) for: circle; triangle+cloud; expected Gaussian.
-2. Start at a random interior point. What breaks?
-3. 50 duplicate copies of 5 hull points. What infinite loop looks like.
-4. Measure cloud vs circle in the demo. Do not invent milliseconds.
-
-```js
-// Jarvis: start lowest-then-leftmost; on collinear take the farthest (drop middles).
-let q = firstPointNotP;
-for (const r of P) {
-  const o = orient(p, q, r);
-  if (o < 0) q = r;
-  else if (o === 0 && dist2(p, r) > dist2(p, q)) q = r;
-}
-```
+Expected Gaussian h = O(log n) as a name.

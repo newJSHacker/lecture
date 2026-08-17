@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** version, precision, in/out  
-**Success check:** #version 300 es first line.
+**Kernel:** #version 300 es first line; precision; in/out; outColor not gl_FragColor  
+**Success check:** they can break a shader, read the compile log, and ship a versioned VS/FS pair
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: version, precision, in/out | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 3 | Goal: GLSL ES 3.00 that compiles | Invariant: the first line is the language; the log is the teacher`
 
 ## Board at the end (they photograph this)
 
 ```
-#version 300 es
-Shader stages.
+#version 300 es          ← first line, nothing before
+precision highp float;
+in  / out                not attribute / varying
+out vec4 outColor;       not gl_FragColor
+texture()                not texture2D
+
+vec3  mat4  sampler2D
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Shader stages.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Language. [[WebGL/11 Vertex and Fragment]].
+**Say:** A silent black screen is often a shader that did not compile. Today we make the log loud. WebGL1 vs 2 is a dialect, not a vibe.
 
-**Ask:** #version 300 es first line? Wait seven seconds. Take two answers.
+**Ask:** Can #version 300 es sit on line 2 after a comment? Wait. Want: first line; even a blank can bite — freeze: first.
 
-**Board:** parked strip. Then #version 300 es.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: version, precision, in/out. Kernel: version, precision, in/out. We freeze conventions and we do not invent timings.
+**Say:** in/out, layout(location=), outColor. precision highp float in FS. Types: vec3, mat4, sampler2D. Demo: break 01-triangle shaders.
 
-**Ask:** What would a wrong version of this look like? Want: version after other lines.
+**Ask:** Does WebGL2 have gl_FragColor?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Language. [[WebGL/11 Vertex and Fragment]].
+**Say:** Language table on the board. WebGL1 names are banned in 300 es.
 
-**Say:** Errors. Compile log is the teacher.
+**Board:** #version, precision, outColor.
 
-**Say:** Types. vec3, mat4, sampler2D.
+**Say:** Link error ≠ compile error. Check both.
 
-**Ask:** #version 300 es first line? Wait seven seconds. Take two answers.
+**Ask:** texture2D in 300 es — what happens?
 
-**They do:** On paper: A second program (debug color).
+**They do:** On paper: the three first lines of a FS.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Break a shader; read the log; fix.. Zoom 140%. Read errors out loud.
+**Say:** Break a shader; read the log; fix. Plant version after other lines. Plant texture2D. Plant gl_FragColor.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** A second program (debug color).
+**Say:** A second program that paints debug magenta. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: A second program (debug color).; precision extra.. Homework: Written: WebGL1 vs 2 shader diffs.; Code: versioned pair.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: debug-color program + precision extra. Homework: WebGL1 vs 2 diffs; versioned pair. Quiz: first line, gl_FragColor?, precision.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: version, precision, in/out | Plant the first common mistake. |
-| 10–30 | Break a shader; read the log; fix. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | #version first | Plant it on line 2. |
+| 10–30 | Break / log / fix | They must hear the log. |
+| 30–45 | outColor vs gl_FragColor | Plant the old name. |
+| 45–60 | They write a second program | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. first line (3)
-2. gl_FragColor in WebGL2? (4)
-3. precision (3)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +163,7 @@ See [[WebGL Programming/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Language.** [[WebGL/11 Vertex and Fragment]].
-
-**2. Errors.** Compile log is the teacher.
-
-**3. Types.** vec3, mat4, sampler2D.
+_none_
 
 ---
 
@@ -175,8 +174,8 @@ See [[WebGL Programming/exercises/Week 03]].
 
 ## If we run long, cut
 
-Types
+Every GLSL built-in. Keep version + logs.
 
 ## If we run short, add
 
-precision extra.
+precision extra on a second FS.

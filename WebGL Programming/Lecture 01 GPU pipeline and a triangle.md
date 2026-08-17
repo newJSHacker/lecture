@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** WebGL2 context, first triangle  
-**Success check:** Create a WebGL2 context.
+**Kernel:** WebGL2 context; clip-space triangle; gl_Position is clip, not pixels  
+**Success check:** they get a red triangle from getContext('webgl2') with compile/link logs printed; they can say what gl_Position is
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,20 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `WebGL/demos/index.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: WebGL2 context, first triangle | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 1 | Goal: a first triangle without Three.js | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
 
 ## Board at the end (they photograph this)
 
 ```
 CPU buffers → VS → raster → FS → framebuffer
-Pipeline.
-Triangle.
+
+gl_Position = clip (xyzw). GPU does the divide.
+NDC after divide: xyz in [−1,1]
+
+RH, Y-up, camera looks −Z
+CCW front     column-major     P * V * M * vec4(p,1)
+
+getContext('webgl2')   —  not Three.js
 ```
 
 ## Slides today (cap: 6)
@@ -37,11 +43,11 @@ Triangle.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Struggle a little. [[02 Curriculum Design Advice]] Course 7.
+**Say:** If they cannot explain gl_Position, they are not allowed to hide in Three.js yet. Today is raw WebGL2. A black screen is a checklist, not a personality.
 
-**Ask:** Create a WebGL2 context? Wait seven seconds. Take two answers.
+**Ask:** Is gl_Position in pixels? Wait seven seconds. Want: no — clip space; the GPU divides by w.
 
-**Board:** parked strip. Then CPU buffers → VS → raster → FS → framebuffer.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +57,9 @@ Triangle.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: WebGL2 context, first triangle. Kernel: WebGL2 context, first triangle. We freeze conventions and we do not invent timings.
+**Say:** Canvas, WebGL2 context, two shaders, one buffer, drawArrays TRIANGLES. Conventions freeze now: right-handed, Y-up, look −Z, CCW, column-major P*V*M. Week 1 triangle lives in clip with w=1 so it is already NDC. Matrices wait until week 7 — we still write the product on the board so the name exists.
 
-**Ask:** What would a wrong version of this look like? Want: Starting in Three.js.
+**Ask:** Who fills the buffer — CPU or GPU?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +71,21 @@ Triangle.
 
 ### Minutes 12–35 — Build
 
-**Say:** Struggle a little. [[02 Curriculum Design Advice]] Course 7.
+**Say:** Pipeline every lecture: VBO → VS → raster → FS → FBO. Draw it. Three.js is next course.
 
-**Say:** Pipeline. Every lecture redraws GPU → VBO → VS → raster → FS → FBO.
+**Board:** gl_Position clip vs NDC vs pixels. Circle w. Do not divide in the VS.
 
-**Say:** Conventions. [[WebGL/01 Conventions]].
+**Say:** Compile log and link log are different. Print both. Clear color you can see: 0.10, 0.10, 0.12.
 
-**Ask:** Create a WebGL2 context? Wait seven seconds. Take two answers.
+**Ask:** Why CCW? Want: OpenGL default front face.
 
-**They do:** On paper: Clear color you can see.
+**They do:** On paper: pipeline boxes plus one line: gl_Position = vec4(a_position, 0, 1).
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Typed triangle from demo 01; print compile/link logs.. Zoom 140%. Read errors out loud.
+**Say:** Typed triangle from WebGL/demos/01-triangle.html. Local _gl.js, no CDN. Plant getContext('webgl') then 'webgl2'. Plant a 0×0 canvas. Read the compile log out loud.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +95,7 @@ Triangle.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Clear color you can see.
+**Say:** Clear color you can see, then the three clip verts. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +105,7 @@ Triangle.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Clear color you can see.; Resize canvas backing store.. Homework: Written: pipeline boxes.; Code: triangle.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Photograph the board. Lab: visible clear + resize backing store. Homework: pipeline boxes; a triangle. Quiz: getContext webgl2, where logs, why not Three.js yet.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +117,10 @@ Triangle.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: WebGL2 context, first triangle | Plant the first common mistake. |
-| 10–30 | Typed triangle from demo 01; print compile/link logs. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | getContext('webgl2') + clear | Plant webgl1 or Three.js. Fix: raw WebGL2. |
+| 10–30 | 01-triangle.html typed | Plant missing #version 300 es. Read the log. |
+| 30–45 | gl_Position on the board | Plant pixels. Write clip → NDC. |
+| 45–60 | They type three verts | Circulate. No CDN. Serve if file:// dies. |
 
 Point them at `WebGL/demos/index.html` as the after-class check, not as the lecture.
 
@@ -136,9 +142,7 @@ Point them at `WebGL/demos/index.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. WebGL2 getContext (2)
-2. where logs (4)
-3. why not Three.js yet (4)
+None this meeting.
 
 
 ## Snippet
@@ -155,11 +159,7 @@ See [[WebGL Programming/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Struggle a little.** [[02 Curriculum Design Advice]] Course 7. Frameworks hide the pipeline.
-
-**2. Pipeline.** Every lecture redraws GPU → VBO → VS → raster → FS → FBO.
-
-**3. Conventions.** [[WebGL/01 Conventions]]. Demo: [[WebGL/demos/index.html]] 01.
+_none_
 
 ---
 
@@ -170,8 +170,8 @@ See [[WebGL Programming/exercises/Week 01]].
 
 ## If we run long, cut
 
-Conventions
+P*V*M multiplication today. Keep clip triangle + logs.
 
 ## If we run short, add
 
-Resize canvas backing store.
+Resize canvas backing store with devicePixelRatio named.

@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Real-Time Rendering  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** real-time look  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** real-time look: named stack graph + measured table on a named device  
+**Success check:** a TA can serve the folder, read the graph, and see two measured rows without Unreal
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,14 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `Real-Time Rendering/code/`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: freeze; drop deferred if behind; keep PBR+shadow+tonemap`
 
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: stack graph · PBR · shadow · tonemap · measured table
+Cuts: drop deferred / SSAO / TAA
+README: serve + device + what you did not write
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Product shot, small interior, or shader-ball. Cuts are allowed. Invented fps still fail.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: stack graph on the board.
+**Say:** Desk review: stack graph on the board, then the measured table, then citations.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Serve first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report: stack graph, budgets, citations. Next week 12+5.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: real-time look | Plant the first common mistake. |
-| 10–30 | Desk review: stack graph on the board. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings + cut list | Photograph. |
+| 10–50 | Desk review | Graph + table. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,13 +94,11 @@ See [[Real-Time Rendering/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Product shot, small interior, or shader-ball studio.
-**2. Cuts.** Drop deferred. Keep PBR+shadow+tonemap.
-**3. Report.** stack graph, budgets, citations.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New libraries. Keep freeze.
 
 ## If we run short, add
 

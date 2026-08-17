@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Advanced Computer Graphics  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** one advanced piece  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** one advanced piece: teaching tracer, volume, tiles, or a measured cut — with a claim sentence  
+**Success check:** a TA can run the README and read the limitation paragraph
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,9 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: claim sentence · figure · limitation · spp/dt/device if relevant
+Cuts: production path tracer, Nanite port, NeRF training
+README: how to run     no CDN     no invented fps
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Pretty graphs with no tests or no limitation fail. We still do not start a production path tracer this week.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, do you cut spp or the claim sentence?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: claim sentence + figure.
+**Say:** Desk review: claim + figure. Measure or omit.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Claim first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. Be ready to derive or name one formula.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one advanced piece | Plant the first common mistake. |
-| 10–30 | Desk review: claim sentence + figure. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings | Photograph. |
+| 10–50 | Desk review | Claim + figure. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,14 +94,12 @@ See [[Advanced Computer Graphics/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Cornell-ish box, fog shaft, or many-light heatmap + writeup connecting to a paper.
-**2. Cuts.** Spheres only. spp 32. Homogeneous fog.
-**3. Honesty.** Three.js PathTracing if used is an **oracle** — they must still write the teaching tracer or a kernel.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New methods. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60-second rehearsal of the limitation.

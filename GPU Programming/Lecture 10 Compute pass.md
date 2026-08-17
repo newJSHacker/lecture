@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** workgroups  
-**Success check:** A compute shader fills a storage texture or buffer.
+**Kernel:** compute pass: dispatch workgroups; write storage texture/buffer; then blit  
+**Success check:** they can fill a texture from @compute @workgroup_size(8,8) without a triangle-per-particle
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,20 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: workgroups | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 10 | Goal: a grid of threads | Invariant: compute has no raster; races if you write without sync; this replaces some ping-pong FS hacks`
 
 ## Board at the end (they photograph this)
 
 ```
-dispatch(x,y,z)
-Grid of threads.
+dispatch(x, y, 1)
+
+@compute @workgroup_size(8,8)
+fn cs(@builtin(global_invocation_id) id: vec3u)
+
+storage buffer  vs  storage texture
+  (draw the bytes:  width×height×channels)
+
+no triangle per particle
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +45,11 @@ Grid of threads.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Compute. No raster.
+**Say:** No raster. Threads in a grid. Perfect for particles and blur. Unbounded loops in WGSL are a hang. Fallback: if WebGPU is missing, they still have ping-pong from week 2 — say so.
 
-**Ask:** A compute shader fills a storage texture or buffer? Wait seven seconds. Take two answers.
+**Ask:** Does a compute shader need a triangle? Wait. Want: no.
 
-**Board:** parked strip. Then dispatch(x,y,z).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +59,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: workgroups. Kernel: workgroups. We freeze conventions and we do not invent timings.
+**Say:** Memory: storage buffers vs textures. Map: replaces some FS ping-pong. Workgroup 8×8 is the lab size. Particle integrate extra if time — still in a buffer they draw.
 
-**Ask:** What would a wrong version of this look like? Want: compute that still rasterizes a triangle per particle.
+**Ask:** Why workgroups?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +73,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Compute. No raster.
+**Say:** Grid of threads over the texture. id.xy is the texel.
 
-**Say:** Memory. storage buffers vs textures.
+**Board:** dispatch + workgroup_size. Circle storage.
 
-**Say:** Map. This replaces some ping-pong FS hacks.
+**Say:** Blit to the canvas is a separate render pass — name both.
 
-**Ask:** A compute shader fills a storage texture or buffer? Wait seven seconds. Take two answers.
+**Ask:** What does dispatch(x,y,z) mean?
 
-**They do:** On paper: particle integrate extra if time.
+**They do:** On paper: compute pass then render/blit pass.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Compute a gradient or noise into a texture; blit.. Zoom 140%. Read errors out loud.
+**Say:** Compute a gradient or noise into a texture; blit. Plant compute that still rasterizes a triangle per particle. Plant unbounded loop.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +97,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** particle integrate extra if time.
+**Say:** Workgroup 8×8, or particle integrate extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +107,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: particle integrate extra if time.; workgroup 8×8.. Homework: Written: workgroup.; WGSL compute.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: 8×8 + integrate extra if time. Homework: workgroup paragraph; WGSL compute. Quiz: dispatch, storage, why not FS.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +119,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: workgroups | Plant the first common mistake. |
-| 10–30 | Compute a gradient or noise into a texture; blit. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name compute pass | Plant triangle-per-particle. |
+| 10–30 | 8×8 fill + blit | Plant unbounded loop. |
+| 30–45 | Storage layout | Draw the bytes. |
+| 45–60 | They dispatch | Circulate. Feature detect. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +144,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. dispatch (3)
-2. storage (4)
-3. why not FS (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +163,7 @@ See [[GPU Programming/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Compute.** No raster. Threads in a grid. Perfect for particles and blur.
-
-**2. Memory.** storage buffers vs textures. Race if you write without sync.
-
-**3. Map.** This replaces some ping-pong FS hacks.
+_none_
 
 ---
 
@@ -173,8 +174,8 @@ See [[GPU Programming/exercises/Week 10]].
 
 ## If we run long, cut
 
-Map
+Shared-memory prefix sum. Keep dispatch + storage + blit.
 
 ## If we run short, add
 
-workgroup 8×8.
+Race/sync as a one-line warning.

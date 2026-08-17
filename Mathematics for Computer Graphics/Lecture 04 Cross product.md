@@ -46,11 +46,11 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 **Ask:** (2,0)×(0,3) in 2D? Wait. Want: 6.
 
-**Board:** parked strip. Then right-hand rule.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *2D signed area, 3D perpendicular*.
+**They do:** write today’s question in their notes: *`cross2(a,b) = ax by − ay bx`; triangle normal (b−a)×(c−a)*.
 
 **Do not:** Left-handed 'until it looks right'.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 **They do:** On paper: signed area of triangle (0,0),(1,0),(0,1).
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/04-cross.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. 2D cross (2,0)×(0,3) (3)
-2. i×j (3)
-3. why winding matters (4)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. 2D.** ax by − ay bx. Same as computational geometry `orient` kernel.
-
-**2. 3D.** i × j = k. Determinant of the 3×3 mnemonic. Lighting normals = cross of edges.
-
-**3. Handedness.** IGWT is right-handed. Flipping two vertices flips the normal.
+_none_
 
 ---
 

@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** one asset, full stack  
-**Success check:** Load a glb or primitives.
+**Kernel:** look-dev: one asset; dir + IBL + shadow + tonemap named; toggle stack  
+**Success check:** they can load a glb or primitives, match a reference crop in words, and say what they configured vs wrote
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: one asset, full stack | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 13 | Goal: one asset, full named stack | Invariant: honesty: if PMREM or GGX is Three.js, say so; Unreal stills are not the lab`
 
 ## Board at the end (they photograph this)
 
 ```
-dir + IBL + shadow + tonemap
-Reference pair.
+dir light + IBL lookup + shadow compare + tonemap
+(+ bloom if earned)
+
+cuts: drop SSAO; keep metal-rough + shadow + tonemap
+reference crop  |  yours
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Reference pair.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Look-dev. This is a job.
+**Say:** Look-dev is a job: reference, then stack, then budget. Cinema from Unreal as 'the lab' fails. Local glb. No CDN HDR.
 
-**Ask:** Load a glb or primitives? Wait seven seconds. Take two answers.
+**Ask:** If IBL is Three.js PMREM, what do you write in the README? Wait. Want: that sentence.
 
-**Board:** parked strip. Then dir + IBL + shadow + tonemap.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: one asset, full stack. Kernel: one asset, full stack. We freeze conventions and we do not invent timings.
+**Say:** Toggle the stack. Device from last week's table. Cuts: drop SSAO.
 
-**Ask:** What would a wrong version of this look like? Want: cinema screenshot from Unreal as 'the lab'.
+**Ask:** What do you skip first?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Look-dev. This is a job.
+**Say:** Reference pair. Three differences they will have to name.
 
-**Say:** Honesty. If IBL is Three.js PMREM, say so.
+**Board:** dir + IBL + shadow + tonemap. Circle honesty.
 
-**Say:** Cuts. Drop SSAO.
+**Say:** README: configured vs wrote.
 
-**Ask:** Load a glb or primitives? Wait seven seconds. Take two answers.
+**Ask:** Name today's required passes.
 
-**They do:** On paper: toggle stack.
+**They do:** On paper: skip list.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A still that matches a reference crop.. Zoom 140%. Read errors out loud.
+**Say:** A still that matches a reference crop (local photo). Plant Unreal as the lab. Toggle stack.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** toggle stack.
+**Say:** Toggle stack + README bullets. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: toggle stack.; README.. Homework: Written: reference vs yours, three differences.; repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: toggles + README. Homework: three differences vs reference; repo. Quiz: configured vs wrote, skip list, device. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one asset, full stack | Plant the first common mistake. |
-| 10–30 | A still that matches a reference crop. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name the stack | Plant Unreal screenshot. |
+| 10–30 | Load glb/primitives | Plant CDN env. |
+| 30–45 | Toggles | Honesty line in README. |
+| 45–60 | They write three diffs | Circulate. No invented fps. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. what you configured vs wrote (4)
-2. skip list (3)
-3. device (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +151,7 @@ See [[Real-Time Rendering/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Look-dev.** This is a job. Reference, then stack, then budget.
-
-**2. Honesty.** If IBL is Three.js PMREM, say so. If GGX is yours, say so.
-
-**3. Cuts.** Drop SSAO. Keep metal-rough + shadow + tonemap.
+_none_
 
 ---
 
@@ -164,8 +161,8 @@ See [[Real-Time Rendering/exercises/Week 13]].
 
 ## If we run long, cut
 
-Cuts
+SSAO on the look. Keep metal-rough + shadow + tonemap.
 
 ## If we run short, add
 
-README.
+Bloom only if leftover HDR is visible.

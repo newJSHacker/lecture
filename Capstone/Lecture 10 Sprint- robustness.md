@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** load fail, bad GLB, offline  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** load fail, bad GLB, offline: user-visible errors; support matrix  
+**Success check:** they can demo three failures without a white screen
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,10 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-errors you can show
-Red states.
+missing file     bad GLB     offline
+user-visible error
+support matrix: laptop · (phone) · (headset extra)
+Cuts: new features while the 404 is silent
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +38,9 @@ Red states.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: robustness). Silent 404 is a TA-fail. Offline is a labeled limit or a message — not a crash.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** What does the user see if the glTF 404s?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +48,15 @@ Red states.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Three failure demos.
+**Say:** Three failure demos. Support matrix. Errors in the HUD, not only the console.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Three failures.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Support matrix in README. Next: documentation. The path still comes first.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +66,9 @@ Red states.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: load fail, bad GLB, offline | Plant the first common mistake. |
-| 10–30 | Three failure demos. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Three failures listed | Photograph. |
+| 10–50 | Desk review | Visible errors. |
+| 50–60 | Support matrix | Silent-404 plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +97,12 @@ See [[Capstone/exercises/Week 10]].
 
 ## Notes from the outline
 
-**1. Robust.** TAs will break files. Feature detect. Inline fallback if XR.
-**2. Support.** Browser × OS table. Honest no.
-**3. Logging.** No secrets in logs.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New features. Keep failure UX.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Offline sentence in README.

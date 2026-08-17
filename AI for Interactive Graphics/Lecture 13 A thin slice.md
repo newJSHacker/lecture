@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** one AI feature in a scene  
-**Success check:** One feature: texture, copy, agent tool, or RAG caption.
+**Kernel:** one AI-backed graphics feature: texture, copy, tool, or RAG caption — with logs  
+**Success check:** they can demo the slice, show the asset table, and name a key-leak threat
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: one AI feature in a scene | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 13 | Goal: depth over a chatbot wrapper | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-orbit + one API + log
-Figure.
+one feature in a scene
+proxy/mock     asset table     eval row
+README threats: key leak, ToS
+cite model, date, prompts
+wrapper chatbot with no 3D  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Figure.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Slice. Capstone energy.
+**Say:** Capstone energy. Mock the model, keep the architecture. A wrapper around a chatbot with no 3D fails. No medical/legal claims in the slice.
 
-**Ask:** One feature: texture, copy, agent tool, or RAG caption? Wait seven seconds. Take two answers.
+**Ask:** If the vendor is down, does the architecture still demo? Wait. Want: yes — mock.
 
-**Board:** parked strip. Then orbit + one API + log.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: one AI feature in a scene. Kernel: one AI feature in a scene. We freeze conventions and we do not invent timings.
+**Say:** Working slice + logs. Cuts allowed. Cite. Screenshot.
 
-**Ask:** What would a wrong version of this look like? Want: wrapper around a chatbot with no 3D.
+**Ask:** What is the one feature?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Slice. Capstone energy.
+**Say:** Slice. Depth.
 
-**Say:** Cuts. Mock the model, keep the architecture.
+**Board:** feature · logs · table · threats.
 
-**Say:** Cite. Model names, dates, prompts.
+**Say:** Chatbot-only is a cut to fail.
 
-**Ask:** One feature: texture, copy, agent tool, or RAG caption? Wait seven seconds. Take two answers.
+**Ask:** What threat goes in the README?
 
-**They do:** On paper: README threats (key leak, ToS).
+**They do:** One-sentence feature + mock/real.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Working slice + logs.. Zoom 140%. Read errors out loud.
+**Say:** Working slice + logs. Plant chatbot wrapper. Plant key in client. Plant medical claim.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** README threats (key leak, ToS).
+**Say:** Tighten the slice; fill threats. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: README threats (key leak, ToS).; screenshot.. Homework: Written: architecture figure.; repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: README threats; screenshot. Homework: freeze feature. Quiz: one feature, table, no secrets. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one AI feature in a scene | Plant the first common mistake. |
-| 10–30 | Working slice + logs. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Name the feature | Plant chatbot wrapper. |
+| 15–40 | Logs + table | Plant client key. |
+| 40–55 | Threats README | Medical-claim plant. |
+| 55–60 | They screenshot | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. one feature (3)
-2. log (4)
-3. mock OK? (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +151,7 @@ See [[AI for Interactive Graphics/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Slice.** Capstone energy. Depth over demo reel.
-
-**2. Cuts.** Mock the model, keep the architecture.
-
-**3. Cite.** Model names, dates, prompts.
+_none_
 
 ---
 
@@ -164,8 +161,8 @@ See [[AI for Interactive Graphics/exercises/Week 13]].
 
 ## If we run long, cut
 
-Cite
+Second feature. Keep one + logs.
 
 ## If we run short, add
 
-screenshot.
+Screenshot of HUD + scene.

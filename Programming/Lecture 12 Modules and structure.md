@@ -44,11 +44,11 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 **Ask:** Why might `import` fail when you double-click HTML? Wait. Want: `file://` / modules / CORS.
 
-**Board:** parked strip. Then boxes: main.js → math.js.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *split files, functions as API*.
+**They do:** write today’s question in their notes: *`export function lerp` in `math.js`; `import` from `main.js`; serve locally*.
 
 **Do not:** One 400-line file 'for simplicity'.
 
@@ -78,7 +78,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 **They do:** Write the import line for lerp on paper.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -139,9 +139,7 @@ Point them at `Programming/code/05-clamp.html` as the after-class check, not as 
 
 ## Quiz next meeting (they hear this now)
 
-1. export syntax (3)
-2. Why serve locally (4)
-3. Name two files in CG I kernel (3)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +158,7 @@ See [[Programming/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why files.** Later: kernel.js vs raster.js. Now: `math.js` with clamp/lerp.
-
-**2. Browser modules.** `type="module"` and `export function`. file:// may fail — use a static server. Same rule as WebGL demos.
-
-**3. Interface.** A file is a set of named functions. No hidden globals.
+_none_
 
 ---
 

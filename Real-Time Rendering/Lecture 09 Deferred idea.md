@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** G-buffer then lights  
-**Success check:** Name G-buffer channels.
+**Kernel:** deferred: G-buffer pass (albedo, n, depth, metal-rough) then light pass  
+**Success check:** they can name G channels and show three debug panes without deferred-on-one-cube
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: G-buffer then lights | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 9 | Goal: name G then lights | Invariant: many lights, few G writes; a single cube does not earn deferred`
 
 ## Board at the end (they photograph this)
 
 ```
-albedo n depth → light pass
-G panes.
+PASS 1  G-buffer   albedo | n | depth | metal-rough
+PASS 2  lights     read G, add
+
+MRT  name
+debug panes  are  required
+when not:  one cube, forward is enough
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ G panes.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Why. Many lights, few objects that write G-buffer.
+**Say:** Why: many lights, objects write G once. Light pass reads G. WebGL MRT is a name. Students can fake G with extra textures. We do not invent how many lights 'hurt' — they count, or they omit.
 
-**Ask:** G-buffer channels? Wait seven seconds. Take two answers.
+**Ask:** Does deferred help one cube and one light? Wait. Want: no.
 
-**Board:** parked strip. Then albedo n depth → light pass.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: G-buffer then lights. Kernel: G-buffer then lights. We freeze conventions and we do not invent timings.
+**Say:** Packed G. Debug view of n and albedo. Transparency and MSAA are later reasons to stay forward.
 
-**Ask:** What would a wrong version of this look like? Want: deferred for a single cube.
+**Ask:** What goes in G?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why. Many lights, few objects that write G-buffer.
+**Say:** Four panes. Label channels.
 
-**Say:** What goes in G. albedo, metallic-rough, normals, depth.
+**Board:** G then light pass. Circle MRT.
 
-**Say:** WebGL. MRT names.
+**Say:** Written G layout is the lab if code time is short.
 
-**Ask:** G-buffer channels? Wait seven seconds. Take two answers.
+**Ask:** When do you not deferred?
 
-**They do:** On paper: count lights that would hurt forward.
+**They do:** On paper: G layout (four rows).
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Debug view: albedo | normals | depth as three panes (can be extra FBOs or Three.js).. Zoom 140%. Read errors out loud.
+**Say:** Debug view: albedo | normals | depth. Plant deferred for a single cube. Count lights that would hurt forward — as a count, not an fps.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** count lights that would hurt forward.
+**Say:** Count lights / written G layout. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: count lights that would hurt forward.; written G layout.. Homework: Written: when deferred wins.; debug screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: light count + G layout. Homework: when deferred wins; debug screenshot. Quiz: G channels, MRT, when not.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: G-buffer then lights | Plant the first common mistake. |
-| 10–30 | Debug view: albedo | normals | depth as three panes (can be extra FBOs or Three.js). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Name G pass | Plant one-cube deferred. |
+| 10–30 | Three debug panes | Plant no debug views. |
+| 30–45 | Light pass idea | Read G, add. |
+| 45–60 | They write the layout | Circulate. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. G channels (4)
-2. MRT (3)
-3. when not to deferred (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Real-Time Rendering/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why.** Many lights, few objects that write G-buffer. Light pass reads G and adds.
-
-**2. What goes in G.** albedo, metallic-rough, normals, depth. Packed.
-
-**3. WebGL.** MRT names. Students can draw a **debug view** of n and albedo from a fake G (multiple targets or just extra textures).
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Real-Time Rendering/exercises/Week 09]].
 
 ## If we run long, cut
 
-WebGL
+A full MRT engine. Keep named G + debug panes.
 
 ## If we run short, add
 
-written G layout.
+Transparency as a reason to stay forward.

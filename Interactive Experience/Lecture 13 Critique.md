@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Awwwards-style review  
-**Success check:** Critique two student sites (or two public ones) with a rubric.
+**Kernel:** Awwwards-style rubric: beat, HUD, motion, budget, keyboard, citations  
+**Success check:** they can score two works on the rubric and apply one fix to their own project
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,23 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: Awwwards-style review | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 13 | Goal: critique on criteria, not vibes | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-criteria: story, perf, a11y, craft
-Rubric.
+beat   HUD   motion   budget   keyboard   citations
+
+specific · kind · next action
+screenshot + date if public
+do not clone their glTF
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: two dated screenshots of public sites | photographs |
 
 ---
 
@@ -38,11 +40,11 @@ Rubric.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Rubric. Story beat, HUD, motion, budget, keyboard, citations.
+**Say:** Taste without a rubric is a vibe. We score story, HUD, motion, budget, keyboard, citations. Mocking peers is a fail. Clone-as-project is a fail.
 
-**Ask:** Critique two student sites (or two public ones) with a rubric? Wait seven seconds. Take two answers.
+**Ask:** If the HUD has no keyboard path, which cell is zero? Wait.
 
-**Board:** parked strip. Then criteria: story, perf, a11y, craft.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +54,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Awwwards-style review. Kernel: Awwwards-style review. We freeze conventions and we do not invent timings.
+**Say:** Public sites: screenshot and date. Do not copy their glTF. Feedback: specific, kind, next action.
 
-**Ask:** What would a wrong version of this look like? Want: mocking peers.
+**Ask:** What is a next action vs a roast?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +68,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Rubric. Story beat, HUD, motion, budget, keyboard, citations.
+**Say:** Rubric on the board. Six cells.
 
-**Say:** Public sites. If using live sites, screenshot and date.
+**Board:** fill one row together on a volunteer or a public still.
 
-**Say:** Feedback. [[Teaching]] feedback notes: specific, kind, next action.
+**Say:** Apply one fix to your project this hour — not a rewrite.
 
-**Ask:** Critique two student sites (or two public ones) with a rubric? Wait seven seconds. Take two answers.
+**Ask:** Why date the screenshot?
 
-**They do:** On paper: rubric table filled.
+**They do:** Score two sites or two classmates (names stripped) on paper.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Written critique 1 page × 2; apply one fix to your project.. Zoom 140%. Read errors out loud.
+**Say:** Walk one public still against the six cells. Plant a roast. Rewrite as next action. Then they write 1 page × 2.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +92,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** rubric table filled.
+**Say:** Fill the rubric; pick one fix. Eight minutes, then studio-like apply.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +102,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: rubric table filled.; before/after.. Homework: Two critiques.; one fix in repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: rubric table; before/after. Homework: one-page critique. Quiz: six cells, not a clone. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +114,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Awwwards-style review | Plant the first common mistake. |
-| 10–30 | Written critique 1 page × 2; apply one fix to your project. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Rubric on board | Plant vibes. |
+| 15–40 | Two critiques | Plant mocking. |
+| 40–55 | One fix applied | Clone plant. |
+| 55–60 | Before/after still | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +139,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. one a11y row (3)
-2. why not taste-only (4)
-3. citation (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +150,7 @@ See [[Interactive Experience/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Rubric.** Story beat, HUD, motion, budget, keyboard, citations.
-
-**2. Public sites.** If using live sites, screenshot and date. Don't copy their glTF.
-
-**3. Feedback.** [[Teaching]] feedback notes: specific, kind, next action.
+_none_
 
 ---
 
@@ -165,8 +161,8 @@ See [[Interactive Experience/exercises/Week 13]].
 
 ## If we run long, cut
 
-Feedback
+Awwwards brand lecture. Keep six cells + one fix.
 
 ## If we run short, add
 
-before/after.
+Before/after screenshot.

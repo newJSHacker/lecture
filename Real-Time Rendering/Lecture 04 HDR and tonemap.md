@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Reinhard / ACES names  
-**Success check:** Store HDR color.
+**Kernel:** HDR shade → tonemap pass (Reinhard or ACES name) → then sRGB encode  
+**Success check:** they can store HDR, expose, Reinhard, and say why not clamp and why not tonemap per light
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: Reinhard / ACES names | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 4 | Goal: map HDR to the monitor without inventing scores | Invariant: tonemap is a named display pass; per-light tonemap is a bug`
 
 ## Board at the end (they photograph this)
 
 ```
-hdr → [0,1] display
-HDR bar.
+PASS 1  shade in HDR     (sun >> 1)
+PASS 2  tonemap          Reinhard: x/(1+x)   or ACES name
+PASS 3  encode sRGB
+
+order:  tonemap then encode
+do not tonemap per light
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ HDR bar.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Need. Sun is >> 1.
+**Say:** Sun is >> 1. Bloom next week needs leftover energy. Clamp-to-1 throws the look away. We pick one operator and document it — we do not invent how many ms ACES costs.
 
-**Ask:** Store HDR color? Wait seven seconds. Take two answers.
+**Ask:** Tonemap each light then add? Wait. Want: no.
 
-**Board:** parked strip. Then hdr → [0,1] display.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Reinhard / ACES names. Kernel: Reinhard / ACES names. We freeze conventions and we do not invent timings.
+**Say:** Reinhard, filmic, ACES — names. Exposure is a uniform before the operator. Gamma backwards (encode then tonemap) is a plant.
 
-**Ask:** What would a wrong version of this look like? Want: tonemap per light.
+**Ask:** Why not clamp?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Need. Sun is >> 1.
+**Say:** HDR bar on the board: 0, 1, 10.
 
-**Say:** Operators. Reinhard, filmic, ACES.
+**Board:** three passes. Circle order vs gamma.
 
-**Say:** sRGB. Tonemap then encode, or a combined output pass.
+**Say:** False-color extra is a debug view of this buffer, not a fps claim.
 
-**Ask:** Store HDR color? Wait seven seconds. Take two answers.
+**Ask:** Write Reinhard in one line.
 
-**They do:** On paper: ACES extra name in comments.
+**They do:** On paper: order shade → tonemap → encode.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Overbright cube; exposure; Reinhard.. Zoom 140%. Read errors out loud.
+**Say:** Overbright cube; exposure; Reinhard. Plant tonemap per light. ACES as a comment name.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** ACES extra name in comments.
+**Say:** ACES name in comments, or false-color HDR extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: ACES extra name in comments.; false-color HDR extra.. Homework: Written: why not clamp.; Code: reinhard.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: ACES name + false-color. Homework: why not clamp; reinhard(). Quiz: Reinhard, exposure, order vs gamma.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Reinhard / ACES names | Plant the first common mistake. |
-| 10–30 | Overbright cube; exposure; Reinhard. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | HDR buffer | Plant clamp. |
+| 10–30 | Reinhard + exposure | Plant per-light tonemap. |
+| 30–45 | Then encode | Plant gamma first. |
+| 45–60 | They false-color | Circulate. No invented fps. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. Reinhard (3)
-2. exposure (3)
-3. order vs gamma (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Real-Time Rendering/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Need.** Sun is >> 1. Bloom needs leftover energy.
-
-**2. Operators.** Reinhard, filmic, ACES. Pick one for the lab. Document it.
-
-**3. sRGB.** Tonemap then encode, or a combined output pass.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Real-Time Rendering/exercises/Week 04]].
 
 ## If we run long, cut
 
-sRGB
+Full ACES fit. Keep Reinhard + named order.
 
 ## If we run short, add
 
-false-color HDR extra.
+ACES as a documented name.

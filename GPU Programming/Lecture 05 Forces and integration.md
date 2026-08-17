@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Euler, clamp  
-**Success check:** Semi-implicit Euler.
+**Kernel:** semi-implicit Euler in the update kernel: v+=a dt; p+=v dt; clamp dt and speed  
+**Success check:** they can explode with huge dt, then cap, in the same packing as week 3
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: Euler, clamp | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 5 | Goal: stable steps you can pause | Invariant: integration runs where the state lives; CPU physics + GPU draw is not GPGPU`
 
 ## Board at the end (they photograph this)
 
 ```
-v += a dt; p += v dt
-Euler step.
+in the update kernel (FS or TF):
+  v += a * dt
+  p += v * dt          // semi-implicit: v first
+  v = clamp(v, ±vmax)
+  dt = min(dt, dtMax)
+
+state layout still: RG pos, BA vel
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Euler step.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** Integration. Same as Interactive Web physics-lite.
+**Say:** Same as Interactive Web physics-lite, all particles in parallel. Variable uncapped dt explodes. CPU physics then upload is not this course. Pause; inspect one texel.
 
-**Ask:** Semi-implicit Euler? Wait seven seconds. Take two answers.
+**Ask:** Why v before p? Wait. Want: semi-implicit Euler.
 
-**Board:** parked strip. Then v += a dt; p += v dt.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Euler, clamp. Kernel: Euler, clamp. We freeze conventions and we do not invent timings.
+**Say:** Stability: dt too big → explode. Clamp speed. Forces: gravity, attractor; curl noise extra. Box collide extra writes p and v in the same layout.
 
-**Ask:** What would a wrong version of this look like? Want: variable dt uncapped.
+**Ask:** What causes the explode?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Integration. Same as Interactive Web physics-lite.
+**Say:** One particle on the board: numbers, then the same in a texel.
 
-**Say:** Stability. dt too big → explode.
+**Board:** Euler + clamp. Circle dtMax.
 
-**Say:** Forces. Gravity, attractor, curl noise extra.
+**Say:** Attractor as a uniform. Plant uncapped rAF dt.
 
-**Ask:** Semi-implicit Euler? Wait seven seconds. Take two answers.
+**Ask:** Write the two Euler lines.
 
-**They do:** On paper: box collide extra.
+**They do:** On paper: where dt is clamped.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Attractor + gravity; explode then cap dt.. Zoom 140%. Read errors out loud.
+**Say:** Attractor + gravity; explode then cap dt. Plant variable dt uncapped. Plant CPU physics + GPU draw labeled GPGPU.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** box collide extra.
+**Say:** Box collide extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: box collide extra.; curl extra.. Homework: Written: why cap dt.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: box collide + curl extra. Homework: why cap dt; demo. Quiz: Euler, explode cause, clamp.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Euler, clamp | Plant the first common mistake. |
-| 10–30 | Attractor + gravity; explode then cap dt. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Euler in the kernel | Plant CPU physics as GPGPU. |
+| 10–30 | Explode then dtMax | Plant uncapped dt. |
+| 30–45 | Clamp speed | Same RG/BA layout. |
+| 45–60 | They add a box | Circulate. Pause. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. Euler (3)
-2. explode cause (4)
-3. clamp (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[GPU Programming/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Integration.** Same as Interactive Web physics-lite. GPU: all particles in parallel.
-
-**2. Stability.** dt too big → explode. Clamp speed.
-
-**3. Forces.** Gravity, attractor, curl noise extra.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[GPU Programming/exercises/Week 05]].
 
 ## If we run long, cut
 
-Forces
+RK4. Keep Euler + clamp + layout.
 
 ## If we run short, add
 
-curl extra.
+Curl noise as extra force.

@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** scroll controls, storytelling  
-**Success check:** Map scroll to a camera path **or** to a mix value.
+**Kernel:** scroll 0–1 drives one camera or mix; reduced-motion path  
+**Success check:** they can map scroll progress to one rotation or dolly and name a non-scroll path
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: scroll controls, storytelling | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 4 | Goal: one beat, not a locomotive theme park | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-scroll y → camera or mix
-Scroll strip.
+scroll  0 ──────── 1
+          ↓
+   camera / mix / rotation
+
+prefers-reduced-motion  →  same content, no forced scroll
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Scroll strip.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Narrative. Awwwards-style pages are often scroll → 3D.
+**Say:** Awwwards pages are often scroll → 3D. Students overbuild. One beat: progress 0–1 rotates a product. Capstone energy starts when there is a beat.
 
-**Ask:** Map scroll to a camera path **or** to a mix value? Wait seven seconds. Take two answers.
+**Ask:** If the user cannot scroll, is the story gone? Wait. Want: no — a button or reduced-motion cut.
 
-**Board:** parked strip. Then scroll y → camera or mix.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: scroll controls, storytelling. Kernel: scroll controls, storytelling. We freeze conventions and we do not invent timings.
+**Say:** useFrame reads progress, not setState of scroll every pixel. Do not lerp 100 meshes. Fluid images and viewport still apply from Web Tech.
 
-**Ask:** What would a wrong version of this look like? Want: full locomotive + 3 scenes as week 4.
+**Ask:** Where does progress live — React state every pixel, or a ref the frame loop reads?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Narrative. Awwwards-style pages are often scroll → 3D.
+**Say:** Narrative is a shot, not a second scene graph.
 
-**Say:** a11y. `prefers-reduced-motion`.
+**Board:** 0–1 line. Camera or rotation only.
 
-**Say:** Perf. Don't lerp 100 meshes from scroll without instancing.
+**Say:** prefers-reduced-motion. Progress bar is honest UX.
 
-**Ask:** Map scroll to a camera path **or** to a mix value? Wait seven seconds. Take two answers.
+**Ask:** Why is locomotive + three scenes a week-4 fail?
 
-**They do:** On paper: reduced-motion CSS media extra.
+**They do:** Sketch stacked copy vs 3D beat; mark the reduced-motion path.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Scroll 0–1 spins or dollies a glTF/primitive.. Zoom 140%. Read errors out loud.
+**Say:** Scroll 0–1 dollies or spins a primitive. Plant setState on every scroll event. Move progress to a ref.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** reduced-motion CSS media extra.
+**Say:** Bind progress to rotation.y. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: reduced-motion CSS media extra.; progress bar.. Homework: Written: skip/reduce policy.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: reduced-motion extra; progress bar. Homework: one-beat storyboard. Quiz: 0–1, two clocks, reduced-motion.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: scroll controls, storytelling | Plant the first common mistake. |
-| 10–30 | Scroll 0–1 spins or dollies a glTF/primitive. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Progress 0–1 | Plant full locomotive. |
+| 15–40 | Drive one mesh | Plant 100 lerps. |
+| 40–55 | Reduced-motion branch | They feel the skip. |
+| 55–60 | They add a progress bar | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. progress 0-1 (3)
-2. reduced motion (4)
-3. hijack risk (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Interactive Experience/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Narrative.** Awwwards-style pages are often scroll → 3D. Students overbuild. One beat: scroll 0–1 rotates a product.
-
-**2. a11y.** `prefers-reduced-motion`. A non-scroll path to the same content.
-
-**3. Perf.** Don't lerp 100 meshes from scroll without instancing.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Interactive Experience/exercises/Week 04]].
 
 ## If we run long, cut
 
-Perf
+Lenis/locomotive. Keep one beat.
 
 ## If we run short, add
 
-progress bar.
+Progress bar as DOM, not a 3D ticker.

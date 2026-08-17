@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Canvas, reconciler  
-**Success check:** Create a Vite + R3F app.
+**Kernel:** JSX in <Canvas> is a reconciler onto a Three.js graph; npm run dev  
+**Success check:** they can run Vite, put a mesh in Canvas, and say this is not a new lighting model
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,21 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `Interactive Experience/code/01-hud.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: Canvas, reconciler | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 1 | Goal: a cube in Canvas, not a 2018 CRA tutorial | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-JSX tree = scene graph
-JSX = graph.
+JSX tree  →  commit  →  Three.js graph
+
+<Canvas>
+  <mesh>
+    <boxGeometry />
+    <meshStandardMaterial />
+  </mesh>
+</Canvas>
+
+npm run dev     not file://     no CDN
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +44,11 @@ JSX = graph.
 
 ### Minutes 0–8 — Hook
 
-**Say:** What R3F is. React Three Fiber is a **reconciler**: React state commits become Three.js object graphs.
+**Say:** Three.js Development still owns the renderer math. R3F is how IGWT ships UI + 3D without two competing scene graphs. If the only interface is orbit-drag, it is a scene, not an experience — that fight starts at Canvas.
 
-**Ask:** Create a Vite + R3F app? Wait seven seconds. Take two answers.
+**Ask:** Is R3F a different renderer, or a reconciler onto Three.js? Wait seven seconds.
 
-**Board:** parked strip. Then JSX tree = scene graph.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +58,9 @@ JSX = graph.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: Canvas, reconciler. Kernel: Canvas, reconciler. We freeze conventions and we do not invent timings.
+**Say:** Vite, JSX, fast refresh. file:// will not load modules. Vanilla Three + DOM is allowed if they already have a scene — still two clocks. Cap dpr. No CDN.
 
-**Ask:** What would a wrong version of this look like? Want: CRA 2018 tutorials.
+**Ask:** Where does a <mesh> live after commit — the React tree, the GPU, or a Three.js Object3D?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +72,21 @@ JSX = graph.
 
 ### Minutes 12–35 — Build
 
-**Say:** What R3F is. React Three Fiber is a **reconciler**: React state commits become Three.js object graphs.
+**Say:** Reconciler: React state commits become object graphs. Same cube as Three.js week 1: box, orbit, ambient+dir.
 
-**Say:** Why a course. Product sites, scroll stories, and HUDs need **UI + 3D**.
+**Board:** JSX tree → graph. Circle Canvas. Color is a prop, not a CSS background.
 
-**Say:** Vite. Modules, JSX, fast refresh.
+**Say:** CRA 2018 tutorials are a plant. We freeze Vite. Resize is default; still cap dpr.
 
-**Ask:** Create a Vite + R3F app? Wait seven seconds. Take two answers.
+**Ask:** Why does file:// fail here?
 
-**They do:** On paper: color as a prop.
+**They do:** On paper: nest lights + mesh under Canvas and mark which node is Three.js.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A box, orbit controls, ambient+dir. Same cube as Three.js week 1.. Zoom 140%. Read errors out loud.
+**Say:** Vite + a box. Plant a CDN three import. Fix: local package. Demo Interactive Experience/code/01-hud.html if Vite dies.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +96,7 @@ JSX = graph.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** color as a prop.
+**Say:** Color as a prop on the material. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +106,7 @@ JSX = graph.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: color as a prop.; resize is default — still cap dpr.. Homework: Written: reconciler in 8 sentences.; repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Photograph the board. Lab: color prop + dpr cap. Homework: reconciler in eight sentences + repo. Quiz: Canvas, mesh maps to Object3D, why Vite.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +118,10 @@ JSX = graph.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Canvas, reconciler | Plant the first common mistake. |
-| 10–30 | A box, orbit controls, ambient+dir. Same cube as Three.js week 1. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Canvas + mesh | Plant CRA / CDN. |
+| 10–30 | Orbit + lights | Plant missing Canvas. |
+| 30–45 | dpr cap | Plant retina melt. |
+| 45–60 | They set color as a prop | Circulate. No CDN. |
 
 Point them at `Interactive Experience/code/01-hud.html` as the after-class check, not as the lecture.
 
@@ -135,9 +143,7 @@ Point them at `Interactive Experience/code/01-hud.html` as the after-class check
 
 ## Quiz next meeting (they hear this now)
 
-1. Canvas is (3)
-2. mesh maps to (4)
-3. why Vite (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +162,7 @@ See [[Interactive Experience/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. What R3F is.** React Three Fiber is a **reconciler**: React state commits become Three.js object graphs. It is not a different renderer math. [[18 Three.js Development]] still applies.
-
-**2. Why a course.** Product sites, scroll stories, and HUDs need **UI + 3D**. R3F is how IGWT ships that without two competing scene graphs.
-
-**3. Vite.** Modules, JSX, fast refresh. file:// will not work. `npm run dev`.
+_none_
 
 ---
 
@@ -171,8 +173,8 @@ See [[Interactive Experience/exercises/Week 01]].
 
 ## If we run long, cut
 
-Vite
+drei Html. Keep Canvas + reconciler.
 
 ## If we run short, add
 
-resize is default — still cap dpr.
+Resize is default — still write the dpr cap.

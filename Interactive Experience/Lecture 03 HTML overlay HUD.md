@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Dom, portals  
-**Success check:** A HUD with buttons.
+**Kernel:** HTML overlay HUD; pointer-events none except controls  
+**Success check:** a button changes a mesh and the canvas still receives orbit except on the button
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: Dom, portals | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 3 | Goal: a HUD that is HTML, not WebGL text | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-div over canvas; pointer events
-Sandwich.
+DOM HUD  (labels, buttons, focus)
+   ↕  pointer-events
+<canvas>  Three / R3F
+
+.hud { position:absolute; inset:0; pointer-events:none; }
+.hud button { pointer-events:auto; }
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Sandwich.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Layers. Web Technologies pipeline: the canvas is a layer; HTML on top is the product UI.
+**Say:** Web Technologies already painted this stack. The canvas is a layer; HTML on top is the product UI. All-UI-as-WebGL-text fails keyboard and labels.
 
-**Ask:** A HUD with buttons? Wait seven seconds. Take two answers.
+**Ask:** If the overlay is inset 0, why can I not orbit? Wait. Want: it ate pointer-events.
 
-**Board:** parked strip. Then div over canvas; pointer events.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Dom, portals. Kernel: Dom, portals. We freeze conventions and we do not invent timings.
+**Say:** Price tag + one mesh. Button sets color through React state (clock 1). drei Html is a pin, not the whole HUD — cost is extra DOM.
 
-**Ask:** What would a wrong version of this look like? Want: all UI as WebGL text.
+**Ask:** When is drei Html the right tool vs a page HUD?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Layers. Web Technologies pipeline: the canvas is a layer; HTML on top is the product UI.
+**Say:** Layers. Canvas then HUD. Labels live in HTML.
 
-**Say:** Pointer. `pointer-events: none` on overlay except controls.
+**Board:** pointer-events split. Circle auto on the button.
 
-**Say:** Html from drei. Pinned labels.
+**Say:** Focus-visible on buttons. 3D picking vs button clicks — do not mix silently.
 
-**Ask:** A HUD with buttons? Wait seven seconds. Take two answers.
+**Ask:** Why not draw the price with a canvas texture this week?
 
-**They do:** On paper: label that follows extra (drei Html).
+**They do:** On paper: HUD CSS plus one button → material.color.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Price tag HUD + one mesh; button changes color.. Zoom 140%. Read errors out loud.
+**Say:** Price tag HUD; button recolors a mesh. Plant overlay eating all clicks. Then add pointer-events. Demo 01-hud.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** label that follows extra (drei Html).
+**Say:** HUD button + orbit still works around it. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: label that follows extra (drei Html).; focus visible on buttons.. Homework: Written: why HUD is DOM.; app.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: follow-label extra; focus-visible. Homework: pointer-events paragraph. Quiz: none vs auto, why HTML HUD, focus.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Dom, portals | Plant the first common mistake. |
-| 10–30 | Price tag HUD + one mesh; button changes color. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Absolute HUD | Plant WebGL text. |
+| 10–30 | pointer-events split | Plant overlay eating orbit. |
+| 30–45 | Button → color | State clock, not useFrame. |
+| 45–60 | They add focus-visible | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. pointer-events (4)
-2. Html cost (3)
-3. who gets the click (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Interactive Experience/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Layers.** Web Technologies pipeline: the canvas is a layer; HTML on top is the product UI.
-
-**2. Pointer.** `pointer-events: none` on overlay except controls. 3D picking vs button clicks.
-
-**3. Html from drei.** Pinned labels. Cost: extra DOM. Use sparingly.
+_none_
 
 ---
 
@@ -174,8 +172,8 @@ See [[Interactive Experience/exercises/Week 03]].
 
 ## If we run long, cut
 
-Html from drei
+drei Html tour. Keep page HUD + pointer-events.
 
 ## If we run short, add
 
-focus visible on buttons.
+One pinned drei Html label, then say the cost.

@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** render to texture  
-**Success check:** createFramebuffer.
+**Kernel:** FBO: render to texture, then a fullscreen second pass  
+**Success check:** they createFramebuffer, check COMPLETE, unbind to the canvas, and blit via a quad
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: render to texture | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 11 | Goal: offscreen, then on screen | Invariant: the default framebuffer is the canvas; forget unbind and you draw into the texture forever`
 
 ## Board at the end (they photograph this)
 
 ```
-FBO → color tex → second pass
-Two passes.
+createTexture + renderbuffer(depth)
+createFramebuffer → COLOR_ATTACHMENT0
+check FRAMEBUFFER_COMPLETE
+draw scene → tex
+bindFramebuffer(null) → draw quad sampling tex
+
+FBO size ≠ canvas size   (often)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Two passes.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Offscreen. Post and GPGPU.
+**Say:** Post and GPGPU start here. Demo 13-framebuffer-post.html: cube to FBO, vignette on a fullscreen triangle. This is what EffectComposer hides next course.
 
-**Ask:** createFramebuffer? Wait seven seconds. Take two answers.
+**Ask:** After drawing to the FBO, where do you bind before the screen pass? Wait. Want: null / the canvas.
 
-**Board:** parked strip. Then FBO → color tex → second pass.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: render to texture. Kernel: render to texture. We freeze conventions and we do not invent timings.
+**Say:** Depth renderbuffer if 3D goes into the FBO. Incomplete FBO is a status, not a JS throw. Size: FBO can be smaller than the canvas.
 
-**Ask:** What would a wrong version of this look like? Want: forgetting to unbind.
+**Ask:** Why might FRAMEBUFFER_COMPLETE fail?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Offscreen. Post and GPGPU.
+**Say:** Offscreen color tex. Second program samples it.
 
-**Say:** Size. FBO size vs canvas.
+**Board:** two passes. Unbind.
 
-**Say:** Depth. DEPTH_COMPONENT16 renderbuffer if 3D into FBO.
+**Say:** Identity post shader is the debug. Invert extra.
 
-**Ask:** createFramebuffer? Wait seven seconds. Take two answers.
+**Ask:** Do you need depth on a fullscreen post quad?
 
-**They do:** On paper: incomplete FBO debug.
+**They do:** On paper: the bind sequence for pass 1 and pass 2.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Draw cube to FBO; display as a quad.. Zoom 140%. Read errors out loud.
+**Say:** Draw cube to FBO; display as a quad. Demo 13-framebuffer-post.html. Plant forgetting to unbind. Plant 3D into FBO with no depth.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** incomplete FBO debug.
+**Say:** Incomplete FBO debug: log the status. Then invert extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: incomplete FBO debug.; second pass invert extra.. Homework: Written: why FBO.; Code: one offscreen pass.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: incomplete debug; invert extra. Homework: why FBO; one offscreen pass. Quiz: COMPLETE, unbind, post.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: render to texture | Plant the first common mistake. |
-| 10–30 | Draw cube to FBO; display as a quad. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Create FBO + tex | Plant no COMPLETE check. |
+| 10–30 | Scene into FBO | Plant no depth RB. |
+| 30–45 | Unbind + quad | Plant still bound to FBO. |
+| 45–60 | They invert | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. COMPLETE (3)
-2. unbind (3)
-3. post (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Offscreen.** Post and GPGPU. [[WebGL/15 Postprocess]], [[WebGL/17 Particles and GPGPU]].
-
-**2. Size.** FBO size vs canvas.
-
-**3. Depth.** DEPTH_COMPONENT16 renderbuffer if 3D into FBO.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[WebGL Programming/exercises/Week 11]].
 
 ## If we run long, cut
 
-Depth
+Ping-pong GPGPU. Keep one offscreen pass.
 
 ## If we run short, add
 
-second pass invert extra.
+Second-pass invert extra.

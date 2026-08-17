@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** heterogeneous, woodcock name  
-**Success check:** Regular tracking: step, sample density.
+**Kernel:** heterogeneous regular tracking: step, sample density, accumulate; Woodcock named  
+**Success check:** they can march an fBm density ball and compare two step sizes with screenshots
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: heterogeneous, woodcock name | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 6 | Goal: step size is a bias/cost choice | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-step σ(x); accumulate
-Steps inside a ball.
+for t=0..far step dt:
+  d = density(p)
+  acc += emit * d * dt * T
+  T  *= exp(−d * dt)
+
+dt=0 is a bug
+Woodcock / delta tracking     named
 ```
 
 ## Slides today (cap: 6)
@@ -37,11 +42,11 @@ Steps inside a ball.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Heterogeneous. σ varies.
+**Say:** σ varies. Shadertoy clouds energy. Research cloud as the lab fails. Cost vs step size — measure stills, do not invent fps. Shadow in volume extra.
 
-**Ask:** Regular tracking: step, sample density? Wait seven seconds. Take two answers.
+**Ask:** If dt is huge, what happens to the ball? Want: banding / missed density.
 
-**Board:** parked strip. Then step σ(x); accumulate.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +56,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: heterogeneous, woodcock name. Kernel: heterogeneous, woodcock name. We freeze conventions and we do not invent timings.
+**Say:** Delta tracking unbiased for some media — name, optional code. Froxels / slice volumes named. Realtime names only.
 
-**Ask:** What would a wrong version of this look like? Want: research cloud as the lab.
+**Ask:** What do you screenshot?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +70,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Heterogeneous. σ varies.
+**Say:** Heterogeneous. Sample density.
 
-**Say:** Tracking. Delta tracking is unbiased for some media — name, optional code.
+**Board:** the loop. Circle dt.
 
-**Say:** Realtime. Slice volumes, froxels names.
+**Say:** Two screenshots, two dt. Honesty about bias.
 
-**Ask:** Regular tracking: step, sample density? Wait seven seconds. Take two answers.
+**Ask:** What is Woodcock tracking in one sentence?
 
-**They do:** On paper: step size compare 2 screenshots.
+**They do:** Loop in words; mark where T updates.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: fBm density ball; cheap emission; screenshot.. Zoom 140%. Read errors out loud.
+**Say:** fBm density ball; cheap emission. Plant research cloud. Plant dt=0. Two step-size stills.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +94,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** step size compare 2 screenshots.
+**Say:** March with a dt they can name. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +104,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: step size compare 2 screenshots.; shadow in volume extra.. Homework: Written: bias vs step.; GLSL or JS.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: two screenshots; shadow extra. Homework: dt paragraph. Quiz: regular tracking, dt, Woodcock name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +116,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: heterogeneous, woodcock name | Plant the first common mistake. |
-| 10–30 | fBm density ball; cheap emission; screenshot. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Density(p) | Plant dt=0. |
+| 15–40 | Accumulate + T | Plant research cloud. |
+| 40–55 | Two dt stills | No invented fps. |
+| 55–60 | They compare | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -136,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. regular tracking (3)
-2. cost (4)
-3. froxel (3)
+None this meeting.
 
 
 ## Snippet
@@ -157,11 +160,7 @@ See [[Advanced Computer Graphics/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Heterogeneous.** σ varies. Shadertoy clouds. Cost vs step size.
-
-**2. Tracking.** Delta tracking is unbiased for some media — name, optional code.
-
-**3. Realtime.** Slice volumes, froxels names.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[Advanced Computer Graphics/exercises/Week 06]].
 
 ## If we run long, cut
 
-Realtime
+Realtime froxel impl. Keep march + two dt.
 
 ## If we run short, add
 
-shadow in volume extra.
+Shadow in volume extra.

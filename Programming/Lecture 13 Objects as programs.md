@@ -47,11 +47,11 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 **Ask:** In `p.dist(q)`, what is `this`? Wait. Want: `p`.
 
-**Board:** parked strip. Then object with a method arrow.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *tiny OOP, methods*.
+**They do:** write today’s question in their notes: *`class Point { dist(q){…} }` or record + `dist(p,q)` — student choice, with tests*.
 
 **Do not:** Deep inheritance for a homework.
 
@@ -81,7 +81,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 **They do:** On paper: a Vector add that returns new, does not mutate.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -142,9 +142,7 @@ Point them at `Programming/code/11-point.html` as the after-class check, not as 
 
 ## Quiz next meeting (they hear this now)
 
-1. What is this (3)
-2. Why inheritance is skipped (3)
-3. dist of two points (4)
+None this meeting.
 
 
 ## Snippet
@@ -166,11 +164,7 @@ See [[Programming/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Methods.** `counter.inc()` mutates. this is the receiver. Losing this in a callback is a later JS course topic — demo once.
-
-**2. class.** `class Point { constructor(x,y){...} dist(){...} }`. Optional. Records + functions are enough for IGWT math kernels.
-
-**3. Inheritance.** Skip. Composition: a sprite has a point.
+_none_
 
 ---
 

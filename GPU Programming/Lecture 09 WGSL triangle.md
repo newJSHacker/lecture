@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** vertex_index, clip  
-**Success check:** A WGSL vs/fs pair.
+**Kernel:** WGSL vs/fs: @builtin(vertex_index) → clip position; bind group for time  
+**Success check:** they can read a WGSL pair, resize, and table six GLSL vs WGSL rows
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: vertex_index, clip | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 9 | Goal: a triangle you wrote | Invariant: Three.js WebGPURenderer without reading WGSL is not the lab; validation errors are loud on purpose`
 
 ## Board at the end (they photograph this)
 
 ```
-@vertex @fragment
-Triangle.
+@vertex   fn vs(@builtin(vertex_index) i: u32)
+          -> @builtin(position) vec4f
+
+@fragment fn fs(...) -> @location(0) vec4f
+
+clip z  0..1  (not GLSL's -1..1)   — freeze and say it
+bind group  ≈  uniforms
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Triangle.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** WGSL. Typed.
+**Say:** WGSL is typed. @location. No GLSL preprocessor soup. navigator.gpu.requestAdapter then configure the canvas. Copying a full sample unread fails. Still no CUDA.
 
-**Ask:** A WGSL vs/fs pair? Wait seven seconds. Take two answers.
+**Ask:** Who supplies vertex_index — a VBO, or the draw? Wait. Want: the draw (builtin).
 
-**Board:** parked strip. Then @vertex @fragment.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: vertex_index, clip. Kernel: vertex_index, clip. We freeze conventions and we do not invent timings.
+**Say:** Colored triangle; resize. Uniform time extra. Compare GLSL side by side. Clip Z convention named.
 
-**Ask:** What would a wrong version of this look like? Want: three.js WebGPURenderer as the only lab with no WGSL read.
+**Ask:** What is a bind group?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** WGSL. Typed.
+**Say:** Three vertices from an index. No buffer required for the hello.
 
-**Say:** Canvas. `navigator.gpu.requestAdapter` then `configure` the context.
+**Board:** @vertex @fragment. Circle clip z.
 
-**Say:** Errors. Validation is loud.
+**Say:** Validation is loud — read it like a GLSL compile log.
 
-**Ask:** A WGSL vs/fs pair? Wait seven seconds. Take two answers.
+**Ask:** Write the vs signature in one line.
 
-**They do:** On paper: uniform time extra.
+**They do:** On paper: GLSL vs WGSL, three rows to start the homework table.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Colored triangle WGSL; resize.. Zoom 140%. Read errors out loud.
+**Say:** Colored triangle WGSL; resize. Plant WebGPURenderer as the only lab. Plant unread sample paste. Local, no CDN.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** uniform time extra.
+**Say:** Uniform time extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: uniform time extra.; compare GLSL side by side.. Homework: Written: GLSL vs WGSL table (6 rows).; code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: time uniform + GLSL side by side. Homework: 6-row table; code. Quiz: @builtin(position), bind group, clip z.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: vertex_index, clip | Plant the first common mistake. |
-| 10–30 | Colored triangle WGSL; resize. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | requestAdapter + configure | Plant no detect. |
+| 10–30 | WGSL triangle | Plant Three.js-only lab. |
+| 30–45 | Resize + validation error | Read it out loud. |
+| 45–60 | They add time bind group | Circulate. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. @builtin(position) (3)
-2. bind group (4)
-3. clip z (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[GPU Programming/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. WGSL.** Typed. `@location`. No GLSL preprocessor soup.
-
-**2. Canvas.** `navigator.gpu.requestAdapter` then `configure` the context.
-
-**3. Errors.** Validation is loud. Good.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[GPU Programming/exercises/Week 09]].
 
 ## If we run long, cut
 
-Errors
+A mesh loader. Keep triangle + bind group + table.
 
 ## If we run short, add
 
-compare GLSL side by side.
+Clip z 0..1 on the parked strip.

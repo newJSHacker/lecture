@@ -1,356 +1,277 @@
 # Lecture 1 — What computational geometry is
 
-**Time:** 75 min lecture + 60 min live coding  
-**Kernel this week:** `orient(a, b, c)`  
-**Board first:** one picture of three points and a signed area
+**Week 1 of 15** · Computational Geometry  
+**Meeting:** 75 min lecture + 60 min live coding  
+**Kernel:** orient(a,b,c) = sign of cross(b−a, c−a); LEFT / RIGHT / COLLINEAR; atan2 is the wrong primitive  
+**Success check:** they can color a triangle left/right/collinear, print the raw cross, and say why not atan2
+
+This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. Run the 75 minutes as **moves** (Say / Ask / Board / Slide / They do). Detailed notes follow.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/01-orient.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — one picture of three points and a signed area.
-- Parked strip: `Lecture 1 | What computational geometry is | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- No quiz (Lecture 1). Course contract lives in the land.
+- Demo: `Computational Geometry/code/01-orient.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
+- Backup: the board photograph list below if the projector dies.
+- Parked strip: `Lecture 1 | Goal: see that graphics already is computational geometry; freeze predicates, degeneracy, visualization | Invariant: predicates before constructions; degeneracy is the course`
 
 ## Board at the end (they photograph this)
 
 ```
-one picture of three points and a signed area
-Triangle ABC with an arrow on AB and a + / − on C.
-Four flagship problem thumbnails.
-The 15-week map as five boxes: primitives, hulls, sweep/tri, proximity/search, project.
+cross(b−a, c−a) = (bx−ax)(cy−ay) − (by−ay)(cx−ax)
+>0 LEFT of directed ab (CCW)    =0 COLLINEAR    <0 RIGHT
+area = cross / 2
+
+predicate: discrete answer     construction: new geometry
+atan2: slow, wraps ±π, branch cut     cross: four sub, two mul
+
+degenerate: collinear hull · T-junction · overlap · duplicate verts
+1e20 can swallow a 1 in IEEE — detect; do not hope
 ```
 
 ## Slides today (cap: 6)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | — | Most blocks have **no slide**. Argument on the board. |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–10 | Why this course exists (graphics already is geometry) |
-| 10–25 | Four flagship problems |
-| 25–40 | Predicates vs constructions |
-| 40–55 | Degeneracy and floating point |
-| 55–70 | Course contract and 15-week map |
-| 70–75 | Preview `orient`, then stand up for live coding |
 
 ---
 
-## Learning goals
+## Lecture (75 min)
 
-By the end of the lecture a student can:
+### Minutes 0–8 — Hook
 
-1. Name the five problem families of this course.
-2. Distinguish a **predicate** from a **construction**.
-3. Give three degenerate cases that break naive code.
-4. Compute the 2D cross product and interpret its sign.
-5. Explain why `atan2` is the wrong primitive for “left of a line.”
+**Say:** Does this click hit the polygon? Do these walls cross? That is this course. 2D first; 3D is the same idea with one extra coordinate. A construction inherits the predicate’s errors — implement predicates first.
 
----
+**Ask:** Is the intersection point of two lines a predicate or a construction? Wait. Want: construction.
 
-## 1. Opening (10 min)
+**Board:** parked strip. Then one picture of three points and a signed area.
 
-Computer graphics is full of questions that look continuous but must be answered with discrete algorithms:
+**Slide:** none unless the table above has a photograph.
 
-- Does this click hit the polygon?
-- Do these two walls cross?
-- What is the outline of this point cloud?
-- Which triangle contains the ray?
-- Who is the nearest site to this pixel?
+**They do:** write today’s question in their notes: *`orient(a, b, c)`*.
 
-Computational geometry is the study of **algorithms for geometric objects**: points, segments, polygons, and later meshes.
+**Do not:** Using angles.
 
-This course is 2D-first. Almost every 3D graphics test (ray–triangle, frustum, collision) is the same idea with one extra coordinate.
+### Minutes 8–12 — Frame
 
-Write on the board:
+**Say:** Four flagships: closest pair, hull, segment intersection, point in polygon. Fifth family named: proximity and search. Course policy: detect degeneracy, write a policy, write a test, never ==0 on a float without saying EPS. EPS does not solve everything — Week 13 robustness. We will not implement full Fortune, Kirkpatrick, 3D Delaunay, CGAL kernels; we name them. JS + Canvas. Labs 25, hw 20, quizzes 10, midterm 15, project 30.
 
-```
-input: finite set of points / segments / polygons
-output: a combinatorial structure + a few constructed points
-```
+**Ask:** Why is sorting polar angles a bad replacement for orient?
 
-We care about:
+**Board:** today’s question in one line.
 
-- **correctness** on ugly inputs
-- **complexity** in n
-- **visualization** so students can see the invariant
+**Slide:** none.
 
----
+**They do:** copy the parked invariant.
 
-## 2. Four flagship problems (15 min)
+**Do not:** skip the attempt later to “cover more.”
 
-Draw each one. Do not implement yet.
+### Minutes 12–35 — Build
 
-### Closest pair
+**Say:** AB is directed. orient(a,b,c) is not orient(b,a,c).
 
-Input: n points.  
-Output: the two that are nearest.
+**Board:** triangle ABC, arrow on AB, +/− on C. Four flagship thumbnails. 15-week map: primitives, hulls, sweep/tri, proximity/search, project.
 
-Naive: try all pairs, Θ(n²).  
-This course: divide and conquer, O(n log n) (Week 12).
+**Say:** I subtract A first so the test is translation-invariant. I print the raw value so near-zero is visible. I do not call Math.atan2.
 
-### Convex hull
+**Ask:** cross for A=(0,0), B=(2,0), C=(1,3) — left/right?
 
-Input: n points.  
-Output: the smallest convex polygon containing them.
+**They do:** On paper: why cross beats polar angles for left-of-line, half page. One fragile float input (explain the risk).
 
-Mental image: stretch a rubber band around nails.
+**Do not:** Skip the attempt.
 
-### Segment intersection
+### Minutes 35–50 — Show
 
-Input: n line segments.  
-Output: all crossing points, or yes/no.
+**Say:** Visualizer from zero: click add, drag, reset, coordinates. Three points: segment AB, fill green/red/gray by orient, print LEFT/RIGHT/COLLINEAR and raw cross. Demo Computational Geometry/code/01-orient.html. Plant atan2. Plant cross===0 as ‘exact.’
 
-Naive: every pair, Θ(n²).  
-This course: sweep line (Week 6).
+**Slide:** none. Live editor or local demo. Zoom 140%.
 
-### Point in polygon
+**They do:** watch hands; then the same kernel on their machine when you say so.
 
-Input: a polygon P and a query point q.  
-Output: inside / outside / on boundary.
+**Do not:** type a 40-line starter you have not shown on the board. Do not hide the error.
 
-Used every time a user clicks a shape.
+### Minutes 50–65 — Attempt
 
-**Fifth family, named now, taught later:** proximity (Voronoi / Delaunay) and search (kd-tree / BVH).
+**Say:** orient with eps. Eight minutes. Four console tests: left, right, collinear-between, collinear-beyond.
 
----
+**They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
-## 3. Predicates vs constructions (15 min)
+**Board:** after they struggle, write one correct fragment.
 
-A **predicate** returns a discrete answer.
+**Do not:** live-code the attempt for them before they try.
 
-Examples:
+### Minutes 65–75 — Land
 
-- Is c left of directed line ab?
-- Do segments ab and cd intersect?
-- Is triangle abc oriented counterclockwise?
+**Say:** Lab: distance, midpoint, signed area, ‘make C collinear’ button. Homework: 8 tests including C=A, tiny triangle, translated copy. Quiz: cross, predicate vs construction, two degeneracies, why not atan2.
 
-A **construction** returns new geometry.
+**Board:** add the invariant if it is not already in the parked strip.
 
-Examples:
-
-- The intersection point of two lines
-- The circumcenter of three points
-- The convex hull polygon
-
-**Teaching rule:** implement predicates first. Constructions inherit their errors.
-
-The fundamental 2D predicate is orientation.
-
-For points a, b, c define
-
-```
-cross(b - a, c - a) = (bx - ax)(cy - ay) - (by - ay)(cx - ax)
-```
-
-| Sign | Meaning |
-| --- | --- |
-| > 0 | c is to the **left** of directed line ab (CCW) |
-| = 0 | a, b, c are **collinear** |
-| < 0 | c is to the **right** of ab (CW) |
-
-This value is also twice the signed area of triangle abc.
-
-```
-area(abc) = cross(b - a, c - a) / 2
-```
-
-**Why not angles?**
-
-`atan2` is slow, wraps at ±π, and is unstable near the branch cut. The cross product uses four subtractions and two multiplies. It is the primitive of the whole course.
-
-### Pseudocode
-
-```
-orient(a, b, c):
-    v = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)
-    if v > EPS: return LEFT
-    if v < -EPS: return RIGHT
-    return COLLINEAR
-```
-
-This week, mention `EPS` but do not pretend it solves everything. Week 13 returns to robustness.
-
----
-
-## 4. Degeneracy and floating point (15 min)
-
-A case is **degenerate** when a predicate that is “usually” nonzero becomes zero, or when objects coincide.
-
-Show these four pictures:
-
-1. Three collinear points on a hull
-2. Two segments that touch at an endpoint (T-junction)
-3. Two overlapping collinear segments
-4. Duplicate vertices in a polygon
-
-Then show the floating-point surprise:
-
-```
-a = (0, 0)
-b = (1, 0)
-c = (1e20, 1)
-```
-
-The true orientation is LEFT, but `1e20` can swallow the `1` in IEEE-754 double. Naive code reports COLLINEAR.
-
-**Course policy on degeneracy:**
-
-- Detect it. Do not hope it will not happen.
-- Define a policy (keep collinear hull points or drop them).
-- Write a test for it.
-- Never use `== 0` on a computed float without saying you are using an epsilon.
-
-Exact arithmetic and Shewchuk predicates are named now, required later only as reading.
-
----
-
-## 5. Course contract (15 min)
-
-### What we will implement
-
-Weeks 1–7: kernel, polygons, hulls, sweep, triangulation.  
-Week 8: midterm + DCEL.  
-Weeks 9–12: search, Voronoi, Delaunay, closest pair.  
-Weeks 13–15: graphics applications and the project.
-
-### What we will not implement
-
-Full Fortune, Kirkpatrick point location, 3D Delaunay, CGAL kernels. We will **name** them.
-
-### How a week works
-
-Lecture → live coding on a canvas → lab → homework → 10-minute quiz.
-
-### Assessment reminder
-
-Labs 25%, homework 20%, quizzes 10%, midterm 15%, project 30%.
-
-### Language
-
-JavaScript + Canvas, unless the department has already standardized on Python. The math does not change.
+**Do not:** “Any questions?” End on the lab hook.
 
 ---
 
 ## Live coding (60 min)
 
-Build the shared visualizer from zero.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Click / drag visualizer | A visualizer that cannot move points cannot show degeneracy. |
+| 10–35 | orient + raw cross | Plant atan2. Print v. |
+| 35–50 | Drag to collinear | Gray + near-zero. |
+| 50–60 | They add signed area | Circulate. |
 
-**Must work by the end of class:**
-
-1. Click adds a point.
-2. Drag moves the nearest point.
-3. Reset clears.
-4. Coordinates drawn next to each point.
-5. If the student (or you) has selected three points A, B, C:
-   - draw segment AB
-   - fill triangle ABC with green / red / gray by `orient`
-   - print `LEFT`, `RIGHT`, or `COLLINEAR` and the raw cross value
-
-Talk while typing:
-
-- “I subtract A first so the test is translation-invariant.”
-- “I do not call `Math.atan2`.”
-- “I print the raw value so we can see near-zero cases.”
-
-Starter they leave with:
-
-```js
-export function cross(ax, ay, bx, by, cx, cy) {
-  return (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
-}
-
-export function orient(a, b, c, eps = 1e-9) {
-  const v = cross(a.x, a.y, b.x, b.y, c.x, c.y);
-  if (v > eps) return 1;
-  if (v < -eps) return -1;
-  return 0;
-}
-```
+Point them at `Computational Geometry/code/01-orient.html` as the after-class check, not as the lecture.
 
 ---
 
-## Lab (2–3 hours)
+## Lab
 
-Using the visualizer:
-
-1. Implement `distance(a, b)` and `midpoint(a, b)`.
-2. Display the signed area of ABC.
-3. Add a button: “make C collinear with AB” (project C onto AB).
-4. Write 4 console tests: left, right, collinear-between, collinear-beyond.
-
-Done when a TA can click three points and see sign, area, and distance without opening the console.
+_(none this meeting)_
 
 ---
 
 ## Homework
 
-Due start of Week 2.
-
 1. Implement `orient` with 8 unit tests. Required cases:
-   - left, right
-   - collinear, C between A and B
-   - collinear, C beyond B
-   - C = A
-   - very small triangle
-   - a translated copy of a previous case (invariance)
-2. Written (half page): why the cross product is better than comparing polar angles for the left-of-line test.
-3. Written: give one floating-point input you expect to be fragile. You do not need to break IEEE; you need to explain the risk.
+2. left, right
+3. collinear, C between A and B
+4. collinear, C beyond B
+5. C = A
+6. very small triangle
+7. a translated copy of a previous case (invariance)
+8. Written (half page): why the cross product is better than comparing polar angles for the left-of-line test.
+9. Written: give one floating-point input you expect to be fragile. You do not need to break IEEE; you need to explain the risk.
 
 ---
 
-## Quiz (10 min, start of Week 2 or end of Week 1)
+## Quiz next meeting (they hear this now)
 
-1. Compute `cross` for A=(0,0), B=(2,0), C=(1,3). Inside/left/right? (2 pts)
-2. Is “the intersection point of two lines” a predicate or a construction? (2 pts)
-3. Name two degenerate cases for segment intersection. (3 pts)
-4. Why is sorting polar angles a bad replacement for `orient`? One sentence. (3 pts)
+None this meeting.
+
+
+## Extra exercises
+
+See [[Computational Geometry/exercises/Week 01]].
+
+---
+
+## Notes you may still need (from the outline)
+
+**1. Opening (10 min).** Computer graphics is full of questions that look continuous but must be answered with discrete algorithms:
+- Does this click hit the polygon?
+- Do these two walls cross?
+- What is the outline of this point cloud?
+- Which triangle contains the ray?
+- Who is the nearest site to this pixel?
+Computational geometry is the study of **algorithms for geometric objects**: points, segments, polygons, and later meshes.
+This course is 2D-first. Almost every 3D graphics test (ray–triangle, frustum, collision) is the same idea with one extra coordinate.
+Write on the board:
+```
+input: finite set of points / segments / polygons
+output: a combinatorial structure + a few constructed points
+```
+We care about:
+- **correctness** on ugly inputs
+- **complexity** in n
+- **visualization** so students can see the i
+
+**2. Four flagship problems (15 min).** Draw each one. Do not implement yet.
+### Closest pair
+Input: n points.  
+Output: the two that are nearest.
+Naive: try all pairs, Θ(n²).  
+This course: divide and conquer, O(n log n) (Week 12).
+### Convex hull
+Input: n points.  
+Output: the smallest convex polygon containing them.
+Mental image: stretch a rubber band around nails.
+### Segment intersection
+Input: n line segments.  
+Output: all crossing points, or yes/no.
+Naive: every pair, Θ(n²).  
+This course: sweep line (Week 6).
+### Point in polygon
+Input: a polygon P and a query point q.  
+Output: inside / outside / on boundary.
+Used every time a user clicks a shape.
+**Fifth family, named now, taught later:** proximity (Voronoi / Delaunay) and search (kd-tree / BVH).
+---
+
+**3. Predicates vs constructions (15 min).** A **predicate** returns a discrete answer.
+Examples:
+- Is c left of directed line ab?
+- Do segments ab and cd intersect?
+- Is triangle abc oriented counterclockwise?
+A **construction** returns new geometry.
+Examples:
+- The intersection point of two lines
+- The circumcenter of three points
+- The convex hull polygon
+**Teaching rule:** implement predicates first. Constructions inherit their errors.
+The fundamental 2D predicate is orientation.
+For points a, b, c define
+```
+cross(b - a, c - a) = (bx - ax)(cy - ay) - (by - ay)(cx - ax)
+```
+| Sign | Meaning |
+| --- | --- |
+| > 0 | c is to the **left** of directed line ab (CCW) |
+| = 0 | a, b, c are **collinear** |
+| < 0 | c is to the **right** of ab (CW) |
+This value is also twice the signed area of triangle abc.
+```
+area(abc) = cross(b - a, c - 
+
+**4. Degeneracy and floating point (15 min).** A case is **degenerate** when a predicate that is “usually” nonzero becomes zero, or when objects coincide.
+Show these four pictures:
+1. Three collinear points on a hull
+2. Two segments that touch at an endpoint (T-junction)
+3. Two overlapping collinear segments
+4. Duplicate vertices in a polygon
+Then show the floating-point surprise:
+```
+a = (0, 0)
+b = (1, 0)
+c = (1e20, 1)
+```
+The true orientation is LEFT, but `1e20` can swallow the `1` in IEEE-754 double. Naive code reports COLLINEAR.
+**Course policy on degeneracy:**
+- Detect it. Do not hope it will not happen.
+- Define a policy (keep collinear hull points or drop them).
+- Write a test for it.
+- Never use `== 0` on a computed float without saying you are using an epsilon.
+Exact arithmetic and Shewchuk predicates are named now, required l
+
+**5. Course contract (15 min).** ### What we will implement
+Weeks 1–7: kernel, polygons, hulls, sweep, triangulation.  
+Week 8: midterm + DCEL.  
+Weeks 9–12: search, Voronoi, Delaunay, closest pair.  
+Weeks 13–15: graphics applications and the project.
+### What we will not implement
+Full Fortune, Kirkpatrick point location, 3D Delaunay, CGAL kernels. We will **name** them.
+### How a week works
+Lecture → live coding on a canvas → lab → homework → 10-minute quiz.
+### Assessment reminder
+Labs 25%, homework 20%, quizzes 10%, midterm 15%, project 30%.
+### Language
+JavaScript + Canvas, unless the department has already standardized on Python. The math does not change.
+---
 
 ---
 
 ## Common mistakes
 
-- Using angles.
-- Testing `cross === 0` and then arguing the code is “exact.”
-- Forgetting that AB is **directed**. `orient(a,b,c)` is not `orient(b,a,c)`.
-- Building a visualizer that cannot move points. Degeneracy is easier to show by dragging.
+1. Using angles.
+2. Testing `cross === 0` and then arguing the code is “exact.”
+3. Forgetting that AB is **directed**. `orient(a,b,c)` is not `orient(b,a,c)`.
+4. Building a visualizer that cannot move points. Degeneracy is easier to show by dragging.
 
----
+## If we run long, cut
 
-## Board drawings
+Shewchuk details. Keep orient + degeneracy pictures.
 
-1. Triangle ABC with an arrow on AB and a + / − on C.
-2. Four flagship problem thumbnails.
-3. The 15-week map as five boxes: primitives, hulls, sweep/tri, proximity/search, project.
+## If we run short, add
 
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 01]] · Demo: [01-orient.html](code/01-orient.html)
-
-Recitation picks (do not replace the homework):
-
-1. Translate ABC by (1000, −50). Does `orient` change? Why is that better than comparing `atan2`?
-2. Predicate or construction: left-of-line, intersection point, circumcenter.
-3. Reduce point-in-triangle to three `orient` tests. Boundary policy?
-4. Student writes `if (cross === 0)`. What policy did they just invent?
-
-```js
-function orient(a, b, c, eps = 1e-9) {
-  const v = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-  if (v > eps) return 1;
-  if (v < -eps) return -1;
-  return 0;
-}
-```
+Reduce point-in-triangle to three orient tests — name the boundary policy.

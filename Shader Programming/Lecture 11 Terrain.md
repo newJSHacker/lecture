@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** heightmap fBm, lod name  
-**Success check:** Height = fBm(xz).
+**Kernel:** height = fBm(xz); march the heightfield; fog; LOD step named  
+**Success check:** they can set y = fbm(xz) and color a snow line without a DEM download
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: heightmap fBm, lod name | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 11 | Goal: one sun, fog, height color | Invariant: terrain this week is a function of xz, not a mesh pipeline`
 
 ## Board at the end (they photograph this)
 
 ```
-y = fbm(xz)
-Slice of hills.
+h = fbm(p.xz * scale)
+map:  p.y - h
+
+fog  =  mix(col, fogCol, 1 - exp(-k t))
+
+LOD: step size may grow with t   (name; not required)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Slice of hills.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Terrain. The classic IQ scene.
+**Say:** The classic IQ hills. DEM downloads are next year's GIS course. Unlimited steps is a hang, not a look. Pause time; debug a still camera.
 
-**Ask:** Height = fBm(xz)? Wait seven seconds. Take two answers.
+**Ask:** Where does height live — a texture from NASA, or fBm(xz)? Wait. Want: fBm today.
 
-**Board:** parked strip. Then y = fbm(xz).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: heightmap fBm, lod name. Kernel: heightmap fBm, lod name. We freeze conventions and we do not invent timings.
+**Say:** One sun, height color, fog. Triplanar is a name, not required. Shadow extra if time — still a named second march.
 
-**Ask:** What would a wrong version of this look like? Want: DEM downloads as the week.
+**Ask:** What is LOD here?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Terrain. The classic IQ scene.
+**Say:** Slice of hills. Camera looks down the +z or along the ground — freeze one.
 
-**Say:** LOD. Step size can grow with t.
+**Board:** y = fbm(xz). Fog formula.
 
-**Say:** Textures. Optional triplanar name.
+**Say:** Cap max steps with a uniform. Do not invent fps; if the machine dies, lower octaves.
 
-**Ask:** Height = fBm(xz)? Wait seven seconds. Take two answers.
+**Ask:** Normal from height in one idea?
 
-**They do:** On paper: snow line extra.
+**They do:** On paper: snow line if h > threshold.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fullscreen terrain march; fog.. Zoom 140%. Read errors out loud.
+**Say:** Fullscreen terrain march; fog. Plant DEM as the week. Snow line extra.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** snow line extra.
+**Say:** Snow line extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: snow line extra.; shadow extra if time.. Homework: Written: height vs mesh terrain.; GLSL.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: snow + shadow extra if time. Homework: height vs mesh terrain; GLSL. Quiz: height fBm, normal from height, fog.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: heightmap fBm, lod name | Plant the first common mistake. |
-| 10–30 | Fullscreen terrain march; fog. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | h = fbm(xz) | Plant DEM download. |
+| 10–30 | March + fog | Plant unlimited steps. |
+| 30–45 | Max-steps uniform | Pause camera. |
+| 45–60 | They add snow line | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. height fbm (3)
-2. normal from height (4)
-3. fog (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Shader Programming/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Terrain.** The classic IQ scene. One sun, fog, height color.
-
-**2. LOD.** Step size can grow with t. Name only unless they implement.
-
-**3. Textures.** Optional triplanar name. Not required.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Shader Programming/exercises/Week 11]].
 
 ## If we run long, cut
 
-Textures
+Triplanar textures. Keep height + fog + step cap.
 
 ## If we run short, add
 
-shadow extra if time.
+LOD as a name on the board.

@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** GLTFLoader, scale, shadows  
-**Success check:** GLTFLoader + DRACO name.
+**Kernel:** GLTFLoader from vendor/jsm; traverse for shadows; scale; DRACO as a name  
+**Success check:** they load a local glb (or the 10-gltf-pattern stand-in), traverse castShadow, and show an error UI on failure
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: GLTFLoader, scale, shadows | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 6 | Goal: a model that is a graph | Invariant: gltf.scene is a Group; load once, not in rAF; no Sketchfab hotlink without credit`
 
 ## Board at the end (they photograph this)
 
 ```
-model.scene
-glTF box.
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+// addons → ThreeJS/vendor/jsm/     no CDN
+
+loader.load('m.glb', (g) => scene.add(g.scene))
+traverse: if (o.isMesh) o.castShadow = true
+Box3.setFromObject → center / scale
+
+DRACO   (name)   file:// fails → serve
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ glTF box.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Format. Blender course exports this.
+**Say:** Blender exports this. Demo 10-gltf-pattern.html uses local vendor. If the glTF viewer is wrong, the engine is not the bug — that sentence is the Blender course; today we still check scale.
 
-**Ask:** GLTFLoader + DRACO name? Wait seven seconds. Take two answers.
+**Ask:** Do you loader.load inside the animation loop? Wait. Want: no.
 
-**Board:** parked strip. Then model.scene.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: GLTFLoader, scale, shadows. Kernel: GLTFLoader, scale, shadows. We freeze conventions and we do not invent timings.
+**Say:** Loading manager + placeholder cube. Error UI. DRACO name, not a lab install. License on any third-party glb.
 
-**Ask:** What would a wrong version of this look like? Want: hotlinking huge sketchfab without credit.
+**Ask:** Who is gltf.scene — a Mesh or a Group?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Format. Blender course exports this.
+**Say:** Format. One glb vs gltf+bin+png.
 
-**Say:** Async. loading manager.
+**Board:** load, add g.scene, traverse.
 
-**Say:** Demo. model load demo.
+**Say:** Box3 center. Shadows need traverse.
 
-**Ask:** GLTFLoader + DRACO name? Wait seven seconds. Take two answers.
+**Ask:** Why traverse for castShadow?
 
-**They do:** On paper: error UI.
+**They do:** On paper: the load callback three lines.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Load a tiny glTF (or a public example with license). Traverse set castShadow.. Zoom 140%. Read errors out loud.
+**Say:** Load pattern from 10-gltf-pattern.html. Plant CDN GLTFLoader. Plant load in rAF. Plant huge Sketchfab without credit.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** error UI.
+**Say:** Error UI on 404 glb. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: error UI.; box3 center.. Homework: Written: why glTF.; Code: load.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: error UI; box3 center. Homework: why glTF; load. Quiz: who is scene, traverse, load in rAF?.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: GLTFLoader, scale, shadows | Plant the first common mistake. |
-| 10–30 | Load a tiny glTF (or a public example with license). Traverse set castShadow. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | importmap vendor + addons | Plant CDN. |
+| 10–30 | load + add scene | Plant adding gltf not gltf.scene. |
+| 30–45 | traverse shadows | Forgot isMesh. |
+| 45–60 | They error-UI | Circulate. Serve. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. who is scene (3)
-2. traverse (4)
-3. load in rAF? (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[ThreeJS Development/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Format.** Blender course exports this.
-
-**2. Async.** loading manager. Placeholder cube.
-
-**3. Demo.** model load demo.
+_none_
 
 ---
 
@@ -173,8 +173,8 @@ See [[ThreeJS Development/exercises/Week 06]].
 
 ## If we run long, cut
 
-Demo
+DRACO decode internals. Keep load + traverse + serve.
 
 ## If we run short, add
 
-box3 center.
+Box3 center / scale to meters.

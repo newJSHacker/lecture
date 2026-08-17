@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** JSON, abort, cache  
-**Success check:** Headers.
+**Kernel:** fetch JSON; AbortController; no API keys in the frontend  
+**Success check:** they abort a previous search fetch and can say where a key must not live
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/06-closure.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: JSON, abort, cache | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 6 | Goal: GET local JSON, cancel in-flight, never ship a key | Invariant: fetch talks HTTP; a race without abort is a stale answer; secrets are not in git`
 
 ## Board at the end (they photograph this)
 
 ```
-AbortController name
-Race.
-Key skull.
+const c = new AbortController();
+fetch(url, { signal: c.signal });
+c.abort();                 // new search
+
+if (!res.ok) throw …       // 404 is not a throw from fetch
+
+KEY SKULL   —  not in source, not in the bundle
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Key skull.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** APIs. GET JSON.
+**Say:** AI course and capstone will fetch. Today: local data.json, abort on a new search, and a skull on the board for keys. A CDN or a pasted token is a fail.
 
-**Ask:** Headers? Wait seven seconds. Take two answers.
+**Ask:** Does fetch throw on HTTP 404? Wait. Want: no — check res.ok.
 
-**Board:** parked strip. Then AbortController name.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: JSON, abort, cache. Kernel: JSON, abort, cache. We freeze conventions and we do not invent timings.
+**Say:** GET JSON is the lab. POST to a local mock is extra. Headers named. Cache: the browser may reuse GET — we do not invent cache timings. Abort cancels the previous in-flight request.
 
-**Ask:** What would a wrong version of this look like? Want: Keys in source.
+**Ask:** Where do API keys live? Want: server / env / never the repo.
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** APIs. GET JSON.
+**Say:** Request, response, body. .json() parses. Serve — file:// breaks fetch the same way it broke modules.
 
-**Say:** Abort. Cancel on new search.
+**Board:** AbortController. Race: slow response arrives after a new query.
 
-**Say:** Secrets. No API keys in the repo.
+**Say:** Secrets. No keys in source. AI course will repeat this. Handle 500 with a visible message.
 
-**Ask:** Headers? Wait seven seconds. Take two answers.
+**Ask:** What does abort() do to an await fetch?
 
-**They do:** On paper: POST to a local mock extra.
+**They do:** On paper: search-as-you-type: abort previous, then fetch. Three boxes.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Search-as-you-type fake: abort previous.. Zoom 140%. Read errors out loud.
+**Say:** Search-as-you-type fake: abort previous. Serve Modern JavaScript/code/ and fetch data.json (see 04-async.html). Plant a key in a const. Erase it. Plant ignoring !ok.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** POST to a local mock extra.
+**Say:** Abort on a second button click. Handle 404/500 with text on the page. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: POST to a local mock extra.; Handle 500.. Homework: Written: why keys not in git.; Code: abort.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: abort + handle 500; optional POST to a local mock. Homework: why keys not in git; abort code. Quiz: AbortController, where keys live, GET cache name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: JSON, abort, cache | Plant the first common mistake. |
-| 10–30 | Search-as-you-type fake: abort previous. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | fetch data.json + ok | Plant file:// and missing ok. |
+| 10–30 | AbortController | Plant race: late response overwrites. |
+| 30–45 | Key skull | Plant a fake key. Delete. No CDN. |
+| 45–60 | They abort on second click | Circulate. |
 
 Point them at `Modern JavaScript/code/06-closure.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Modern JavaScript/code/06-closure.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. AbortController (4)
-2. where keys live (3)
-3. GET cache (3)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +162,7 @@ See [[Modern JavaScript/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. APIs.** GET JSON. POST for later backends.
-
-**2. Abort.** Cancel on new search.
-
-**3. Secrets.** No API keys in the repo. AI course will repeat this.
+_none_
 
 ---
 
@@ -175,8 +173,8 @@ See [[Modern JavaScript/exercises/Week 06]].
 
 ## If we run long, cut
 
-Secrets
+POST mock if abort is still shaky. Keep GET + abort + no keys.
 
 ## If we run short, add
 
-Handle 500.
+Handle 500 with a visible status.

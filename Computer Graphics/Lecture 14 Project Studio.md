@@ -1,58 +1,106 @@
 # Lecture 14 — Project studio
 
-**Time:** 30 min lecture, then studio until the period ends  
-**No new theory**  
-**Required this week:** running pipeline, one debug view, README
+**Week 14 of 15** · Computer Graphics I  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** running pipeline + one debug view (n / UV / depth) + README that serves; freeze: cube+Lambert+texture beats broken glTF  
+**Success check:** a TA can serve the folder, see more than an untransformed triangle, and hear where M,V,P are
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. This meeting is **studio**, not a content lecture.
-
 ## Before you enter
 
-- Demo: `Computer Graphics/code/14-blinn-phong.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — today's picture.
-- Parked strip: `Lecture 14 | Project studio | Invariant: a picture is an array; putPixel lives in pixels`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Computer Graphics/code/14-blinn-phong.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: a picture is an array; putPixel lives in pixels`
 
 ## Board at the end (they photograph this)
 
 ```
-Project studio
+Report: problem · weeks used · pipeline · hard case · kernel vs lib · results · limits · refs
+Defense: M V P order?  divide by w?  debug view?  disable depth?  library vs you?
+         affine UV?  where encode?  left-handed API?
+
+Must: serve · debug view · who wrote which file
+Cuts: glTF/PBR/shadows → cube+Lambert+texture
+      dual CPU/GPU → one path + mapping table
+      city graph → two nodes
+Do not invent fps. If you did not measure, say so.
 ```
 
-## Slides today (cap: 6)
+## Slides today (cap: 2)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
-
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–15 | How to write the report |
-| 15–30 | Defense-style questions; presentation clock |
-| 30–end | Desk review. Professor and TAs circulate. |
-
-Do not give a lecture on PBR. If a team is stuck on a matrix, debug the matrix.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals (for the studio)
+## Lecture / studio (75 min)
 
-1. Freeze scope: one pipeline story, one visual.
-2. Write a report a second examiner can grade without watching the demo twice.
-3. Answer “what is in clip space?” without guessing.
+### Minutes 0–10 — Frame
+
+**Say:** This meeting is **studio**. No PBR lecture. If they are stuck on a matrix, debug the matrix. A correct z-buffer on canvas beats a broken gltf dump. Three people, one git author is a failure mode.
+
+**Ask:** If behind, what do you cut first?
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk order: mat4/shaders, camera, rasterizer or depth test, report outline. Comment on the pipeline, not the CSS. Rehearse 12+5 once with a TA timer: 0–2 problem, 2–6 pipeline+limitation, 6–10 live debug view, 10–12 who did what.
+
+**They do:** Studio. Serve first. One debug view. Recording draft.
+
+**Do not:** sit at the podium. Do not add features for them.
+
+### Minutes 65–75 — Land
+
+**Say:** Report draft + 30s recording due before Week 15. Next week 12+5. No quiz.
+
+**Do not:** “Any questions?” End on the clock.
 
 ---
 
-## 1. Report structure (15 min)
+## Live coding (60 min)
 
-6–8 pages, including figures. Not a Three.js tutorial.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Eight headings + eight questions + clock | Photograph. |
+| 10–50 | Desk review | Kernel, then camera, then depth, then outline. |
+| 50–60 | 60s rehearsal | Hard stop. |
+
+This slot is **more studio**, not a hidden lecture.
+
+---
+
+## Lab
+
+_(none this meeting)_
+
+---
+
+## Homework
+
+_(none this meeting)_
+
+---
+
+## Quiz next meeting
+
+None this week.
+
+## Extra exercises
+
+See [[Computer Graphics/exercises/Week 14]].
+
+## Notes from the outline
+
+**1. Report structure (15 min).** 6–8 pages, including figures. Not a Three.js tutorial.
 
 | Section | What we want | Typical length |
 | --- | --- | --- |
@@ -72,10 +120,7 @@ Do not give a lecture on PBR. If a team is stuck on a matrix, debug the matrix.
 **Do not** invent timings. If you did not measure FPS, say so.
 
 ---
-
-## 2. Questions I will ask next week (15 min)
-
-1. Point to M, V, P in your code. What is the product order?
+**2. Questions I will ask next week (15 min).** 1. Point to M, V, P in your code. What is the product order?
 2. Where do you divide by w?
 3. Show a debug view (normals / UV / depth). What would a black normal view mean?
 4. If I disable depth, what happens?
@@ -98,10 +143,7 @@ Do not give a lecture on PBR. If a team is stuck on a matrix, debug the matrix.
 | 10–12 | Who did what; what you would do next |
 
 ---
-
-## 3. Studio rules
-
-### Must be true before they leave today
+**3. Studio rules.** ### Must be true before they leave today
 
 - README runs on a lab machine (`npx serve` / `python -m http.server`).
 - The scene is more than a single untransformed triangle **or** they have a written waiver from you for a documented recovery plan.
@@ -128,42 +170,10 @@ Comment on the **pipeline**, not the CSS.
 
 ---
 
-## Lab
+## If we run long, cut
 
-The studio **is** the lab. Checkpoint: complete / incomplete from Week 13 plus today’s README/debug-view check.
+New libraries. Keep freeze.
 
----
+## If we run short, add
 
-## Homework
-
-Finish the report draft and the 30-second recording. Submit the recording before Week 15.
-
----
-
-## Quiz
-
-None.
-
----
-
-## Common failure modes
-
-- Pretty Three.js, no student matrix.
-- Report is a Blender tutorial.
-- No debug view.
-- Three people, one git author.
-
----
-
-## Board
-
-Write only:
-
-1. The 8 report headings
-2. The 8 defense questions
-3. The 12 + 5 clock
-
-
-## Extra exercises
-
-See [[Computer Graphics/exercises/Week 14]].
+Waiver only for a documented recovery plan on a single triangle.

@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** viewport, breakpoints  
-**Success check:** Set viewport meta.
+**Kernel:** viewport meta; one breakpoint with min-width; fluid images  
+**Success check:** they can show the same page readable at ~360px and desktop without a second site
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,22 +14,23 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/06-responsive.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: viewport, breakpoints | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 7 | Goal: one document, two widths | Invariant: responsive is layout change, not a separate mobile app`
 
 ## Board at the end (they photograph this)
 
 ```
-phone vs laptop frames
-Frames.
-Stack vs row.
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+@media (min-width: 720px) { … }
+
+img { max-width: 100%; height: auto; }
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Phone screenshot of a desktop-only page overflowing | photograph |
 
 ---
 
@@ -39,11 +40,11 @@ Stack vs row.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Viewport. `width=device-width` or the page is 980px shrunk.
+**Say:** Capstone must work on a phone. Viewport meta is not optional. We do not invent a second URL.
 
-**Ask:** Set viewport meta? Wait seven seconds. Take two answers.
+**Ask:** What happens without the viewport meta on a phone? Wait.
 
-**Board:** parked strip. Then phone vs laptop frames.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +54,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: viewport, breakpoints. Kernel: viewport, breakpoints. We freeze conventions and we do not invent timings.
+**Say:** Mobile first: default is the small layout; min-width adds columns. Breakpoint: pick one number and freeze it for the lab.
 
-**Ask:** What would a wrong version of this look like? Want: Only testing at 1920px.
+**Ask:** min-width vs max-width — which matches mobile-first?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +68,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Viewport. `width=device-width` or the page is 980px shrunk.
+**Say:** Viewport. Then fluid images.
 
-**Say:** Breakpoints. Start from the actual layout breaking, not from Bootstrap's numbers.
+**Board:** one breakpoint. Two sketches: stacked vs two-column.
 
-**Say:** Images. max-width: 100%.
+**Say:** DevTools device mode is a lie-detector, not a real phone — still use it today.
 
-**Ask:** Set viewport meta? Wait seven seconds. Take two answers.
+**Ask:** Why height: auto on img?
 
-**They do:** On paper: Fix a horizontal overflow.
+**They do:** Sketch stacked vs 720px two-column.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A page that stacks cards under 640px.. Zoom 140%. Read errors out loud.
+**Say:** Stack cards, then row at 720px. Demo 06-responsive.html. Plant missing viewport.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +92,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Fix a horizontal overflow.
+**Say:** Last week’s grid stacks under 720px. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +102,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Fix a horizontal overflow.; Fluid type with clamp extra.. Homework: Written: why viewport meta.; Code: two-breakpoint layout.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: viewport + one breakpoint. Homework: overflow screenshot. Quiz: viewport, min-width, img rule.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +114,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: viewport, breakpoints | Plant the first common mistake. |
-| 10–30 | A page that stacks cards under 640px. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Viewport | Plant missing meta. |
+| 15–40 | Breakpoint | Plant max-width spaghetti. |
+| 40–55 | Fluid img | Broken height. |
+| 55–60 | They stack the grid | Circulate. |
 
 Point them at `Web Technologies/code/06-responsive.html` as the after-class check, not as the lecture.
 
@@ -138,9 +139,7 @@ Point them at `Web Technologies/code/06-responsive.html` as the after-class chec
 
 ## Quiz next meeting (they hear this now)
 
-1. viewport meta (4)
-2. min-width vs max-width (3)
-3. max-width 100% on img (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +158,7 @@ See [[Web Technologies/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Viewport.** `width=device-width` or the page is 980px shrunk. Required on every IGWT page.
-
-**2. Breakpoints.** Start from the actual layout breaking, not from Bootstrap's numbers. One or two breakpoints is enough.
-
-**3. Images.** max-width: 100%. Later: srcset name only.
+_none_
 
 ---
 
@@ -174,8 +169,8 @@ See [[Web Technologies/exercises/Week 07]].
 
 ## If we run long, cut
 
-Images
+Three breakpoints. Keep one.
 
 ## If we run short, add
 
-Fluid type with clamp extra.
+prefers-reduced-motion name — Lecture 13.

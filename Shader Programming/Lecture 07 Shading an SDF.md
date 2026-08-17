@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** normals from gradient  
-**Success check:** Estimate a 2D/3D normal with tetrahedral or central differences.
+**Kernel:** n = normalize(∇d) by central differences; Lambert n·ℓ  
+**Success check:** they can estimate a 2D normal with finite differences and light it
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: normals from gradient | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 7 | Goal: light an SDF without an analytic n | Invariant: the normal is the gradient of the SDF; epsilon too big is a different shape`
 
 ## Board at the end (they photograph this)
 
 ```
-n = normalize(vec3(d(p+e)-d(p-e)))
-Gradient.
+e = 0.001   (too big: 0.1 on a tiny shape)
+
+n.x = d(p+ex) - d(p-ex)
+n.y = d(p+ey) - d(p-ey)
+n = normalize(n)
+
+Lambert: max(dot(n,L), 0)
+PBR is RTR — not this hour
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Gradient.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Gradient. The normal is ∇f for an SDF f.
+**Say:** If they never compare analytic n to finite-difference n, they will trust a broken map() in week 9. Soft shadow is a name — week 9 marches. This week: N·L.
 
-**Ask:** Estimate a 2D/3D normal with tetrahedral or central differences? Wait seven seconds. Take two answers.
+**Ask:** What happens if e=0.1 on a small circle? Wait.
 
-**Board:** parked strip. Then n = normalize(vec3(d(p+e)-d(p-e))).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: normals from gradient. Kernel: normals from gradient. We freeze conventions and we do not invent timings.
+**Say:** Gradient is ∇f. In 2D we fake a lit disk. Energy is still Lambert. Compare analytic (p/|p|) to FD once.
 
-**Ask:** What would a wrong version of this look like? Want: analytic n and finite-difference n never compared.
+**Ask:** Why finite difference instead of only analytic?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Gradient. The normal is ∇f for an SDF f.
+**Say:** Central differences. Tetrahedral is a name for 3D later.
 
-**Say:** Soft shadow name. IQ's `shadow` via raymarch — week 9.
+**Board:** n from d. Circle e.
 
-**Say:** Energy. Still Lambert.
+**Say:** Two lights extra is two dots added — still not a named PBR pass.
 
-**Ask:** Estimate a 2D/3D normal with tetrahedral or central differences? Wait seven seconds. Take two answers.
+**Ask:** Write n.x in one line.
 
-**They do:** On paper: two lights extra.
+**They do:** On paper: analytic n of a circle vs FD sketch.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Lit circle SDF; light angle slider.. Zoom 140%. Read errors out loud.
+**Say:** Lit circle SDF; light-angle uniform. Plant e=0.1. Compare analytic vs FD on the board.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** two lights extra.
+**Say:** Two lights extra, or a Blinn specular extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: two lights extra.; specular blinn extra.. Homework: Written: why finite difference.; Code: normal2.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: two lights or specular. Homework: why finite difference; normal2. Quiz: epsilon too big, n from d, Lambert. Midterm next week: gamma, uv, noise, fBm, SDF.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: normals from gradient | Plant the first common mistake. |
-| 10–30 | Lit circle SDF; light angle slider. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | FD normal | Plant e=0.1. |
+| 10–30 | Lambert slider | Plant skipping analytic compare. |
+| 30–45 | Pause light angle | Debug a still. |
+| 45–60 | They add a second light | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. epsilon too big (3)
-2. n from d (4)
-3. Lambert (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[Shader Programming/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Gradient.** The normal is ∇f for an SDF f. In 2D, light a 'height' or fake 3D with n.xy.
-
-**2. Soft shadow name.** IQ's `shadow` via raymarch — week 9. This week: N·L.
-
-**3. Energy.** Still Lambert. PBR is RTR course.
+_none_
 
 ---
 
@@ -173,8 +173,8 @@ See [[Shader Programming/exercises/Week 07]].
 
 ## If we run long, cut
 
-Energy
+Energy conservation speech. Keep FD + Lambert.
 
 ## If we run short, add
 
-specular blinn extra.
+Blinn specular as extra, named.

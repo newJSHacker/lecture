@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** boundaries, harassment, medical  
-**Success check:** Guardian / play space.
+**Kernel:** guardian, seated option, no jumpscares as required, no secret recording  
+**Success check:** they can ship a safety README: space, seated, data, epilepsy note
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: boundaries, harassment, medical | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 12 | Goal: a lab that does not hurt people | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-guardian; consent; breaks
-Guardian outline.
+clear the space     sitting demos OK
+no required jumpscares
+no recording classmates in AR without consent
+epilepsy note     (no 3 Hz strobe)
+
+we do not give medical advice
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Guardian outline.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Safety. Real rooms have tables.
+**Say:** Real rooms have tables. Forced standing-only as an exam is a fail. Secret recording is a fail. We name epilepsy risk; we do not practice medicine. Demo XR/code/02-safety.html.
 
-**Ask:** Guardian / play space? Wait seven seconds. Take two answers.
+**Ask:** If a student is seated, is the experience allowed to exist? Wait. Want: yes.
 
-**Board:** parked strip. Then guardian; consent; breaks.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: boundaries, harassment, medical. Kernel: boundaries, harassment, medical. We freeze conventions and we do not invent timings.
+**Say:** Single-user ethics still: AR cameras catch faces. Multiplayer moderation named if they ever add it — not this week. Course: no horror jumpscares as required content.
 
-**Ask:** What would a wrong version of this look like? Want: forced standing-only exam.
+**Ask:** What goes in the safety README?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Safety. Real rooms have tables.
+**Say:** Boundaries. Guardian / play space.
 
-**Say:** Social. If multiplayer ever, moderation.
+**Board:** seated · consent · epilepsy note · no medical claims.
 
-**Say:** Policy. Course: no horror jumpscares as required content.
+**Say:** Harassment: if social ever, moderation. Today: do not trap, do not record silently.
 
-**Ask:** Guardian / play space? Wait seven seconds. Take two answers.
+**Ask:** Why is a jumpscare the wrong required content?
 
-**They do:** On paper: epilepsy note.
+**They do:** Draft the safety README headings.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A safety README: space, seated option, data.. Zoom 140%. Read errors out loud.
+**Say:** Safety README: space, seated, data. Plant standing-only exam. Plant secret recording. Plant a medical claim — strike it.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** epilepsy note.
+**Say:** Write the README section. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: epilepsy note.; no recording classmates in AR without consent.. Homework: Written: 1 page safety.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: epilepsy note; no recording without consent. Homework: safety page. Quiz: seated, consent, no medical advice. Next: one verb.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: boundaries, harassment, medical | Plant the first common mistake. |
-| 10–30 | A safety README: space, seated option, data. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Play space | Plant standing-only. |
+| 15–40 | README: seated + data | Plant secret recording. |
+| 40–55 | No medical claims | Strike the sentence. |
+| 55–60 | They add epilepsy note | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. guardian (3)
-2. AR camera (4)
-3. jumpscare policy (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +152,7 @@ See [[XR/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Safety.** Real rooms have tables. Sitting experiences for class demos. Clear the space.
-
-**2. Social.** If multiplayer ever, moderation. This week: single-user ethics still — recording people in AR.
-
-**3. Policy.** Course: no horror jumpscares as required content.
+_none_
 
 ---
 
@@ -165,8 +163,8 @@ See [[XR/exercises/Week 12]].
 
 ## If we run long, cut
 
-Policy
+Policy lecture. Keep README + seated.
 
 ## If we run short, add
 
-no recording classmates in AR without consent.
+Consent line for AR camera.

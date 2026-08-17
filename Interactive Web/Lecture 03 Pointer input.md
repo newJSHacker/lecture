@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** offset, buttons, touch  
-**Success check:** Map client to canvas.
+**Kernel:** map clientX/Y through getBoundingClientRect onto the backing store; Pointer Events  
+**Success check:** they drag a circle that tracks the pointer when CSS size ≠ canvas.width
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/03-pointer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: offset, buttons, touch | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 3 | Goal: the click lands on the path | Invariant: CSS pixels are not canvas pixels until you scale; listen, don’t poll`
 
 ## Board at the end (they photograph this)
 
 ```
-client vs canvas coords
-Mapping.
+const r = canvas.getBoundingClientRect();
+x = (ev.clientX - r.left) * canvas.width  / r.width;
+y = (ev.clientY - r.top)  * canvas.height / r.height;
+
+pointerdown / move / up     setPointerCapture
+clientX as a pixel index    =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Mapping.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Coordinates. getBoundingClientRect + scale to backing store.
+**Say:** A geometry visualizer is a drag. WebGL picking later is the same mapping idea. If they use clientX as a backing-store index, every HiDPI or CSS-scaled canvas lies.
 
-**Ask:** Map client to canvas? Wait seven seconds. Take two answers.
+**Ask:** If the canvas is drawn 640 wide but CSS-styled to 320px, where is a click at the right edge in canvas space? Wait. Want: ~640, not 320.
 
-**Board:** parked strip. Then client vs canvas coords.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: offset, buttons, touch. Kernel: offset, buttons, touch. We freeze conventions and we do not invent timings.
+**Say:** Pointer Events unify mouse and touch. Capture so drag is not lost. preventDefault on contextmenu if a right-drag is the lab. Hit-test: distance to circle centers.
 
-**Ask:** What would a wrong version of this look like? Want: using clientX as pixel index.
+**Ask:** Why setPointerCapture on down?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Coordinates. getBoundingClientRect + scale to backing store.
+**Say:** Bounding rect + scale. Write the two lines every time until they are muscle.
 
-**Say:** Pointer Events. Unify mouse and touch.
+**Board:** client vs canvas. Circle the multiply by width/r.width.
 
-**Say:** Dragging. CG geometry visualizer pattern.
+**Say:** Dragging is down → move (if captured) → up. CG visualizer pattern.
 
-**Ask:** Map client to canvas? Wait seven seconds. Take two answers.
+**Ask:** offsetX vs the rect formula — when does offsetX lie? (CSS / border teaching-level.)
 
-**They do:** On paper: Multitouch extra.
+**They do:** On paper: hit two circles — formula for ‘which disk contains (x,y)’.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Drag a circle. Right-click prevent menu if needed.. Zoom 140%. Read errors out loud.
+**Say:** Drag a circle. Right-click prevent menu if needed. Demo Interactive Web/code/03-pointer.html. Plant clientX as pixel index. Stretch the CSS and show the miss, then the scale fix.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Multitouch extra.
+**Say:** Hit two circles. Multitouch extra if the first mapping works. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Multitouch extra.; Hit two circles.. Homework: Written: client vs canvas.; Code: drag.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: hit two circles; multitouch extra. Homework: client vs canvas; drag. Quiz: bounding rect, pointer vs mouse, capture.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: offset, buttons, touch | Plant the first common mistake. |
-| 10–30 | Drag a circle. Right-click prevent menu if needed. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | dots at clientX | Plant. Stretch CSS. Miss. |
+| 10–30 | rect scale mapping | They match 03-pointer.html. |
+| 30–45 | drag + capture | Plant lost drag off canvas. |
+| 45–60 | They hit two circles | Circulate. |
 
 Point them at `Interactive Web/code/03-pointer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Web/code/03-pointer.html` as the after-class check, n
 
 ## Quiz next meeting (they hear this now)
 
-1. bounding rect (4)
-2. pointer vs mouse (3)
-3. capture (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Interactive Web/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Coordinates.** getBoundingClientRect + scale to backing store.
-
-**2. Pointer Events.** Unify mouse and touch.
-
-**3. Dragging.** CG geometry visualizer pattern.
+_none_
 
 ---
 
@@ -174,7 +172,7 @@ See [[Interactive Web/exercises/Week 03]].
 
 ## If we run long, cut
 
-Dragging
+Multitouch. Keep mapping + one drag.
 
 ## If we run short, add
 

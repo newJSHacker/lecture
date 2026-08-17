@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Modern JavaScript Development  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** small tool  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** small tool: modules + tests + README how to run (npm test or python -m http.server)  
+**Success check:** a TA can follow the README and see tests or the tool without a second undocumented app
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,20 +14,24 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `Modern JavaScript/code/08-modules.html`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: drop TypeScript if behind; keep modules + tests; no new bundler today`
 
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must:  named exports · at least 5 asserts · README
+Ideas: JSON pretty · fetch dashboard (local) · math lib
+Cuts:  drop TS; drop extra UI; keep kernel + tests
+
+npm test     or     python -m http.server
+No CDN
 ```
 
 ## Slides today (cap: 2)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | Clock / 12+5 rubric preview | not a feature list |
 
 ---
 
@@ -35,9 +39,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. A small tool, not a framework. JSON pretty, a local fetch dashboard, or a module math lib with tests. Not Three.js.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If you are behind, what do you cut first? Wait. Want: TS and chrome; not tests.
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +49,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: import graph + tests.
+**Say:** Desk review: import graph + tests. One teammate map. Rehearse 60 seconds. I do not add features for them.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Tests first. I circulate.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Photograph the headings. Homework: report + repo. Next week 12+5. No surprise scope. Ask them: where is await? where is the loop?
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +67,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: small tool | Plant the first common mistake. |
-| 10–30 | Desk review: import graph + tests. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings | They photograph. |
+| 10–50 | Desk review | Import graph + tests. Serve first. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,9 +97,7 @@ See [[Modern JavaScript/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Ideas.** JSON pretty, fetch dashboard, module math lib with tests, mini bundler-free app.
-**2. Cuts.** Drop TS. Keep modules + tests.
-**3. Report.** Architecture, how to run.
+_none_
 
 ## If we run long, cut
 

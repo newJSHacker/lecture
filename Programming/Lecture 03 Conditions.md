@@ -46,11 +46,11 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 **Ask:** What is the difference between `=` and `===`? Wait seven seconds. Take two answers. Then write both on the board.
 
-**Board:** parked strip. Then true/false diamond.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *if / else / comparisons*.
+**They do:** write today’s question in their notes: *`if (x === 0)` and the live bug `if (x = 0)`*.
 
 **Do not:** Assignment in if.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 **They do:** On paper: write the `if` for age ≥ 18. Collect two papers.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Programming/code/03-grade.html` as the after-class check, not as 
 
 ## Quiz next meeting (they hear this now)
 
-1. Result of `0 == ''` (2)
-2. Write if for age ≥ 18 (4)
-3. Why === (4)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Programming/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Boolean expressions.** `===` and `!==`. `==` is forbidden in this course except to show a bug once. `NaN === NaN` is false — show it.
-
-**2. Control flow.** if / else if / else. Early return as a style. Nested if more than two deep is a smell; use a function.
-
-**3. Guarding graphics later.** `if (!gl)` is the WebGL black-screen cousin. Conditions are how programs refuse to crash.
+_none_
 
 ---
 

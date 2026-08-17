@@ -47,11 +47,11 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 **Ask:** What is the index of the last element of `a`? Wait. Want: `a.length - 1`.
 
-**Board:** parked strip. Then boxes 0..n-1.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *push, map, index*.
+**They do:** write today’s question in their notes: *`const b = a.slice()` and average / max-index of an array*.
 
 **Do not:** `a = a.push(x)`.
 
@@ -81,7 +81,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 **They do:** On paper: reverse a 4-element array on a copy.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -142,9 +142,7 @@ Point them at `Programming/code/06-arrays.html` as the after-class check, not as
 
 ## Quiz next meeting (they hear this now)
 
-1. Index of last element (2)
-2. push return value (2)
-3. Copy vs alias (6)
+None this meeting.
 
 
 ## Snippet
@@ -163,11 +161,7 @@ See [[Programming/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. A list of values.** Vertices will be arrays of points. Indices into a cube. Off-by-one here becomes a missing triangle later.
-
-**2. Mutation.** push changes the array. `const a = []` can still push. Copy before sort if you need the original.
-
-**3. Higher-order preview.** `arr.map` / `filter` names only. Required: for-loop. Optional: map for the homework extra.
+_none_
 
 ---
 

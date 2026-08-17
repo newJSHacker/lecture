@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** JSON APIs  
-**Success check:** fetch a JSON URL.
+**Kernel:** fetch('data.json'); response.ok; await json(); no secrets  
+**Success check:** they load local JSON and render a list; they can explain 404 vs throw
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/09-fetch.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: JSON APIs | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 11 | Goal: data in, DOM out | Invariant: fetch talks HTTP; keys never in the frontend; local JSON is enough this week`
 
 ## Board at the end (they photograph this)
 
 ```
-fetch → then/await → json
-Request arrow.
-JSON list.
+const res = await fetch('data.json');
+if (!res.ok) throw new Error(res.status);
+const data = await res.json();
+
+GET local file   404 → !ok
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +41,11 @@ JSON list.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** fetch. Returns a Promise.
+**Say:** AI course and capstone will fetch. Today: a local JSON file served from this folder. CORS and file:// will bite — we serve.
 
-**Ask:** fetch a JSON URL? Wait seven seconds. Take two answers.
+**Ask:** Does fetch throw on 404? Wait. Want: no — you check res.ok.
 
-**Board:** parked strip. Then fetch → then/await → json.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +55,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: JSON APIs. Kernel: JSON APIs. We freeze conventions and we do not invent timings.
+**Say:** async/await preview (Modern JS owns the deep version). try/catch. No API keys. No CDN.
 
-**Ask:** What would a wrong version of this look like? Want: Ignoring !ok.
+**Ask:** Why serve instead of file://?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +69,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** fetch. Returns a Promise.
+**Say:** Request, response, body. JSON.parse is what .json() does.
 
-**Say:** Status. `if (!res.ok) throw`.
+**Board:** ok check. Then map to DOM from Lecture 9.
 
-**Say:** CORS. A browser policy.
+**Say:** GET is default. POST named, not used without a server.
 
-**Ask:** fetch a JSON URL? Wait seven seconds. Take two answers.
+**Ask:** What is in data.json if the file is an array of {name}?
 
-**They do:** On paper: Error state in the UI.
+**They do:** On paper: the three lines: fetch, ok, json.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Load `/data.json` with three records; render a list.. Zoom 140%. Read errors out loud.
+**Say:** Load people.json, render ul. Demo 09-fetch.html. Plant file:// fail. Plant ignoring !ok.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +93,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Error state in the UI.
+**Say:** Render names from JSON. Handle 404 with a visible message. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +103,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Error state in the UI.; Loading text.. Homework: Written: CORS in one paragraph.; Code: fetch + render + error.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: fetch + list + 404 message. Homework: why file:// breaks. Quiz: res.ok, await json, no keys.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +115,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: JSON APIs | Plant the first common mistake. |
-| 10–30 | Load `/data.json` with three records; render a list. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | fetch local | Plant file://. |
+| 15–40 | ok + json | Plant missing ok. |
+| 40–55 | Render list | They connect Lecture 9. |
+| 55–60 | They add 404 text | Circulate. |
 
 Point them at `Web Technologies/code/09-fetch.html` as the after-class check, not as the lecture.
 
@@ -138,9 +140,7 @@ Point them at `Web Technologies/code/09-fetch.html` as the after-class check, no
 
 ## Quiz next meeting (they hear this now)
 
-1. res.ok (3)
-2. JSON.parse vs res.json (3)
-3. Why file:// fetch fails (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +159,7 @@ See [[Web Technologies/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. fetch.** Returns a Promise. async/await in this week at teaching level; Modern JS goes deeper.
-
-**2. Status.** `if (!res.ok) throw`. Students skip this and parse an HTML 404 as JSON.
-
-**3. CORS.** A browser policy. Local files and foreign APIs fail. Use a local JSON file served by a static server.
+_none_
 
 ---
 
@@ -174,8 +170,8 @@ See [[Web Technologies/exercises/Week 11]].
 
 ## If we run long, cut
 
-CORS
+Auth headers. Keep local JSON + ok.
 
 ## If we run short, add
 
-Loading text.
+AbortController name.

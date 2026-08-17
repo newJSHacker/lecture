@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** base color, metal, roughness  
-**Success check:** Assign Principled.
+**Kernel:** Principled: Base Color, Metallic 0 or 1, Roughness; maps to MeshStandardMaterial  
+**Success check:** they assign Principled and can say painted wood is metalness 0; they do not judge in solid view
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: base color, metal, roughness | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 5 | Goal: PBR knobs that survive glTF | Invariant: same knobs as Standard; metalness 0.4 'because it looked nice' is usually wrong`
 
 ## Board at the end (they photograph this)
 
 ```
-metalness 0 or 1; roughness slider
-Three spheres.
-Knob table.
+BaseColor     Metallic 0|1     Roughness     Normal
+=  MeshStandardMaterial  map / metalness / roughness / normalMap
+
+dielectric 0     metal 1
+Material Preview + HDRI     not Solid
+
+specular workflow  =  legacy
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Knob table.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** PBR teaching. Same knobs as Three.js `MeshStandardMaterial` and later the RTR course.
+**Say:** Same knobs as Three.js Standard and later RTR. Students judge metal under gray clay and think PBR is broken. Preview with an HDRI.
 
-**Ask:** Assign Principled? Wait seven seconds. Take two answers.
+**Ask:** Metalness of painted wood? Wait. Want: 0.
 
-**Board:** parked strip. Then metalness 0 or 1; roughness slider.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: base color, metal, roughness. Kernel: base color, metal, roughness. We freeze conventions and we do not invent timings.
+**Say:** Two materials on a crate ok. Emission as a tiny LED extra. Do not set 0.5 on everything.
 
-**Ask:** What would a wrong version of this look like? Want: metalness 0.5 on everything.
+**Ask:** Three.js name for Base Color?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** PBR teaching. Same knobs as Three.js `MeshStandardMaterial` and later the RTR course.
+**Say:** Principled slots. Write the Three.js names beside them.
 
-**Say:** Metalness. Dielectric 0, metal 1.
+**Board:** 0 or 1 metal. Roughness meaning.
 
-**Say:** Preview. Material Preview vs Rendered.
+**Say:** Solid view plant. Switch to Material Preview.
 
-**Ask:** Assign Principled? Wait seven seconds. Take two answers.
+**Ask:** Why is metalness 0.5 usually wrong?
 
-**They do:** On paper: A crate with two materials.
+**They do:** On paper: crate wood vs crate metal strip — two values.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Three spheres: plastic, brushed metal, rubber. Same HDRI.. Zoom 140%. Read errors out loud.
+**Say:** Assign Principled; HDRI preview; map names to Standard. Plant metalness 0.5. Plant judging in solid.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** A crate with two materials.
+**Say:** Crate with two materials. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: A crate with two materials.; Emission as a tiny LED extra.. Homework: Written: map to MeshStandardMaterial.; Blend + screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: two materials; LED extra. Homework: map to MeshStandardMaterial; blend + screenshot. Quiz: painted wood, roughness meaning, three.js names.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: base color, metal, roughness | Plant the first common mistake. |
-| 10–30 | Three spheres: plastic, brushed metal, rubber. Same HDRI. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Principled on crate | Plant Solid view. |
+| 10–30 | metal 0 vs 1 | Plant 0.5. |
+| 30–45 | roughness slider | They see the highlight. |
+| 45–60 | They add a second material | Circulate. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. metalness of painted wood (3)
-2. roughness meaning (4)
-3. three.js names (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Blender/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. PBR teaching.** Same knobs as Three.js `MeshStandardMaterial` and later the RTR course. BaseColor, Metallic, Roughness, Normal. Specular workflow is legacy.
-
-**2. Metalness.** Dielectric 0, metal 1. 0.4 'because it looked nice' is usually wrong.
-
-**3. Preview.** Material Preview vs Rendered. Use an HDRI for preview; students judge metal under a gray clay viewport and think PBR is broken.
+_none_
 
 ---
 
@@ -174,7 +172,7 @@ See [[Blender/exercises/Week 05]].
 
 ## If we run long, cut
 
-Preview
+Clearcoat / sheen tour. Keep three knobs + preview.
 
 ## If we run short, add
 

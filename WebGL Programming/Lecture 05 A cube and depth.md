@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** indices, DEPTH_TEST, cull  
-**Success check:** Indexed cube.
+**Kernel:** indexed cube, DEPTH_TEST, CULL_FACE, CCW front  
+**Success check:** they enable depth, clear depth, and can toggle cull to see winding
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: indices, DEPTH_TEST, cull | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 5 | Goal: a cube that is not painter-sorted by luck | Invariant: hidden surfaces are a GPU test; winding is CCW; near is not 0`
 
 ## Board at the end (they photograph this)
 
 ```
-enable DEPTH_TEST
-Cube.
-cull.
+gl.enable(DEPTH_TEST)
+gl.enable(CULL_FACE)     CCW front     cull BACK
+
+clear COLOR | DEPTH      (forgot depth → flicker)
+
+near 0.1   far 100       near=0 is illegal / fighting
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ cull.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** Hidden surfaces. Same as CG I z-buffer.
+**Say:** CG I z-buffer is now a GPU bit. Without depth a cube is a scribble. Winding: if it is inside-out, you mirrored scale or reversed CCW — not 'WebGL is broken.'
 
-**Ask:** Indexed cube? Wait seven seconds. Take two answers.
+**Ask:** Do you need to clear depth every frame? Wait. Want: yes, COLOR | DEPTH.
 
-**Board:** parked strip. Then enable DEPTH_TEST.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: indices, DEPTH_TEST, cull. Kernel: indices, DEPTH_TEST, cull. We freeze conventions and we do not invent timings.
+**Say:** Indexed cube: 24 unique verts with normals later, or 8 verts if you accept shared normals. Today indices + depth. Demo 04-rotating-cube.html. Conventions: CCW.
 
-**Ask:** What would a wrong version of this look like? Want: no depth clear.
+**Ask:** What does CULL_FACE remove?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Hidden surfaces. Same as CG I z-buffer.
+**Say:** Same as CG I hidden surfaces. Now enable the test.
 
-**Say:** Winding. CCW front.
+**Board:** DEPTH_TEST, clear mask, CCW.
 
-**Say:** Demo. 04 cube, conventions.
+**Say:** Toggle depth off — painter bugs. Toggle cull — missing faces.
 
-**Ask:** Indexed cube? Wait seven seconds. Take two answers.
+**Ask:** Why is near=0 a problem?
 
-**They do:** On paper: cull toggle.
+**They do:** On paper: the two enable lines plus the clear mask.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Cube with depth; toggle depth to show painter bugs.. Zoom 140%. Read errors out loud.
+**Say:** Cube with depth; toggle depth to show painter bugs. Plant no depth clear. Plant near=0.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** cull toggle.
+**Say:** cull toggle. See which faces vanish. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: cull toggle.; wireframe extra.. Homework: Written: GPU depth vs CPU z-buffer.; Code: cube.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: cull toggle; wireframe extra. Homework: GPU depth vs CPU z-buffer; cube. Quiz: DEPTH_TEST, CCW, clear depth.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: indices, DEPTH_TEST, cull | Plant the first common mistake. |
-| 10–30 | Cube with depth; toggle depth to show painter bugs. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Indexed cube no depth | It looks 'ok' from one angle. Plant. |
+| 10–30 | enable DEPTH_TEST + clear | Plant forgot DEPTH bit. |
+| 30–45 | CULL_FACE CCW | Plant CW verts. Inside-out. |
+| 45–60 | They toggle cull | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. DEPTH_TEST (3)
-2. CCW (3)
-3. clear depth (4)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +161,7 @@ See [[WebGL Programming/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Hidden surfaces.** Same as CG I z-buffer. Now the GPU.
-
-**2. Winding.** CCW front. Inside-out = winding or mirrored scale.
-
-**3. Demo.** 04 cube, conventions.
+_none_
 
 ---
 
@@ -175,8 +172,8 @@ See [[WebGL Programming/exercises/Week 05]].
 
 ## If we run long, cut
 
-Demo
+Normal matrix. Keep cube + depth + cull.
 
 ## If we run short, add
 
-wireframe extra.
+Wireframe extra (LINES or barycentric name).

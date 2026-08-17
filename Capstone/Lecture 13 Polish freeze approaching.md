@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** bugs only  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** bugs only; known issues list; contact sheet; no new scope  
+**Success check:** the triage list is in README and Must is not growing
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,10 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-bug list vs feature list
-Triage columns.
+bugs only
+known issues
+contact sheet of the path
+Must is frozen     Could is already dead
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +38,9 @@ Triage columns.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (polish freeze approaching). New features this week become known issues or they slip the defense. Triage in README.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** Is that a bug in Must or a Could in disguise?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +48,15 @@ Triage columns.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Triage meeting recorded in README.
+**Say:** Triage meeting recorded in README. Contact sheet. Known issues. No new library.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Bugs only.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Known issues committed. Next week is freeze: tag, report, video.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +66,9 @@ Triage columns.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: bugs only | Plant the first common mistake. |
-| 10–30 | Triage meeting recorded in README. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Triage columns | Photograph. |
+| 10–50 | Desk review | Bugs only. |
+| 50–60 | Contact sheet | New-verb plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +97,12 @@ See [[Capstone/exercises/Week 13]].
 
 ## Notes from the outline
 
-**1. Freeze policy.** Week 14 is freeze. This week is last polish. Features that are not musts become won't.
-**2. QA.** Two devices if you claimed them.
-**3. Known issues.** A honest list is adult; hiding is not.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New features. Keep freeze of Must.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Known issues section.

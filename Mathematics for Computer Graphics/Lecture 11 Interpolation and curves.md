@@ -46,11 +46,11 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 **Ask:** lerp t=0 is? Wait. Want: a.
 
-**Board:** parked strip. Then lerp on a segment; cubic Bezier.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *lerp, Bezier intro*.
+**They do:** write today’s question in their notes: *`lerp(a,b,t)`; quadratic Bezier as lerp of lerps; cubic sampled*.
 
 **Do not:** T outside [0,1] without saying if extrapolating.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 **They do:** lerp tests t=0,1,0.5 on paper.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/08-bezier.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. lerp t=0 (2)
-2. quadratic as lerps (5)
-3. arc length warning (3)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. lerp.** a + t(b-a). Colors, camera paths, keyframes.
-
-**2. Bezier.** De Casteljau. Two control points for cubic. SVG and fonts.
-
-**3. Parametric speed.** t is not arc length. Mention; do not implement arc-length this term.
+_none_
 
 ---
 

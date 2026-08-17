@@ -1,151 +1,84 @@
 # Lecture 15 — Project presentations
 
-**Time:** full session of 12 + 5 minute slots  
-**No new lecture**  
-**Deliverables:** live demo, repo, 6–8 page report, 30-second recording
+**Week 15 of 15** · Computational Geometry  
+**Meeting:** 12 min + 5 questions — not a content lecture  
+**Kernel:** 12+5; live demo of the student algorithm; where is orient (or incircle); one ugly input  
+**Success check:** they stop at 12; they can answer the predicate question; recording plays if HDMI dies
+
+Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. This meeting is **presentations** (12+5), not a content lecture.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/15-incircle.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — today's picture.
-- Parked strip: `Lecture 15 | Project presentations | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Timer visible to the speaker.
+- Rubric on the parked strip.
+- Recording backup if the department requires it.
+- Parked strip: `Lecture 15 | 12 min + 5 questions | Invariant: no new features`
 
 ## Board at the end (they photograph this)
 
 ```
-Project presentations
+12 + 5
+Show: predicate · invariant in the viewer · one degenerate input
+Always: where is orient (or incircle) in the repo?
+No new algorithms on stage
 ```
 
-## Slides today (cap: 6)
+## Slides today
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Timer | not a slide of Fortune |
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Before the session
-
-- Room: projector + one spare HDMI/USB-C dongle.
-- Load each team’s recording as backup.
-- Print the rubric (below) one sheet per team.
-- Order: random or by project type (all Voronoi, then all picking) so comparison is fair.
-- A TA keeps time: 10-minute warning, 12-minute stop.
+Student decks are their problem. Yours is a timer.
 
 ---
 
-## Slot format
+## The meeting
 
-| Time | Who | What |
-| --- | --- | --- |
-| 12 min | team | problem, algorithm, live demo, limitations |
-| 5 min | examiner | two questions from the Week 14 list, plus one specific to their code |
-| 1 min | — | switch |
+**Say:** Presentations. 12+5. Repo, 6–8 page report, 30s recording. Computational geometry in this program is naming the predicate, drawing the invariant, testing the degenerate case, only then putting the result on a GPU.
 
-If the demo dies, play the recording and continue. Do not debug for five minutes in front of the class.
+**Ask (every team, two of):** Where is orient (or incircle)? What happens on your degenerate input? What did a library do?
 
----
+**They do:** present. Live-coding hour is more talks.
 
-## Required deliverables
-
-1. **Live demo** of the student algorithm.
-2. **Repository** with README, kernel, tests, and a note on libraries.
-3. **Report** 6–8 pages, captions on figures.
-4. **30-second recording** for the IGWT portfolio / exhibition.
-
-Late report: follow the department rule you announced in Week 1. Suggested: −10% per 24 hours, zero after 72 hours.
+**Do not:** debug on stage. Do not let a deck become the product.
 
 ---
 
-## Rubric (30% of the course)
+## Live coding (60 min)
 
-Copy onto the grade sheet.
-
-| Criterion | Weight | 5 | 3 | 1 |
-| --- | --- | --- | --- | --- |
-| Correct algorithm (tests + degeneracy) | 30% | Kernel matches the lecture invariant; tests include a degenerate case | Algorithm works on happy input; weak tests | Library does the work, or wrong algorithm |
-| Visual explanation | 20% | Viewer shows the invariant (stack, strip, illegal edge, sweep, …) | Result is visible, process is not | Screenshots of a finished mesh only |
-| Code and repository | 15% | Runs from README; one kernel; clear authors | Runs with tribal knowledge | Does not run on the lab machine |
-| Report | 20% | Problem, complexity, degeneracy, honest limits, citations | Write-up exists but skips complexity or degeneracy | Tutorial padding, no figures |
-| Presentation and demo | 15% | 12 minutes, ugly input shown, questions answered | Demo works, story is fuzzy | Over time, or cannot answer the predicate question |
-
-Half-points are allowed. Three teammates may receive different participation adjustments if the repo history and the Q&A make that obvious. Announce this in Week 1.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–60 | Talks | Cut at 12. Play recording if the demo dies. |
 
 ---
 
-## Suggested questions by project type
+## Lab
 
-**Map editor.** How do you report a T-junction? Do you split the DCEL edge?
-
-**Polygon modeler.** Ear or CDT? Show a reflex vertex that is not an ear.
-
-**Terrain / city.** Dual: which Voronoi vertex is which Delaunay triangle? Empty circle?
-
-**Physics.** Hull policy for collinear? SAT vs segment tests?
-
-**Picking / configurator.** What do you prune? Barycentric meaning for “which part”?
-
-**Path demo.** Visibility edge vs Voronoi roadmap. Shortest vs safest?
-
-**Stipple.** Discrete vs exact Voronoi. What is a vertex in the pixel picture?
-
-**Mesh repair.** Which intersections do you insert? Is the result a valid DCEL?
-
-Always ask: **“Where is `orient` (or incircle) in your repo?”**
+_(none this meeting)_
 
 ---
 
-## After the session
+## Homework
 
-- Collect repos as tags / zips.
-- Pick 3–4 demos for the annual IGWT exhibition.
-- Note one curriculum fix for next year (where did everyone break?).
-- Typical fixes: more time on `onSegment`, a provided visualizer, a smaller n cap on Delaunay.
+_(none this meeting)_
 
 ---
 
-## What you say in the last two minutes of the course
+## Quiz
 
-Computational geometry in this program is not a museum of algorithms.
+None.
 
-It is the habit of:
+## Extra exercises
 
-1. naming the predicate,
-2. drawing the invariant,
-3. testing the degenerate case,
-4. only then putting the result on a GPU.
+See [[Computational Geometry/exercises/Week 15]].
 
-That habit is what they should take into Computer Graphics I, WebGL, and the capstone.
+## If we run long, cut
 
----
+Debugging on stage.
 
-## Quiz / homework
+## If we run short, add
 
-None. Grades close when the report and repo are in.
-
----
-
-## Board
-
-The rubric table. The clock. Nothing else.
-
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 15]] · Tests: [19-kernel-tests.html](code/19-kernel-tests.html)
-
-Rehearse the 12 + 5 once with a TA timer. Each teammate answers one:
-
-1. Predicate, three return values.
-2. Test that fails if it flips.
-3. Library file vs student file.
-4. Degeneracy you actually shipped.
-
-Do not add algorithms this week.
+One question: what would break in 3D?

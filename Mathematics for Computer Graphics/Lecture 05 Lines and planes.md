@@ -44,11 +44,11 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 **Ask:** What t values make a segment? Wait. Want: 0 to 1.
 
-**Board:** parked strip. Then line p(t)=a+t d.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *parametric, implicit*.
+**They do:** write today’s question in their notes: *`p(t) = a + t d`; segment t∈[0,1], ray t≥0; plane n·(x−p)=0*.
 
 **Do not:** T unclamped calling it a segment.
 
@@ -78,7 +78,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 **They do:** On paper: point at t=0.5 on a segment.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -139,9 +139,7 @@ Point them at `Mathematics for Computer Graphics/code/05-line.html` as the after
 
 ## Quiz next meeting (they hear this now)
 
-1. t domain of a segment (3)
-2. plane equation (4)
-3. ray vs line (3)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +158,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Parametric.** p(t) = a + t d. Segment t∈[0,1], ray t≥0. Same as CG geometry objects.
-
-**2. Planes.** A triangle defines a plane. Ray–triangle later uses this plus barycentric.
-
-**3. Distance.** Point to line in 2D via cross/|d|. Optional.
+_none_
 
 ---
 

@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** public checkpoint  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** public checkpoint: 10+5 demo of the happy path; updated MoSCoW; remaining risks  
+**Success check:** the path runs for an audience; they can say what they cut; not a written exam
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,15 +19,18 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-rubric: slice, spec, measure
-Rubric.
+10 + 5     public checkpoint
+Show: users · verb · path on lab machine
+updated MoSCoW     risks remaining
+NOT a written exam
+no new engine this hour
 ```
 
 ## Slides today (cap: 2)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | Timer | not a pitch-deck template |
 
 ---
 
@@ -35,9 +38,9 @@ Rubric.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is a **midterm demo** — a public checkpoint, not a written exam. The happy path on a lab machine is the project. Slideware without the path fails.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If the demo dies, what do you show — a video backup or a new feature?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +48,15 @@ Rubric.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** 10+5 midterm demo.
+**Say:** 10+5. Circulate as audience. Updated MoSCoW. Risks remaining. Who did what.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio / remaining teams demo. Backup video if hardware fails.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** MoSCoW + risks committed. Next sprints: content, robustness, docs. No surprise scope.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +66,9 @@ Rubric.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: public checkpoint | Plant the first common mistake. |
-| 10–30 | 10+5 midterm demo. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Rubric: users, verb, path | Photograph. |
+| 10–50 | 10+5 demos | Tech-list opening plant. |
+| 50–60 | MoSCoW delta | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -97,14 +97,12 @@ See [[Capstone/exercises/Week 08]].
 
 ## Notes from the outline
 
-**1. Checkpoint.** This is a graded midterm **demo**, not a written exam. Spec diffs must be explicit.
-**2. Honesty.** If the verb is missing, say so. Do not hide behind bloom.
-**3. Replan.** Cuts now, not week 14 night.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New features between talks. Keep the path.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60s rehearsal if a team has not gone.

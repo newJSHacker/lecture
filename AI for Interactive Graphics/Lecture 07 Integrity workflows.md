@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** what students must log  
-**Success check:** An asset table: source, license, gen?, prompt.
+**Kernel:** asset table + prompt log; unlabeled gen is an integrity case  
+**Success check:** they can fill a table for a mini scene even if every file is handmade
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: what students must log | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 7 | Goal: a lab notebook for assets | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-prompt log; asset table
-Asset table.
+| file | source | license | generated? | prompt/model | human edits |
+
+empty table because 'just a cube'  =  fail
+labeled gen + human cleanup        =  OK
+exams remain human
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Asset table.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Process. Good students keep a prompt log like a lab notebook.
+**Say:** Good students keep a prompt log like a lab notebook. Unlabeled gen is an integrity case. Labeled gen with cleanup is fine. TAs will spot-check one asset. Demo 02-asset-table.html.
 
-**Ask:** An asset table: source, license, gen?, prompt? Wait seven seconds. Take two answers.
+**Ask:** If it was 'just a cube,' do you still have a row? Wait. Want: yes.
 
-**Board:** parked strip. Then prompt log; asset table.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: what students must log. Kernel: what students must log. We freeze conventions and we do not invent timings.
+**Say:** Peer review of a stripped table. Template in the repo. Same rule as Teaching/12: disclose; explain.
 
-**Ask:** What would a wrong version of this look like? Want: empty table because 'it was just a cube'.
+**Ask:** What is the difference between labeled gen and a lie?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Process. Good students keep a prompt log like a lab notebook.
+**Say:** Process. The table is the kernel.
 
-**Say:** Grading. Unlabeled gen is an integrity case.
+**Board:** six columns. Fill one handmade row.
 
-**Say:** TAs. Spot-check one asset per project.
+**Say:** Spot-check. Prompts recorded.
 
-**Ask:** An asset table: source, license, gen?, prompt? Wait seven seconds. Take two answers.
+**Ask:** Who is the table for — the model or the TA?
 
-**They do:** On paper: Peer review of a classmate's table (names stripped).
+**They do:** Fill three rows (handmade allowed).
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fill an asset table for a mini scene (even if all handmade — still fill).. Zoom 140%. Read errors out loud.
+**Say:** Fill an asset table for a mini scene. Plant empty table. Plant missing prompts. Peer swap names stripped.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Peer review of a classmate's table (names stripped).
+**Say:** Three rows. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Peer review of a classmate's table (names stripped).; Prompt log template in the repo.. Homework: Written: exam vs homework AI policy.; Completed asset table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: peer review; template in repo. Homework: table in README. Quiz: columns, unlabeled = case, cube still has a row. Next: midterm then latency.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: what students must log | Plant the first common mistake. |
-| 10–30 | Fill an asset table for a mini scene (even if all handmade — still fill). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Columns | Plant empty table. |
+| 15–40 | Fill handmade + gen | Plant unlabeled. |
+| 40–55 | Peer review stripped | They mark a miss. |
+| 55–60 | Template in repo | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. unlabeled gen (4)
-2. what a log row contains (3)
-3. TA spot-check (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[AI for Interactive Graphics/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Process.** Good students keep a prompt log like a lab notebook. Bad students paste.
-
-**2. Grading.** Unlabeled gen is an integrity case. Labeled gen with human cleanup is fine.
-
-**3. TAs.** Spot-check one asset per project.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[AI for Interactive Graphics/exercises/Week 07]].
 
 ## If we run long, cut
 
-TAs
+TA process lecture. Keep table + log.
 
 ## If we run short, add
 
-Prompt log template in the repo.
+Prompt log template file.

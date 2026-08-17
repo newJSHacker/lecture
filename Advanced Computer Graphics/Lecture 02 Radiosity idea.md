@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** patches, form factors  
-**Success check:** Discretize a room into patches.
+**Kernel:** patches + form factors; iterate B_i = E_i + ρ_i Σ F_ij B_j on a tiny system  
+**Success check:** they can iterate a 2×2 made-up F and say radiosity is diffuse, view-independent
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/01-radiosity2.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: patches, form factors | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 2 | Goal: color bleed on paper, not a hemicube coder | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-F_ij = fraction of energy i→j
-Patches + arrows.
+B_i = E_i + ρ_i Σ_j F_ij B_j
+
+2×2 F   made-up, honest
+diffuse only     bad for mirrors
+
+hemicube     named, not coded in full
+lightmaps / probes     realtime cousins
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Patches + arrows.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Classic. Goral et al.
+**Say:** Goral et al. Classic interiors. Full hemicube as required lab fails. Radiosity on a mirror sphere fails the model. Demo 01-radiosity2.html.
 
-**Ask:** Discretize a room into patches? Wait seven seconds. Take two answers.
+**Ask:** Does F_ij depend on the camera? Wait. Want: no — view-independent.
 
-**Board:** parked strip. Then F_ij = fraction of energy i→j.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: patches, form factors. Kernel: patches, form factors. We freeze conventions and we do not invent timings.
+**Say:** 4-patch room or 2-quad bleed. Iterate gather. Blender bake as oracle extra. Plot convergence extra.
 
-**Ask:** What would a wrong version of this look like? Want: full hemicube as required lab.
+**Ask:** Why is a mirror a bad radiosity customer?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Classic. Goral et al.
+**Say:** Discretize. Patches.
 
-**Say:** Teaching math. A 4-patch room: students compute a tiny linear system **or** iterate gather with made-up F_ij.
+**Board:** the gather formula. 2×2 F.
 
-**Say:** Realtime cousins. Lightmaps baked in Blender.
+**Say:** Honesty: F from hemicube is a name.
 
-**Ask:** Discretize a room into patches? Wait seven seconds. Take two answers.
+**Ask:** What is a form factor in one sentence?
 
-**They do:** On paper: Blender lightmap bake extra as oracle.
+**They do:** One iteration on paper with made-up F.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Two-quad color bleed: iterate `B_i = E_i + ρ_i Σ F_ij B_j` with a 2×2 made-up F.. Zoom 140%. Read errors out loud.
+**Say:** Two-quad bleed with 2×2 F. Plant hemicube as required. Plant mirror radiosity. Plot a couple iterates.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Blender lightmap bake extra as oracle.
+**Say:** One gather iteration in JS or on paper. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Blender lightmap bake extra as oracle.; plot convergence.. Homework: Written: why diffuse-only.; spreadsheet or JS of the 2×2.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: bake extra as oracle; plot convergence. Homework: view-independent paragraph. Quiz: patches, F, diffuse-only.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: patches, form factors | Plant the first common mistake. |
-| 10–30 | Two-quad color bleed: iterate `B_i = E_i + ρ_i Σ F_ij B_j` with a 2×2 made-up F. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Patches on a room | Plant hemicube lab. |
+| 15–40 | Iterate 2×2 | Plant mirror. |
+| 40–55 | Convergence sketch | They plot. |
+| 55–60 | They change ρ | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/01-radiosity2.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Advanced Computer Graphics/code/01-radiosity2.html` as the after-
 
 ## Quiz next meeting (they hear this now)
 
-1. form factor (4)
-2. view independent (3)
-3. mirrors (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Advanced Computer Graphics/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Classic.** Goral et al. Diffuse-only. View-independent. Great for interiors; bad for mirrors.
-
-**2. Teaching math.** A 4-patch room: students compute a tiny linear system **or** iterate gather with made-up F_ij. Honesty: F_ij from hemicube is named, not coded in full.
-
-**3. Realtime cousins.** Lightmaps baked in Blender. Probes.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Advanced Computer Graphics/exercises/Week 02]].
 
 ## If we run long, cut
 
-Realtime cousins
+Hemicube implementation. Keep 2×2 gather.
 
 ## If we run short, add
 
-plot convergence.
+Plot B over iterations.

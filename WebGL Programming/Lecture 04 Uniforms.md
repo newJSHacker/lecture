@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** mat4, time, colors  
-**Success check:** uniform locations.
+**Kernel:** uniforms: mat4, u_time, colors; getUniformLocation once  
+**Success check:** they spin a cube with u_time and can say uniform vs attribute
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: mat4, time, colors | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 4 | Goal: CPU values that reach the shader | Invariant: a uniform is constant for one draw; column-major matches kernel.js`
 
 ## Board at the end (they photograph this)
 
 ```
-u_time slider
-CPU/GPU arrow.
+attribute  =  per vertex     (buffer)
+uniform    =  per draw       (CPU sets)
+
+gl.uniformMatrix4fv(loc, false, m);   // false = already column-major
+
+u_time   u_color
+location null → name unused or typo
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ CPU/GPU arrow.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Uniforms. Constants for a draw call.
+**Say:** Last week the color was baked in the shader. Today the CPU talks. PVM is still a name — we rotate in the shader with u_time. Demo 04-rotating-cube.html.
 
-**Ask:** uniform locations? Wait seven seconds. Take two answers.
+**Ask:** Do you call getUniformLocation inside the fragment? Wait. Want: once after link, cache it.
 
-**Board:** parked strip. Then u_time slider.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: mat4, time, colors. Kernel: mat4, time, colors. We freeze conventions and we do not invent timings.
+**Say:** false in uniformMatrix4fv means the array is already column-major. Row-major by accident transposes the world. Missing name → location null, silent no-op.
 
-**Ask:** What would a wrong version of this look like? Want: row-major by accident.
+**Ask:** Uniform vs attribute in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Uniforms. Constants for a draw call.
+**Say:** Constants for a draw. Change M next week per object; today one object.
 
-**Say:** Column-major. false in uniformMatrix4fv means already column-major — match kernel.js.
+**Board:** u_time slider. CPU/GPU arrow.
 
-**Say:** Demo. 04 rotating cube.
+**Say:** Do not getUniformLocation every pixel. Cache.
 
-**Ask:** uniform locations? Wait seven seconds. Take two answers.
+**Ask:** What does false mean in uniformMatrix4fv?
 
-**They do:** On paper: Pause time.
+**They do:** On paper: two uniforms you would set for a tinted spinner.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Spin with u_time; then a color uniform.. Zoom 140%. Read errors out loud.
+**Say:** Spin with u_time; then a color uniform. Demo 04-rotating-cube.html. Plant row-major. Plant querying location in the rAF hot path.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Pause time.
+**Say:** Pause time with a flag. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Pause time.; Two objects different uniforms extra.. Homework: Written: uniform vs attribute.; Code: time.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pause time; two objects different uniforms extra. Homework: uniform vs attribute; time. Quiz: vs attribute, column-major, missing name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: mat4, time, colors | Plant the first common mistake. |
-| 10–30 | Spin with u_time; then a color uniform. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | u_color uniform | Plant forgot useProgram before set. |
+| 10–30 | u_time spin | Plant row-major mat4. |
+| 30–45 | Cache locations | Plant getUniformLocation in draw. |
+| 45–60 | They pause time | Circulate. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. uniform vs attribute (4)
-2. column-major (3)
-3. location of missing name (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Uniforms.** Constants for a draw call. PVM later.
-
-**2. Column-major.** false in uniformMatrix4fv means already column-major — match kernel.js.
-
-**3. Demo.** 04 rotating cube.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[WebGL Programming/exercises/Week 04]].
 
 ## If we run long, cut
 
-Demo
+Full PVM today. Keep time + color + column-major.
 
 ## If we run short, add
 
-Two objects different uniforms extra.
+Two objects, different color uniforms.

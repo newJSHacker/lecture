@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** a11y, LCP name  
-**Success check:** Keyboard the lab page.
+**Kernel:** label, alt, keyboard path, contrast; LCP as a named metric not a number we invent  
+**Success check:** they can tab through the page and every image has alt; they name LCP without a fake score
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/10-transform.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: a11y, LCP name | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 13 | Goal: usable, then maybe pretty | Invariant: if it cannot be used with a keyboard, it is not done; do not invent Lighthouse scores`
 
 ## Board at the end (they photograph this)
 
 ```
-focus ring on a button
-Tab path.
-Budget list.
+alt on img     label on input     one :focus visible
+
+keyboard: Tab through the lab page
+
+LCP  =  largest contentful paint   (name; measure later, do not invent)
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +41,11 @@ Budget list.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Keyboard. Tab order.
+**Say:** R3F and XR inherit this. A canvas with no keyboard story fails the experience course. Contrast is not a theme preference.
 
-**Ask:** Keyboard the lab page? Wait seven seconds. Take two answers.
+**Ask:** Can you use this page with the keyboard only? Wait. Then try.
 
-**Board:** parked strip. Then focus ring on a button.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +55,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: a11y, LCP name. Kernel: a11y, LCP name. We freeze conventions and we do not invent timings.
+**Say:** alt empty only if decorative. Focus visible. Reduced motion named. LCP/CLS names — no invented scores.
 
-**Ask:** What would a wrong version of this look like? Want: outline: none without a replacement.
+**Ask:** When is alt="" correct?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +69,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Keyboard. Tab order.
+**Say:** Perceivable, operable. Skip the four-letter sermon; show the page.
 
-**Say:** Performance. Images sized.
+**Board:** alt, label, focus. LCP name.
 
-**Say:** Inclusive. [[Teaching/10 Inclusive Teaching and Accessibility]]
+**Say:** Images without dimensions cause layout shift — CLS name.
 
-**Ask:** Keyboard the lab page? Wait seven seconds. Take two answers.
+**Ask:** What is LCP in one sentence?
 
-**They do:** On paper: Fix 3 a11y issues.
+**They do:** Tab the lab page; list what fails.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Audit the Week 7 page with keyboard + one axe DevTools pass (or checklist).. Zoom 140%. Read errors out loud.
+**Say:** A pretty button that is not a button (div). Plant. Fix with <button>. No Lighthouse number unless you run it live.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +93,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Fix 3 a11y issues.
+**Say:** Fix alt + labels + focus on last week’s page. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +103,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Fix 3 a11y issues.; Compress one image.. Homework: Written: three a11y checks.; Code: focus styles visible.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: keyboard path. Homework: alt audit. Quiz: alt, focus, LCP name. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +115,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: a11y, LCP name | Plant the first common mistake. |
-| 10–30 | Audit the Week 7 page with keyboard + one axe DevTools pass (or checklist). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | div-as-button | Plant. Fix button. |
+| 15–40 | alt + label | Empty alt on content image. |
+| 40–55 | Tab order | They walk it. |
+| 55–60 | They fix focus | Circulate. |
 
 Point them at `Web Technologies/code/10-transform.html` as the after-class check, not as the lecture.
 
@@ -138,9 +140,7 @@ Point them at `Web Technologies/code/10-transform.html` as the after-class check
 
 ## Quiz next meeting (they hear this now)
 
-1. alt purpose (3)
-2. Why focus ring (4)
-3. One perf budget (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +159,7 @@ See [[Web Technologies/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Keyboard.** Tab order. Skip links name. Canvas games need a non-pointer path or a documented limit.
-
-**2. Performance.** Images sized. JS deferred. Later: glTF budgets in Blender week.
-
-**3. Inclusive.** [[Teaching/10 Inclusive Teaching and Accessibility]]
+_none_
 
 ---
 
@@ -174,8 +170,8 @@ See [[Web Technologies/exercises/Week 13]].
 
 ## If we run long, cut
 
-Inclusive
+ARIA soup. Keep alt, label, keyboard.
 
 ## If we run short, add
 
-Compress one image.
+prefers-reduced-motion one rule.

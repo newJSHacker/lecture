@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Blender for Real-Time Graphics  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** one pack, one viewer  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** one pack, one viewer: UVs + Principled + glb + Three.js load; README units/rest/maps/budget  
+**Success check:** a TA can open the README, serve the viewer, and see measured tris — not a cinematic short
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,14 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `Blender/code/03-budget.html`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: drop armature if behind; keep UVs + Principled + glb + load; no invented fps`
 
 ## Board at the end (they photograph this)
 
 ```
-headings: source, maps, budget, viewer
-Headings.
+Must: meters · facing · UVs · Principled · .glb · viewer then Three
+Cuts: drop armature / bake extras; keep the handshake
+README: units, rest pose, map list, budget (measured), how to serve
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Product, prop, or simple arm. Not a cinematic short.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first? Want: armature and extra bakes.
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: glb in viewer, then in Three.js.
+**Say:** Desk review: viewer first, then Three.js load with vendor. Budget sheet filled. Pipeline figures for the report.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Viewer first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report 6–8 pages: pipeline figures. Next week 12+5. Questions: units, why viewer first.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: one pack, one viewer | Plant the first common mistake. |
-| 10–30 | Desk review: glb in viewer, then in Three.js. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings: units, maps, budget | Photograph. |
+| 10–50 | Desk review | Viewer then vendor load. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,14 +94,12 @@ See [[Blender/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Pack.** Product, prop, or simple character arm. Not a cinematic short.
-**2. README.** Units, rest pose, map list, budget, how to open the viewer.
-**3. Cuts.** Drop armature. Keep UVs + Principled + glb + Three.js load.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New tools. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60-second viewer-then-engine rehearsal.

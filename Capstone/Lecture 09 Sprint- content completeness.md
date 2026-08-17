@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Capstone Project  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** copy, data, beats  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** copy, data, beats: replace lorem; schema in /data; empty-data path  
+**Success check:** a TA can change a JSON/markdown string and see it in the product
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,11 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-shot list or data schema
-Data files.
+/data     not JSX-only copy
+beats complete     or cut the beat
+empty data path
+one citation pass
+Cuts: new scene
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +39,9 @@ Data files.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio** (sprint: content). Lorem in a capstone is a user-problem fail. Data lives in files. Cite sources.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If I delete your JSX strings, does the product still have words?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +49,15 @@ Data files.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Replace lorem; schema in /data.
+**Say:** Replace lorem. Schema in /data. Empty data path. Citation pass.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Kill lorem first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Citation pass in the table. Next: robustness. Users still own the copy.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +67,9 @@ Data files.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: copy, data, beats | Plant the first common mistake. |
-| 10–30 | Replace lorem; schema in /data. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Lorem hunt | Photograph. |
+| 10–50 | Desk review | /data + empty path. |
+| 50–60 | Citation pass | JSX-only copy plant. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -98,14 +98,12 @@ See [[Capstone/exercises/Week 09]].
 
 ## Notes from the outline
 
-**1. Content.** Experiences die on lorem. Museum labels, product names, units.
-**2. Schema.** JSON from R3F week 10 habit.
-**3. Integrity.** AI copy labeled if used.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New beats. Keep completeness of Must.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+Empty-data message.

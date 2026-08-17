@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** position rotation scale  
-**Success check:** position/quaternion/scale.
+**Kernel:** Object3D: position, quaternion/euler, scale; parent.add(child); matrixWorld is M  
+**Success check:** they parent a cube, spin the parent, and can say matrixWorld is the model matrix
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: position rotation scale | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 2 | Goal: a tree of transforms | Invariant: the graph multiplies M; scale −1 is a winding bug unless you mean it`
 
 ## Board at the end (they photograph this)
 
 ```
-matrixWorld
-Tree.
+local  position  rotation  scale
+world  matrixWorld  =  parent.matrixWorld * local
+
+parent.add(child)
+AxesHelper     Euler.order     gimbal named
+
+scale −1 'to flip'  →  winding / normals talk
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Tree.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Graph. CG I scene graph with nicer API.
+**Say:** CG I scene graph with a nicer API. Demo 06-solar-system.html. matrixWorld is the M they uploaded last semester.
 
-**Ask:** position/quaternion/scale? Wait seven seconds. Take two answers.
+**Ask:** If the parent spins, does the child's position vector in local space change? Wait. Want: no — world does.
 
-**Board:** parked strip. Then matrixWorld.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: position rotation scale. Kernel: position rotation scale. We freeze conventions and we do not invent timings.
+**Say:** Euler order property. Quaternion under the hood. lookAt extra. Units: 1 = 1 meter if the Blender course did its job.
 
-**Ask:** What would a wrong version of this look like? Want: scale -1 'to flip' without winding talk.
+**Ask:** What is matrixWorld in WebGL?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Graph. CG I scene graph with nicer API.
+**Say:** Graph. Local vs world.
 
-**Say:** Euler. order property.
+**Board:** matrixWorld product. AxesHelper.
 
-**Say:** Demo. hierarchy demo if present.
+**Say:** Plant scale −1. Faces invert. CCW from WebGL still applies.
 
-**Ask:** position/quaternion/scale? Wait seven seconds. Take two answers.
+**Ask:** Why AxesHelper this week?
 
-**They do:** On paper: axesHelper.
+**They do:** On paper: parent/child boxes and one product.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Parent a cube to another; spin parent.. Zoom 140%. Read errors out loud.
+**Say:** Parent a cube to another; spin parent. Demo 06-solar-system.html. Plant scale −1 to flip.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** axesHelper.
+**Say:** AxesHelper on parent and child. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: axesHelper.; lookAt extra.. Homework: Written: matrixWorld is M.; Code: parent.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: axesHelper; lookAt extra. Homework: matrixWorld is M; parent. Quiz: position units, matrixWorld, euler order.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: position rotation scale | Plant the first common mistake. |
-| 10–30 | Parent a cube to another; spin parent. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | position.set meters | Plant 100-unit cube. |
+| 10–30 | parent.add + spin | They see the orbit. |
+| 30–45 | scale −1 plant | Winding talk. |
+| 45–60 | They add AxesHelper | Circulate. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. position units (3)
-2. matrixWorld (4)
-3. euler order (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[ThreeJS Development/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Graph.** CG I scene graph with nicer API.
-
-**2. Euler.** order property. Gimbal from math course.
-
-**3. Demo.** hierarchy demo if present.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[ThreeJS Development/exercises/Week 02]].
 
 ## If we run long, cut
 
-Demo
+Full quaternion SLERP lecture. Keep graph + matrixWorld.
 
 ## If we run short, add
 
-lookAt extra.
+lookAt extra on a child.

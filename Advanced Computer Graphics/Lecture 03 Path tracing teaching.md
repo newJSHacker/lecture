@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Monte Carlo, cosine sample  
-**Success check:** A camera ray, a bounce, a light sample **or** uniform hemisphere.
+**Kernel:** Monte Carlo paths; cosine-weighted hemisphere; accumulate spp — teaching tracer, not production  
+**Success check:** they can accumulate a 2-sphere Lambert scene and say speckle is variance
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: Monte Carlo, cosine sample | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 3 | Goal: a tiny tracer that is theirs | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-throughput *= brdf; p += n
-Paths + average.
+color += trace(ray);  n++;  display(color/n)
+
+spp ↑  →  slower, cleaner     (measure spp, do not invent fps)
+cosine hemisphere     NEE named
+spheres + Lambert + one light  =  complete teaching tracer
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Paths + average.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** MC. Average many random paths.
+**Say:** Average many random paths. One path is not a tracer. Copied GPUPathTracer unread fails. We do not start with a production path tracer. Demo 02-tracer.html.
 
-**Ask:** A camera ray, a bounce, a light sample **or** uniform hemisphere? Wait seven seconds. Take two answers.
+**Ask:** What is the speckle? Wait. Want: variance, not a bug in the sphere.
 
-**Board:** parked strip. Then throughput *= brdf; p += n.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Monte Carlo, cosine sample. Kernel: Monte Carlo, cosine sample. We freeze conventions and we do not invent timings.
+**Say:** Next event estimation named. Gamma encode display. One more bounce extra. Cornell extra. spp slider they can explain.
 
-**Ask:** What would a wrong version of this look like? Want: one path and calling it a tracer.
+**Ask:** Why cosine-weighted for diffuse?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** MC. Average many random paths.
+**Say:** MC. Mean of paths.
 
-**Say:** Sampling. Cosine-weighted hemisphere for diffuse.
+**Board:** accumulate / n. spp.
 
-**Say:** Scope. Spheres + Lambert + one area light is a complete teaching tracer.
+**Say:** Scope freeze: spheres + Lambert + one area light.
 
-**Ask:** A camera ray, a bounce, a light sample **or** uniform hemisphere? Wait seven seconds. Take two answers.
+**Ask:** If n=1, what do you see?
 
-**They do:** On paper: gamma encode display.
+**They do:** On paper: ray, bounce, sample light or hemisphere.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Accumulate a 2-sphere Lambert scene on Canvas; spp slider.. Zoom 140%. Read errors out loud.
+**Say:** 2-sphere Lambert on Canvas; spp slider. Plant one path as done. Plant GPUPathTracer paste. Gamma encode.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** gamma encode display.
+**Say:** Accumulate n samples on one pixel or a tiny buffer. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: gamma encode display.; one more bounce extra.. Homework: Written: why noise.; code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: gamma; extra bounce. Homework: variance paragraph. Quiz: MC, cosine, why not production tracer.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Monte Carlo, cosine sample | Plant the first common mistake. |
-| 10–30 | Accumulate a 2-sphere Lambert scene on Canvas; spp slider. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | One path vs many | Plant n=1 done. |
+| 15–40 | Accumulate spp | Plant production tracer. |
+| 40–55 | Gamma display | They see the lift. |
+| 55–60 | They move spp | Circulate. No invented fps. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. spp (3)
-2. why random (4)
-3. Lambert sample (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Advanced Computer Graphics/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. MC.** Average many random paths. Variance is the speckle. More spp → slower, cleaner.
-
-**2. Sampling.** Cosine-weighted hemisphere for diffuse. Next event estimation name.
-
-**3. Scope.** Spheres + Lambert + one area light is a complete teaching tracer. Cornell box extra.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Advanced Computer Graphics/exercises/Week 03]].
 
 ## If we run long, cut
 
-Scope
+Full Cornell. Keep spheres + accumulate.
 
 ## If we run short, add
 
-one more bounce extra.
+One more bounce extra.

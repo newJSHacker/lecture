@@ -45,11 +45,11 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 **Ask:** R(90°) of (1,0) with **our** matrix? Compute on the board.
 
-**Board:** parked strip. Then right-hand thumb on axis.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *Ry, composition*.
+**They do:** write today’s question in their notes: *R2(θ) frozen on the board; Ry(90)*(1,0,0) test; same Ry as CG I*.
 
 **Do not:** Mixing conventions.
 
@@ -79,7 +79,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 **They do:** Rotate (1,0) by 90° with the frozen matrix.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -140,9 +140,7 @@ Point them at `Mathematics for Computer Graphics/code/07-rotate.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. R(90) of (1,0) (3)
-2. why order matters (4)
-3. gimbal lock name (3)
+None this meeting.
 
 
 ## Snippet
@@ -161,11 +159,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. 2D.** [[c,-s],[s,c]] or the course's documented variant — **write one and freeze**.
-
-**2. 3D.** Rx, Ry, Rz. Order matters. Euler gimbal lock: name and a picture; quaternions named, not required.
-
-**3. Convention.** Same Ry as [[Computer Graphics/Lecture 05 Homogeneous Transforms]].
+_none_
 
 ---
 

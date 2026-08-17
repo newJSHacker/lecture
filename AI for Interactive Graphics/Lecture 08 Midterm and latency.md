@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · AI for Interactive Graphics  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; streaming, placeholders  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** midterm; then latency: stream or placeholder; 3D keeps orbiting; abort  
+**Success check:** after the exam they can orbit a cube while a mocked stream fills a HUD
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -20,15 +20,18 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm: ethics, proxy, textures, 3D limits, agents, RAG, logs., Time to first token., Streaming UI., Don't block the render loop on fetch.
+**Topics:** not training GPT; no frontend secrets; proxy/mock; image→map + asset table; 3D-gen inspect; allowlisted tools; RAG retrieve-then-cite.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-TTFT; skeleton UI
-Stream + orbit.
+time to first token     (name; measure later)
+3D orbits while text streams
+placeholder on textures
+abort · timeout
+retries cost $     cache mocks in dev
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +44,21 @@ Stream + orbit.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then latency UX. No laptop for the exam. After: a frozen canvas waiting on a vendor is a fail. Placeholders. Abort. Do not invent milliseconds.
 
-**Ask:** Time to first token.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. UX.** 3D should orbit while text streams. Placeholders on textures.
 
-**3. Cost.** Retries cost money. Cache mocks in dev.
 
 ### Show / attempt if time
 
-**Say:** Orbit a cube while a mocked stream fills a HUD.
+**Say:** Orbit a cube while a mocked stream fills a HUD. Plant blocking fetch that freezes the canvas. Abort button.
 
----
-
-**They do:** abort button.
+**They do:** Placeholder + abort. Two clocks: rAF vs await.
 
 ---
 
@@ -67,10 +66,9 @@ Stream + orbit.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; streaming, placeholders | Plant the first common mistake. |
-| 10–30 | Orbit a cube while a mocked stream fills a HUD. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Orbit during mock stream | Plant frozen canvas. |
+| 15–40 | Placeholder texture | Plant blocking await. |
+| 40–60 | Abort + timeout | They type. Circulate. |
 
 ---
 
@@ -97,8 +95,8 @@ See [[AI for Interactive Graphics/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+Vendor streaming protocol. Keep placeholder + abort.
 
 ## If we run short, add
 
-One more worked leftover example.
+Timeout UI.

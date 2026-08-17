@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** let const arrow  
-**Success check:** let/const.
+**Kernel:** let/const (no var); arrow as expression; default param  
+**Success check:** they rewrite a var/function helper to const + arrow and can say why new Arrow() fails
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `Modern JavaScript/code/01-arrows.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: let const arrow | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 1 | Goal: stop teaching 1999 JavaScript | Invariant: one binding, one module, no hidden globals`
 
 ## Board at the end (they photograph this)
 
 ```
-function vs =>
-Binding table.
+let     rebind OK, block scope
+const   no rebind; object fields still mutable
+var     hoists — forbidden in this course
+
+const add = (a, b = 0) => a + b;
+=>  lexical this;  not a constructor
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +40,11 @@ Binding table.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Why ES6+. The language of Three.js examples.
+**Say:** IGWT ships ES modules. Three.js samples are arrows and const. If we spend a week on var, the rest of the program fights us. Today: bindings and arrows.
 
-**Ask:** let/const? Wait seven seconds. Take two answers.
+**Ask:** What happens if you write const n = 1; n = 2? Wait seven seconds. Want: TypeError, not silent.
 
-**Board:** parked strip. Then function vs =>.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +54,9 @@ Binding table.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: let const arrow. Kernel: let const arrow. We freeze conventions and we do not invent timings.
+**Say:** Block scope. const is the default; let when you rebind. Arrow is shorter and lexical this — it is not function. We freeze: no var, no new on an arrow.
 
-**Ask:** What would a wrong version of this look like? Want: var.
+**Ask:** Can you call an arrow with new? Want: no.
 
 **Board:** today’s question in one line.
 
@@ -64,21 +68,21 @@ Binding table.
 
 ### Minutes 12–35 — Build
 
-**Say:** Why ES6+. The language of Three.js examples.
+**Say:** A binding is a name. var hoists and leaks out of blocks — that is why we ban it.
 
-**Say:** Arrows. Shorter, lexical this.
+**Board:** function add(a,b) vs const add = (a,b=0) => a+b. Circle default param.
 
-**Say:** Defaults. function f(x=0).
+**Say:** Arrows do not get their own this and cannot be constructors. Methods that need this wait until week 10.
 
-**Ask:** let/const? Wait seven seconds. Take two answers.
+**Ask:** Does const freeze the object? Want: no — only the binding.
 
-**They do:** On paper: 5 arrows with tests.
+**They do:** On paper: five arrows (double, even?, clamp, lerp, identity) plus one default-param helper.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Rewrite a var/function script into const/arrows.. Zoom 140%. Read errors out loud.
+**Say:** Rewrite a var/function script into const/arrows live. Plant var i in a for and log it after the loop. Demo Modern JavaScript/code/01-arrows.html. Serve the folder if you later add type=module.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +92,7 @@ Binding table.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** 5 arrows with tests.
+**Say:** Five arrows with a console.assert each. Default-param helper last. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +102,7 @@ Binding table.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: 5 arrows with tests.; A default-param helper.. Homework: Written: this and arrows, 1 page.; Code: rewrite.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Photograph the board. Lab: arrows + asserts; a default-param helper. Homework: one page on this vs arrows; rewrite a var script. Quiz: const rebound, arrow as constructor, default param.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +114,10 @@ Binding table.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: let const arrow | Plant the first common mistake. |
-| 10–30 | Rewrite a var/function script into const/arrows. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | const vs let vs var | Plant var hoisting after a block. |
+| 10–30 | Rewrite to arrows | Plant new on an arrow. Read the TypeError. |
+| 30–45 | Default param + map | They copy 01-arrows.html kernel. |
+| 45–60 | They write five arrows | Circulate. No CDN. |
 
 Point them at `Modern JavaScript/code/01-arrows.html` as the after-class check, not as the lecture.
 
@@ -135,9 +139,7 @@ Point them at `Modern JavaScript/code/01-arrows.html` as the after-class check, 
 
 ## Quiz next meeting (they hear this now)
 
-1. const rebound (3)
-2. arrow vs function construct (4)
-3. default param (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +158,7 @@ See [[Modern JavaScript/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why ES6+.** The language of Three.js examples. Teaching old var is harm.
-
-**2. Arrows.** Shorter, lexical this. Not identical to function in all ways — constructors.
-
-**3. Defaults.** function f(x=0).
+_none_
 
 ---
 
@@ -171,8 +169,8 @@ See [[Modern JavaScript/exercises/Week 01]].
 
 ## If we run long, cut
 
-Defaults
+Defaults if the rewrite is still messy. Keep const + arrow.
 
 ## If we run short, add
 
-A default-param helper.
+A default-param helper with a test.

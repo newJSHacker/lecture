@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** declarative three  
-**Success check:** What R3F is.
+**Kernel:** R3F is declarative Three; same scene graph; not this course's project  
+**Success check:** they can map <mesh> to Mesh/draw call and say useFrame is rAF; they do not abandon the vanilla project
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,27 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: declarative three | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 13 | Goal: a map, not a rewrite | Invariant: JSX does not replace WebGL; wait for Interactive Experience`
 
 ## Board at the end (they photograph this)
 
 ```
-Canvas > mesh
-JSX tree.
+<Canvas>                 WebGLRenderer + rAF
+  <mesh>                 Mesh  →  draw call
+    <boxGeometry />      BoxGeometry
+    <meshStandardMaterial />
+
+useFrame  ≈  the rAF callback
+position={[x,y,z]}  ≈  object.position
+
+Semester 5 · Interactive Experience
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional 20-line R3F cube if a bundler exists | otherwise the board is the demo |
 
 ---
 
@@ -38,11 +44,11 @@ JSX tree.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Semester 5. Interactive Experience.
+**Say:** Semester 5 will do this for real. Today: the map so they are not frightened later. Do not npm-install a new stack into the week-14 project.
 
-**Ask:** What R3F is? Wait seven seconds. Take two answers.
+**Ask:** Does <mesh> skip the draw call? Wait. Want: no — it still is one.
 
-**Board:** parked strip. Then Canvas > mesh.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: declarative three. Kernel: declarative three. We freeze conventions and we do not invent timings.
+**Say:** Same graph. If the lab has no bundler, stay on the board. No full app.
 
-**Ask:** What would a wrong version of this look like? Want: abandoning the Three.js project to start R3F overnight.
+**Ask:** What is useFrame?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Semester 5. Interactive Experience.
+**Say:** Declarative = same objects, different syntax.
 
-**Say:** Mental model. Same scene graph.
+**Board:** Canvas > mesh > geometry/material.
 
-**Say:** Demo. none required.
+**Say:** Table: R3F prop → Object3D.
 
-**Ask:** What R3F is? Wait seven seconds. Take two answers.
+**Ask:** Why wait until semester 5?
 
-**They do:** On paper: table: R3F prop → Object3D.
+**They do:** On paper: five-row map R3F → Three → WebGL.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Optional 20-line R3F cube if the lab has a bundler; else a slide mapping.. Zoom 140%. Read errors out loud.
+**Say:** Optional 20-line R3F cube if a bundler exists; else board mapping. Plant abandoning the Three.js project overnight. No CDN.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** table: R3F prop → Object3D.
+**Say:** Table: R3F prop → Object3D. No full app. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: table: R3F prop → Object3D.; no full app.. Homework: Written: when R3F.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: the table; no full app. Homework: when R3F. Quiz: R3F sits on, useFrame is, why wait. Studio next.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: declarative three | Plant the first common mistake. |
-| 10–30 | Optional 20-line R3F cube if the lab has a bundler; else a slide mapping. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Map Mesh → draw again | They still know it. |
+| 10–30 | JSX tree on the board | No install required. |
+| 30–45 | useFrame = rAF | dt still exists. |
+| 45–60 | They fill the table | Circulate. Freeze vanilla project. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. R3F sits on (3)
-2. useFrame is (4)
-3. why wait (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[ThreeJS Development/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Semester 5.** Interactive Experience.
-
-**2. Mental model.** Same scene graph.
-
-**3. Demo.** none required.
+_none_
 
 ---
 
@@ -172,8 +172,8 @@ See [[ThreeJS Development/exercises/Week 13]].
 
 ## If we run long, cut
 
-Demo
+drei helpers tour. Keep the map.
 
 ## If we run short, add
 
-no full app.
+No full app — write that on the parked strip.

@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** Web Audio, analyser  
-**Success check:** AudioContext.
+**Kernel:** AudioContext after a user gesture; AnalyserNode; draw bars in Canvas 2D  
+**Success check:** they start audio on click, draw analyser bars, and can mute without creating a new context every frame
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: Web Audio, analyser | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 11 | Goal: click-to-start, then a picture of the sound | Invariant: autoplay is blocked; one AudioContext; bars are data, not a 3D engine`
 
 ## Board at the end (they photograph this)
 
 ```
-analyser fft bars
-Bars.
+click  →  audioCtx.resume()   // or create on gesture
+AnalyserNode  fftSize  getByteFrequencyData(buf)
+rAF:  analyser → bars on canvas 2d
+
+autoplay noise              =  fail
+new AudioContext every frame =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Bars.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Gesture. Browsers block autoplay.
+**Say:** Browsers block autoplay. A visualizer is analyser bins into week 1’s fillRect. Semester 5 audio viz is this grown up. No Three.js. No CDN synth library.
 
-**Ask:** AudioContext? Wait seven seconds. Take two answers.
+**Ask:** Why did new AudioContext() in the first script line stay silent? Wait. Want: policy — need a gesture, then resume.
 
-**Board:** parked strip. Then analyser fft bars.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: Web Audio, analyser. Kernel: Web Audio, analyser. We freeze conventions and we do not invent timings.
+**Say:** Gesture first. Oscillator or a local file input extra. Analyser frequencyBinCount. Optional sync from audio.currentTime — name, may cut. Mute is gain or suspend, not a new context.
 
-**Ask:** What would a wrong version of this look like? Want: autoplay noise.
+**Ask:** Where does the analyser sit in the graph? Want: source → analyser → destination.
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Gesture. Browsers block autoplay.
+**Say:** Click-to-start. Read the autoplay error if you plant autoplay.
 
-**Say:** Analyser. frequencyBinCount.
+**Board:** analyser fft bars. One context.
 
-**Say:** Sync. t from audio.currentTime optional.
+**Say:** Draw in the rAF you already have. Do not invent fps for the bars.
 
-**Ask:** AudioContext? Wait seven seconds. Take two answers.
+**Ask:** Mute: dest.disconnect vs gain.value = 0 vs suspend — pick one and freeze.
 
-**They do:** On paper: Mute button.
+**They do:** On paper: mute button — which node it touches.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Click-to-start oscillator or file; draw bars.. Zoom 140%. Read errors out loud.
+**Say:** Click-to-start oscillator or file; draw bars. There is no audio demo in code/; do not open 09-gsap.html for this. Plant autoplay. Plant new AudioContext inside rAF.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Mute button.
+**Say:** Mute button. File input extra if the oscillator works. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Mute button.; file input extra.. Homework: Written: autoplay policy.; Code: bars.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: mute + file input extra. Homework: autoplay policy; bars. Quiz: why click first, AnalyserNode, autoplay.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: Web Audio, analyser | Plant the first common mistake. |
-| 10–30 | Click-to-start oscillator or file; draw bars. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | autoplay plant | Silent. Then click resume. |
+| 10–30 | oscillator + analyser bars | Canvas 2D, not WebGL. |
+| 30–45 | one context forever | Plant construct-in-loop. |
+| 45–60 | They add mute | Circulate. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. why click first (4)
-2. AnalyserNode (3)
-3. autoplay (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Interactive Web/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Gesture.** Browsers block autoplay. Click to start.
-
-**2. Analyser.** frequencyBinCount. Visualizer. Semester 5 audio viz is this grown up.
-
-**3. Sync.** t from audio.currentTime optional.
+_none_
 
 ---
 
@@ -174,7 +172,7 @@ See [[Interactive Web/exercises/Week 11]].
 
 ## If we run long, cut
 
-Sync
+currentTime sync. Keep gesture + analyser + bars.
 
 ## If we run short, add
 

@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** keyboard, labels, motion  
-**Success check:** Keyboard select next part.
+**Kernel:** keyboard cycle, HUD name, reduced-motion stops auto orbit  
+**Success check:** they can tab or press Next to select three parts and read the name without the mouse
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: keyboard, labels, motion | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 9 | Goal: 3D that a keyboard can use | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-tab to parts; aria on HUD
-Tab order.
+Next part   (button, focus visible)
+HUD text    =  selected name
+outline     +  label   (not color alone)
+
+prefers-reduced-motion → stop auto orbit
+no 3 Hz strobe
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Tab order.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** 3D is hostile by default. Orbit is a mouse skill.
+**Say:** Orbit is a mouse skill. A canvas with no keyboard story fails this course and XR later. Color-only selection fails.
 
-**Ask:** Keyboard select next part? Wait seven seconds. Take two answers.
+**Ask:** Can you use this page with keyboard only? Wait. Then try.
 
-**Board:** parked strip. Then tab to parts; aria on HUD.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: keyboard, labels, motion. Kernel: keyboard, labels, motion. We freeze conventions and we do not invent timings.
+**Say:** Reset camera. Cycle parts. HUD names them. Bloom caps. Empty alt only if decorative — the HUD is not decorative.
 
-**Ask:** What would a wrong version of this look like? Want: canvas-only with no DOM.
+**Ask:** When is outline:none a fail?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** 3D is hostile by default. Orbit is a mouse skill.
+**Say:** Hostile by default. Provide a path.
 
-**Say:** Color. Not the only channel.
+**Board:** Next + HUD + outline. Reduced-motion stops spin.
 
-**Say:** Seizure. No 3Hz strobe.
+**Say:** Seizure: no 3 Hz strobe. We do not invent Lighthouse scores.
 
-**Ask:** Keyboard select next part? Wait seven seconds. Take two answers.
+**Ask:** Why is color-only selection a fail?
 
-**They do:** On paper: focus styles.
+**They do:** Tab the HUD; list what fails.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Keyboard cycles three parts; HUD names them.. Zoom 140%. Read errors out loud.
+**Say:** Keyboard cycles three parts; HUD names them. Plant canvas-only. Plant outline:none. Fix button + focus.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** focus styles.
+**Say:** Next-part button + label. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: focus styles.; reduced motion stops auto orbit.. Homework: Written: a11y checklist 10 items.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: focus styles; reduced-motion kills auto orbit. Homework: keyboard path paragraph. Quiz: Next, not color-only, reduced-motion.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: keyboard, labels, motion | Plant the first common mistake. |
-| 10–30 | Keyboard cycles three parts; HUD names them. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | div-as-control | Plant. Fix button. |
+| 15–40 | Cycle + HUD name | Color-only plant. |
+| 40–55 | Reduced-motion | Auto orbit plant. |
+| 55–60 | They add focus-visible | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. why HUD text (3)
-2. keyboard (4)
-3. strobe (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Interactive Experience/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. 3D is hostile by default.** Orbit is a mouse skill. Provide: reset camera, keyboard cycle, HUD text for the selected part.
-
-**2. Color.** Not the only channel. Selection outline + label.
-
-**3. Seizure.** No 3Hz strobe. Bloom caps.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Interactive Experience/exercises/Week 09]].
 
 ## If we run long, cut
 
-Seizure
+Full WCAG sermon. Keep keyboard + label.
 
 ## If we run short, add
 
-reduced motion stops auto orbit.
+Reset-camera button.

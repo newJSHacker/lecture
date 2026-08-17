@@ -46,11 +46,11 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 **Ask:** If two unit vectors are perpendicular, what is the dot? Wait. Want: 0.
 
-**Board:** parked strip. Then two arrows, shadow of one on the other.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *projection, cosine*.
+**They do:** write today’s question in their notes: *dot product; projection; Lambert as n·ℓ preview*.
 
 **Do not:** Forgetting to unit-ize before using as cosine.
 
@@ -80,7 +80,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 **They do:** On paper: (1,0)·(2,2) and the projection of (2,2) onto (1,0).
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -141,9 +141,7 @@ Point them at `Mathematics for Computer Graphics/code/03-dot.html` as the after-
 
 ## Quiz next meeting (they hear this now)
 
-1. dot of perpendicular (3)
-2. cos of 0° (2)
-3. projection formula (5)
+None this meeting.
 
 
 ## Snippet
@@ -162,11 +160,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Algebra.** a·b = ax bx + ay by (+ az bz). Also |a||b|cosθ.
-
-**2. Projection.** proj_a b = (a·b / a·a) a. Lighting and collision use this.
-
-**3. Sign.** Acute, obtuse, right. Back-face intuition.
+_none_
 
 ---
 

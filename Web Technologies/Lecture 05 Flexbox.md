@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** axis, wrap, alignment  
-**Success check:** Set flex direction.
+**Kernel:** flex container: direction, wrap, justify-content, align-items  
+**Success check:** they can make a row of three cards that wrap without float
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/04-flex.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: axis, wrap, alignment | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 5 | Goal: a row that wraps on purpose | Invariant: flex is one axis plus a cross axis; float is not how we layout in this course`
 
 ## Board at the end (they photograph this)
 
 ```
-row of three cards
-Axes.
-Navbar.
+display: flex
+main axis →     justify-content
+cross axis ↓    align-items
+
+flex-wrap: wrap
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +41,11 @@ Navbar.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** One-dimensional layout. Flex is a row or a column.
+**Say:** A HUD later is a flex row. Floats are history in this program.
 
-**Ask:** Set flex direction? Wait seven seconds. Take two answers.
+**Ask:** Which axis does flex-direction: row run along? Wait.
 
-**Board:** parked strip. Then row of three cards.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +55,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: axis, wrap, alignment. Kernel: axis, wrap, alignment. We freeze conventions and we do not invent timings.
+**Say:** Container properties vs item flex: 1. Gap. We freeze: no float layouts.
 
-**Ask:** What would a wrong version of this look like? Want: Nested flex until the page is soup.
+**Ask:** What does wrap do when the row is too wide?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +69,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** One-dimensional layout. Flex is a row or a column.
+**Say:** Container first. Then items.
 
-**Say:** Alignment. justify-content vs align-items.
+**Board:** main vs cross. Three boxes.
 
-**Say:** gap. Prefer gap over margin hacks.
+**Say:** justify vs align. Mix them up once on purpose.
 
-**Ask:** Set flex direction? Wait seven seconds. Take two answers.
+**Ask:** flex: 1 means?
 
-**They do:** On paper: Holy-grail header/main/footer with flex column on body.
+**They do:** On paper: nav with logo left, links right — which justify?
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Navbar + three equal cards.. Zoom 140%. Read errors out loud.
+**Say:** Three cards in a row, wrap. Demo 04-flex.html. Plant forgot wrap.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +93,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Holy-grail header/main/footer with flex column on body.
+**Say:** Header: logo + nav links with space-between. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +103,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Holy-grail header/main/footer with flex column on body.; A toolbar of buttons.. Homework: Written: main vs cross axis.; Code: responsive wrap of chips.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: wrapping cards. Homework: header. Quiz: main axis, wrap, no floats.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +115,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: axis, wrap, alignment | Plant the first common mistake. |
-| 10–30 | Navbar + three equal cards. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Row of boxes | Plant float. |
+| 15–40 | Wrap + gap | Plant margin hacks. |
+| 40–55 | space-between header | They copy. |
+| 55–60 | They wrap cards | Circulate. |
 
 Point them at `Web Technologies/code/04-flex.html` as the after-class check, not as the lecture.
 
@@ -138,9 +140,7 @@ Point them at `Web Technologies/code/04-flex.html` as the after-class check, not
 
 ## Quiz next meeting (they hear this now)
 
-1. flex-direction column (2)
-2. justify-content (4)
-3. gap vs margin (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +159,7 @@ See [[Web Technologies/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. One-dimensional layout.** Flex is a row or a column. Navbars, toolbars, HUD over a canvas.
-
-**2. Alignment.** justify-content vs align-items. Students mix these every year — live-code both.
-
-**3. gap.** Prefer gap over margin hacks.
+_none_
 
 ---
 
@@ -174,8 +170,8 @@ See [[Web Technologies/exercises/Week 05]].
 
 ## If we run long, cut
 
-gap
+flex-grow math. Keep wrap + axes.
 
 ## If we run short, add
 
-A toolbar of buttons.
+align-self on one item.

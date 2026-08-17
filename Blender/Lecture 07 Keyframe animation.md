@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** I-key, graph editor  
-**Success check:** Insert loc/rot keyframes.
+**Kernel:** I-key loc/rot; Graph Editor bezier vs linear vs constant; clip idea  
+**Success check:** they insert loc/rot keys on a spinning logo and can say a F-curve is what the mixer will play
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: I-key, graph editor | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 7 | Goal: a clip an engine can play | Invariant: engines see glTF clips; auto-key garbage is not animation; object transforms this week, bones next`
 
 ## Board at the end (they photograph this)
 
 ```
-loc/rot/scale tracks
-Dope sheet.
-Lid arc.
+I  →  Location / Rotation
+Graph Editor:  bezier (default bounce you did not want)
+               linear
+               constant (stepped)
+
+glTF clip  →  Three.js AnimationMixer
+24 fps is a project setting, not a runtime promise
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Lid arc.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** What engines see. glTF can store animation clips.
+**Say:** A spinning logo is enough. Three.js mixer plays clips. Default bezier makes a bounce they did not want. Do not auto-key 400 garbage keys. Do not invent runtime fps from the timeline.
 
-**Ask:** Insert loc/rot keyframes? Wait seven seconds. Take two answers.
+**Ask:** Does 24 fps in Blender mean 24 fps in the browser? Wait. Want: no — it is the clip's time base; the mixer uses dt.
 
-**Board:** parked strip. Then loc/rot/scale tracks.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: I-key, graph editor. Kernel: I-key, graph editor. We freeze conventions and we do not invent timings.
+**Say:** Object vs bone: bones next week. Will this export as a clip? Constant for stepped. Midterm next week on 1–7.
 
-**Ask:** What would a wrong version of this look like? Want: Auto-key on by accident, 400 garbage keys.
+**Ask:** What is a F-curve?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** What engines see. glTF can store animation clips.
+**Say:** Insert loc/rot. Open the graph.
 
-**Say:** Graph editor. Ease-in.
+**Board:** three interpolation names.
 
-**Say:** Object vs bone. Bones next week.
+**Say:** Plant auto-key. Plant animating verts in edit mode for a rigid lid.
 
-**Ask:** Insert loc/rot keyframes? Wait seven seconds. Take two answers.
+**Ask:** Mixer vs rAF rotate — which needs a clip?
 
-**They do:** On paper: Looping rotation.
+**They do:** On paper: three keys for a 360° Y spin.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A lid opening 0–24 frames; play in viewport.. Zoom 140%. Read errors out loud.
+**Say:** Spin a logo; show bezier bounce; switch linear. Plant auto-key. Plant edit-mode vert anim for a lid.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Looping rotation.
+**Say:** Looping rotation. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Looping rotation.; Export thought: will this be a clip?. Homework: Written: what a F-curve is.; 24-frame gif or mp4 of viewport.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: looping rotation; export thought. Homework: what a F-curve is; 24-frame viewport capture (not a fps claim). Quiz: insert key, linear vs bezier, mixer later.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: I-key, graph editor | Plant the first common mistake. |
-| 10–30 | A lid opening 0–24 frames; play in viewport. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | I-key loc/rot | Plant auto-key on. |
+| 10–30 | Graph bezier → linear | Unwanted bounce. |
+| 30–45 | clip name | Mixer later. |
+| 45–60 | They loop the spin | Circulate. No fps brag. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. insert key (2)
-2. linear vs bezier (4)
-3. mixer later (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Blender/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. What engines see.** glTF can store animation clips. Three.js `AnimationMixer` plays them. A spinning logo is enough this week.
-
-**2. Graph editor.** Ease-in. Constant for stepped. Students leave default bezier and get 'bounce' they did not want.
-
-**3. Object vs bone.** Bones next week. This week: object transforms.
+_none_
 
 ---
 
@@ -174,8 +172,8 @@ See [[Blender/exercises/Week 07]].
 
 ## If we run long, cut
 
-Object vs bone
+NLA strips. Keep I-key + graph + clip name.
 
 ## If we run short, add
 
-Export thought: will this be a clip?
+Will this be a clip on export — write yes/no.

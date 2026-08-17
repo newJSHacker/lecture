@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** compatibility, tools  
-**Success check:** Feature detect.
+**Kernel:** decision table: feature → WebGL2 ping-pong or WebGPU compute; detect; pick one API for the final  
+**Success check:** they can feature-detect, screenshot support, and write a one-page memo without rewriting the semester in three APIs
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: compatibility, tools | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 12 | Goal: a decision you can freeze | Invariant: IGWT is web; WebGL2 still ships; WebGPU is taught without stranding labs; no CUDA`
 
 ## Board at the end (they photograph this)
 
 ```
-table: feature → API
-Decision tree.
+need              stay WebGL2           move WebGPU
+particles teach   FBO ping-pong         storage + compute
+atomics / reduce  mip hack              compute atomics
+lab browsers      always                detect + fallback
+
+project: pick ONE api unless you demo both
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Decision tree.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Decision. IGWT is web.
+**Say:** Decision, not a rewrite. Porting shaders is work. Pipelines are verbose. Gain: compute, less driver magic. canIuse is a screenshot they take, not a CDN widget in the product.
 
-**Ask:** Feature detect? Wait seven seconds. Take two answers.
+**Ask:** Must the final be both APIs? Wait. Want: no — pick one unless you explicitly demo both.
 
-**Board:** parked strip. Then table: feature → API.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: compatibility, tools. Kernel: compatibility, tools. We freeze conventions and we do not invent timings.
+**Say:** One-page decision for a capstone-shaped idea. Risk list. Still JS in the browser.
 
-**Ask:** What would a wrong version of this look like? Want: rewriting the semester in three APIs.
+**Ask:** One reason to stay on WebGL?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Decision. IGWT is web.
+**Say:** Table feature → API. Fill three rows live.
 
-**Say:** Porting. Shaders rewrite.
+**Board:** the decision tree. Circle detect.
 
-**Say:** Project rule. Pick one API for the final unless you explicitly demo both.
+**Say:** Risk list: Safari, validation, time to port.
 
-**Ask:** Feature detect? Wait seven seconds. Take two answers.
+**Ask:** One reason to move to WebGPU?
 
-**They do:** On paper: canIuse screenshot.
+**They do:** On paper: their project row in the table.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A one-page decision for *your* capstone-shaped idea.. Zoom 140%. Read errors out loud.
+**Say:** A one-page decision for their idea. Plant rewriting the semester in three APIs. Plant CUDA as a third column.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** canIuse screenshot.
+**Say:** canIuse screenshot + risk list. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: canIuse screenshot.; risk list.. Homework: Written: decision memo 1 page.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: screenshot + risks. Homework: decision memo 1 page. Quiz: one reason WebGL, one WebGPU, detect. Next: choose a sim.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: compatibility, tools | Plant the first common mistake. |
-| 10–30 | A one-page decision for *your* capstone-shaped idea. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Fill the table | Plant three-API rewrite. |
+| 10–30 | Detect in a stub page | Plant CUDA column. |
+| 30–45 | Risk list | Safari / time. |
+| 45–60 | They freeze one API | Circulate. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. one reason WebGL (3)
-2. one reason WebGPU (4)
-3. detect (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +152,7 @@ See [[GPU Programming/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Decision.** IGWT is web. WebGL2 still ships the catalog. WebGPU is the future compute/graphics API — teach it without stranding labs.
-
-**2. Porting.** Shaders rewrite. Pipelines are more verbose. Gain: compute, less driver magic.
-
-**3. Project rule.** Pick one API for the final unless you explicitly demo both.
+_none_
 
 ---
 
@@ -164,8 +162,8 @@ See [[GPU Programming/exercises/Week 12]].
 
 ## If we run long, cut
 
-Project rule
+Vulkan. Keep the table + detect + one API.
 
 ## If we run short, add
 
-risk list.
+Shader rewrite cost as a bullet.

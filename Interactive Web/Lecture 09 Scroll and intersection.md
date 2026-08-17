@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** IO, sticky  
-**Success check:** IntersectionObserver.
+**Kernel:** IntersectionObserver callback; CSS position:sticky; no raw onscroll without throttle  
+**Success check:** they reveal sections with IO and can stick a nav with CSS first
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: IO, sticky | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 9 | Goal: scroll as a signal, not a per-pixel handler | Invariant: the browser can tell you when a box enters the viewport; scroll listeners are a last resort`
 
 ## Board at the end (they photograph this)
 
 ```
-intersection ratio
-Reveal.
+const io = new IntersectionObserver((ents) => {
+  for (const e of ents) e.target.classList.toggle('in', e.isIntersecting);
+});
+io.observe(el);     io.disconnect() when done
+
+position: sticky; top: 0;     /* CSS first */
+onscroll without throttle     =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Reveal.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** IO. Reveal on enter.
+**Say:** Storytelling sites and later R3F scroll controls are this idea grown up. A scroll handler that writes layout every pixel is jank we will not measure as a fake fps — we just use IO.
 
-**Ask:** IntersectionObserver? Wait seven seconds. Take two answers.
+**Ask:** Does IntersectionObserver fire on every scroll pixel? Wait. Want: no — it fires on threshold crossings.
 
-**Board:** parked strip. Then intersection ratio.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: IO, sticky. Kernel: IO, sticky. We freeze conventions and we do not invent timings.
+**Say:** IO: reveal on enter, lazy class on images extra. Sticky: CSS first, not JS top=. If you must listen to scroll, rAF-throttle. Unobserve when the node goes away.
 
-**Ask:** What would a wrong version of this look like? Want: onscroll without throttle.
+**Ask:** What is isIntersecting?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** IO. Reveal on enter.
+**Say:** Observe, toggle a class, CSS does the fade. Do not set element.style.top in the callback.
 
-**Say:** Sticky. CSS first.
+**Board:** intersection ratio. sticky nav. disconnect.
 
-**Say:** Scroll jank. rAF-throttled listeners if you must.
+**Say:** Lazy images: class that sets src or a data-src swap extra — still IO, not onscroll.
 
-**Ask:** IntersectionObserver? Wait seven seconds. Take two answers.
+**Ask:** IO vs scroll listener — one sentence for the homework.
 
-**They do:** On paper: Lazy class on images extra.
+**They do:** On paper: lazy class on images extra — observe, swap, unobserve.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Sections that fade in via IO.. Zoom 140%. Read errors out loud.
+**Say:** Sections that fade in via IO. There is no dedicated IO file in code/; do not demo 09-gsap.html as this kernel. Plant onscroll that sets style.top. Plant IO never disconnected.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Lazy class on images extra.
+**Say:** Lazy class on images extra. Sticky nav. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Lazy class on images extra.; sticky nav.. Homework: Written: IO vs scroll listener.; Code: reveal.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: lazy class + sticky nav. Homework: IO vs scroll listener; reveal. Quiz: IO callback, sticky, layout in scroll.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: IO, sticky | Plant the first common mistake. |
-| 10–30 | Sections that fade in via IO. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | observe + .in class | Plant onscroll. |
+| 10–30 | several sections | Threshold 0.1 name. |
+| 30–45 | sticky CSS nav | Plant JS stick. |
+| 45–60 | They unobserve | Circulate. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. IO callback (4)
-2. sticky (3)
-3. layout in scroll (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Interactive Web/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. IO.** Reveal on enter. Storytelling sites. R3F scroll later.
-
-**2. Sticky.** CSS first.
-
-**3. Scroll jank.** rAF-throttled listeners if you must.
+_none_
 
 ---
 
@@ -173,7 +172,7 @@ See [[Interactive Web/exercises/Week 09]].
 
 ## If we run long, cut
 
-Scroll jank
+Scroll-jank deep dive. Keep IO + sticky CSS.
 
 ## If we run short, add
 

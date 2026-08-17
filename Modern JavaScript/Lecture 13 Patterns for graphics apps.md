@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** game loop, modules, state  
-**Success check:** Separate update(dt) and render().
+**Kernel:** rAF loop; update(dt) then render(); one state object; cap dt  
+**Success check:** they can pause/reset a bouncing ball without putting physics inside draw
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,21 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/08-modules.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: game loop, modules, state | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 13 | Goal: architecture for a graphics app, not a new renderer | Invariant: time is a delta; draw does not simulate; setInterval(16) is not the loop`
 
 ## Board at the end (they photograph this)
 
 ```
-update vs render
-Loop box.
+function frame(t) {
+  const dt = Math.min(0.05, (t - last) / 1000);
+  last = t;
+  update(dt);
+  render();
+  requestAnimationFrame(frame);
+}
+
+state = { … }     serialize later
+dirty flags       name for editors
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +46,11 @@ Loop box.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Loop. Interactive Web and CG I already; now as architecture.
+**Say:** Interactive Web already has rAF. Computer Graphics I already has a tick. Today it is modules and state: one object, update vs render, tests on the kernel. This is the last content week before studio.
 
-**Ask:** Separate update(dt) and render()? Wait seven seconds. Take two answers.
+**Ask:** Why cap dt? Wait. Want: a backgrounded tab or a hitch must not teleport the ball.
 
-**Board:** parked strip. Then update vs render.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +60,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: game loop, modules, state. Kernel: game loop, modules, state. We freeze conventions and we do not invent timings.
+**Say:** Loop as architecture. State is one object — JSON extra in lab. Dirty flags named for editors, not required. No Three.js. No invented fps on the HUD.
 
-**Ask:** What would a wrong version of this look like? Want: setInterval(16) as the loop.
+**Ask:** Where does bounce live — update or render?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +74,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Loop. Interactive Web and CG I already; now as architecture.
+**Say:** Interactive Web and CG I already; now files: loop.js, state, render.
 
-**Say:** State. One object.
+**Board:** update vs render boxes. Cap dt. pause flag.
 
-**Say:** Dirty flags. Name for editors.
+**Say:** setInterval(16) desyncs and does not pause in a hidden tab the way rAF does.
 
-**Ask:** Separate update(dt) and render()? Wait seven seconds. Take two answers.
+**Ask:** What goes in JSON.stringify(state) — functions? Want: data only.
 
-**They do:** On paper: State to JSON extra.
+**They do:** On paper: state to JSON extra — which fields survive a round-trip.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A bouncing ball with dt, pause, reset.. Zoom 140%. Read errors out loud.
+**Say:** A bouncing ball with dt, pause, reset. Demo Modern JavaScript/code/07-loop.html (dt-capped rAF). Plant setInterval(16). Plant uncapped dt after a debugger pause.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +98,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** State to JSON extra.
+**Say:** State to JSON extra. Cap dt if missing. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +108,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: State to JSON extra.; Cap dt.. Homework: Written: update vs render.; Code: loop.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: JSON state + cap dt. Homework: update vs render paragraph; loop code. Quiz: rAF, dt, pause. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +120,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: game loop, modules, state | Plant the first common mistake. |
-| 10–30 | A bouncing ball with dt, pause, reset. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | rAF + cap dt | Plant setInterval(16). |
+| 10–30 | update vs render ball | Plant physics in render. |
+| 30–45 | pause / reset | State object, not a global pile. |
+| 45–60 | They JSON.stringify state | Circulate. |
 
 Point them at `Modern JavaScript/code/08-modules.html` as the after-class check, not as the lecture.
 
@@ -137,9 +145,7 @@ Point them at `Modern JavaScript/code/08-modules.html` as the after-class check,
 
 ## Quiz next meeting (they hear this now)
 
-1. rAF (3)
-2. dt (4)
-3. pause (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +164,7 @@ See [[Modern JavaScript/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Loop.** Interactive Web and CG I already; now as architecture.
-
-**2. State.** One object. Serialize later.
-
-**3. Dirty flags.** Name for editors.
+_none_
 
 ---
 
@@ -173,8 +175,8 @@ See [[Modern JavaScript/exercises/Week 13]].
 
 ## If we run long, cut
 
-Dirty flags
+Dirty flags. Keep loop + state + cap dt.
 
 ## If we run short, add
 
-Cap dt.
+Cap dt on a hitch they trigger with a debugger pause.

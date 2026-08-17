@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** rows, columns, areas  
-**Success check:** Define columns with fr.
+**Kernel:** grid-template-columns and grid-area; a two-column page  
+**Success check:** they can place header / nav / main / footer on a grid without nested flex hacks
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/05-grid.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: rows, columns, areas | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 6 | Goal: a page of areas | Invariant: grid is two axes at once; flex is one`
 
 ## Board at the end (they photograph this)
 
 ```
-12-ish tracks, not Bootstrap required
-Tracks.
-Spanning cell.
+display: grid
+grid-template-columns: 1fr 3fr
+grid-template-areas:
+  "head head"
+  "nav  main"
+  "foot foot"
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ Spanning cell.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Two-dimensional layout. Magazine pages, dashboards, thesis-program sites.
+**Say:** A portfolio and a configurator chrome are grids. Flex for a row; grid for the page.
 
-**Ask:** columns with fr? Wait seven seconds. Take two answers.
+**Ask:** When would you still use flex inside a grid cell? Wait. Want: the nav links.
 
-**Board:** parked strip. Then 12-ish tracks, not Bootstrap required.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: rows, columns, areas. Kernel: rows, columns, areas. We freeze conventions and we do not invent timings.
+**Say:** fr units. Gap. Named areas optional but we use them once so they see the map.
 
-**Ask:** What would a wrong version of this look like? Want: Bootstrap as the lab.
+**Ask:** 1fr 3fr means?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Two-dimensional layout. Magazine pages, dashboards, thesis-program sites.
+**Say:** Two-dimensional. Rows and columns.
 
-**Say:** fr units. `1fr 2fr` is a ratio.
+**Board:** areas diagram.
 
-**Say:** Named areas. Optional.
+**Say:** Repeat() name. Auto-fit later — not required.
 
-**Ask:** columns with fr? Wait seven seconds. Take two answers.
+**Ask:** Grid vs flex in one sentence?
 
-**They do:** On paper: Dashboard: sidebar + main.
+**They do:** On paper: label areas for a docs site.
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A gallery of 6 cells; one featured spanning two columns.. Zoom 140%. Read errors out loud.
+**Say:** Two-column layout. Demo 05-grid.html. Plant 1fr 1fr when they wanted sidebar.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Dashboard: sidebar + main.
+**Say:** Holy-grail: header, nav, main, footer. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Dashboard: sidebar + main.; Do not pull a UI kit.. Homework: Written: flex vs grid, when.; Code: responsive 1-col mobile / 3-col desktop (media query preview OK).. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: areas. Homework: grid vs flex paragraph. Quiz: fr, areas, when flex.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: rows, columns, areas | Plant the first common mistake. |
-| 10–30 | A gallery of 6 cells; one featured spanning two columns. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Columns | Plant flex-only page. |
+| 15–40 | Areas | Typo in area name. |
+| 40–55 | Sidebar 1fr 3fr | They see the ratio. |
+| 55–60 | They place footer | Circulate. |
 
 Point them at `Web Technologies/code/05-grid.html` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `Web Technologies/code/05-grid.html` as the after-class check, not
 
 ## Quiz next meeting (they hear this now)
 
-1. fr meaning (3)
-2. span 2 columns (4)
-3. flex vs grid one sentence (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +160,7 @@ See [[Web Technologies/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Two-dimensional layout.** Magazine pages, dashboards, thesis-program sites.
-
-**2. fr units.** `1fr 2fr` is a ratio. minmax for overflow.
-
-**3. Named areas.** Optional. Line numbers are enough for the lab.
+_none_
 
 ---
 
@@ -174,8 +171,8 @@ See [[Web Technologies/exercises/Week 06]].
 
 ## If we run long, cut
 
-Named areas
+Masonry. Keep 2-column + areas.
 
 ## If we run short, add
 
-Do not pull a UI kit.
+minmax() name.

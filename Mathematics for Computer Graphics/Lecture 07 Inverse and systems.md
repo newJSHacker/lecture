@@ -47,11 +47,11 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 **Ask:** What is det of a rotation? Wait. Want: 1 (or −1 if a flip snuck in).
 
-**Board:** parked strip. Then det as area scale.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *2×2 inverse, det*.
+**They do:** write today’s question in their notes: *det 2×2; invert when det≠0; rotation inverse is transpose*.
 
 **Do not:** Inverting by transposing a scale.
 
@@ -81,7 +81,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 **They do:** Invert [[2,0],[0,2]] and try [[1,0],[2,0]].
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -142,9 +142,7 @@ Point them at `Mathematics for Computer Graphics/code/06-matmul.html` as the aft
 
 ## Quiz next meeting (they hear this now)
 
-1. det of rotate (2)
-2. inverse of Ry (4)
-3. singular meaning (4)
+None this meeting.
 
 
 ## Snippet
@@ -163,11 +161,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Determinant.** Area scale. Negative means flip (reflection / winding).
-
-**2. Inverse.** Undo. Rotation inverse is transpose. If det=0, no inverse — collapsed geometry.
-
-**3. Normals preview.** (M⁻¹)ᵀ in CG I. Name it; compute in 2D on a non-uniform scale.
+_none_
 
 ---
 

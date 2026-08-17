@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** overlay UI  
-**Success check:** Position HTML over canvas.
+**Kernel:** HTML overlay HUD on a Canvas 2D scene; pointer-events none except controls  
+**Success check:** they position a labeled button over the canvas and add a shape without painting the UI in pixels
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: overlay UI | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 10 | Goal: a sandwich: canvas below, UI above | Invariant: HUD is DOM for keyboard and labels; the bitmap is the scene; one state object`
 
 ## Board at the end (they photograph this)
 
 ```
-html overlay on canvas
-Sandwich.
+.stage { position: relative; }
+canvas { display: block; }
+.hud { position: absolute; inset: 0; pointer-events: none; }
+.hud button { pointer-events: auto; }
+
+all UI painted in canvas  =  no keyboard  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Sandwich.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** HUD. Configurators: WebGL + DOM labels.
+**Say:** Configurators later are WebGL + DOM labels. This week the scene is Canvas 2D. If the score is only pixels, Tab cannot reach it. pointer-events is the sandwich.
 
-**Ask:** Position HTML over canvas? Wait seven seconds. Take two answers.
+**Ask:** If the overlay is inset 0 and pointer-events is auto, can you drag the canvas? Wait. Want: no — the HUD ate the hits.
 
-**Board:** parked strip. Then html overlay on canvas.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: overlay UI. Kernel: overlay UI. We freeze conventions and we do not invent timings.
+**Say:** HUD: position absolute over the canvas. none on the overlay, auto on controls. SVG overlay extra is the same sandwich. State: one object, same as Modern JS week 13.
 
-**Ask:** What would a wrong version of this look like? Want: all UI painted in canvas with no keyboard.
+**Ask:** Why is a <button> better than a canvas hit-rect for ‘Add shape’?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** HUD. Configurators: WebGL + DOM labels.
+**Say:** Two clocks: DOM events and rAF. One state. The button writes state; the loop draws it.
 
-**Say:** pointer-events. none on overlay except controls.
+**Board:** sandwich. pointer-events none / auto.
 
-**Say:** State. One object.
+**Say:** a11y: do not ship canvas-only UI. Week 11 will add audio on a gesture — also a DOM control.
 
-**Ask:** Position HTML over canvas? Wait seven seconds. Take two answers.
+**Ask:** Who owns the score text — ctx.fillText or a DOM node?
 
-**They do:** On paper: SVG overlay extra.
+**They do:** On paper: SVG overlay extra — same absolute layer, pointer-events.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Canvas scene + HTML button that adds a shape.. Zoom 140%. Read errors out loud.
+**Say:** Canvas scene + HTML button that adds a shape. Demo Interactive Web/code/06-hud.html. Plant all UI in fillText. Plant overlay blocking pointer mapping from week 3.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** SVG overlay extra.
+**Say:** SVG overlay extra. a11y: button, not only canvas click. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: SVG overlay extra.; a11y: button not only canvas click.. Homework: Written: why HUD in DOM.; Code: overlay.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: SVG overlay + button. Homework: why HUD in DOM; overlay. Quiz: pointer-events none, why DOM HUD, one state.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: overlay UI | Plant the first common mistake. |
-| 10–30 | Canvas scene + HTML button that adds a shape. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | relative stage + overlay | Plant overlay eating clicks. |
+| 10–30 | button adds a shape | State++, loop draws. |
+| 30–45 | pointer-events none/auto | They drag canvas again. |
+| 45–60 | They replace fillText score with DOM | Circulate. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. pointer-events none (3)
-2. why DOM HUD (4)
-3. one state (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Interactive Web/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. HUD.** Configurators: WebGL + DOM labels. This week 2D canvas + HTML.
-
-**2. pointer-events.** none on overlay except controls.
-
-**3. State.** One object. Same as Modern JS Week 13.
+_none_
 
 ---
 
@@ -173,7 +171,7 @@ See [[Interactive Web/exercises/Week 10]].
 
 ## If we run long, cut
 
-State
+State sermon. Keep sandwich + one button.
 
 ## If we run short, add
 

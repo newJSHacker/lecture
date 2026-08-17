@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** tap neighbors  
-**Success check:** Percentage closer filtering.
+**Kernel:** PCF: average binary depth compares in a 3×3 kernel — still the shadow pass  
+**Success check:** they can 3×3 PCF, count taps, and say why blurring the depth texture is not PCF
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,20 +14,25 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: tap neighbors | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 7 | Goal: soft-looking edges on a 2D map | Invariant: PCF averages tests, not the depth values`
 
 ## Board at the end (they photograph this)
 
 ```
-3×3 compare average
-9 taps.
+PASS: shadow compare  (same map as week 6)
+
+3×3:  9 binary tests  →  average
+not:  blur(depthTex) then compare once
+
+VSM / PCSS  names only
+sampler2DShadow  name
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | Hard vs 3×3 edge crop | photograph |
 
 ---
 
@@ -37,11 +42,11 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** PCF. Average binary tests in a kernel.
+**Say:** Percentage closer filtering: average the tests. Blurring depth and calling it PCF is the classic fail. PCSS is not the required lab. We do not invent how many ms nine taps cost.
 
-**Ask:** Percentage closer filtering? Wait seven seconds. Take two answers.
+**Ask:** If I blur the depth texture first, is that PCF? Wait. Want: no.
 
-**Board:** parked strip. Then 3×3 compare average.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +56,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: tap neighbors. Kernel: tap neighbors. We freeze conventions and we do not invent timings.
+**Say:** Soft-looking edges, still a 2D map. Acne can remain — say why. API: compare mode names.
 
-**Ask:** What would a wrong version of this look like? Want: blurring the depth texture and calling it PCF.
+**Ask:** How many taps in 3×3?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +70,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** PCF. Average binary tests in a kernel.
+**Say:** Nine samples around uv. Average 0/1.
 
-**Say:** VSM name. Advanced CG / week later.
+**Board:** 3×3. Circle 'tests, not blur depth'.
 
-**Say:** API. sampler2DShadow / compare mode names.
+**Say:** Count taps in comments. Toggle hard vs PCF.
 
-**Ask:** Percentage closer filtering? Wait seven seconds. Take two answers.
+**Ask:** Why can acne survive PCF?
 
-**They do:** On paper: count taps in comments.
+**They do:** On paper: one tap vs nine — what is averaged?
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Toggle hard vs 3×3 PCF; screenshot.. Zoom 140%. Read errors out loud.
+**Say:** Toggle hard vs 3×3; screenshot. Plant blur-the-depth. Do not quote fps.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +94,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** count taps in comments.
+**Say:** Count taps in comments. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +104,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: count taps in comments.; acne still possible — say why.. Homework: Written: PCF vs blur the depth (wrong).; Code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: tap count + acne sentence. Homework: PCF vs blur depth; code. Quiz: PCF, why not blur depth, tap count. Midterm next week.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +116,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: tap neighbors | Plant the first common mistake. |
-| 10–30 | Toggle hard vs 3×3 PCF; screenshot. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Hard compare | They still have week 6. |
+| 10–30 | 3×3 PCF | Plant blur depth. |
+| 30–45 | Toggle + screenshot | No invented timings. |
+| 45–60 | They comment 9 taps | Circulate. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -136,9 +141,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. PCF (4)
-2. why not blur depth (3)
-3. tap count (3)
+None this meeting.
 
 
 ## Snippet
@@ -157,11 +160,7 @@ See [[Real-Time Rendering/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. PCF.** Average binary tests in a kernel. Soft-looking edges, still a 2D map.
-
-**2. VSM name.** Advanced CG / week later. Moments. Light leak.
-
-**3. API.** sampler2DShadow / compare mode names.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[Real-Time Rendering/exercises/Week 07]].
 
 ## If we run long, cut
 
-API
+PCSS lab. Keep 9 taps + the wrong blur.
 
 ## If we run short, add
 
-acne still possible — say why.
+sampler2DShadow as a name.

@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Three.js Development  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; picking oracle  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** midterm; then Raycaster as an oracle — NDC mouse, not a BVH you write  
+**Success check:** after the exam they can convert a pointer to NDC, intersectObjects, and say the engine is not the algorithm
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,21 +14,24 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 - Printed midterm + spare paper. No laptop for the exam.
 - Topic list was announced at the end of Lecture 7.
 - After collection: demo `ThreeJS Development/code/` ready (local, no CDN).
-- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: picking is a ray vs bounds the engine owns; y is flipped in NDC`
 
 ## Midterm (about 50–60 min)
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm., Raycaster as oracle., Student must still know a ray., NDC mouse mapping.
+**Topics:** Scene/camera/renderer and Mesh→draw; matrixWorld as M; Basic vs Standard; lights/shadow flags; dt vs fps; GLTFLoader/traverse; albedo sRGB vs linear data maps.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-Raycaster.intersectObjects
-Ray.
+pointer NDC: x = (cx/w)*2-1     y = −(cy/h)*2+1
+raycaster.setFromCamera(pointer, camera)
+hits = raycaster.intersectObjects(pickables, recursive)
+
+oracle  ≠  you implemented a BVH
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +44,21 @@ Ray.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then picking. No laptop for the exam. After: Raycaster is an oracle. Computational Geometry owns the algorithm. Demo 07-raycaster.html.
 
-**Ask:** Raycaster as oracle.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Picking.** [[Computational Geometry/Week 13]] vs engine raycast.
 
-**3. Demo.** picking demo.
 
 ### Show / attempt if time
 
-**Say:** Click to highlight a mesh.
+**Say:** Click to highlight a mesh. Plant forgot minus on y. Plant intersect the whole scene including helpers.
 
----
-
-**They do:** layer extra.
+**They do:** Highlight on hit. Layer extra if time.
 
 ---
 
@@ -67,10 +66,9 @@ Ray.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; picking oracle | Plant the first common mistake. |
-| 10–30 | Click to highlight a mesh. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | NDC mapping | Plant +y. Picks the floor. |
+| 15–40 | intersectObjects | Plant recursive false on a Group. |
+| 40–60 | They highlight | Circulate. |
 
 ---
 
@@ -98,8 +96,8 @@ See [[ThreeJS Development/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+Octree. Keep NDC + oracle sentence.
 
 ## If we run short, add
 
-One more worked leftover example.
+layers extra: camera.layers vs raycaster.layers.

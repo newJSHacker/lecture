@@ -2,8 +2,8 @@
 
 **Week 9 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** LOD, tessellation, Nanite idea  
-**Success check:** LOD: swap meshes by distance.
+**Kernel:** LOD swap by distance; Nanite is a visibility-buffer idea, not a glTF checkbox  
+**Success check:** they can switch three LOD meshes, log tri count, and refuse 'we used Nanite' on a glTF
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 8 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 9 | Goal: LOD, tessellation, Nanite idea | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 9 | Goal: detail as a budget, named | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-error in pixels
-LOD rings.
+lod.addLevel(high, 0)
+lod.addLevel(low, 20)
+
+hysteresis named     popping without it
+Nanite / vis buffer  cartoon-level name
+'we used Nanite' on a glTF  =  fail
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ LOD rings.
 
 Hand out the Lecture 8 quiz. Mark one item together. Then:
 
-**Say:** Why. Budgets from Blender/RTR meet **algorithm** names here.
+**Say:** Blender/RTR budgets meet algorithm names. UE5 Nanite is not a lab port. drei Detailed / Three.js LOD is the lab. Pixel-error sentence extra.
 
-**Ask:** LOD: swap meshes by distance? Wait seven seconds. Take two answers.
+**Ask:** If you loaded one glTF, did you use Nanite? Wait. Want: no.
 
-**Board:** parked strip. Then error in pixels.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: LOD, tessellation, Nanite idea. Kernel: LOD, tessellation, Nanite idea. We freeze conventions and we do not invent timings.
+**Say:** Hysteresis extra. Tessellation named. Web: Three.LOD. Do not invent fps when they switch.
 
-**Ask:** What would a wrong version of this look like? Want: 'we used Nanite' on a glTF.
+**Ask:** What do you log when LOD switches?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why. Budgets from Blender/RTR meet **algorithm** names here.
+**Say:** Distance swap. Count tris.
 
-**Say:** Virtualized geometry. UE5 Nanite: cut only when you can explain visibility buffers at cartoon level.
+**Board:** addLevel. Nanite as idea, not a checkbox.
 
-**Say:** Web. drei `Detailed` / Three.js LOD.
+**Say:** Popping. Hysteresis name.
 
-**Ask:** LOD: swap meshes by distance? Wait seven seconds. Take two answers.
+**Ask:** What is a visibility buffer in one cartoon sentence?
 
-**They do:** On paper: hysteresis extra.
+**They do:** Three boxes as LODs; distances labeled.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Three LOD meshes (or simplified boxes); switch; log tri count.. Zoom 140%. Read errors out loud.
+**Say:** Three LOD meshes or boxes; switch; log tris. Plant Nanite-on-glTF. Plant pop without talking hysteresis.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** hysteresis extra.
+**Say:** Two levels, log count. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: hysteresis extra.; pixel error sentence.. Homework: Written: Nanite in 8 honest sentences.; LOD demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: hysteresis extra; pixel-error sentence. Homework: Nanite-is-not-glTF. Quiz: LOD, popping, vis-buffer name.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 8 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: LOD, tessellation, Nanite idea | Plant the first common mistake. |
-| 10–30 | Three LOD meshes (or simplified boxes); switch; log tri count. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Three LODs | Plant Nanite checkbox. |
+| 15–40 | Log tris | Plant no count. |
+| 40–55 | Hysteresis name | Pop plant. |
+| 55–60 | They switch distances | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. LOD (3)
-2. visibility buffer name (4)
-3. why not in WebGL lab (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Advanced Computer Graphics/exercises/Week 09]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why.** Budgets from Blender/RTR meet **algorithm** names here.
-
-**2. Virtualized geometry.** UE5 Nanite: cut only when you can explain visibility buffers at cartoon level. Not a lab port.
-
-**3. Web.** drei `Detailed` / Three.js LOD. That's the lab.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Advanced Computer Graphics/exercises/Week 09]].
 
 ## If we run long, cut
 
-Web
+Nanite impl. Keep LOD + honesty.
 
 ## If we run short, add
 
-pixel error sentence.
+Pixel error sentence.

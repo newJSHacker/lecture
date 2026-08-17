@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** MSAA, TAA, FXAA  
-**Success check:** MSAA: samples at geometry edges, limited on deferred.
+**Kernel:** name MSAA (edge samples), FXAA (post), TAA (history) — table, not a homework TAA  
+**Success check:** they can fill where / cost-idea / blur and choose AA for a product viewer in words
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,20 +14,25 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: MSAA, TAA, FXAA | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 11 | Goal: a table you can defend | Invariant: AA is a named technique; 8× supersample on a laptop is not the lab; do not invent fps`
 
 ## Board at the end (they photograph this)
 
 ```
-table: where / cost / blur
-AA table.
+        where           blur risk
+MSAA    geometry edge   low      (hates deferred)
+FXAA    post            some
+TAA     history         ghosting
+
+alpha-to-coverage  name
+TAA not required homework
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | Same edge: off vs renderer AA vs cheap blur | photograph |
 
 ---
 
@@ -37,11 +42,11 @@ AA table.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Why aliasing. Edges, specular sparkle, thin geometry, alpha test.
+**Say:** Aliasing: edges, specular sparkle, thin geo, alpha test. MSAA hates deferred — that is a reason for FXAA/TAA. We screenshot; we do not invent milliseconds.
 
-**Ask:** MSAA: samples at geometry edges, limited on deferred? Wait seven seconds. Take two answers.
+**Ask:** Why is TAA not the required homework? Wait. Want: ghosting, history, too much for a week.
 
-**Board:** parked strip. Then table: where / cost / blur.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +56,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: MSAA, TAA, FXAA. Kernel: MSAA, TAA, FXAA. We freeze conventions and we do not invent timings.
+**Say:** Forward antialias: true is MSAA-ish. FXAA is a post pass. Hair is hard. Alpha-to-coverage named.
 
-**Ask:** What would a wrong version of this look like? Want: TAA as required homework.
+**Ask:** What is TAA's main artifact?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +70,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why aliasing. Edges, specular sparkle, thin geometry, alpha test.
+**Say:** Table: where / cost-idea / blur. Cost-idea is 'samples' or 'history', not a fake ms.
 
-**Say:** Deferred vs MSAA. MSAA hates deferred.
+**Board:** the table. Circle deferred vs MSAA.
 
-**Say:** Alpha. Alpha-to-coverage name.
+**Say:** Ghosting description from a video still extra.
 
-**Ask:** MSAA: samples at geometry edges, limited on deferred? Wait seven seconds. Take two answers.
+**Ask:** MSAA in one sentence?
 
-**They do:** On paper: written table.
+**They do:** On paper: fill the three-row table.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Screenshot the same edge with AA off vs renderer antialias on vs a cheap FXAA-ish blur extra.. Zoom 140%. Read errors out loud.
+**Say:** Same edge: AA off vs renderer antialias vs cheap FXAA-ish blur. Plant TAA as required HW. Plant 8× SS as the lab.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +94,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** written table.
+**Say:** Written table. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +104,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: written table.; ghosting description from a video still extra.. Homework: Written: choose AA for a product viewer.; screenshots.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: table + ghosting extra. Homework: choose AA for a product viewer; screenshots. Quiz: MSAA idea, TAA risk, FXAA.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +116,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: MSAA, TAA, FXAA | Plant the first common mistake. |
-| 10–30 | Screenshot the same edge with AA off vs renderer antialias on vs a cheap FXAA-ish blur extra. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Why aliasing | They list edges. |
+| 10–30 | Three screenshots | Plant invented fps. |
+| 30–45 | Deferred vs MSAA | Name the conflict. |
+| 45–60 | They fill the table | Circulate. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -136,9 +141,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. MSAA idea (3)
-2. TAA risk (4)
-3. FXAA (3)
+None this meeting.
 
 
 ## Snippet
@@ -157,11 +160,7 @@ See [[Real-Time Rendering/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why aliasing.** Edges, specular sparkle, thin geometry, alpha test.
-
-**2. Deferred vs MSAA.** MSAA hates deferred. That's a reason for FXAA/TAA.
-
-**3. Alpha.** Alpha-to-coverage name. Hair is hard.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[Real-Time Rendering/exercises/Week 11]].
 
 ## If we run long, cut
 
-Alpha
+Implement TAA. Keep names + screenshots.
 
 ## If we run short, add
 
-ghosting description from a video still extra.
+Alpha-to-coverage as a name.

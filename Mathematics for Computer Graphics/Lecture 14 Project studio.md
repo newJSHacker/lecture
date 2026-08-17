@@ -95,9 +95,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Projects.** vec visualizer, Bezier editor, 2×2 explorer, lookAt basis drawer.
-**2. Cuts.** Drop 3D; keep 2D + tests.
-**3. Report.** Definitions, screenshots, limitations.
+_none_
 
 ## If we run long, cut
 

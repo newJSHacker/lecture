@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** server proxy  
-**Success check:** A tiny proxy (Node/fetch) that holds the key.
+**Kernel:** browser → your proxy → vendor; mock is first-class; key never in the repo  
+**Success check:** they can fetch('/api/complete') against a mock or proxy and show .env is not in git
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/01-proxy-mock.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: server proxy | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 2 | Goal: a proxy or an honest mock | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-browser → your server → vendor
-Proxy box.
+browser  →  POST /api/complete  →  proxy  →  vendor
+                ↑
+              mock JSON is a valid lab
+
+key in GitHub  =  fail
+unbounded spend  =  fail
+ToS: student work, not resale
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Proxy box.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Architecture. The browser never sees the vendor key.
+**Say:** The browser never sees the vendor key. Same as any production app. If there is no budget, a mock server is the lab — architecture still counts. Demo 01-proxy-mock.html.
 
-**Ask:** A tiny proxy (Node/fetch) that holds the key? Wait seven seconds. Take two answers.
+**Ask:** Does a mock mean you skipped the course? Wait. Want: no — you still have a proxy shape.
 
-**Board:** parked strip. Then browser → your server → vendor.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: server proxy. Kernel: server proxy. We freeze conventions and we do not invent timings.
+**Say:** Error states and timeout. No CDN vendor SDK required. Read ToS at teaching level — we are not lawyers.
 
-**Ask:** What would a wrong version of this look like? Want: key in GitHub.
+**Ask:** What happens on 401 from the proxy?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Architecture. The browser never sees the vendor key.
+**Say:** Three boxes. Key lives in the middle box.
 
-**Say:** Mock. If no budget: a mock server returns canned JSON/images.
+**Board:** fetch POST. Mock returns canned JSON.
 
-**Say:** ToS. Read the vendor policy.
+**Say:** .gitignore .env. Unbounded student spend is a plant.
 
-**Ask:** A tiny proxy (Node/fetch) that holds the key? Wait seven seconds. Take two answers.
+**Ask:** Why not VITE_OPENAI_KEY?
 
-**They do:** On paper: error states.
+**They do:** On paper: the three boxes and where the key sits.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: fetch('/api/complete') against a mock or real proxy; display text.. Zoom 140%. Read errors out loud.
+**Say:** fetch('/api/complete') against mock. Plant key in the HTML. Plant infinite retries. Timeout.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** error states.
+**Say:** Button → mock complete → show JSON. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: error states.; timeout.. Homework: Written: why proxy.; code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: error states; timeout. Homework: why the key is not in the client. Quiz: proxy, mock OK, no GitHub key.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: server proxy | Plant the first common mistake. |
-| 10–30 | fetch('/api/complete') against a mock or real proxy; display text. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Three boxes | Plant client key. |
+| 15–40 | Mock fetch | Plant real key in repo. |
+| 40–55 | Timeout / error | Unbounded spend plant. |
+| 55–60 | They hide .env | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/01-proxy-mock.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `AI for Interactive Graphics/code/01-proxy-mock.html` as the after
 
 ## Quiz next meeting (they hear this now)
 
-1. who holds the key (4)
-2. mock allowed? (3)
-3. rate limit (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[AI for Interactive Graphics/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Architecture.** The browser never sees the vendor key. Same as any production app.
-
-**2. Mock.** If no budget: a mock server returns canned JSON/images. The **client architecture** is the lab.
-
-**3. ToS.** Read the vendor policy. Student work, not resale.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[AI for Interactive Graphics/exercises/Week 02]].
 
 ## If we run long, cut
 
-ToS
+ToS law. Keep proxy + mock.
 
 ## If we run short, add
 
-timeout.
+Timeout UI.

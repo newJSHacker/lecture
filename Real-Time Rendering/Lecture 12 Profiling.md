@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Real-Time Rendering  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** GPU vs CPU, budgets  
-**Success check:** Use renderer.info / Spector.js name / Chrome GPU.
+**Kernel:** CPU vs GPU clocks; table: device, resolution, what changed, ms — measure or omit  
+**Success check:** they can record two rows after one change and never say 'it's 60' without numbers
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Real-Time Rendering/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: GPU vs CPU, budgets | Invariant: a frame is a budget; name the pass`
+- Parked strip: `Lecture 12 | Goal: two rows on a named device | Invariant: invented frame rates are a grading zero; a budget is a measured table`
 
 ## Board at the end (they photograph this)
 
 ```
-draw calls, overdraw, ms
-Budget sheet.
+CPU: JS, draw calls
+GPU: fill, bandwidth, shader
+
+table:
+  device | res | change | ms or info.render
+
+Spector.js / renderer.info / Chrome GPU  names
+overdraw viz: additive white extra
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Budget sheet.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Two clocks. CPU: JS, draw calls.
+**Say:** Two clocks. Student rule: device, resolution, what changed, ms. Spector.js, RenderDoc, three.js info, timestamp queries — names. 'It's 60 on my machine' with no numbers fails.
 
-**Ask:** renderer.info / Spector.js name / Chrome GPU? Wait seven seconds. Take two answers.
+**Ask:** If you did not measure, what do you write? Wait. Want: omit.
 
-**Board:** parked strip. Then draw calls, overdraw, ms.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: GPU vs CPU, budgets. Kernel: GPU vs CPU, budgets. We freeze conventions and we do not invent timings.
+**Say:** One change: shadow map size or pixel ratio. Two rows. Overdraw viz extra. Cut one pass extra. Do not optimize 8k textures last if they are the problem — still measure.
 
-**Ask:** What would a wrong version of this look like? Want: 'it's 60 on my machine' with no numbers.
+**Ask:** CPU bound vs GPU bound in one idea?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Two clocks. CPU: JS, draw calls.
+**Say:** Empty table on the board. Fill it live from this machine.
 
-**Say:** Tools. Spector.js, RenderDoc (desktop), three.js info, timestamp queries name.
+**Board:** the columns. Circle omit.
 
-**Say:** Student rule. A table with **device, resolution, what changed, ms**.
+**Say:** console.table(renderer.info.render) as a snippet, not a fps fantasy.
 
-**Ask:** renderer.info / Spector.js name / Chrome GPU? Wait seven seconds. Take two answers.
+**Ask:** What four columns?
 
-**They do:** On paper: overdraw viz extra (additive white).
+**They do:** On paper: one hypothesized bottleneck — then they must measure or strike it.
 
-**Do not:** invent fps numbers. Measure or omit.
+**Do not:** Invent fps numbers. Measure or omit.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Profile a scene: one change (shadow map size or pixel ratio); record two rows.. Zoom 140%. Read errors out loud.
+**Say:** Profile: one change; two rows on the named device. Plant 'it's 60'. No CDN tools that require a login wall — Spector as optional local.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** overdraw viz extra (additive white).
+**Say:** Overdraw viz extra, or cut one pass. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: overdraw viz extra (additive white).; cut one pass.. Homework: Written: budget for *your* project device.; measured table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: overdraw or cut pass. Homework: budget for *your* project device; measured table. Quiz: CPU vs GPU bound, overdraw, why measure.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: GPU vs CPU, budgets | Plant the first common mistake. |
-| 10–30 | Profile a scene: one change (shadow map size or pixel ratio); record two rows. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Two clocks | Plant '60 fps'. |
+| 10–30 | One change, two rows | Fill device + res. |
+| 30–45 | info.render | Read the numbers out loud. |
+| 45–60 | They cut one pass | Circulate. Omit if unmeasured. |
 
 Point them at `Real-Time Rendering/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `Real-Time Rendering/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. CPU vs GPU bound (4)
-2. overdraw (3)
-3. why measure (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[Real-Time Rendering/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Two clocks.** CPU: JS, draw calls. GPU: fill rate, bandwidth, shader cost.
-
-**2. Tools.** Spector.js, RenderDoc (desktop), three.js info, timestamp queries name.
-
-**3. Student rule.** A table with **device, resolution, what changed, ms**. No fantasy.
+_none_
 
 ---
 
@@ -173,8 +173,8 @@ See [[Real-Time Rendering/exercises/Week 12]].
 
 ## If we run long, cut
 
-Student rule
+RenderDoc deep dive. Keep the table + one change.
 
 ## If we run short, add
 
-cut one pass.
+Timestamp query as a name.

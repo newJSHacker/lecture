@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Capstone Project  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** who, why, users  
-**Success check:** Form teams (2–4) or justified solo.
+**Kernel:** problem = users + job; tech list is not a problem; teams 2–4 or justified solo  
+**Success check:** they can write Problem | Users | Non-goals | Success look and create a repo
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -19,8 +19,13 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 ## Board at the end (they photograph this)
 
 ```
-problem statement box
-Problem box.
+Problem | Users | Non-goals | Success look
+
+'We will use R3F and AI'     ≠  a problem
+'A visitor compares three bronzes on a phone'  =  a problem
+
+roles: graphics · UI · assets · producer
+medical viz OK     medical device claims not
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +41,11 @@ Problem box.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Capstone. A complete interactive application: configurator, viz, museum, game prototype, walkthrough, medical **viz** (not a device), creative demo.
+**Say:** Fifteen weeks, one product. Configurator, viz, museum, game prototype, walkthrough, medical viz (not a device), creative demo. Five engines in week 1 fail. No users fail. Demo Capstone/code/01-moscow.html as the later spec shape.
 
-**Ask:** Form teams (2–4) or justified solo? Wait seven seconds. Take two answers.
+**Ask:** Is 'we will use WebXR' a problem? Wait. Want: no — who must do what?
 
-**Board:** parked strip. Then problem statement box.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +55,9 @@ Problem box.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: who, why, users. Kernel: who, why, users. We freeze conventions and we do not invent timings.
+**Say:** Team contract. Git from day 1. Meeting time. Staff approve topics that fit the lab. We do not start in an engine before the problem statement.
 
-**Ask:** What would a wrong version of this look like? Want: five engines in week 1.
+**Ask:** What is a non-goal?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +69,21 @@ Problem box.
 
 ### Minutes 12–35 — Build
 
-**Say:** Capstone. A complete interactive application: configurator, viz, museum, game prototype, walkthrough, medical **viz** (not a device), creative demo.
+**Say:** Capstone is a complete interactive application — the happy path on a lab machine.
 
-**Say:** Problem. 'We will use R3F and AI' is not a problem.
+**Board:** four boxes. Strike the tech list as problem.
 
-**Say:** Teams. Roles: graphics, UI, assets, producer.
+**Say:** Roles. Producer is a role, not leftover.
 
-**Ask:** Form teams (2–4) or justified solo? Wait seven seconds. Take two answers.
+**Ask:** Why is a medical device a skip?
 
-**They do:** On paper: repo created.
+**They do:** Fill the four boxes for their idea.
 
-**Do not:** start in an engine before the problem statement.
+**Do not:** Start in an engine before the problem statement.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Problem statement + users + non-goals on one page. Team contract.. Zoom 140%. Read errors out loud.
+**Say:** Problem page + team contract. Plant five engines. Plant no users. Plant medical-device claim.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +93,7 @@ Problem box.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** repo created.
+**Say:** Four boxes + repo created. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +103,7 @@ Problem box.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: repo created.; meeting time.. Homework: Signed contract + problem page.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: repo; meeting time. Homework: signed contract + problem page. Quiz: user, non-goal, tech list is not a problem.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +115,10 @@ Problem box.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: who, why, users | Plant the first common mistake. |
-| 10–30 | Problem statement + users + non-goals on one page. Team contract. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Four boxes | Plant tech-list problem. |
+| 15–40 | Team contract + roles | Plant five engines. |
+| 40–55 | Repo | Plant no git. |
+| 55–60 | They write users | Circulate. |
 
 Point them at `Capstone/code/01-moscow.html` as the after-class check, not as the lecture.
 
@@ -134,9 +139,7 @@ Point them at `Capstone/code/01-moscow.html` as the after-class check, not as th
 
 ## Quiz next meeting (they hear this now)
 
-1. user (3)
-2. non-goal (4)
-3. tech list as problem? (3)
+None this meeting.
 
 
 ## Snippet
@@ -155,11 +158,7 @@ See [[Capstone/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Capstone.** A complete interactive application: configurator, viz, museum, game prototype, walkthrough, medical **viz** (not a device), creative demo. [[01 subjects.md]] list.
-
-**2. Problem.** 'We will use R3F and AI' is not a problem. 'A visitor must compare three bronze statues on a phone' is.
-
-**3. Teams.** Roles: graphics, UI, assets, producer. Git hygiene from day 1.
+_none_
 
 ---
 
@@ -170,8 +169,8 @@ See [[Capstone/exercises/Week 01]].
 
 ## If we run long, cut
 
-Teams
+Engine bake-off. Keep users + contract.
 
 ## If we run short, add
 
-meeting time.
+Meeting time on the contract.

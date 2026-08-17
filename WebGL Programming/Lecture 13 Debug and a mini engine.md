@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** checklist, abstraction  
-**Success check:** The 10-point checklist.
+**Kernel:** black-screen 10-point checklist; a 40-line renderer, not Engine.js  
+**Success check:** they can walk the checklist on a black screen and map Mesh → program/VAO/M/draw
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: checklist, abstraction | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 13 | Goal: debug, then a mini engine | Invariant: abstraction after a cube; a 500-line engine with no cube is failure`
 
 ## Board at the end (they photograph this)
 
 ```
-black-screen 10 items
-Checklist.
+1 canvas size   2 compile+link   3 camera looks
+4 near plane    5 winding/cull   6 depth
+7 attribs       8 texture ready  9 clear   10 uniforms
+
+debug: n as color · uv as color · depth gray
+
+Mesh → bind program, VAO, u_p u_v u_m, draw
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Checklist.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Checklist. [[WebGL/01 Conventions]] and Teaching live-coding.
+**Say:** The 10-point list in WebGL/01 Conventions is the course. Mini engine: program, mesh, camera, light. Next course is Three.js — homework is a name map, not a rewrite.
 
-**Ask:** The 10-point checklist? Wait seven seconds. Take two answers.
+**Ask:** Name one black-screen cause. Wait. Take three.
 
-**Board:** parked strip. Then black-screen 10 items.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: checklist, abstraction. Kernel: checklist, abstraction. We freeze conventions and we do not invent timings.
+**Say:** Debug key modes: 1 n, 2 uv, 3 depth. README how to serve. Do not start the Three.js project tonight.
 
-**Ask:** What would a wrong version of this look like? Want: 500-line Engine.js with no cube.
+**Ask:** Three.js Mesh is which WebGL objects?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Checklist. [[WebGL/01 Conventions]] and Teaching live-coding.
+**Say:** Walk the checklist on a planted black screen.
 
-**Say:** Engine. program, mesh, camera, light.
+**Board:** ten items. Then Mesh → draw.
 
-**Say:** Three.js. Next course.
+**Say:** 40-line renderer drawing two meshes. Not 500 lines.
 
-**Ask:** The 10-point checklist? Wait seven seconds. Take two answers.
+**Ask:** Why is texture async on the checklist?
 
-**They do:** On paper: debug modes keys.
+**They do:** On paper: the ten items from memory.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 40-line renderer drawing two meshes.. Zoom 140%. Read errors out loud.
+**Say:** A 40-line renderer, two meshes. Plant a 500-line Engine.js sketch. Plant 0×0 canvas. Read logs.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** debug modes keys.
+**Say:** Debug-mode keys. README. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: debug modes keys.; README.. Homework: Written: name map to Three.js.; Code: mini engine.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: debug keys; README. Homework: name map to Three.js; mini engine. Quiz: one black-screen cause, debug n, Mesh is?. Studio next.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: checklist, abstraction | Plant the first common mistake. |
-| 10–30 | A 40-line renderer drawing two meshes. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Plant black screen | Walk 1–10 out loud. |
+| 10–30 | 40-line two meshes | Keep it tiny. |
+| 30–45 | Debug n/uv/depth keys | They toggle. |
+| 45–60 | They write README serve | Circulate. No CDN. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. one black-screen cause (4)
-2. debug n (3)
-3. Three.js Mesh is? (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[WebGL Programming/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Checklist.** [[WebGL/01 Conventions]] and Teaching live-coding.
-
-**2. Engine.** program, mesh, camera, light. Project is this.
-
-**3. Three.js.** Next course. Table of names.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[WebGL Programming/exercises/Week 13]].
 
 ## If we run long, cut
 
-Three.js
+Full scene-graph editor. Keep checklist + 40 lines.
 
 ## If we run short, add
 
-README.
+README: python -m http.server in WebGL/demos.

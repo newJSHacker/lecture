@@ -44,11 +44,11 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 **Ask:** If n doubles, what happens to nested-loop work? Wait. Want: about four times, not two.
 
-**Board:** parked strip. Then n cards, selection sort trace.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *selection sort; Θ*.
+**They do:** write today’s question in their notes: *selection sort by hand and in code; count swaps; measure n=1000 vs 2000*.
 
 **Do not:** Calling sort in the lab.
 
@@ -78,7 +78,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 **They do:** On paper: one pass of selection sort on `[4,1,3,2]`.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -139,9 +139,7 @@ Point them at `Programming/code/09-sort.html` as the after-class check, not as t
 
 ## Quiz next meeting (they hear this now)
 
-1. Selection sort idea (4)
-2. If n doubles, n² time? (3)
-3. Built-in sort allowed in project? (3)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +158,7 @@ See [[Programming/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Selection sort.** Find min, swap to front. Easy to see. n² comparisons.
-
-**2. Complexity.** Count nested loops. 'Twice as long' vs 'four times' when n doubles. No Master theorem.
-
-**3. Engine sort.** `array.sort((a,b)=>a-b)` exists. Lab is selection sort so they feel n². Later they may use built-in.
+_none_
 
 ---
 

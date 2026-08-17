@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** metal, glass names  
-**Success check:** Perfect mirror bounce.
+**Kernel:** mirror bounce; glass: refract + Schlick mix; max depth  
+**Success check:** they can reflect a mirror sphere and name ior 1.5 without unbounded recursion
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: metal, glass names | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 4 | Goal: two materials in a teaching tracer | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-reflect; refract; TIR
-Reflect / refract.
+mirror:  reflect(ω, n)
+glass:   refract, ior 1.5, Schlick k
+max depth     Russian roulette named
+
+WebGLPathTracer = oracle after theirs looks like noise
+dispersion not required
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Reflect / refract.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** BXDF teaching. Mirror is easy.
+**Say:** BXDF teaching. Mirror is easy. Dispersion as required fails. Unbounded recursion fails. Production tracers remain oracles.
 
-**Ask:** Perfect mirror bounce? Wait seven seconds. Take two answers.
+**Ask:** What stops a hall of mirrors? Wait. Want: max depth / roulette.
 
-**Board:** parked strip. Then reflect; refract; TIR.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: metal, glass names. Kernel: metal, glass names. We freeze conventions and we do not invent timings.
+**Say:** Fake glass with reflect-only if refract slips. Lambert floor stays. ior slider extra. Depth 2 vs 5 extra. Microfacet optional extra — RTR already named it.
 
-**Ask:** What would a wrong version of this look like? Want: dispersion as required.
+**Ask:** What is Schlick mixing?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** BXDF teaching. Mirror is easy.
+**Say:** Mirror first. Then glass names.
 
-**Say:** Recursion. Max depth.
+**Board:** reflect / refract / k. Max depth.
 
-**Say:** Three.js. WebGLPathTracer / similar as **oracle** after theirs looks like noise.
+**Say:** Oracle after their noise looks like a picture.
 
-**Ask:** Perfect mirror bounce? Wait seven seconds. Take two answers.
+**Ask:** Why not recurse forever?
 
-**They do:** On paper: ior slider extra.
+**They do:** Trace a mirror hit on paper: new direction.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A mirror sphere and a glass sphere (or fake glass with reflect-only if refract slips); still Lambert floor.. Zoom 140%. Read errors out loud.
+**Say:** Mirror sphere + glass or reflect-only glass; Lambert floor. Plant dispersion required. Plant depth ∞.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** ior slider extra.
+**Say:** Mirror bounce in the tracer. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: ior slider extra.; depth 2 vs 5.. Homework: Written: TIR.; screenshots.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: ior extra; depth 2 vs 5. Homework: Schlick sentence. Quiz: mirror, ior, max depth.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: metal, glass names | Plant the first common mistake. |
-| 10–30 | A mirror sphere and a glass sphere (or fake glass with reflect-only if refract slips); still Lambert floor. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Mirror bounce | Plant unbounded recursion. |
+| 15–40 | Glass names / Schlick | Plant dispersion lab. |
+| 40–55 | Depth 2 vs 5 | They compare stills. |
+| 55–60 | Oracle screenshot cited | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. Schlick (3)
-2. TIR (4)
-3. max depth (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Advanced Computer Graphics/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. BXDF teaching.** Mirror is easy. Glass: `refract`, ior 1.5, Schlick mix. Microfacet in a tracer is RTR+this — optional extra.
-
-**2. Recursion.** Max depth. Russian roulette name.
-
-**3. Three.js.** WebGLPathTracer / similar as **oracle** after theirs looks like noise.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Advanced Computer Graphics/exercises/Week 04]].
 
 ## If we run long, cut
 
-Three.js
+Microfacet in-tracer. Keep mirror + depth.
 
 ## If we run short, add
 
-depth 2 vs 5.
+Depth 2 vs 5 stills.

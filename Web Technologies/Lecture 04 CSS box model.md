@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Web Technologies  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** margin border padding content  
-**Success check:** Draw the box model.
+**Kernel:** content + padding + border + margin; box-sizing: border-box as course policy  
+**Success check:** they can draw the box of a 200px element with padding 20 and say the used width under border-box
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,22 +14,25 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Web Technologies/code/03-box.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: margin border padding content | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 4 | Goal: stop guessing spacing | Invariant: every visible thing is a box; margin is outside`
 
 ## Board at the end (they photograph this)
 
 ```
-box with four layers
-Box model.
-Computed panel.
+  margin
+    border
+      padding
+        content
+
+box-sizing: border-box     (course policy)
+width includes padding+border
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: a box-model overlay screenshot from DevTools | the overlay is a photo |
 
 ---
 
@@ -39,11 +42,11 @@ Computed panel.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Everything is a box. Layout is boxes.
+**Say:** CSS is not a paint program. It is boxes. If width surprises you, you forgot padding.
 
-**Ask:** Draw the box model? Wait seven seconds. Take two answers.
+**Ask:** Is margin inside the border? Wait. Want: no.
 
-**Board:** parked strip. Then box with four layers.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: margin border padding content. Kernel: margin border padding content. We freeze conventions and we do not invent timings.
+**Say:** Content, padding, border, margin. Course policy: border-box so width means the box you see. display block vs inline named.
 
-**Ask:** What would a wrong version of this look like? Want: !important everywhere.
+**Ask:** What does width include under border-box?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Everything is a box. Layout is boxes.
+**Say:** Draw four nested rectangles. Label them.
 
-**Say:** border-box. Course policy: `* { box-sizing: border-box; }` in the reset.
+**Board:** border-box vs content-box with numbers: 200 + padding.
 
-**Say:** Cascade intro. Specificity later.
+**Say:** DevTools computed box. We inspect, we do not guess.
 
-**Ask:** Draw the box model? Wait seven seconds. Take two answers.
+**Ask:** Margin collapse name — do we need it today? Want: name only.
 
-**They do:** On paper: A card with padding and a border.
+**They do:** On paper: a 200px border-box with 20px padding — content width?
 
-**Do not:** lecture HTML as a visual design tool. No CDN.
+**Do not:** Lecture HTML as a visual design tool. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Color the content/padding/border/margin of one box using outlines.. Zoom 140%. Read errors out loud.
+**Say:** A card with padding. Plant content-box. Switch to border-box. Demo 03-box.html.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** A card with padding and a border.
+**Say:** A card: image placeholder, title, two paragraphs. Border-box. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: A card with padding and a border.; Two boxes side by side with inline-block or flex preview.. Homework: Written: content-box vs border-box.; Code: a priced product card.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: card + inspect. Homework: draw three boxes from a screenshot. Quiz: four layers, border-box, margin vs padding.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: margin border padding content | Plant the first common mistake. |
-| 10–30 | Color the content/padding/border/margin of one box using outlines. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Four layers | Plant margin inside. |
+| 15–40 | border-box | Plant content-box width surprise. |
+| 40–55 | Inspect | Computed pane. |
+| 55–60 | They build the card | Circulate. |
 
 Point them at `Web Technologies/code/03-box.html` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `Web Technologies/code/03-box.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. Four layers (4)
-2. What border-box includes (3)
-3. Inspect where (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +160,7 @@ See [[Web Technologies/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Everything is a box.** Layout is boxes. Graphics people who skip this fight later UI overlays on WebGL canvases.
-
-**2. border-box.** Course policy: `* { box-sizing: border-box; }` in the reset.
-
-**3. Cascade intro.** Specificity later. This week: one stylesheet, class selectors.
+_none_
 
 ---
 
@@ -174,8 +171,8 @@ See [[Web Technologies/exercises/Week 04]].
 
 ## If we run long, cut
 
-Cascade intro
+Position absolute. Keep the four layers.
 
 ## If we run short, add
 
-Two boxes side by side with inline-block or flex preview.
+box-shadow as a fifth decoration, not a layer of the model.

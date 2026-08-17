@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** pooling, culling 2D  
-**Success check:** Skip draw if off canvas.
+**Kernel:** skip draw if AABB is off-canvas; pool instead of new per particle; measure with performance.now  
+**Success check:** they toggle culling on 1000 particles and can say they must measure before pooling
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,25 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/09-gsap.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: pooling, culling 2D | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 13 | Goal: the same engine, fewer wasted draws | Invariant: cull is a boolean skip; pooling is reuse; do not invent fps`
 
 ## Board at the end (they photograph this)
 
 ```
-offscreen skip
-Cull.
+if (x < -r || x > w + r || y < -r || y > h + r) return;  // skip draw
+
+pool:  dead[i] = true;  reuse slot instead of new
+measure:  t0 = performance.now();  …  t1
+
+invented fps           =  fail
+pooling without a number =  fail
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: DevTools screenshot of two runs, cull on vs off | photo of numbers you just took |
 
 ---
 
@@ -38,11 +42,11 @@ Cull.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** Culling. AABB vs canvas.
+**Say:** Week 12 spawned freely. Today we skip offscreen draw and we reuse slots. Computational Geometry AABB is the test. Same rule as Modern JS week 11: measure or omit. 08-cull.html already has the toggle.
 
-**Ask:** Skip draw if off canvas? Wait seven seconds. Take two answers.
+**Ask:** If a particle is off-canvas, do we still update(dt)? Wait. Want: usually yes — it may come back; we skip render.
 
-**Board:** parked strip. Then offscreen skip.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: pooling, culling 2D. Kernel: pooling, culling 2D. We freeze conventions and we do not invent timings.
+**Say:** Culling: AABB vs canvas. Pooling: reuse particles. Measure with performance.now on a batch — not an fps HUD you made up. Overdraw named.
 
-**Ask:** What would a wrong version of this look like? Want: pooling without measuring.
+**Ask:** Does culling replace a smaller spawn cap?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Culling. AABB vs canvas.
+**Say:** Update can still run. Render returns early. Write the four inequalities.
 
-**Say:** Pooling. Reuse particles.
+**Board:** offscreen skip. Pool slot. now() wrap.
 
-**Say:** Measure. performance.now frames.
+**Say:** Toggle cull like the demo. Read two now() deltas. No fps slogan.
 
-**Ask:** Skip draw if off canvas? Wait seven seconds. Take two answers.
+**Ask:** When is pooling wasted work?
 
-**They do:** On paper: pool extra.
+**They do:** On paper: pool extra — acquire/release two functions.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: 1000 particles: naive vs skip-offscreen.. Zoom 140%. Read errors out loud.
+**Say:** 1000 particles: naive vs skip-offscreen. Demo Interactive Web/code/08-cull.html (checkbox; hint says do not invent fps). Plant an fps number on the board. Erase it. Plant pooling without a measure.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** pool extra.
+**Say:** Pool extra. Optional readout of two now() numbers — not an fps widget. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: pool extra.; fps readout.. Homework: Written: when to pool.; Code: cull.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pool extra; measured readout. Homework: when to pool; cull. Quiz: offscreen skip, pool, overdraw. Next: studio.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: pooling, culling 2D | Plant the first common mistake. |
-| 10–30 | 1000 particles: naive vs skip-offscreen. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | AABB skip draw | Plant skipping update too, then discuss. |
+| 10–30 | 1000 particles toggle | 08-cull.html. Measure, no fps. |
+| 30–45 | pool acquire/release | Plant new every spawn. |
+| 45–60 | They write two now() times | Circulate. |
 
 Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Interactive Web/code/09-gsap.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. offscreen skip (4)
-2. pool (3)
-3. overdraw (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Interactive Web/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. Culling.** AABB vs canvas. CG geometry AABB.
-
-**2. Pooling.** Reuse particles.
-
-**3. Measure.** performance.now frames.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Interactive Web/exercises/Week 13]].
 
 ## If we run long, cut
 
-Measure
+Pooling if cull is not in. Keep skip-draw + measure.
 
 ## If we run short, add
 
-fps readout.
+A measured on/off table, two rows, no fps.

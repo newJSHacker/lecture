@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** rAF, dt, time  
-**Success check:** rAF loop.
+**Kernel:** requestAnimationFrame; dt in seconds; clearRect; cap dt  
+**Success check:** they have a rAF loop that moves with dt and can toggle clear vs trails
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,20 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Interactive Web/code/02-raf.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: rAF, dt, time | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 2 | Goal: motion that does not depend on a magic 16 | Invariant: time is rAF; input is events; draw is a function`
 
 ## Board at the end (they photograph this)
 
 ```
-requestAnimationFrame ring
-Loop.
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);  // seconds, capped
+  last = now;
+  clearRect(0,0,w,h);     // or trails on purpose
+  // update + draw
+  requestAnimationFrame(frame);
+}
+
+setInterval(16)  =  not the loop
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +45,11 @@ Loop.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** vs setInterval. rAF syncs to refresh.
+**Say:** A path that does not move is week 1. Today the clock is rAF. setInterval(16) is a lie: it is not vsync, and a hidden tab keeps waking. We do not invent fps.
 
-**Ask:** rAF loop? Wait seven seconds. Take two answers.
+**Ask:** Why is dt in seconds, not ‘frames’? Wait. Want: motion = velocity × time; refresh rate is not a unit we assume.
 
-**Board:** parked strip. Then requestAnimationFrame ring.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +59,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: rAF, dt, time. Kernel: rAF, dt, time. We freeze conventions and we do not invent timings.
+**Say:** rAF syncs to refresh and slows when the tab is hidden — good. t in seconds; sin(t) for a path. Clear each frame or you paint trails. Cap dt so a hitch does not teleport.
 
-**Ask:** What would a wrong version of this look like? Want: setInterval(16).
+**Ask:** What if you forget to request the next frame?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +73,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** vs setInterval. rAF syncs to refresh.
+**Say:** vs setInterval. One ring: schedule the next frame at the end.
 
-**Say:** Time. t in seconds.
+**Board:** rAF ring. dt cap. clearRect vs trails.
 
-**Say:** Clear. clearRect each frame or trails.
+**Say:** Pause key sets a flag; the loop still runs or you stop requesting — pick one and freeze.
 
-**Ask:** rAF loop? Wait seven seconds. Take two answers.
+**Ask:** Uncapped dt after a debugger pause — what happens to a ball with vx*dt?
 
-**They do:** On paper: dt-cap.
+**They do:** On paper: dt-cap one-liner and a pause flag.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A ball on a sine; pause key.. Zoom 140%. Read errors out loud.
+**Say:** A ball on a sine; pause key. Demo Interactive Web/code/02-raf.html. Plant setInterval(16). Plant forgotten clearRect (trails). Plant uncapped dt.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +97,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** dt-cap.
+**Say:** dt-cap. Trail vs clear toggle. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +107,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: dt-cap.; trail vs clear toggle.. Homework: Written: why rAF.; Code: loop module.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: dt-cap + trail toggle. Homework: why rAF; loop as a module. Quiz: rAF vs interval, dt, hidden tab.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +119,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: rAF, dt, time | Plant the first common mistake. |
-| 10–30 | A ball on a sine; pause key. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | rAF ring | Plant setInterval(16). |
+| 10–30 | sine ball + dt | Plant pixels-per-frame with no dt. |
+| 30–45 | clear vs trails + pause | They see both. |
+| 45–60 | They cap dt | Circulate. No fps claims. |
 
 Point them at `Interactive Web/code/02-raf.html` as the after-class check, not as the lecture.
 
@@ -137,9 +144,7 @@ Point them at `Interactive Web/code/02-raf.html` as the after-class check, not a
 
 ## Quiz next meeting (they hear this now)
 
-1. rAF vs interval (4)
-2. dt (3)
-3. hidden tab (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +163,7 @@ See [[Interactive Web/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. vs setInterval.** rAF syncs to refresh. Tab hidden slows it — good.
-
-**2. Time.** t in seconds. sin(t) for motion.
-
-**3. Clear.** clearRect each frame or trails.
+_none_
 
 ---
 
@@ -173,8 +174,8 @@ See [[Interactive Web/exercises/Week 02]].
 
 ## If we run long, cut
 
-Clear
+Pause key if dt is still wrong. Keep rAF + dt + clear.
 
 ## If we run short, add
 
-trail vs clear toggle.
+Trail vs clear toggle.

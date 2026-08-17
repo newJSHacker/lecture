@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** BoxGeometry, Standard vs Basic  
-**Success check:** Box/Sphere/Plane.
+**Kernel:** BoxGeometry / Sphere / Plane; MeshBasicMaterial vs MeshStandardMaterial  
+**Success check:** they can say Basic is unlit, Standard needs lights, and dispose geometry they recreate in a loop
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: BoxGeometry, Standard vs Basic | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 3 | Goal: three meshes, two lighting models | Invariant: geometry is the VBO; material is the program + uniforms; leaking geo is a VRAM leak`
 
 ## Board at the end (they photograph this)
 
 ```
-MeshStandardMaterial
-Material table.
+Geometry  →  attributes (position, normal, uv)
+Material  →  program + uniforms
+Mesh      →  draw call
+
+Basic     unlit / debug
+Standard  PBR-ish  (needs light + later env)
+
+geo.dispose()  if you replace it in a loop
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Material table.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Basic. Unlit.
+**Say:** Last week the cube was a Mesh. Today we split geometry and material. Demo 04-materials.html. ShaderMaterial is the shader course — name only.
 
-**Ask:** Box/Sphere/Plane? Wait seven seconds. Take two answers.
+**Ask:** Why is a Standard cube black? Wait. Want: no light (or metal+no env, later).
 
-**Board:** parked strip. Then MeshStandardMaterial.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: BoxGeometry, Standard vs Basic. Kernel: BoxGeometry, Standard vs Basic. We freeze conventions and we do not invent timings.
+**Say:** Share one BoxGeometry across meshes. Wireframe toggle. Standard metalness/roughness knobs. Do not leak new BoxGeometry every frame.
 
-**Ask:** What would a wrong version of this look like? Want: leaking geometries in a loop.
+**Ask:** Is Standard physically correct PBR?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Basic. Unlit.
+**Say:** Basic = unlit debug. Standard = lit.
 
-**Say:** Standard. PBR-ish.
+**Board:** three meshes, three materials.
 
-**Say:** Custom. ShaderMaterial is shader course.
+**Say:** dispose. Custom ShaderMaterial parked.
 
-**Ask:** Box/Sphere/Plane? Wait seven seconds. Take two answers.
+**Ask:** What GPU object is Geometry?
 
-**They do:** On paper: wireframe toggle.
+**They do:** On paper: Basic vs Standard one sentence each.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Three meshes three materials.. Zoom 140%. Read errors out loud.
+**Say:** Three meshes, three materials. Demo 04-materials.html. Plant new Geometry in rAF. Plant Standard with no light.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** wireframe toggle.
+**Say:** wireframe toggle. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: wireframe toggle.; shared geometry.. Homework: Written: Basic vs Standard.; Code: trio.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: wireframe; shared geometry. Homework: Basic vs Standard; trio. Quiz: unlit material, dispose, Standard is PBR?.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: BoxGeometry, Standard vs Basic | Plant the first common mistake. |
-| 10–30 | Three meshes three materials. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Box Sphere Plane | Same scene. |
+| 10–30 | Basic vs Standard | Plant no light. |
+| 30–45 | dispose plant | Loop leak. |
+| 45–60 | They share geometry | Circulate. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. unlit material (3)
-2. dispose (4)
-3. Standard is PBR? (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[ThreeJS Development/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Basic.** Unlit. Debug.
-
-**2. Standard.** PBR-ish. Real-Time Rendering later.
-
-**3. Custom.** ShaderMaterial is shader course.
+_none_
 
 ---
 
@@ -172,8 +172,8 @@ See [[ThreeJS Development/exercises/Week 03]].
 
 ## If we run long, cut
 
-Custom
+ShaderMaterial. Keep Basic vs Standard.
 
 ## If we run short, add
 
-shared geometry.
+Shared geometry, two materials.

@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** clock, mixer name  
-**Success check:** Clock dt.
+**Kernel:** Clock.getDelta(); mixer is a name for glTF clips later  
+**Success check:** they rotate with dt, can pause, and do not write rotation = t on a variable refresh display
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: clock, mixer name | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 5 | Goal: motion that does not depend on fps | Invariant: time is dt; AnimationMixer is clips, not the rAF loop`
 
 ## Board at the end (they photograph this)
 
 ```
-Clock.getDelta
-Clock.
+const dt = clock.getDelta();
+mesh.rotation.y += speed * dt;
+
+pause: skip the integrate, still render
+
+AnimationMixer   (name)  —  glTF clips week 6
+GSAP can tween Object3D; still one rAF
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Clock.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** dt. Same as Interactive Web.
+**Say:** Same as Interactive Web: rAF is the clock. rotation = elapsed without dt lies on 30 Hz vs 144 Hz. We do not invent fps — we integrate dt.
 
-**Ask:** Clock dt? Wait seven seconds. Take two answers.
+**Ask:** If the tab throttles, does rotation += 0.01 still mean the same angle per second? Wait. Want: no.
 
-**Board:** parked strip. Then Clock.getDelta.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: clock, mixer name. Kernel: clock, mixer name. We freeze conventions and we do not invent timings.
+**Say:** Clock. Mixer named so week 6 has a word. GSAP optional name; still one rAF. Pause is a boolean around the integrate.
 
-**Ask:** What would a wrong version of this look like? Want: rotation = t without dt on variable fps.
+**Ask:** Mixer vs rAF rotate — which plays a glTF clip?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** dt. Same as Interactive Web.
+**Say:** dt from getDelta. Speed in rad/s.
 
-**Say:** Clips. Week 6 glTF may include clips.
+**Board:** pause still renders.
 
-**Say:** GSAP. Can tween Object3D; still one rAF.
+**Say:** Bounce with sin(time) is ok if time is accumulated dt.
 
-**Ask:** Clock dt? Wait seven seconds. Take two answers.
+**Ask:** What does getDelta return the first frame?
 
-**They do:** On paper: pause.
+**They do:** On paper: the integrate line with dt.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Spin + bounce with dt.. Zoom 140%. Read errors out loud.
+**Say:** Spin + bounce with dt. Plant rotation = t. Demo 01 or 06. No fps brag.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** pause.
+**Say:** Pause flag. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: pause.; mixer extra if a clip exists.. Homework: Written: mixer vs rAF rotate.; Code: dt.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pause; mixer extra if a clip exists. Homework: mixer vs rAF; dt. Quiz: getDelta, mixer, pause.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: clock, mixer name | Plant the first common mistake. |
-| 10–30 | Spin + bounce with dt. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Clock.getDelta | Plant Date.now()/16. |
+| 10–30 | spin with dt | Plant += 0.01. |
+| 30–45 | pause | Still render. |
+| 45–60 | They pause | Circulate. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. getDelta (3)
-2. mixer (4)
-3. pause (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[ThreeJS Development/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. dt.** Same as Interactive Web.
-
-**2. Clips.** Week 6 glTF may include clips.
-
-**3. GSAP.** Can tween Object3D; still one rAF.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[ThreeJS Development/exercises/Week 05]].
 
 ## If we run long, cut
 
-GSAP
+GSAP timeline. Keep dt + pause.
 
 ## If we run short, add
 
-mixer extra if a clip exists.
+mixer extra only if a clip is already in the scene.

@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** scene tex → FS  
-**Success check:** Render a 3D or Shadertoy scene to a texture (or use a still).
+**Kernel:** pass 1: scene → FBO color; pass 2: fullscreen FS (vignette/grain)  
+**Success check:** they can name both passes and toggle the post without using it as lighting
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: scene tex → FS | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 12 | Goal: scene tex → FS | Invariant: post is an image filter on a named pass; it is not the light`
 
 ## Board at the end (they photograph this)
 
 ```
-FBO color → quad
-Two passes.
+PASS 1  scene (march or mesh)  →  color tex
+PASS 2  fullscreen quad         →  vignette / grain
+
+ping-pong  named for GPU course
+FXAA       named for RTR
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Two passes.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Post. Same FBO idea as WebGL week 11.
+**Say:** Same FBO idea as WebGL week 11. Name every pass. A 4K FBO on integrated graphics is a hang — we do not invent timings; we shrink the target or omit the claim.
 
-**Ask:** Render a 3D or Shadertoy scene to a texture (or use a still)? Wait seven seconds. Take two answers.
+**Ask:** How many passes in vignette-on-a-cube? Wait. Want: two (at least).
 
-**Board:** parked strip. Then FBO color → quad.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: scene tex → FS. Kernel: scene tex → FS. We freeze conventions and we do not invent timings.
+**Say:** Kernel filters: blur/sharpen teaching. Separable blur is a name. Ping-pong is GPU Programming's week 2.
 
-**Ask:** What would a wrong version of this look like? Want: post as a substitute for lighting.
+**Ask:** Why extra fill rate?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Post. Same FBO idea as WebGL week 11.
+**Say:** Two boxes: scene, then quad. Label the texture.
 
-**Say:** FXAA name. RTR will name AA.
+**Board:** two passes. Circle 'not lighting'.
 
-**Say:** Ping-pong. Named for GPU course.
+**Say:** Grain should be after tonemap in RTR; here it is a 2D teaching filter. Toggle with a uniform.
 
-**Ask:** Render a 3D or Shadertoy scene to a texture (or use a still)? Wait seven seconds. Take two answers.
+**Ask:** What is pass 1 writing?
 
-**They do:** On paper: blur extra (separable name).
+**They do:** On paper: arrows FBO color → sampler2D in FS.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Vignette + grain on a marching scene or a textured cube.. Zoom 140%. Read errors out loud.
+**Say:** Vignette + grain on a marching scene or textured cube. Plant post as lighting. Toggle post.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** blur extra (separable name).
+**Say:** Blur extra (separable name). Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: blur extra (separable name).; toggle post.. Homework: Written: why extra fill rate.; Two-pass code.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: blur name + toggle. Homework: why extra fill rate; two-pass code. Quiz: FBO, grain should be, 8 passes as a smell.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: scene tex → FS | Plant the first common mistake. |
-| 10–30 | Vignette + grain on a marching scene or a textured cube. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | FBO scene | Plant 4K target. |
+| 10–30 | Vignette FS | Plant post as lighting. |
+| 30–45 | Toggle uniform | Pause; debug still. |
+| 45–60 | They name separable blur | Circulate. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. FBO (3)
-2. grain should be (4)
-3. 8 passes (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Shader Programming/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Post.** Same FBO idea as WebGL week 11. Shaders here are 2D image filters.
-
-**2. FXAA name.** RTR will name AA. This week: kernel filters (blur/sharpen) as teaching.
-
-**3. Ping-pong.** Named for GPU course.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Shader Programming/exercises/Week 12]].
 
 ## If we run long, cut
 
-Ping-pong
+Eight Instagram passes. Keep two named passes.
 
 ## If we run short, add
 
-toggle post.
+Ping-pong as a name only.

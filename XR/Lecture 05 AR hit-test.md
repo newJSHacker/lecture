@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** plane detection idea  
-**Success check:** immersive-ar.
+**Kernel:** hit-test pose on a plane, or inline fake plane; ARKit-native is not the homework  
+**Success check:** they can place an object on a real hit-test or a documented fake plane
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: plane detection idea | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 5 | Goal: place on a plane without a headset lottery | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-hit-test source → pose
-Phone + plane.
+immersive-ar  +  hit-test source
+desktop: often no AR  →  mouse-place on fake plane
+
+requestHitTestSource({ space: viewerSpace })
+document the device     camera permission
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Phone + plane.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** AR. Phone or headset.
+**Say:** AR is a pose on a detected plane. Desktop often has no AR. The lab is real hit-test or a fake plane — written in the README. Native ARKit as the homework is out of scope.
 
-**Ask:** immersive-ar? Wait seven seconds. Take two answers.
+**Ask:** If Chrome on the lab laptop has no AR, what do you submit? Wait. Want: inline fake plane + the same place verb.
 
-**Board:** parked strip. Then hit-test source → pose.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: plane detection idea. Kernel: plane detection idea. We freeze conventions and we do not invent timings.
+**Say:** Anchors persist next week. Privacy: camera. Policy in the syllabus. Remove-last extra.
 
-**Ask:** What would a wrong version of this look like? Want: ARKit-only native app as the homework.
+**Ask:** What is a hit-test in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** AR. Phone or headset.
+**Say:** Plane detection idea. Pose, not a mesh of the room.
 
-**Say:** Web. Chrome Android / Quest.
+**Board:** hit-test vs fake plane. Same place verb.
 
-**Say:** Privacy. Camera.
+**Say:** Document device. No lottery.
 
-**Ask:** immersive-ar? Wait seven seconds. Take two answers.
+**Ask:** Why is an ARKit app the wrong homework?
 
-**They do:** On paper: document device.
+**They do:** README two lines: device, fallback.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Place an object on a plane (real hit-test **or** inline fake plane).. Zoom 140%. Read errors out loud.
+**Say:** Place on plane or fake plane. Plant no fallback. Plant native-only. Remove-last extra.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** document device.
+**Say:** Click-to-place on a plane (fake OK). Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: document device.; remove last extra.. Homework: Written: fallback if no AR.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: document device; remove-last extra. Homework: fallback paragraph. Quiz: hit-test, fake plane, camera.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: plane detection idea | Plant the first common mistake. |
-| 10–30 | Place an object on a plane (real hit-test **or** inline fake plane). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Hit-test name | Plant ARKit homework. |
+| 15–40 | Place on plane / fake | Plant no fallback. |
+| 40–55 | Document device | Lottery plant. |
+| 55–60 | They place one object | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. hit-test (4)
-2. privacy (3)
-3. inline fallback (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[XR/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. AR.** Phone or headset. Hit-test gives a pose on a detected plane. Anchors persist it (next week).
-
-**2. Web.** Chrome Android / Quest. Desktop often **no AR** — fallback: mouse-place on a fake plane in inline.
-
-**3. Privacy.** Camera. Policy in the syllabus.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[XR/exercises/Week 05]].
 
 ## If we run long, cut
 
-Privacy
+Privacy law. Keep place + fallback.
 
 ## If we run short, add
 
-remove last extra.
+Remove last extra.

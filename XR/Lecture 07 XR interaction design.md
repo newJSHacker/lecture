@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** affordances, diegetic UI  
-**Success check:** Diegetic vs HUD.
+**Kernel:** diegetic / world panel, large hits, waist height; not a 2D site at 1 m  
+**Success check:** they can laser-select three large world buttons and say why tiny text fails
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: affordances, diegetic UI | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 7 | Goal: XR UI you can hit while seated | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-laser vs hands vs panel
-Panel at arm length.
+diegetic / world panel     vs     browser DOM only
+arm's length     large hits     ~3–5° teaching target
+waist / rest     not arms-up forever
+
+sitting layout still works
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Panel at arm length.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** UX. VR UI is not a 2D website pasted at 1 m without thought.
+**Say:** VR UI is not a website pasted at one meter. Prefer world panels, large targets, rest poses. Browser-DOM-only never in-world fails the week. Tiny text fails.
 
-**Ask:** Diegetic vs HUD? Wait seven seconds. Take two answers.
+**Ask:** After two minutes arms-up, what happened to accuracy? Wait.
 
-**Board:** parked strip. Then laser vs hands vs panel.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: affordances, diegetic UI. Kernel: affordances, diegetic UI. We freeze conventions and we do not invent timings.
+**Say:** Hover scale. Sitting layout extra. Feedback: highlight; sound/haptic optional. Inline: the same three buttons in a panel.
 
-**Ask:** What would a wrong version of this look like? Want: browser DOM only, never in-world.
+**Ask:** Diegetic vs HUD in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** UX. VR UI is not a 2D website pasted at 1 m without thought.
+**Say:** Affordances. Hits you can see.
 
-**Say:** Fatigue. Arms-up is tiring.
+**Board:** three buttons, arm's length. Sitting mark.
 
-**Say:** Feedback. Highlight, sound optional, haptic optional.
+**Say:** Fatigue. Waist-level menus.
 
-**Ask:** Diegetic vs HUD? Wait seven seconds. Take two answers.
+**Ask:** Why not only DOM overlay this week?
 
-**They do:** On paper: hover scale.
+**They do:** Sketch a seated panel with three hits.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A world-space panel with 3 large buttons; laser select.. Zoom 140%. Read errors out loud.
+**Say:** World panel, three large buttons, laser select. Plant tiny text. Plant DOM-only. Sitting layout extra.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** hover scale.
+**Say:** Three world buttons (or inline panel analog). Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: hover scale.; sitting layout extra.. Homework: Written: 8 XR UX rules.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: hover scale; sitting extra. Homework: diegetic vs HUD. Quiz: hit size, fatigue, sitting. Next: midterm then comfort.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: affordances, diegetic UI | Plant the first common mistake. |
-| 10–30 | A world-space panel with 3 large buttons; laser select. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | World panel | Plant DOM-only. |
+| 15–40 | Large hits + laser | Plant tiny text. |
+| 40–55 | Sitting layout | Arms-up plant. |
+| 55–60 | They add hover scale | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. angular size (4)
-2. diegetic (3)
-3. fatigue (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[XR/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. UX.** VR UI is not a 2D website pasted at 1 m without thought. Prefer world panels at arm's length, large hit targets.
-
-**2. Fatigue.** Arms-up is tiring. Waist-level menus. Rest poses.
-
-**3. Feedback.** Highlight, sound optional, haptic optional.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[XR/exercises/Week 07]].
 
 ## If we run long, cut
 
-Feedback
+Full UX paper. Keep panel + hits.
 
 ## If we run short, add
 
-sitting layout extra.
+Sitting layout extra.

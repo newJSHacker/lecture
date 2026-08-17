@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · Interactive Web Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** getContext, paths  
-**Success check:** getContext('2d').
+**Kernel:** canvas.getContext('2d'); beginPath / moveTo / lineTo / arc / fill / stroke; save/restore  
+**Success check:** they draw a path (house or smiley) and can restore fillStyle after a nested color change
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `Interactive Web/code/01-canvas.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: getContext, paths | Invariant: time is rAF; input is events; draw is a function`
+- Parked strip: `Lecture 1 | Goal: a first picture from paths | Invariant: Canvas 2D is a drawing API, not a z-buffer renderer; one context kind per canvas`
 
 ## Board at the end (they photograph this)
 
 ```
-beginPath moveTo lineTo stroke
-Path.
-State stack.
+const ctx = canvas.getContext('2d');   // not webgl today
+
+beginPath  moveTo  lineTo  arc  fill / stroke
+save() / restore()     state stack: fillStyle, lineWidth
+
+CSS size ≠ backing store   (DPI name)
+0×0 canvas  =  nothing
 ```
 
 ## Slides today (cap: 6)
@@ -37,11 +41,11 @@ State stack.
 
 ### Minutes 0–8 — Hook
 
-**Say:** A drawing API. Not a renderer with a z-buffer.
+**Say:** Computer Graphics I puts pixels. This course draws paths in Canvas 2D. WebGL and Three.js are later courses — not the kernel. If getContext('2d') is a mystery, every animation week collapses.
 
-**Ask:** getContext('2d')? Wait seven seconds. Take two answers.
+**Ask:** What happens if you request '2d' and 'webgl' on the same canvas? Wait. Want: you don’t — one context; mixing is a plant.
 
-**Board:** parked strip. Then beginPath moveTo lineTo stroke.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +55,9 @@ State stack.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: getContext, paths. Kernel: getContext, paths. We freeze conventions and we do not invent timings.
+**Say:** Immediate-ish mode: you issue draws; the bitmap is what remains. State: fillStyle, lineWidth, transform. save/restore is a stack. DPI / backing store vs CSS named — same bug as CG I week 1.
 
-**Ask:** What would a wrong version of this look like? Want: WebGL + 2d on one canvas.
+**Ask:** Does fill() consume the current path? Want: yes — next shape needs beginPath.
 
 **Board:** today’s question in one line.
 
@@ -65,21 +69,21 @@ State stack.
 
 ### Minutes 12–35 — Build
 
-**Say:** A drawing API. Not a renderer with a z-buffer.
+**Say:** A drawing API. Not a scene graph. Not Three.js.
 
-**Say:** State. fillStyle, lineWidth.
+**Board:** beginPath → move/line/arc → fill/stroke. save/restore box.
 
-**Say:** DPI. backing store vs CSS.
+**Say:** Width/height attributes are the backing store. CSS can stretch — we name it, we may cut DPI if long.
 
-**Ask:** getContext('2d')? Wait seven seconds. Take two answers.
+**Ask:** Why call beginPath before a second shape?
 
-**They do:** On paper: smiley.
+**They do:** On paper: smiley as three arcs + a path mouth. Indent the calls.
 
-**Do not:** start with Three.js. Canvas 2D is the kernel.
+**Do not:** Start with Three.js. Canvas 2D is the kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: House from paths; then a circle arc.. Zoom 140%. Read errors out loud.
+**Say:** House from paths; then a circle arc. Demo Interactive Web/code/01-canvas.html. Plant 0×0 canvas. Plant fillStyle leak without restore.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +93,7 @@ State stack.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** smiley.
+**Say:** Smiley. Then save/restore color bug fix. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +103,7 @@ State stack.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: smiley.; save/restore color bug fix.. Homework: Written: ImageData vs path API.; Code: flag.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: smiley + save/restore. Homework: ImageData vs path API; flag. Quiz: getContext 2d, save/restore, two contexts. No CDN.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +115,10 @@ State stack.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: getContext, paths | Plant the first common mistake. |
-| 10–30 | House from paths; then a circle arc. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | getContext('2d') + fillRect | Plant 0×0. Fix width/height. |
+| 10–30 | House paths + arc | Plant missing beginPath. |
+| 30–45 | save/restore fillStyle | Plant color leak. |
+| 45–60 | They draw smiley | Circulate. No WebGL. |
 
 Point them at `Interactive Web/code/01-canvas.html` as the after-class check, not as the lecture.
 
@@ -136,9 +140,7 @@ Point them at `Interactive Web/code/01-canvas.html` as the after-class check, no
 
 ## Quiz next meeting (they hear this now)
 
-1. getContext 2d (2)
-2. save restore (4)
-3. two contexts (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[Interactive Web/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. A drawing API.** Not a renderer with a z-buffer. Immediate-ish mode. CG I uses ImageData; this week is the 2D path API.
-
-**2. State.** fillStyle, lineWidth. save/restore stacks.
-
-**3. DPI.** backing store vs CSS. Same bug as CG I Week 1.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Interactive Web/exercises/Week 01]].
 
 ## If we run long, cut
 
-DPI
+DPI. Keep paths + save/restore.
 
 ## If we run short, add
 
-save/restore color bug fix.
+save/restore color bug fix as a second pass.

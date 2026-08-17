@@ -1,250 +1,115 @@
 # Lecture 8 — Midterm and DCEL
 
-**Time:** 60–75 min midterm, then 30–45 min lecture  
-**New structure:** doubly-connected edge list  
-**Lab:** walk a face
+**Week 8 of 15** · Computational Geometry  
+**Meeting:** written midterm, then leftover lecture + live coding  
+**Kernel (after the exam):** DCEL: half-edge origin/twin/next/face; walkFace = next loop; walkVertex = twin.next; face on the left  
+**Success check:** after the exam they walk two bounded faces of a pentagon-with-diagonal and twin.twin==e
 
-No homework this week except keeping midterm notes.
+This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
 ---
-
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. This meeting includes a **midterm**. Say that at the door.
 
 ## Before you enter
 
-- Demo: `Computational Geometry/code/08-andrew.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — today's picture.
-- Parked strip: `Lecture 8 | Midterm and DCEL | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Printed midterm + spare paper. No laptop for the exam.
+- Topic list was announced at the end of Lecture 7.
+- After collection: demo `Computational Geometry/code/08-andrew.html` ready (local, no CDN).
+- Parked strip (uncover after the exam): `Lecture 8 | Goal: leftover kernel | Invariant: predicates before constructions; degeneracy is the course`
 
-## Board at the end (they photograph this)
+## Midterm (about 50–60 min)
 
-```
-Half-edge with arrows: `origin`, `twin`, `next`, `face`.
-Two triangles, every half-edge labeled.
-`walkVertex` = `twin.next` loop.
-```
+Written. No laptop. Weeks 1–7.
 
-## Slides today (cap: 6)
+**Topics:** orient and degeneracy; proper/touch/overlap/none; PIP vertex-hit; convex vs simple vs bowtie; same-turn ⇔ convex for simple (short proof); Jarvis Θ(nh); Andrew sort+≤0+O(n log n); parabola lower bound; sweep events and neighbors; ear + n−2; one degeneracy. No Voronoi, kd-tree, or DCEL on the paper.
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
+Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Midterm (60–75 min)
-
-Written. No laptop. 100 points. Topic list was issued in Week 7.
-
-### Suggested paper (edit names/numbers as you like)
-
-**Q1. Predicates (16 pts)**  
-A=(0,0), B=(4,1), C=(2,3), D=(2,0).
-
-1. Sign of `orient(A,B,C)`? (4)
-2. Type of intersection of AB and CD? (4)
-3. Is “circumcenter of ABC” a predicate or a construction? (4)
-4. Give one reason not to use `atan2` for left-of-line. (4)
-
-**Q2. Polygons (16 pts)**  
-1. Define convex set. (4)
-2. Classify: convex hexagon, C-shape, bowtie. (6)
-3. Short proof: simple + all turns the same sign ⇒ locally convex, and why the bowtie shows simplicity is required. (6)
-
-**Q3. Hulls (24 pts)**  
-1. Jarvis time in n, h. Worst-case input. (6)
-2. Andrew: write the lower-hull while-condition and say what `<= 0` does. (8)
-3. Parabola reduction in 4–6 sentences. (10)
-
-**Q4. Sweep (20 pts)**  
-1. Three event types. (6)
-2. Why test only status neighbors? (8)
-3. After INTER, what happens to the two segments in T? (6)
-
-**Q5. Triangulation and degeneracy (24 pts)**  
-1. Number of triangles and diagonals in a simple 12-gon. (6)
-2. Define an ear. (6)
-3. Ray from q hits a polygon vertex. What goes wrong, and what is the half-open fix? (6)
-4. T-junction: `proper`, `touch`, `overlap`, or `none`? (6)
-
-### Grading note
-
-Award partial credit for a correct picture with a wrong name. Do not award credit for “O(n log n)” on Jarvis without h.
-
----
-
-## Lecture — DCEL (30–45 min)
-
-### Why a new data structure
-
-Arrays of vertices are enough for a single polygon. They fail as soon as we have:
-
-- many faces (a triangulation, a map, a mesh)
-- the need to walk around a face
-- the need to walk around a vertex
-- the need to split an edge at an intersection
-
-A **doubly-connected edge list** stores a planar subdivision.
-
-Graphics people already know this as a **half-edge mesh**.
-
----
-
-### Records
-
-**Vertex**
-
-- `x, y`
-- `incidentEdge` — one outgoing half-edge
-
-**Half-edge**
-
-- `origin` — vertex
-- `twin` — the opposite half-edge
-- `next` — next half-edge around the face
-- `prev` — previous around the face (optional if you always have `next` and `twin`)
-- `face` — the face on the left (for CCW faces)
-
-**Face**
-
-- `outer` — one half-edge on the outer boundary, or null if unbounded
-- `inners` — half-edges on hole cycles, if any
-
-Convention for this course: **walk `next` so the face is on the left** (CCW outer boundary, CW holes).
+## Board at the end (after the exam; they photograph this)
 
 ```
+Vertex: x,y, incidentEdge
+Half: origin, twin, next, face (left, CCW outer)
+Face: outer, inners
+
 e.twin.origin == e.next.origin
 e.twin.twin == e
-e.next.prev == e
+
+walkFace: e = e.next
+walkVertex: e = e.twin.next
+
+two triangles share an edge:
+  4 verts, 10 half-edges, 3 faces (2 bounded + unbounded)
+
+Three.js BufferGeometry is triangle soup, not a DCEL
 ```
 
----
+## Slides today (cap: 2)
 
-### Pictures (draw both)
-
-1. One triangle: 3 vertices, 3 interior half-edges, 3 outer (unbounded-face) half-edges, 2 faces.
-2. Two triangles sharing an edge: 4 vertices, 10 half-edges (5 edges × 2), 3 faces (two bounded + unbounded).
-
-Count with the students. If the counts mismatch, the DCEL is wrong.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-### Operations we need
+## After the exam (~15–25 min lecture)
 
-```
-walkFace(e):
-    start = e
-    do:
-        visit e
-        e = e.next
-    while e != start
+**Say:** This meeting is a **midterm**, then DCEL. No laptop. After: half-edges are how you walk a face and split an edge after Week 6 intersections. Grading: a correct picture with a wrong name gets partial; O(n log n) on Jarvis without h gets zero.
 
-walkVertex(e):          // outgoing edges around origin
-    start = e
-    do:
-        visit e
-        e = e.twin.next
-    while e != start
-```
+**Ask:** What is the leftover picture?
 
-Splitting an edge at a point p (needed after Week 6 intersections, map overlay, mesh repair):
+**They do:** copy the leftover board.
 
-1. Insert vertex p.
-2. Replace one edge by two.
-3. Update `next` / `twin` on both faces.
+**Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-Do this as a diagram. Coding the split is optional extra, not the lab.
+
+
+### Show / attempt if time
+
+**Say:** Hardcoded DCEL for two triangles. Log walkFace and walkVertex on the shared verts. Demo 12-dcel-walk.html. Plant storing one directed edge per segment. Plant forgetting the unbounded face.
+
+**They do:** walkFace(edgeId) → vertex ids. Every twin.twin is itself.
 
 ---
 
-### Graphics connection
+## Live coding (remaining time)
 
-| DCEL idea | Engine name |
-| --- | --- |
-| half-edge | half-edge / winged-edge |
-| `next` around face | face loop |
-| `twin.next` around vertex | vertex ring |
-| faces | mesh faces / materials |
-| split edge | edge split, subdivision |
-
-Three.js `BufferGeometry` is **not** a DCEL. It is a triangle soup (or indexed soup). That is why adjacency queries are painful and why mesh-repair tools rebuild a half-edge structure first.
-
----
-
-## Live coding (if any time remains)
-
-Draw a hardcoded DCEL for two triangles. Log `walkFace` for each bounded face and `walkVertex` for the shared vertices.
-
-Otherwise do this as the first 20 minutes of lab.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–15 | Count a triangle DCEL with the class | 3+3 halves, 2 faces. |
+| 15–40 | Two triangles, label every half | Counts mismatch ⇒ the DCEL is wrong. |
+| 40–60 | walkFace / walkVertex | They type the loops. |
 
 ---
 
 ## Lab
 
-Give students a JSON DCEL for:
-
-- one triangle
-- two triangles sharing an edge
-- a convex pentagon with one diagonal (three faces)
-
-They write:
-
-1. `walkFace(edgeId) -> [vertexIds]`
-2. `walkVertex(edgeId) -> [neighborVertexIds]`
-3. A check: every half-edge’s twin’s twin is itself; every face walk returns to start.
-
-Done when the pentagon-with-diagonal reports two bounded faces with the correct vertex cycles.
+1. one triangle
+2. two triangles sharing an edge
+3. a convex pentagon with one diagonal (three faces)
+4. `walkFace(edgeId) -> [vertexIds]`
+5. `walkVertex(edgeId) -> [neighborVertexIds]`
+6. A check: every half-edge’s twin’s twin is itself; every face walk returns to start.
 
 ---
 
 ## Homework
 
-None. Optional: read de Berg, chapter on DCEL (short).
+_(none this meeting)_
 
 ---
 
-## Quiz
+## Quiz next meeting
 
-None this week.
+None this week — midterm. Next quiz is Lecture 9.
 
----
+## Extra exercises
 
-## Common mistakes
+See [[Computational Geometry/exercises/Week 08]].
 
-- Storing only one directed edge per segment, then being unable to walk both faces.
-- Mixing CW and CCW in the same file.
-- Forgetting the unbounded face. Euler numbers will not add up.
-- Treating Three.js triangle indices as a DCEL in the lab report.
+## If we run long, cut
 
----
+Edge-split coding. Keep records + two walks.
 
-## Board drawings
+## If we run short, add
 
-1. Half-edge with arrows: `origin`, `twin`, `next`, `face`.
-2. Two triangles, every half-edge labeled.
-3. `walkVertex` = `twin.next` loop.
-
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 08]] · Demo: [12-dcel-walk.html](code/12-dcel-walk.html)
-
-Makeup drills (new numbers): A=(0,0), B=(6,0), C=(2,4), D=(2,−1).
-
-1. `orient(A,B,C)` and type of AB ∩ CD.
-2. 15-gon: triangles and diagonals.
-3. Walk face 0 in the demo after ear-clip. Write the vertex cycle.
-4. Split-edge thought experiment: which DCEL fields change?
-
-```js
-function walkFace(dcel, faceIndex) {
-  const start = dcel.half.findIndex((h) => h.face === faceIndex);
-  let e = start, ids = [];
-  do { ids.push(dcel.half[e].origin); e = dcel.half[e].next; }
-  while (e !== start);
-  return ids;
-}
-```
+Euler check: include the unbounded face.

@@ -47,15 +47,13 @@ console.assert(clamp(5,0,3)===3, 'clamp high')
 
 **Say:** This meeting is a **midterm**, then a short lecture on debugging. No laptop for the exam.
 
-**Ask:** Read a stack trace.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Debugging.** Syntax error vs runtime vs wrong answer. Breakpoints in DevTools. Do not `console.log` fifty times as the only strategy — but it is allowed.
 
-**3. assert.** `console.assert(lerp(0,10,0.5)===5)` is the seed of Week 19 kernel tests in later courses.
 
 ### Show / attempt if time
 

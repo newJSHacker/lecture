@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** divergence-free idea  
-**Success check:** Stable fluids names (Stam).
+**Kernel:** stable-fluids names: advect → diffuse → project; dye and velocity textures  
+**Success check:** they can advect a dye by a velocity field and say why project (incompressible)
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: divergence-free idea | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 6 | Goal: divergence-free as a name, dye as a picture | Invariant: a swirling dye is the lab; 3D Navier–Stokes is a thesis; Unity VFX is not the homework`
 
 ## Board at the end (they photograph this)
 
 ```
-advect → diffuse → project
-Velocity + dye.
+vel tex   RG = velocity
+dye tex   RGB = color     (ping-pong each)
+
+advect  →  diffuse  →  project (Jacobi name)
+  dye samples uv - dt * vel
+
+3D NS  not this week
+cite Stam / GPU Gems
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Velocity + dye.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Idea. Velocity field in a texture.
+**Say:** Velocity field in a texture. Pressure solve makes it incompressible — Jacobi iteration named. A dye blob that swirls is the lab. Unstable huge dt fails. Cite.
 
-**Ask:** Stable fluids names (Stam)? Wait seven seconds. Take two answers.
+**Ask:** Is 3D fluid the week? Wait. Want: no.
 
-**Board:** parked strip. Then advect → diffuse → project.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: divergence-free idea. Kernel: divergence-free idea. We freeze conventions and we do not invent timings.
+**Say:** Scope: 2D dye, mouse or vortex velocity. One Jacobi extra or a note why skipped. Dissipation extra. Still ping-pong — WebGPU later.
 
-**Ask:** What would a wrong version of this look like? Want: Unity Visual Effect Graph as the homework.
+**Ask:** Why project?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Idea. Velocity field in a texture.
+**Say:** Two layouts: vel and dye. Ping-pong both.
 
-**Say:** Scope. A dye blob that swirls is the lab.
+**Board:** advect → diffuse → project. Circle incompressible.
 
-**Say:** Refs. GPU Gems / Stam.
+**Say:** Backtrace uv - dt*vel. Pause to see a still swirl.
 
-**Ask:** Stable fluids names (Stam)? Wait seven seconds. Take two answers.
+**Ask:** Write the advect sample line.
 
-**They do:** On paper: one Jacobi extra or a note why skipped.
+**They do:** On paper: memory layout of vel vs dye.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: 2D dye advected by a mouse-drawn velocity or a vortex field.. Zoom 140%. Read errors out loud.
+**Say:** 2D dye advected by mouse velocity or a vortex. Plant Unity VFX as homework. Plant huge dt. Local only.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** one Jacobi extra or a note why skipped.
+**Say:** One Jacobi extra or a skip note. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: one Jacobi extra or a note why skipped.; dissipation.. Homework: Written: why project.; screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: Jacobi note + dissipation. Homework: why project; screenshot. Quiz: advect, incompressible, 3D this week?
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: divergence-free idea | Plant the first common mistake. |
-| 10–30 | 2D dye advected by a mouse-drawn velocity or a vortex field. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Vel + dye layout | Plant Unity VFX homework. |
+| 10–30 | Advect dye | Plant huge dt. |
+| 30–45 | Project name | Jacobi optional. |
+| 45–60 | They add dissipation | Circulate. Cite Stam. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. advect (3)
-2. incompressible (4)
-3. 3D this week? (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[GPU Programming/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Idea.** Velocity field in a texture. Advect. Pressure solve makes it incompressible — Jacobi iteration name.
-
-**2. Scope.** A dye blob that swirls is the lab. 3D Navier–Stokes is a thesis.
-
-**3. Refs.** GPU Gems / Stam. Cite.
+_none_
 
 ---
 
@@ -173,8 +173,8 @@ See [[GPU Programming/exercises/Week 06]].
 
 ## If we run long, cut
 
-Refs
+Full pressure solver. Keep advect + named project + layouts.
 
 ## If we run short, add
 
-dissipation.
+Dissipation on dye.

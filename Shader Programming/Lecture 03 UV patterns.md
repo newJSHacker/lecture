@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** grid, polar, repeat  
-**Success check:** Make a checker.
+**Kernel:** st = fract(uv * n); polar (r, a); checker from step(fract)  
+**Success check:** they can make a checker from fract, not from a 4-pixel texture
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: grid, polar, repeat | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 3 | Goal: UV as a plane you program | Invariant: a pattern is a function of uv (and time); a texture is optional`
 
 ## Board at the end (they photograph this)
 
 ```
 st = fract(uv * n)
-UV plane.
-Polar.
+
+r = length(p)
+a = atan(p.y, p.x)     // y, x  — not swapped
+
+smoothstep / fwidth  on edges
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +42,11 @@ Polar.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** Procedural. Patterns are functions of uv and time.
+**Say:** Procedural is the Shadertoy muscle. If they load a 4-pixel checker PNG they skipped the course. Pause time; the pattern must still be a function.
 
-**Ask:** Make a checker? Wait seven seconds. Take two answers.
+**Ask:** What does fract(uv.x * 8) do? Wait.
 
-**Board:** parked strip. Then st = fract(uv * n).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +56,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: grid, polar, repeat. Kernel: grid, polar, repeat. We freeze conventions and we do not invent timings.
+**Say:** Grid, polar, repeat. atan(y, x). Aliased step() is a teaching moment; smoothstep is the fix, not a style.
 
-**Ask:** What would a wrong version of this look like? Want: texture2D of a 4px checker instead of learning fract.
+**Ask:** Why not texture2D of a tiny checker?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +70,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Procedural. Patterns are functions of uv and time.
+**Say:** UV plane. Scale, fract, step.
 
-**Say:** polar. `r = length(p); a = atan(p.y,p.x);`
+**Board:** polar. Circle argument order of atan.
 
-**Say:** AA. fwidth/smoothstep for edges.
+**Say:** fwidth named. Brick is offset fract — they try after the checker.
 
-**Ask:** Make a checker? Wait seven seconds. Take two answers.
+**Ask:** fract vs mod in one sentence?
 
-**They do:** On paper: brick pattern extra.
+**They do:** On paper: checker from two step(fract) lines.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fullscreen checker + spinning polar stripes.. Zoom 140%. Read errors out loud.
+**Say:** Fullscreen checker + spinning polar stripes. Plant atan(x,y) swapped. Serve local. No CDN.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +94,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** brick pattern extra.
+**Say:** Brick pattern or a smoothstep circle. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +104,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: brick pattern extra.; smoothstep anti-alias a circle.. Homework: Written: fract vs mod.; GLSL snippet in the repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: brick + AA circle. Homework: fract vs mod; snippet in the repo. Quiz: fract, atan, why smoothstep.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +116,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: grid, polar, repeat | Plant the first common mistake. |
-| 10–30 | Fullscreen checker + spinning polar stripes. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | fract checker | Plant a 4px texture instead. |
+| 10–30 | Polar stripes | Plant atan swapped. |
+| 30–45 | smoothstep edge | Aliased step() first. |
+| 45–60 | They brick or AA | Circulate. Uniform for n. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -138,9 +141,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. fract purpose (3)
-2. atan (3)
-3. why smoothstep (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +160,7 @@ See [[Shader Programming/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. Procedural.** Patterns are functions of uv and time. This is the Shadertoy muscle.
-
-**2. polar.** `r = length(p); a = atan(p.y,p.x);`
-
-**3. AA.** fwidth/smoothstep for edges. Aliased step() is a teaching moment.
+_none_
 
 ---
 
@@ -174,8 +171,8 @@ See [[Shader Programming/exercises/Week 03]].
 
 ## If we run long, cut
 
-AA
+Every IQ pattern. Keep fract + polar + one AA.
 
 ## If we run short, add
 
-smoothstep anti-alias a circle.
+mod as a name next to fract.

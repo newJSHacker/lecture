@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Three.js Development  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** interactive 3D scene  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** interactive 3D scene: camera, light, local glTF or mesh, one pick or animate; vendor only  
+**Success check:** a TA can serve ThreeJS/ (or the project folder) and hear Mesh → draw call
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,14 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `ThreeJS Development/code/`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: drop composer; keep camera+light+model; no CDN`
 
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: vendor three.module.js · light · camera · one interaction
+Cuts: drop composer / IBL; keep shadows optional
+README: serve folder · import map · what Three hid vs what you set
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Product shot, small world, or viewer. Honesty: what Three.js did vs what you configured.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first? Want: composer and extra HDR.
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: mapping table + scene.
+**Say:** Desk review: mapping table + scene. Serve first. One teammate map Mesh → draw.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Serve first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. Questions: where is V? Raycaster oracle?
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: interactive 3D scene | Plant the first common mistake. |
-| 10–30 | Desk review: mapping table + scene. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings: map, scene, README | Photograph. |
+| 10–50 | Desk review | Serve + vendor + one pick. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,14 +94,12 @@ See [[ThreeJS Development/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Product shot, small world, viewer.
-**2. Cuts.** Drop composer. Keep camera+light+model.
-**3. Honesty.** What Three.js did vs what you configured.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New libraries. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 60-second Mesh→draw rehearsal.

@@ -101,9 +101,7 @@ See [[Programming/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Scope.** Guessing game, quiz, snake-in-console, or a tiny canvas clicker. Not a Three.js game.
-**2. Report.** Problem, functions, tests, limitations. 4–6 pages is enough at Semester 1.
-**3. Cuts.** If behind: drop graphics, keep functions + tests + README.
+_none_
 
 ## If we run long, cut
 

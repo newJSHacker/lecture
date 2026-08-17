@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Three.js Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** types, bias  
-**Success check:** PCF name.
+**Kernel:** shadow types named (PCF); bias / normalBias; CameraHelper on shadow.camera  
+**Success check:** they tune bias on a character-scale cube and can name PCF without claiming a fps win
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `ThreeJS Development/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: types, bias | Invariant: Three.js is an engine, not the algorithm`
+- Parked strip: `Lecture 10 | Goal: acne you can fix | Invariant: bias too large deletes shadows; one directional should not cover the earth`
 
 ## Board at the end (they photograph this)
 
 ```
-bias / normalBias
-Acne.
+PCF / PCFSoft   (names)
+light.shadow.bias = −0.0001
+light.shadow.normalBias   (named)
+
+CameraHelper(light.shadow.camera)
+frustum too big → acne + peter-panning
+
+CSM   (name only)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +44,11 @@ Acne.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** RTR later. Full shadow maps.
+**Say:** Week 4 enabled shadows. Today knobs. Demo 03-lights-shadows.html and 20-shadow-contact.html knobs. Full maps in RTR. Do not set bias 0.1.
 
-**Ask:** PCF name? Wait seven seconds. Take two answers.
+**Ask:** If the shadow pulls away from the feet, is that acne or peter-panning? Wait. Want: panning — bias too negative / frustum.
 
-**Board:** parked strip. Then bias / normalBias.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +58,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: types, bias. Kernel: types, bias. We freeze conventions and we do not invent timings.
+**Say:** Helpers on the shadow camera. mapSize experiment measured. CSM name, skip implementation.
 
-**Ask:** What would a wrong version of this look like? Want: bias 0.1 destroying shadows.
+**Ask:** What is PCF in one sentence?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +72,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** RTR later. Full shadow maps.
+**Say:** Acne vs panning on the board.
 
-**Say:** Helpers. CameraHelper on shadow.camera.
+**Board:** bias line + helper.
 
-**Say:** CSM name. Skip implementation.
+**Say:** One directional, tight frustum.
 
-**Ask:** PCF name? Wait seven seconds. Take two answers.
+**Ask:** Why not bias = 0.1?
 
-**They do:** On paper: helper on.
+**They do:** On paper: two symptoms and which knob.
 
-**Do not:** treat the inspector as the renderer. Local vendor only.
+**Do not:** Treat the inspector as the renderer. Load Three from a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Tune bias on a character-scale cube.. Zoom 140%. Read errors out loud.
+**Say:** Tune bias on a character-scale cube. Plant bias 0.1. Plant one huge directional covering the earth.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +96,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** helper on.
+**Say:** CameraHelper on shadow.camera. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +106,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: helper on.; mapSize experiment measured.. Homework: Written: acne vs panning.; Code: bias.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: helper on; mapSize experiment measured. Homework: acne vs panning; bias. Quiz: bias, PCF, helper.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +118,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: types, bias | Plant the first common mistake. |
-| 10–30 | Tune bias on a character-scale cube. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Acne plant | bias 0. |
+| 10–30 | tune −0.0001 | Plant 0.1. |
+| 30–45 | helper frustum | Too big. |
+| 45–60 | They measure mapSize | No invented fps. |
 
 Point them at `ThreeJS Development/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +143,7 @@ Point them at `ThreeJS Development/code/` as the after-class check, not as the l
 
 ## Quiz next meeting (they hear this now)
 
-1. bias (4)
-2. PCF (3)
-3. helper (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +162,7 @@ See [[ThreeJS Development/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. RTR later.** Full shadow maps. Here: practical knobs.
-
-**2. Helpers.** CameraHelper on shadow.camera.
-
-**3. CSM name.** Skip implementation.
+_none_
 
 ---
 
@@ -173,7 +173,7 @@ See [[ThreeJS Development/exercises/Week 10]].
 
 ## If we run long, cut
 
-CSM name
+CSM implementation. Keep bias + helper.
 
 ## If we run short, add
 

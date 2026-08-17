@@ -2,8 +2,8 @@
 
 **Week 2 of 15** · Modern JavaScript Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** pattern match lite  
-**Success check:** Destructure objects/arrays.
+**Kernel:** {x,y}=p and [...a, x]; object spread is shallow  
+**Success check:** they merge two option objects with spread and can name one nested field that is still shared
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 1 (10 min, paper or LMS).
 - Demo: `Modern JavaScript/code/02-spread.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 2 | Goal: pattern match lite | Invariant: one binding, one module, no hidden globals`
+- Parked strip: `Lecture 2 | Goal: pattern-match a point without p.x soup | Invariant: spread copies one level; nested objects are aliases`
 
 ## Board at the end (they photograph this)
 
 ```
-{x,y} = p
-Patterns.
+const { x, y } = p;
+const q = { ...p, y: 0 };
+
+[...a, x]          rest: (...args)
+
+shallow:  nested mesh.geometry  still shared
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Patterns.
 
 Hand out the Lecture 1 quiz. Mark one item together. Then:
 
-**Say:** Destructure. const {x,y}=p.
+**Say:** Last time: one binding. Today: take a point apart. Graphics code is full of {x,y,z}. If they think spread deep-copies a mesh, they will mutate someone else’s geometry.
 
-**Ask:** Destructure objects/arrays? Wait seven seconds. Take two answers.
+**Ask:** After const q = { ...p }; q.nested.k = 1 — does p.nested.k change? Wait. Want: yes, same object.
 
-**Board:** parked strip. Then {x,y} = p.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: pattern match lite. Kernel: pattern match lite. We freeze conventions and we do not invent timings.
+**Say:** Destructure in assignment and in parameters. Spread arrays and objects. Rest collects the leftover. Deep copy is structuredClone or a serializer — name only today.
 
-**Ask:** What would a wrong version of this look like? Want: Thinking spread deep-copies nested meshes.
+**Ask:** Rename while destructuring: const { x: px } = p — what is px?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Destructure. const {x,y}=p.
+**Say:** A pattern on the left matches a shape on the right. Missing fields are undefined unless you default.
 
-**Say:** Spread. [...a, x].
+**Board:** swap [a,b] = [b,a]. Clone array [...a]. Clone point { ...p }.
 
-**Say:** Rest. (...args).
+**Say:** Merge options: { ...defaults, ...user }. Last wins. Nested user.mesh is not cloned.
 
-**Ask:** Destructure objects/arrays? Wait seven seconds. Take two answers.
+**Ask:** Rest vs spread — which is the left side of a signature?
 
-**They do:** On paper: Merge two option objects.
+**They do:** On paper: merge {color:'#111', size:2} with {size:4}. Write the result. Star the nested alias pitfall.
 
-**Do not:** install a new bundler mid-lecture. No CDN.
+**Do not:** Install a new bundler mid-lecture. Use a CDN.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Swap via destucture; clone an array; clone a point.. Zoom 140%. Read errors out loud.
+**Say:** Swap via destructure; clone an array; clone a point; then mutate a nested field. Demo Modern JavaScript/code/02-spread.html. Read the shared nested key out loud.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Merge two option objects.
+**Say:** Merge two option objects. Eight minutes. Then write one sentence: what is still shared.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Merge two option objects.; Deep copy discussion.. Homework: Written: shallow vs deep.; Code: 8 tests.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: merge + deep-copy discussion. Homework: shallow vs deep paragraph; eight tests. Quiz: clone array, rename destructure, shallow pitfall.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 1 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: pattern match lite | Plant the first common mistake. |
-| 10–30 | Swap via destucture; clone an array; clone a point. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | {x,y}=p | Plant p.x still after rename — they forgot the new name. |
+| 10–30 | Spread clone + nested mutate | Plant ‘it copied everything’. |
+| 30–45 | Merge options | Last-wins demo. |
+| 45–60 | They merge on paper then in the file | Circulate. |
 
 Point them at `Modern JavaScript/code/02-spread.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Modern JavaScript/code/02-spread.html` as the after-class check, 
 
 ## Quiz next meeting (they hear this now)
 
-1. clone array (3)
-2. rename destucture (3)
-3. shallow pitfall (4)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Modern JavaScript/exercises/Week 02]].
 
 ## Notes you may still need (from the outline)
 
-**1. Destructure.** const {x,y}=p. Parameters too.
-
-**2. Spread.** [...a, x]. Object spread shallow.
-
-**3. Rest.** (...args).
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[Modern JavaScript/exercises/Week 02]].
 
 ## If we run long, cut
 
-Rest
+Rest parameters. Keep destructure + shallow spread.
 
 ## If we run short, add
 
-Deep copy discussion.
+Deep copy discussion: structuredClone name, JSON round-trip cost.

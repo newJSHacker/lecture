@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Virtual and Augmented Reality  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; IPD, vignette, locomotion policy  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** midterm; then comfort: snap, vignette, seated, teleport vs optional smooth  
+**Success check:** after the exam they can toggle teleport vs smooth and name vignette as a comfort tool
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -20,15 +20,19 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm: sessions, spaces, input, teleport, hit-test, anchors., Comfort settings: snap, vignette, seated., Don't ignore sickness reports., IPD name.
+**Topics:** inline vs immersive; fallback; local-floor; select/ray; teleport+snap policy; hit-test or fake plane; session anchors; diegetic hits.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-comfort settings panel
-Settings.
+settings:  teleport | smooth (optional)
+           snap     | vignette
+           seated height
+
+dropped frames  →  sickness
+measure or omit fps     no invented 90
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +45,21 @@ Settings.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then comfort. No laptop for the exam. After: IPD is a headset fact we name; we do not diagnose. Vignette on move. Do not invent 90 fps.
 
-**Ask:** Comfort settings: snap, vignette, seated.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Comfort.** Vignette on move, disable strafe, snap, teleport. Students add a **settings** panel.
 
-**3. Perf.** Dropped frames cause sickness. Budget from RTR still applies.
 
 ### Show / attempt if time
 
-**Say:** Settings: teleport vs (optional) smooth; vignette toggle.
+**Say:** Settings panel: teleport vs optional smooth; vignette toggle. Plant smooth-only. Plant invented 90 fps. Demo XR/code/02-safety.html if needed.
 
----
-
-**They do:** seated camera height extra.
+**They do:** Two settings that change locomotion or vignette (inline analog OK).
 
 ---
 
@@ -67,10 +67,9 @@ Settings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; IPD, vignette, locomotion policy | Plant the first common mistake. |
-| 10–30 | Settings: teleport vs (optional) smooth; vignette toggle. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Settings panel | Plant no options. |
+| 15–40 | Vignette + snap | Plant 90 fps claim. |
+| 40–60 | Seated height | They type. Circulate. |
 
 ---
 
@@ -97,8 +96,8 @@ See [[XR/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+IPD hardware lecture. Keep settings + policy.
 
 ## If we run short, add
 
-One more worked leftover example.
+Seated camera height extra.

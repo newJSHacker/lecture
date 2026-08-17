@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Interactive Experience Development  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** interactive experience  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** interactive experience: two clocks, HUD, keyboard, budget table, README  
+**Success check:** a TA can npm run dev, tab the HUD, and see a beat without a second tool
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -19,8 +19,9 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: two clocks · HUD · keyboard · one beat · budget table
+Cuts: extra scenes, extra physics, extra audio
+README: npm run dev     no CDN
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +36,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. An orbit-only cube fails. Cuts are allowed. Two clocks and a keyboard path beat a new drei helper.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first — the beat or a second library?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +46,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: two clocks and HUD.
+**Say:** Desk review: useFrame vs setState, HUD pointer-events, Next-part or equivalent, table with no invented fps.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. npm run dev first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. Keyboard path in the demo.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +64,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: interactive experience | Plant the first common mistake. |
-| 10–30 | Desk review: two clocks and HUD. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings | Photograph. |
+| 10–50 | Desk review | Two clocks + HUD. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,13 +94,11 @@ See [[Interactive Experience/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Configurator teaser, museum object, audio viz, or scroll product.
-**2. Cuts.** Drop physics. Keep Canvas + HUD + one beat.
-**3. R3F vs vanilla.** Vanilla Three.js is allowed if the HUD is still DOM — say why.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New libraries. Keep freeze.
 
 ## If we run short, add
 

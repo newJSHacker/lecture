@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · GPU Programming  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** choose ping-pong or compute  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** choose ping-pong FS or WebGPU compute; freeze packing, dt, debug view of state  
+**Success check:** they can run a small sim with a packing diagram, stable dt, and no readback every frame
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,17 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `GPU Programming/code/01-pong.html`.
-- Parked strip: `Lecture 13 | Goal: freeze and review | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 13 | Goal: freeze and review | Invariant: if they cannot draw the memory layout, they are running a sample`
 
 ## Board at the end (they photograph this)
 
 ```
-state → update → draw
-State machine.
+state  →  update kernel  →  draw
+
+pick:  FBO A/B   or   storage buffer + compute
+debug: show state as color
+cuts:  drop fluids; keep particles + dt cap
+cite:  Stam / IQ / samples
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +40,9 @@ State machine.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This week you choose. Quality: stable dt, debug view of the state tex or buffer, no readback. Fluids drop if behind. Cite. Feature detect if WebGPU.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If you cannot draw the layout, what are you running? Wait. Want: a sample.
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +50,15 @@ State machine.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Working sim + debug view.
+**Say:** N slider only if safe — a counted N, not a fantasy. Screenshot the debug view. README: packing + API.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Draw the packing; screenshot debug. Eight minutes.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Lab: N slider if safe + screenshot. Homework: packing + API; repo. No quiz. Next: project studio.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +68,10 @@ State machine.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: choose ping-pong or compute | Plant the first common mistake. |
-| 10–30 | Working sim + debug view. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Circle one API | Plant both unfinished. |
+| 10–30 | Packing on the board | Plant missing debug view. |
+| 30–45 | Pause + dt cap | No readback. |
+| 45–60 | They screenshot state | Circulate. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -99,14 +101,12 @@ See [[GPU Programming/exercises/Week 13]].
 
 ## Notes from the outline
 
-**1. Quality.** Stable dt, debug view of state tex, no readback.
-**2. Cuts.** Drop fluids. Keep ping-pong particles.
-**3. Cite.** Stam / IQ / samples.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+A new fluid solver. Keep one architecture + layout.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+60s rehearsal of the packing diagram.

@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · Web Technologies  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** portfolio site  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** portfolio site: semantic page, one breakpoint, one fetch or static list, README how to serve  
+**Success check:** a TA can serve the folder and tab through the page without a framework
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,14 +14,14 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `Web Technologies/code/10-transform.html`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: the browser requests, parses, then paints`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: no React this course; freeze; tests are ‘does it serve and read’`
 
 ## Board at the end (they photograph this)
 
 ```
-report headings
-Headings.
-Clock.
+Must: skeleton · flex or grid · one breakpoint · labels
+Cuts: drop animation; keep structure + serve
+README: python -m http.server
 ```
 
 ## Slides today (cap: 2)
@@ -36,9 +36,9 @@ Clock.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. A personal portfolio in HTML/CSS/JS. Not Next.js.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first?
 
 **They do:** write their cut list in one column.
 
@@ -46,17 +46,15 @@ Clock.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: lighthouse or checklist, not a design-award argument.
+**Say:** Desk review: landmarks, labels, viewport, README.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Serve first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report + repo. Next week 12+5. Keyboard path in the demo.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -66,10 +64,9 @@ Clock.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: portfolio site | Plant the first common mistake. |
-| 10–30 | Desk review: lighthouse or checklist, not a design-award argument. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings | Photograph. |
+| 10–50 | Desk review | Serve + tab. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -97,14 +94,12 @@ See [[Web Technologies/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Personal portfolio or a small product page for a fake GPU. HTML/CSS/JS only.
-**2. Cuts.** Drop GSAP. Keep semantic HTML + flex/grid + fetch of local JSON.
-**3. Report.** 4–6 pages, screenshots, a11y notes.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New libraries. Keep freeze.
 
 ## If we run short, add
 
-One 60-second rehearsal in front of another team.
+One 404 page.

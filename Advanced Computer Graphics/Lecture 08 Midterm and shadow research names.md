@@ -2,8 +2,8 @@
 
 **Week 8 of 15** · Advanced Computer Graphics  
 **Meeting:** written midterm, then leftover lecture + live coding  
-**Kernel (after the exam):** midterm; VSM, CSM, PCSS  
-**Success check:** they sit the exam; after, they can state the leftover kernel in one sentence
+**Kernel (after the exam):** midterm; then VSM / CSM / PCSS as names: leak, seams, blocker search  
+**Success check:** after the exam they can fill a compare table and sketch cascade splits
 
 This meeting is an **exam**, then a short class. It is not a normal content lecture. Session guide: [[Teaching/24 Session Guides]].
 
@@ -20,15 +20,19 @@ This meeting is an **exam**, then a short class. It is not a normal content lect
 
 Written. No laptop. Weeks 1–7.
 
-**Topics:** Sit midterm: GI taxonomy, radiosity, path tracing, volumes, tiled lights., VSM: mean + variance, Chebyshev., CSM: split frustum., PCSS name.
+**Topics:** direct vs indirect; IBL ≠ GI; radiosity gather; MC spp + cosine; mirror/glass depth; Beer–Lambert; tiled lights.
 
 Collect. Do not mark in silence for the rest of the hour — uncover the leftover lecture.
 
 ## Board at the end (after the exam; they photograph this)
 
 ```
-moments; cascades; penumbra
-Three columns.
+VSM   mean+variance, Chebyshev     light leak
+CSM   splits in view depth         seams
+PCSS  blocker search               contact-ish
+
+write 1 page comparing two
+implement none or one extra
 ```
 
 ## Slides today (cap: 2)
@@ -41,25 +45,21 @@ Three columns.
 
 ## After the exam (~15–25 min lecture)
 
-**Say:** The exam is over. The leftover kernel is on the parked strip.
+**Say:** This meeting is a **midterm**, then shadow names beyond PCF. No laptop for the exam. After: we name VSM leak, CSM seams, PCSS blockers. We do not ship a production shadow stack.
 
-**Ask:** VSM: mean + variance, Chebyshev.
+**Ask:** What is the leftover picture?
 
 **They do:** copy the leftover board.
 
 **Do not:** start a new project in the exam hour. Do not skip the leftover kernel if 15 minutes remain.
 
-**2. Shadows beyond PCF.** VSM light leak. CSM seams. PCSS blocker search.
 
-**3. Pick.** Students write 1 page comparing two, implement none or one extra.
 
 ### Show / attempt if time
 
-**Say:** Written compare VSM vs CSM vs PCSS (table). Optional tiny VSM extra.
+**Say:** Written compare table. Optional tiny VSM extra. Draw cascade splits. Light-leak sketch.
 
----
-
-**They do:** draw cascade splits.
+**They do:** Fill VSM vs CSM vs PCSS (one row each).
 
 ---
 
@@ -67,10 +67,9 @@ Three columns.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: midterm; VSM, CSM, PCSS | Plant the first common mistake. |
-| 10–30 | Written compare VSM vs CSM vs PCSS (table). Optional tiny VSM extra. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Three names | Plant implement-all. |
+| 15–40 | Table: leak / seams / blockers | They write. |
+| 40–60 | Cascade sketch | Circulate. |
 
 ---
 
@@ -97,8 +96,8 @@ See [[Advanced Computer Graphics/exercises/Week 08]].
 
 ## If we run long, cut
 
-Live coding. Keep the leftover board.
+Implement all three. Keep names + table.
 
 ## If we run short, add
 
-One more worked leftover example.
+Light-leak sketch.

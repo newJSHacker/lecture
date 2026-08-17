@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** what this course is not  
-**Success check:** Define generative vs classical graphics.
+**Kernel:** this is not training GPT; human in the loop; no medical/legal product claims  
+**Success check:** they can list three allowed and three forbidden uses and say exams stay human
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,19 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `AI for Interactive Graphics/code/01-proxy-mock.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: what this course is not | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 1 | Goal: scope the course before a key exists | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-human + model + app
-Human in the loop.
+human  +  model  +  graphics app
+
+NOT:  train GPT/CUDA ML
+NOT:  medical or legal advice as a product
+NOT:  keys in Three.js
+NOT:  unlabeled gen as 'I modeled this'
+
+.env is server-side
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +42,11 @@ Human in the loop.
 
 ### Minutes 0–8 — Hook
 
-**Say:** IGWT angle. This is **AI for interactive graphics**: APIs, images-as-textures, limits of 3D generation, agents that drive a scene, latency, evaluation — not a ML theory degree and not 'make a startup in 15 weeks'.
+**Say:** APIs, images-as-textures, limits of 3D-gen, agents that drive a scene, latency, eval — not an ML degree and not a startup in 15 weeks. We do not train GPT. We do not ship medical or legal advice. Integrity from week 1.
 
-**Ask:** generative vs classical graphics? Wait seven seconds. Take two answers.
+**Ask:** Is a Midjourney albedo you did not label 'your model'? Wait. Want: no.
 
-**Board:** parked strip. Then human + model + app.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +56,9 @@ Human in the loop.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: what this course is not. Kernel: what this course is not. We freeze conventions and we do not invent timings.
+**Say:** Handbook: disclose tools; exams human. Harm: no CSAM, no non-consensual deepfakes, no medical advice as a claim. Keys never in the client — week 2 architecture, named today.
 
-**Ask:** What would a wrong version of this look like? Want: pasting OpenAI keys in Three.js.
+**Ask:** Where does a vendor key live?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +70,21 @@ Human in the loop.
 
 ### Minutes 12–35 — Build
 
-**Say:** IGWT angle. This is **AI for interactive graphics**: APIs, images-as-textures, limits of 3D generation, agents that drive a scene, latency, evaluation — not a ML theory degree and not 'make a startup in 15 weeks'.
+**Say:** Generative vs classical graphics. Both can be in a scene; only one is a dice roll.
 
-**Say:** Integrity. Students may use AI tools as in the handbook.
+**Board:** human + model + app. Strike train-GPT, strike medical/legal claims, strike VITE_SECRET.
 
-**Say:** Harm. No CSAM, no non-consensual deepfakes, no medical advice as a product claim.
+**Say:** Asset table starts empty — still a table. Demo 01-proxy-mock.html as the later shape.
 
-**Ask:** generative vs classical graphics? Wait seven seconds. Take two answers.
+**Ask:** What is a forbidden product claim this term?
 
-**They do:** On paper: list three allowed / three forbidden uses.
+**They do:** Three allowed / three forbidden uses on paper.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 1-page ethics + integrity addendum for *their* future project idea.. Zoom 140%. Read errors out loud.
+**Say:** One-page ethics addendum for their future idea. Plant a key in client JS. Plant a medical chatbot. Strike both.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +94,7 @@ Human in the loop.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** list three allowed / three forbidden uses.
+**Say:** Allowed/forbidden list + 'no keys in frontend' line. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +104,7 @@ Human in the loop.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: list three allowed / three forbidden uses.; API key policy.. Homework: Written: authorship policy.; none.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: list + API key policy. Homework: authorship policy. Quiz: frontend secrets, label gen, exam policy.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +116,10 @@ Human in the loop.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: what this course is not | Plant the first common mistake. |
-| 10–30 | A 1-page ethics + integrity addendum for *their* future project idea. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Scope: not training GPT | Plant startup pitch. |
+| 10–30 | No medical/legal claims | Plant diagnostic app. |
+| 30–45 | No VITE_SECRET | Plant key in Three.js. |
+| 45–60 | They write three+three | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/01-proxy-mock.html` as the after-class check, not as the lecture.
 
@@ -135,9 +141,7 @@ Point them at `AI for Interactive Graphics/code/01-proxy-mock.html` as the after
 
 ## Quiz next meeting (they hear this now)
 
-1. frontend secrets (4)
-2. label gen assets (3)
-3. exam policy (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +160,7 @@ See [[AI for Interactive Graphics/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. IGWT angle.** This is **AI for interactive graphics**: APIs, images-as-textures, limits of 3D generation, agents that drive a scene, latency, evaluation — not a ML theory degree and not 'make a startup in 15 weeks'.
-
-**2. Integrity.** Students may use AI tools as in the handbook. They must label generated assets. Exams remain human.
-
-**3. Harm.** No CSAM, no non-consensual deepfakes, no medical advice as a product claim.
+_none_
 
 ---
 
@@ -171,8 +171,8 @@ See [[AI for Interactive Graphics/exercises/Week 01]].
 
 ## If we run long, cut
 
-Harm
+Harm slideshow. Keep scope + key rule.
 
 ## If we run short, add
 
-API key policy.
+API key policy sentence in the addendum.

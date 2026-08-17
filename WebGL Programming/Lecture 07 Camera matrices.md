@@ -2,8 +2,8 @@
 
 **Week 7 of 15** · WebGL Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** P V M in the shader  
-**Success check:** Reuse CG I lookAt/perspective if they have it.
+**Kernel:** gl_Position = P * V * M * vec4(pos,1); lookAt + perspective in JS  
+**Success check:** they upload P, V, M as column-major uniforms and orbit a cube without Three.js camera
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,24 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 6 (10 min, paper or LMS).
 - Demo: `WebGL Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 7 | Goal: P V M in the shader | Invariant: CPU fills buffers; GPU runs the shader; P*V*M; CCW`
+- Parked strip: `Lecture 7 | Goal: the camera is three matrices | Invariant: clip is after P; view looks −Z; do not invert the product order`
 
 ## Board at the end (they photograph this)
 
 ```
-gl_Position = P*V*M*pos
-PVM.
+object → world(M) → view(V) → clip(P) → NDC → pixels
+
+gl_Position = u_p * u_v * u_m * vec4(a_pos, 1.0);
+
+RH Y-up   look −Z   CCW   column-major
+fov in radians     near 0.1
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Optional: CG I lookAt diagram photograph | photo, not a Three.js screenshot |
 
 ---
 
@@ -38,11 +41,11 @@ PVM.
 
 Hand out the Lecture 6 quiz. Mark one item together. Then:
 
-**Say:** Same math. [[10 Computer Graphics I]] Weeks 7–9.
+**Say:** Same math as Computer Graphics I weeks 7–9. Three.js later will hide these as camera.projectionMatrix and matrixWorldInverse. Today you write them. Demo 07-orbit-camera.html.
 
-**Ask:** Reuse CG I lookAt/perspective if they have it? Wait seven seconds. Take two answers.
+**Ask:** Is the product M*V*P or P*V*M for column vectors on the right? Wait. Want: P*V*M.
 
-**Board:** parked strip. Then gl_Position = P*V*M*pos.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: P V M in the shader. Kernel: P V M in the shader. We freeze conventions and we do not invent timings.
+**Say:** lookAt + perspective from a JS mat4. Freeze: no THREE.PerspectiveCamera in the lab. Row-major P is the classic 'my cube vanished.'
 
-**Ask:** What would a wrong version of this look like? Want: Three.js camera as the lab.
+**Ask:** What space is gl_Position?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Same math. [[10 Computer Graphics I]] Weeks 7–9.
+**Say:** Spaces table from WebGL/01 Conventions. Circle clip.
 
-**Say:** Three.js later. These uniforms are camera.projectionMatrix etc.
+**Board:** the one GLSL line. Names u_p u_v u_m.
 
-**Say:** Demo. 07 orbit.
+**Say:** Orbit: move eye on a circle, lookAt origin. WASD is extra.
 
-**Ask:** Reuse CG I lookAt/perspective if they have it? Wait seven seconds. Take two answers.
+**Ask:** Does the VS divide by w?
 
-**They do:** On paper: WASD extra.
+**They do:** On paper: product order and what each matrix does.
 
-**Do not:** wrap the first triangle in Three.js. Freeze conventions.
+**Do not:** Wrap the first triangle in Three.js. Unfreeze conventions.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: lookAt + perspective from JS mat4; spin the cube.. Zoom 140%. Read errors out loud.
+**Say:** lookAt + perspective; spin the cube. Demo 07-orbit-camera.html. Plant Three.js camera. Plant row-major P. Plant fov in degrees without conversion.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** WASD extra.
+**Say:** Orbit, or WASD extra if orbit already works. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: WASD extra.; ortho toggle.. Homework: Written: mapping table CPU→uniform.; Code: orbit.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: WASD extra; ortho toggle. Homework: CPU→uniform mapping table; orbit. Quiz: product order, lookAt, fov radians. Midterm next week on 1–7.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 6 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: P V M in the shader | Plant the first common mistake. |
-| 10–30 | lookAt + perspective from JS mat4; spin the cube. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Identity PVM — clip cube | They see last week's object. |
+| 10–30 | perspective + lookAt | Plant degrees. Cube gone. |
+| 30–45 | Orbit mouse/drag | Plant inverted V. |
+| 45–60 | They orbit | Circulate. No Three.js. |
 
 Point them at `WebGL Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `WebGL Programming/code/` as the after-class check, not as the lec
 
 ## Quiz next meeting (they hear this now)
 
-1. product order (4)
-2. lookAt (3)
-3. fov radians (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[WebGL Programming/exercises/Week 07]].
 
 ## Notes you may still need (from the outline)
 
-**1. Same math.** [[10 Computer Graphics I]] Weeks 7–9.
-
-**2. Three.js later.** These uniforms are camera.projectionMatrix etc.
-
-**3. Demo.** 07 orbit.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[WebGL Programming/exercises/Week 07]].
 
 ## If we run long, cut
 
-Demo
+WASD full controller. Keep P*V*M + orbit.
 
 ## If we run short, add
 
-ortho toggle.
+Ortho toggle vs perspective.

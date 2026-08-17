@@ -2,8 +2,8 @@
 
 **Week 11 of 15** · Virtual and Augmented Reality  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** VRButton, controllers  
-**Success check:** Wire VRButton/ARButton.
+**Kernel:** VRButton/ARButton as oracles; students explain session + input  
+**Success check:** they can strip a Three.js XR example to a short file they can explain and cite
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 10 (10 min, paper or LMS).
 - Demo: `XR/code/02-safety.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 11 | Goal: VRButton, controllers | Invariant: comfort and tracking beat extra polygons`
+- Parked strip: `Lecture 11 | Goal: helpers you can read | Invariant: comfort and tracking beat extra polygons`
 
 ## Board at the end (they photograph this)
 
 ```
-XRButton.createButton(renderer)
-Button + scene.
+VRButton.createButton(renderer)
+examples folder  =  oracle
+cite the example URL
+
+XREstimatedLight  +  fallback dir light
+hand tracking     name only
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Button + scene.
 
 Hand out the Lecture 10 quiz. Mark one item together. Then:
 
-**Say:** Helpers. The examples folder is an oracle.
+**Say:** Helpers are not a license to paste 400 lines. Full example dump they cannot explain fails. Citation required. No CDN — local three build.
 
-**Ask:** Wire VRButton/ARButton? Wait seven seconds. Take two answers.
+**Ask:** If I delete VRButton, what must you still know? Wait. Want: requestSession + loop.
 
-**Board:** parked strip. Then XRButton.createButton(renderer).
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: VRButton, controllers. Kernel: VRButton, controllers. We freeze conventions and we do not invent timings.
+**Say:** AR light estimate named; fallback directional. Hands optional extra. Remove unused passes.
 
-**Ask:** What would a wrong version of this look like? Want: full example dump, cannot explain.
+**Ask:** What is an oracle in this course?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Helpers. The examples folder is an oracle.
+**Say:** Button helper. Then the session it hides.
 
-**Say:** AR light. XREstimatedLight.
+**Board:** createButton. Cite URL.
 
-**Say:** Hands. Hand tracking name.
+**Say:** Strip to ~80 lines they can narrate.
 
-**Ask:** Wire VRButton/ARButton? Wait seven seconds. Take two answers.
+**Ask:** Why cite the example?
 
-**They do:** On paper: cite the example URL.
+**They do:** On paper: session, loop, select — three lines the helper wraps.
 
-**Do not:** require a headset to pass week 1. Desktop fallback.
+**Do not:** Require a headset to pass week 1. Skip the desktop fallback.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A three.js example stripped to 80 lines they can explain.. Zoom 140%. Read errors out loud.
+**Say:** Strip a Three.js XR example. Plant dump. Plant no citation. Fallback dir light.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** cite the example URL.
+**Say:** VRButton + one cube they can explain. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: cite the example URL.; remove unused passes.. Homework: Written: what the helper hid.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: cite URL; remove unused passes. Homework: 80-line explain. Quiz: VRButton, oracle, citation.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: VRButton, controllers | Plant the first common mistake. |
-| 10–30 | A three.js example stripped to 80 lines they can explain. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | VRButton | Plant CDN. |
+| 15–40 | Strip the example | Plant dump. |
+| 40–55 | Cite + fallback light | No citation plant. |
+| 55–60 | They narrate 80 lines | Circulate. |
 
 Point them at `XR/code/02-safety.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `XR/code/02-safety.html` as the after-class check, not as the lect
 
 ## Quiz next meeting (they hear this now)
 
-1. VRButton (3)
-2. estimated light (4)
-3. what you deleted (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +160,7 @@ See [[XR/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Helpers.** The examples folder is an oracle. Students must still explain session + input.
-
-**2. AR light.** XREstimatedLight. Fallback dir light.
-
-**3. Hands.** Hand tracking name. Optional extra.
+_none_
 
 ---
 
@@ -173,8 +171,8 @@ See [[XR/exercises/Week 11]].
 
 ## If we run long, cut
 
-Hands
+Hand tracking impl. Keep button + explain.
 
 ## If we run short, add
 
-remove unused passes.
+Remove unused passes.

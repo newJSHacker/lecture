@@ -44,11 +44,11 @@ a cube is vertices; a camera is a matrix
 
 **Ask:** If you plot y = x on a canvas without flipping, which way does the line go? Wait.
 
-**Board:** parked strip. Then x right, y up on paper; canvas y down.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *axes, points, units*.
+**They do:** write today’s question in their notes: *plot a point with y flipped; `deg * Math.PI / 180`*.
 
 **Do not:** Degrees in cos.
 
@@ -78,7 +78,7 @@ a cube is vertices; a camera is a matrix
 
 **They do:** Table: 30°, 45°, 90° → radians. Leave 45° as π/4, not a decimal they invent.
 
-**Do not:** start with eigenvalues. Do not mix row-vector formulas.
+**Do not:** Start with eigenvalues. Mix row-vector formulas.
 
 ### Minutes 35–50 — Show
 
@@ -139,9 +139,7 @@ Point them at `Mathematics for Computer Graphics/code/01-axes.html` as the after
 
 ## Quiz next meeting (they hear this now)
 
-1. π radians in degrees (2)
-2. canvas y direction (4)
-3. point vs pixel (4)
+None this meeting.
 
 
 ## Snippet
@@ -160,11 +158,7 @@ See [[Mathematics for Computer Graphics/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Graphics is numbers.** A cube is vertices. A camera is a matrix. This course is the algebra Computer Graphics I will spend on pictures.
-
-**2. Two y conventions.** Mathematics: +y up. HTML Canvas: +y down. CG I flips in the viewport. Say it every time a plot appears.
-
-**3. Radians.** `Math.cos` takes radians. 180° = π. Convert on the board, store radians in code.
+_none_
 
 ---
 

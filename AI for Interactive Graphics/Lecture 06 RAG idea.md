@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** retrieve then generate  
-**Success check:** RAG: search your notes, then ask the model.
+**Kernel:** retrieve then generate; keyword search over local captions is enough  
+**Success check:** they can show the retrieved chunk beside the answer and a miss case
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: retrieve then generate | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 6 | Goal: your captions, not the model's memory | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-docs → chunks → query → prompt
-Retrieve then prompt.
+query → retrieve chunk → generate (or mock)
+cite filename
+
+keyword filter is a valid lab
+vector DB optional extra
+
+wrong chunk → confident nonsense
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Retrieve then prompt.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Why. A museum app that answers from **your** captions, not from the model's memory.
+**Say:** A museum app should answer from your captions. Embeddings as required infrastructure week 6 fail. Show a miss. Cite the file.
 
-**Ask:** RAG: search your notes, then ask the model? Wait seven seconds. Take two answers.
+**Ask:** If retrieval misses, should the model still sound sure? Wait. Want: no — show the miss.
 
-**Board:** parked strip. Then docs → chunks → query → prompt.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: retrieve then generate. Kernel: retrieve then generate. We freeze conventions and we do not invent timings.
+**Say:** Split a few markdown files. Mock the generate step. No frontend secrets if a real model is used.
 
-**Ask:** What would a wrong version of this look like? Want: embeddings as required infrastructure week 6.
+**Ask:** What do you display besides the answer?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why. A museum app that answers from **your** captions, not from the model's memory.
+**Say:** Why RAG. Grounding.
 
-**Say:** Toy. Split a few markdown files; keyword search is enough.
+**Board:** retrieve then generate. Cite filename.
 
-**Say:** Failure. Wrong chunk → confident nonsense.
+**Say:** Failure: wrong chunk. They must see it.
 
-**Ask:** RAG: search your notes, then ask the model? Wait seven seconds. Take two answers.
+**Ask:** Why is a vector DB not required today?
 
-**They do:** On paper: a miss case.
+**They do:** Three local captions; one query that misses.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Query box over 3 local captions; show retrieved chunk + mocked answer.. Zoom 140%. Read errors out loud.
+**Say:** Query box over 3 captions; show chunk + mocked answer. Plant no citation. Plant embeddings-required. Show a miss.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** a miss case.
+**Say:** Filter + display hit. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: a miss case.; cite filename.. Homework: Written: why retrieve.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: miss case; cite filename. Homework: miss paragraph. Quiz: retrieve-then-generate, cite, miss.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: retrieve then generate | Plant the first common mistake. |
-| 10–30 | Query box over 3 local captions; show retrieved chunk + mocked answer. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Local captions | Plant vector DB required. |
+| 15–40 | Show the chunk | Plant no cite. |
+| 40–55 | A miss case | Confident-nonsense plant. |
+| 55–60 | They cite the file | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. chunk (3)
-2. why cite (4)
-3. miss (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[AI for Interactive Graphics/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why.** A museum app that answers from **your** captions, not from the model's memory.
-
-**2. Toy.** Split a few markdown files; keyword search is enough. Vector DB optional extra.
-
-**3. Failure.** Wrong chunk → confident nonsense. Show a miss.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[AI for Interactive Graphics/exercises/Week 06]].
 
 ## If we run long, cut
 
-Failure
+Embedding math. Keep retrieve + miss.
 
 ## If we run short, add
 
-cite filename.
+Cite filename on the HUD.

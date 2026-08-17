@@ -2,8 +2,8 @@
 
 **Week 10 of 15** · Advanced Computer Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** profile, cut, measure  
-**Success check:** Pick a slow scene (theirs or a starter).
+**Kernel:** profile → cut → measure on a named device; before row required  
+**Success check:** they can show a two-row table (before/after) without a fantasy fps
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 9 (10 min, paper or LMS).
 - Demo: `Advanced Computer Graphics/code/02-tracer.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 10 | Goal: profile, cut, measure | Invariant: local lighting is bounce 0; GI is the rest`
+- Parked strip: `Lecture 10 | Goal: optimization as a method | Invariant: local lighting is bounce 0; GI is the rest`
 
 ## Board at the end (they photograph this)
 
 ```
-before / after table
-Before/after.
+before  |  device  |  spp or dt or lights  |  (fps only if measured)
+after   |  same    |  the cut              |
+
+algorithm cuts: BVH, roulette, tile cull
+asset cuts:  resolution, instances
+a cut that changes the image needs a screenshot
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +42,11 @@ Before/after.
 
 Hand out the Lecture 9 quiz. Mark one item together. Then:
 
-**Say:** Method. Advanced CG is also **engineering**.
+**Say:** Advanced CG is also engineering. Same rule as RTR: measure or omit. Optimizing without a before row fails. Fantasy 200 fps fails. Heavier scene: tracer spp, volume steps, or lights.
 
-**Ask:** Pick a slow scene (theirs or a starter)? Wait seven seconds. Take two answers.
+**Ask:** If you have no before row, did you optimize? Wait. Want: you guessed.
 
-**Board:** parked strip. Then before / after table.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +56,9 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: profile, cut, measure. Kernel: profile, cut, measure. We freeze conventions and we do not invent timings.
+**Say:** Paper vs product: screenshot if the image changes. BVH from geometry course as a named cut.
 
-**Ask:** What would a wrong version of this look like? Want: optimizing without a before row.
+**Ask:** What is an algorithm cut vs an asset cut?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +70,21 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Method. Advanced CG is also **engineering**.
+**Say:** Method. Before first.
 
-**Say:** Cuts that are algorithms. BVH for the tracer (geometry course).
+**Board:** two-row table. Empty fps if unmeasured.
 
-**Say:** Paper vs product. A cut that changes the image must be screenshotted.
+**Say:** One algorithm cut or one asset cut today — named.
 
-**Ask:** Pick a slow scene (theirs or a starter)? Wait seven seconds. Take two answers.
+**Ask:** Why screenshot a cut that changes the image?
 
-**They do:** On paper: one algorithm cut.
+**They do:** Empty two-row table; they fill device + metric.
 
-**Do not:** start with a production path tracer.
+**Do not:** Start with a production path tracer.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Two-row table on a named device.. Zoom 140%. Read errors out loud.
+**Say:** Two-row table on a named device. Plant no before. Plant 200 fps. One cut.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +94,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** one algorithm cut.
+**Say:** Fill before row for their scene. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +104,7 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: one algorithm cut.; one asset cut.. Homework: Written: what you would not cut.; table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: one algorithm cut; one asset cut. Homework: table. Quiz: before row, measure-or-omit, screenshot.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +116,10 @@ Hand out the Lecture 9 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: profile, cut, measure | Plant the first common mistake. |
-| 10–30 | Two-row table on a named device. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Before row | Plant no baseline. |
+| 15–40 | One named cut | Plant 200 fps. |
+| 40–55 | After still / number | They write device. |
+| 55–60 | Screenshot if image changed | Circulate. |
 
 Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-class check, not as the lecture.
 
@@ -137,9 +141,7 @@ Point them at `Advanced Computer Graphics/code/02-tracer.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. CPU vs GPU (3)
-2. image-changing cut (4)
-3. device (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +152,7 @@ See [[Advanced Computer Graphics/exercises/Week 10]].
 
 ## Notes you may still need (from the outline)
 
-**1. Method.** Advanced CG is also **engineering**. Same rule as RTR week 12, now on a heavier scene (tracer spp, volume steps, lights).
-
-**2. Cuts that are algorithms.** BVH for the tracer (geometry course). Russian roulette. Tile culling.
-
-**3. Paper vs product.** A cut that changes the image must be screenshotted.
+_none_
 
 ---
 
@@ -165,8 +163,8 @@ See [[Advanced Computer Graphics/exercises/Week 10]].
 
 ## If we run long, cut
 
-Paper vs product
+Paper vs product sermon. Keep two rows.
 
 ## If we run short, add
 
-one asset cut.
+One asset cut.

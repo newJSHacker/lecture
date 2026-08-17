@@ -2,8 +2,8 @@
 
 **Week 12 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** rubrics for gen  
-**Success check:** A rubric: task success, latency, $, harm, citation.
+**Kernel:** eval table: task success, latency name, call count/$, harm, citation — not one lucky still  
+**Success check:** they can score five outputs and pick one for the scene with costs counted
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 11 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 12 | Goal: rubrics for gen | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 12 | Goal: a scored pick, not a vibe | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-fidelity, latency, cost, harm
-Score table.
+task success | latency (measured or blank) | calls/$ | harm | citation
+
+one lucky screenshot  ≠  eval
+mock: still count calls
+no invented ms     no invented fps
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Score table.
 
 Hand out the Lecture 11 quiz. Mark one item together. Then:
 
-**Say:** Eval. Graphics papers measure error.
+**Say:** Graphics papers measure error. AI features need task measures: did the user finish configuring? Hidden costs fail. One lucky screenshot is not eval. Harm checklist — not a legal memo.
 
-**Ask:** A rubric: task success, latency, $, harm, citation? Wait seven seconds. Take two answers.
+**Ask:** If you did not count calls, what do you write in the $ column? Wait. Want: unknown — not a fake number.
 
-**Board:** parked strip. Then fidelity, latency, cost, harm.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: rubrics for gen. Kernel: rubrics for gen. We freeze conventions and we do not invent timings.
+**Say:** Even mocks count calls. Latency: measure or omit. Harm: biased labels, unsafe images — a checklist, not a diagnosis.
 
-**Ask:** What would a wrong version of this look like? Want: one lucky screenshot as eval.
+**Ask:** What is task success for a configurator?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Eval. Graphics papers measure error.
+**Say:** Rubric. Five columns.
 
-**Say:** Cost. Tokens / images counted.
+**Board:** score 5. Pick 1. Count calls.
 
-**Say:** Harm. Biased labels, unsafe images — a checklist.
+**Say:** Harm note. Citation of model.
 
-**Ask:** A rubric: task success, latency, $, harm, citation? Wait seven seconds. Take two answers.
+**Ask:** Why count mock calls?
 
-**They do:** On paper: cost column.
+**They do:** Empty table; they fill two rows.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Score 5 outputs on a table; pick one for the scene.. Zoom 140%. Read errors out loud.
+**Say:** Score 5 outputs; pick one. Plant lucky screenshot as eval. Plant hidden costs. Plant invented ms.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** cost column.
+**Say:** Fill five rows; circle the pick. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: cost column.; one harm note.. Homework: Written: rubric filled.; table in repo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: cost column; one harm note. Homework: eval paragraph. Quiz: task success, count calls, no lucky still. Next: thin slice.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 11 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: rubrics for gen | Plant the first common mistake. |
-| 10–30 | Score 5 outputs on a table; pick one for the scene. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Rubric columns | Plant lucky still. |
+| 15–40 | Score 5 / pick 1 | Plant hidden $. |
+| 40–55 | Harm checklist | They write one note. |
+| 55–60 | They count calls | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. why not cool-only (4)
-2. cost (3)
-3. harm (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +151,7 @@ See [[AI for Interactive Graphics/exercises/Week 12]].
 
 ## Notes you may still need (from the outline)
 
-**1. Eval.** Graphics papers measure error. AI features need **task** measures: did the user finish configuring?
-
-**2. Cost.** Tokens / images counted. Even mock: count calls.
-
-**3. Harm.** Biased labels, unsafe images — a checklist.
+_none_
 
 ---
 
@@ -165,8 +162,8 @@ See [[AI for Interactive Graphics/exercises/Week 12]].
 
 ## If we run long, cut
 
-Harm
+Harm seminar. Keep table + pick.
 
 ## If we run short, add
 
-one harm note.
+One harm note row.

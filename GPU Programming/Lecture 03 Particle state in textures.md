@@ -2,8 +2,8 @@
 
 **Week 3 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** pos in RG, vel in BA  
-**Success check:** Encode pos/vel in texels.
+**Kernel:** one texel = one particle; RG=pos, BA=vel; VS fetches by VertexID  
+**Success check:** they can pack pos/vel into a FLOAT texture and draw points without 50k Mesh objects
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 2 (10 min, paper or LMS).
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 3 | Goal: pos in RG, vel in BA | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 3 | Goal: SoA on the GPU you can draw | Invariant: neighbor texels are not spatial neighbors unless you build a grid`
 
 ## Board at the end (they photograph this)
 
 ```
-texel = particle
-Texel grid.
+state tex  (W×H FLOAT)
+  texel (i,j):  RG = pos.xy    BA = vel.xy
+
+vertex i:  u = i % W;  v = i / W
+           texelFetch(state, ivec2(u,v), 0)
+
+CPU loop of 50k Mesh  =  not this course
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ Texel grid.
 
 Hand out the Lecture 2 quiz. Mark one item together. Then:
 
-**Say:** SoA on the GPU. Each texel is a particle.
+**Say:** Structure of arrays on the GPU. Render: VS fetches by gl_VertexID. WebGL2 integer fetch. Instancing is a name from WebGL week 12. Invented particle counts are not measurements.
 
-**Ask:** Encode pos/vel in texels? Wait seven seconds. Take two answers.
+**Ask:** Why not one Mesh per particle? Wait. Want: draw-call / CPU death.
 
-**Board:** parked strip. Then texel = particle.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: pos in RG, vel in BA. Kernel: pos in RG, vel in BA. We freeze conventions and we do not invent timings.
+**Say:** N=64² is a teaching count they can see in the layout (64×64 texels). Points need a depth policy. Mouse force extra is a uniform.
 
-**Ask:** What would a wrong version of this look like? Want: CPU loop 50k Mesh objects.
+**Ask:** How do you map VertexID to a texel?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** SoA on the GPU. Each texel is a particle.
+**Say:** Grid of texels. One particle per cell. Draw the RG/BA split.
 
-**Say:** Render. Vertex shader fetches texel by gl_VertexID / instance ID.
+**Board:** packing. Circle fetch.
 
-**Say:** WebGL2. Integer textures / fetch.
+**Say:** Reset button rewrites the texture from JS once — not every frame.
 
-**Ask:** Encode pos/vel in texels? Wait seven seconds. Take two answers.
+**Ask:** What is in BA?
 
-**They do:** On paper: mouse force extra.
+**They do:** On paper: packing diagram for one particle.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: N=64² particles falling with wrap; points.. Zoom 140%. Read errors out loud.
+**Say:** N=64² falling with wrap; points. Plant 50k Mesh. Mouse force extra. Pause to inspect one texel as color.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** mouse force extra.
+**Say:** Mouse force extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: mouse force extra.; reset button.. Homework: Written: packing.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: mouse force + reset. Homework: packing paragraph; demo. Quiz: why not one mesh, RG pos, ID mapping.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 2 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: pos in RG, vel in BA | Plant the first common mistake. |
-| 10–30 | N=64² particles falling with wrap; points. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Packing RG/BA | Plant 50k Mesh. |
+| 10–30 | texelFetch by ID | Plant wrong % W. |
+| 30–45 | Points + wrap | Depth policy. |
+| 45–60 | Reset button | Circulate. Pause time. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. why not one mesh per particle (4)
-2. RG pos (3)
-3. ID mapping (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[GPU Programming/exercises/Week 03]].
 
 ## Notes you may still need (from the outline)
 
-**1. SoA on the GPU.** Each texel is a particle. Neighbor particles are not spatial neighbors unless you design a grid.
-
-**2. Render.** Vertex shader fetches texel by gl_VertexID / instance ID.
-
-**3. WebGL2.** Integer textures / fetch. Instancing from WebGL week 12.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[GPU Programming/exercises/Week 03]].
 
 ## If we run long, cut
 
-WebGL2
+Spatial hash grid. Keep packing + fetch + points.
 
 ## If we run short, add
 
-reset button.
+Two textures if pos and vel split — still draw the layout.

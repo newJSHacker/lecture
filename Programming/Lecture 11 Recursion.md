@@ -48,11 +48,11 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 **Ask:** What happens if you omit the base case? Wait. Want: stack overflow / infinite recursion.
 
-**Board:** parked strip. Then factorial tree.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
-**They do:** write today’s question in their notes: *base case, stack*.
+**They do:** write today’s question in their notes: *`fact(n)` with base case first; stack of `fact(4)`*.
 
 **Do not:** No base case.
 
@@ -82,7 +82,7 @@ Hand out the Lecture 10 quiz. Mark one item together. Then:
 
 **They do:** On paper: stack drawing for `fact(4)`.
 
-**Do not:** mix Python syntax into a JS term. Do not skip the attempt.
+**Do not:** Mix Python syntax into a JS term. Skip the attempt.
 
 ### Minutes 35–50 — Show
 
@@ -143,9 +143,7 @@ Point them at `Programming/code/10-fact.html` as the after-class check, not as t
 
 ## Quiz next meeting (they hear this now)
 
-1. Base case of fact (2)
-2. What happens with no base (3)
-3. One IGWT later use (5)
+None this meeting.
 
 
 ## Snippet
@@ -164,11 +162,7 @@ See [[Programming/exercises/Week 11]].
 
 ## Notes you may still need (from the outline)
 
-**1. Base case first.** If missing, stack overflow. Write it before the recursive call.
-
-**2. Graphics later.** Scene graphs, kd-trees, closest-pair divide-and-conquer. Recursion is not optional in IGWT.
-
-**3. vs loop.** Factorial as loop is finer. Recursion is for divide-and-conquer structure.
+_none_
 
 ---
 

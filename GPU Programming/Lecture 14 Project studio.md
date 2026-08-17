@@ -2,8 +2,8 @@
 
 **Week 14 of 15** · GPU Programming  
 **Meeting:** studio (not a content lecture)  
-**Kernel:** GPGPU or WebGPU mini  
-**Success check:** a TA can run the README or see the week’s deliverable without a second tool
+**Kernel:** GPGPU or WebGPU mini: packing diagram, dispatch or ping-pong, named device  
+**Success check:** a TA can serve the folder, see the layout, and run with feature detect or WebGL
 
 This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
@@ -14,13 +14,15 @@ This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 - Rubric / report headings on the parked strip.
 - Clock visible.
 - Demo only if a volunteer asks for a blocked kernel: `GPU Programming/code/01-pong.html`.
-- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: WGSL triangle + compute gradient is a valid cut; CUDA is not a path`
 
 ## Board at the end (they photograph this)
 
 ```
-headings
-Headings.
+Must: packing diagram · pause · detect or WebGL · README serve
+Cuts: fluids; full TF; million particles
+Valid cut: WGSL triangle + compute gradient
+Report: memory layout, dispatch, device
 ```
 
 ## Slides today (cap: 2)
@@ -35,9 +37,9 @@ Headings.
 
 ### Minutes 0–10 — Frame
 
-**Say:** This is studio, not a new-topic lecture. Cuts are allowed. Tests and the README beat new features.
+**Say:** This meeting is **studio**. Particles, life, blur chain, or compute noise. Desk review: packing diagram first.
 
-**Ask:** If you are behind, what do you cut first? Wait seven seconds.
+**Ask:** If behind, what do you cut first?
 
 **They do:** write their cut list in one column.
 
@@ -45,17 +47,15 @@ Headings.
 
 ### Minutes 10–65 — Desk review
 
-**Say:** Desk review: packing diagram.
+**Say:** Desk review: layout, then detect, then dt cap, then citations.
 
----
-
-**They do:** Work. One teammate map. Rehearse 60 seconds if presenting next week.
+**They do:** Studio. Serve first.
 
 **Do not:** sit at the podium. Do not add features for them.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the headings. Homework is the report/repo. Next meeting is presentations or the next sprint — no surprise scope.
+**Say:** Report: memory layout, dispatch, device. Next week 12+5.
 
 **Do not:** “Any questions?” End on the clock.
 
@@ -65,10 +65,9 @@ Headings.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: GPGPU or WebGPU mini | Plant the first common mistake. |
-| 10–30 | Desk review: packing diagram. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Headings + cut list | Photograph. |
+| 10–50 | Desk review | Packing first. |
+| 50–60 | 60s rehearsal | Stop. |
 
 This slot is **more studio**, not a hidden lecture.
 
@@ -96,13 +95,11 @@ See [[GPU Programming/exercises/Week 14]].
 
 ## Notes from the outline
 
-**1. Project.** Particles, life, blur chain, or compute noise.
-**2. Cuts.** WGSL triangle + compute gradient is a valid cut.
-**3. Report.** memory layout, dispatch, device.
+_none_
 
 ## If we run long, cut
 
-New features. Keep freeze.
+New APIs. Keep freeze.
 
 ## If we run short, add
 

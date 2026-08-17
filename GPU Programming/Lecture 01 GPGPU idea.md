@@ -2,8 +2,8 @@
 
 **Week 1 of 15** · GPU Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** GPU as throughput  
-**Success check:** Contrast CPU latency vs GPU throughput.
+**Kernel:** GPU as throughput: one FS kernel over a grid; readback is slow  
+**Success check:** they can contrast CPU latency vs GPU throughput and say why this is a kernel, not a triangle demo
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - No quiz (Lecture 1). Course contract lives in the land.
 - Demo: `GPU Programming/code/01-pong.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 1 | Goal: GPU as throughput | Invariant: data lives where the kernel runs`
+- Parked strip: `Lecture 1 | Goal: see a fullscreen kernel | Invariant: data lives where the kernel runs; CUDA slides without a browser path are the wrong degree`
 
 ## Board at the end (they photograph this)
 
 ```
-data parallel vs graphics
-Throughput bars.
+CPU:  one thread, low latency
+GPU:  many lanes, high throughput
+
+FS kernel:  one texel / pixel  (no pointers)
+
+readPixels every frame  =  stall
+this program: WebGL then WebGPU — not CUDA-only
 ```
 
 ## Slides today (cap: 6)
@@ -36,11 +41,11 @@ Throughput bars.
 
 ### Minutes 0–8 — Hook
 
-**Say:** Why this course. Particles, fluids teasers, image filters, and an honest WebGPU intro.
+**Say:** Particles, fluids teasers, image filters, then an honest WebGPU intro. Graphics students already write FS kernels; GPGPU is the same hardware with fewer triangles. Teaching only CUDA in a web degree fails the course contract.
 
-**Ask:** Contrast CPU latency vs GPU throughput? Wait seven seconds. Take two answers.
+**Ask:** Is CUDA required this term? Wait. Want: no.
 
-**Board:** parked strip. Then data parallel vs graphics.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -50,9 +55,9 @@ Throughput bars.
 
 ### Minutes 8–12 — Frame
 
-**Say:** Today’s question: GPU as throughput. Kernel: GPU as throughput. We freeze conventions and we do not invent timings.
+**Say:** Web vs native: CUDA/OpenCL exist. IGWT ships in the browser: FBO ping-pong, TF as a name, then WebGPU. Limits: no pointers in FS, fixed output size, readback is slow.
 
-**Ask:** What would a wrong version of this look like? Want: teaching only CUDA slides in a web degree.
+**Ask:** Why is readPixels every frame a problem?
 
 **Board:** today’s question in one line.
 
@@ -64,21 +69,21 @@ Throughput bars.
 
 ### Minutes 12–35 — Build
 
-**Say:** Why this course. Particles, fluids teasers, image filters, and an honest WebGPU intro.
+**Say:** Throughput bars vs a latency needle. Same silicon, different job.
 
-**Say:** Web vs native. CUDA/OpenCL exist.
+**Board:** data-parallel vs graphics. Circle no CUDA-only path.
 
-**Say:** Limits. No pointers in FS.
+**Say:** A gradient 'simulation' into a texture is already a kernel. Time is a uniform you can pause.
 
-**Ask:** Contrast CPU latency vs GPU throughput? Wait seven seconds. Take two answers.
+**Ask:** Where does the state live this week?
 
-**They do:** On paper: time uniform.
+**They do:** On paper: CPU vs GPU, four bullets, no CUDA-only line.
 
-**Do not:** require CUDA. WebGL/WebGPU in the browser.
+**Do not:** Require CUDA. Stay in the browser (WebGL/WebGPU).
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Fullscreen FS that writes a gradient 'simulation' into a texture (static).. Zoom 140%. Read errors out loud.
+**Say:** Fullscreen FS writes a gradient into a texture (static). Demo GPU Programming/code/01-pong.html when it helps. Plant CUDA-only slides. Plant readPixels every frame. Local serve, no CDN.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -88,7 +93,7 @@ Throughput bars.
 
 ### Minutes 50–65 — Attempt
 
-**Say:** time uniform.
+**Say:** Time uniform. Why this is a kernel, in a sentence. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -98,7 +103,7 @@ Throughput bars.
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: time uniform.; why this is a kernel.. Homework: Written: CPU vs GPU 1 page.; screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: time uniform + kernel sentence. Homework: CPU vs GPU one page; screenshot. Quiz: throughput, readback, CUDA this program?
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -110,10 +115,10 @@ Throughput bars.
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: GPU as throughput | Plant the first common mistake. |
-| 10–30 | Fullscreen FS that writes a gradient 'simulation' into a texture (static). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Throughput vs latency | Plant CUDA-only path. |
+| 10–30 | FS as kernel | Plant readPixels every frame. |
+| 30–45 | u_time pause | Debug a still. |
+| 45–60 | They write the kernel sentence | Circulate. |
 
 Point them at `GPU Programming/code/01-pong.html` as the after-class check, not as the lecture.
 
@@ -135,9 +140,7 @@ Point them at `GPU Programming/code/01-pong.html` as the after-class check, not 
 
 ## Quiz next meeting (they hear this now)
 
-1. throughput (3)
-2. readback (4)
-3. CUDA this program? (3)
+None this meeting.
 
 
 ## Snippet
@@ -156,11 +159,7 @@ See [[GPU Programming/exercises/Week 01]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why this course.** Particles, fluids teasers, image filters, and an honest WebGPU intro. Graphics students already write FS kernels; GPGPU is the same hardware with fewer triangles.
-
-**2. Web vs native.** CUDA/OpenCL exist. IGWT still ships in a browser: FBO ping-pong, transform feedback name, then WebGPU compute.
-
-**3. Limits.** No pointers in FS. Fixed output size. Readback is slow.
+_none_
 
 ---
 
@@ -171,8 +170,8 @@ See [[GPU Programming/exercises/Week 01]].
 
 ## If we run long, cut
 
-Limits
+OpenCL history. Keep kernel + no CUDA-only.
 
 ## If we run short, add
 
-why this is a kernel.
+Fixed output size as a limit on the board.

@@ -2,8 +2,8 @@
 
 **Week 13 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** scale, shadows, colors  
-**Success check:** Load the glb in the existing Three.js demo pattern.
+**Kernel:** load the glb with local GLTFLoader; scale, shadows, env; viewer already passed  
+**Success check:** they load in the Three.js pattern, traverse shadows, and fix black metal with env not MeshBasicMaterial
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 12 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 13 | Goal: scale, shadows, colors | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 13 | Goal: the handshake | Invariant: if the viewer was wrong, stop; if Three is black, check metal+rough+env, scale 0.01, inverted N`
 
 ## Board at the end (they photograph this)
 
 ```
-loader.load → traverse shadows
-Loader box.
-1 m cube reference.
+Blender → .glb → viewer OK → ThreeJS/vendor GLTFLoader
+
+scale 0.01          black metal (metal+rough, no env)
+inverted normals    missing UVs     clip not exported
+
+AxesHelper to check size
+Unlit to 'fix' black  =  forbidden
 ```
 
 ## Slides today (cap: 6)
@@ -39,11 +43,11 @@ Loader box.
 
 Hand out the Lecture 12 quiz. Mark one item together. Then:
 
-**Say:** The handshake. This week is the reason the course exists.
+**Say:** This week is why the course exists. Asset → [[18 Three.js Development]] loader. Local vendor. No CDN. Do not re-export 20 times without the viewer step.
 
-**Ask:** Load the glb in the existing Three.js demo pattern? Wait seven seconds. Take two answers.
+**Ask:** Black metallic crate in Three, fine in Blender preview — first hypothesis? Wait. Want: no environment on Standard.
 
-**Board:** parked strip. Then loader.load → traverse shadows.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -53,9 +57,9 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: scale, shadows, colors. Kernel: scale, shadows, colors. We freeze conventions and we do not invent timings.
+**Say:** traverse castShadow. Y-up check. file:// vs serve. AxesHelper. Unlit as a 'fix' is a plant.
 
-**Ask:** What would a wrong version of this look like? Want: Re-exporting 20 times without the viewer step.
+**Ask:** What does traverse do here?
 
 **Board:** today’s question in one line.
 
@@ -67,21 +71,21 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** The handshake. This week is the reason the course exists.
+**Say:** Handshake. Viewer already green.
 
-**Say:** Bugs. Scale 0.01, black material (metal+rough+no env), inverted normals, missing UVs, animation not in export.
+**Board:** bug list. Env.
 
-**Say:** Env. Standard material needs an environment to look like the Blender preview.
+**Say:** Shadow on a plane.
 
-**Ask:** Load the glb in the existing Three.js demo pattern? Wait seven seconds. Take two answers.
+**Ask:** Why might the model be 100× too small?
 
-**They do:** On paper: Shadow on a plane.
+**They do:** On paper: five import bugs and the fix.
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A 40-line loader page using local `ThreeJS/vendor/` showing the student glb + a directional light.. Zoom 140%. Read errors out loud.
+**Say:** Load crate.glb with vendor GLTFLoader (10-gltf-pattern.html pattern). Plant unlit fix. Plant re-export without viewer. Plant CDN.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -91,7 +95,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Shadow on a plane.
+**Say:** AxesHelper to check size. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -101,7 +105,7 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Shadow on a plane.; AxesHelper to check size.. Homework: Written: bug you hit and the fix.; URL or file:// note.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: shadow on a plane; AxesHelper. Homework: bug you hit and the fix; URL or file:// note. Quiz: traverse, black metal cause, Y-up. Studio next.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -113,10 +117,10 @@ Hand out the Lecture 12 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: scale, shadows, colors | Plant the first common mistake. |
-| 10–30 | A 40-line loader page using local `ThreeJS/vendor/` showing the student glb + a directional light. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Viewer still OK? | If not, stop. |
+| 10–30 | GLTFLoader vendor | Plant CDN. |
+| 30–45 | black metal → env | Plant MeshBasic. |
+| 45–60 | They add AxesHelper | Circulate. Serve. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -138,9 +142,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. traverse (3)
-2. black metal cause (4)
-3. Y-up (3)
+None this meeting.
 
 
 ## Snippet
@@ -159,11 +161,7 @@ See [[Blender/exercises/Week 13]].
 
 ## Notes you may still need (from the outline)
 
-**1. The handshake.** This week is the reason the course exists. Asset from Blender → [[18 Three.js Development]] loader.
-
-**2. Bugs.** Scale 0.01, black material (metal+rough+no env), inverted normals, missing UVs, animation not in export.
-
-**3. Env.** Standard material needs an environment to look like the Blender preview.
+_none_
 
 ---
 
@@ -174,7 +172,7 @@ See [[Blender/exercises/Week 13]].
 
 ## If we run long, cut
 
-Env
+Animation mixer deep dive. Keep load + env + scale.
 
 ## If we run short, add
 

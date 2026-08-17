@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · AI for Interactive Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** limits of image-to-3D  
-**Success check:** Try one image-to-3D **or** study papers/products as a survey if tools cost money.
+**Kernel:** inspect image-to-3D: normals, holes, scale, legal question — cleanup is the skill  
+**Success check:** they can fill a table: gen mesh vs a crate (tris, UVs, scale) and not call the gen the homework
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,21 +14,23 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `AI for Interactive Graphics/code/02-asset-table.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: limits of image-to-3D | Invariant: no secrets in the frontend; cite the model`
+- Parked strip: `Lecture 4 | Goal: inspection, not one-click mesh | Invariant: no secrets in the frontend; cite the model`
 
 ## Board at the end (they photograph this)
 
 ```
-mesh quality vs glTF needs
-Wireframe vs crate.
+gen mesh → Blender cleanup → glTF
+inspect: normals  holes  scale  UVs
+
+we mention IP lawsuits     we do not play lawyer
+one-click mesh as the whole HW  =  fail
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | — | Most blocks have **no slide**. Argument on the board. |
-
+| 1 | Wireframe of a gen mesh vs a crate | photograph |
 
 ---
 
@@ -38,11 +40,11 @@ Wireframe vs crate.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Honesty. 2026 tools improve; the **teaching point** is inspection: normals, holes, scale, legal.
+**Say:** Tools improve; the teaching point is inspection. One-click mesh as the whole homework fails. We mention training-data lawsuits; we do not give legal advice.
 
-**Ask:** Try one image-to-3D **or** study papers/products as a survey if tools cost money? Wait seven seconds. Take two answers.
+**Ask:** If UVs are missing, is the mesh done? Wait. Want: no.
 
-**Board:** parked strip. Then mesh quality vs glTF needs.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +54,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: limits of image-to-3D. Kernel: limits of image-to-3D. We freeze conventions and we do not invent timings.
+**Say:** Survey is allowed if tools cost money. Cleanup in Blender extra. Screenshot wireframe. Scale is meters.
 
-**Ask:** What would a wrong version of this look like? Want: one-click mesh as the whole homework.
+**Ask:** What do you write instead of a legal conclusion?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +68,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Honesty. 2026 tools improve; the **teaching point** is inspection: normals, holes, scale, legal.
+**Say:** Honesty. Limits of image-to-3D.
 
-**Say:** Pipeline. Gen mesh → Blender cleanup → glTF.
+**Board:** inspect list. IP: mention, don't advise.
 
-**Say:** IP. Training data lawsuits: mention, don't pretend to be a lawyer.
+**Say:** Table: tris, UVs yes/no, scale vs student crate.
 
-**Ask:** Try one image-to-3D **or** study papers/products as a survey if tools cost money? Wait seven seconds. Take two answers.
+**Ask:** Why is cleanup the course skill?
 
-**They do:** On paper: one cleanup step in Blender extra.
+**They do:** Empty table headers; they fill from a still or a file.
 
-**Do not:** put API keys in client JS. Do not skip integrity.
+**Do not:** Put API keys in client JS. Skip integrity.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A table: gen mesh vs student crate (tris, UVs yes/no, scale).. Zoom 140%. Read errors out loud.
+**Say:** Gen vs crate table. Plant one-click as HW. Plant a legal claim — strike. Wireframe screenshot.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +92,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** one cleanup step in Blender extra.
+**Say:** Fill the inspection table. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +102,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: one cleanup step in Blender extra.; screenshot wireframe.. Homework: Written: 1 page limits.; table.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: cleanup extra; wireframe. Homework: limits paragraph. Quiz: inspect list, no legal advice, cleanup.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +114,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: limits of image-to-3D | Plant the first common mistake. |
-| 10–30 | A table: gen mesh vs student crate (tris, UVs yes/no, scale). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Inspect list | Plant one-click HW. |
+| 15–40 | Table vs crate | Plant no inspection. |
+| 40–55 | No legal claims | Strike the sentence. |
+| 55–60 | They screenshot wireframe | Circulate. |
 
 Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the after-class check, not as the lecture.
 
@@ -137,9 +139,7 @@ Point them at `AI for Interactive Graphics/code/02-asset-table.html` as the afte
 
 ## Quiz next meeting (they hear this now)
 
-1. UV likely? (3)
-2. why retopo (4)
-3. IP mention (3)
+None this meeting.
 
 
 ## Extra exercises
@@ -150,11 +150,7 @@ See [[AI for Interactive Graphics/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Honesty.** 2026 tools improve; the **teaching point** is inspection: normals, holes, scale, legal.
-
-**2. Pipeline.** Gen mesh → Blender cleanup → glTF. Cleanup is the course skill.
-
-**3. IP.** Training data lawsuits: mention, don't pretend to be a lawyer.
+_none_
 
 ---
 
@@ -165,8 +161,8 @@ See [[AI for Interactive Graphics/exercises/Week 04]].
 
 ## If we run long, cut
 
-IP
+IP seminar. Keep inspect + cleanup.
 
 ## If we run short, add
 
-screenshot wireframe.
+Wireframe screenshot.

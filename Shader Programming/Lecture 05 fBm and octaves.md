@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** sum scaled noise  
-**Success check:** Sum 4–6 octaves.
+**Kernel:** fBm: sum a*noise(p); p*=2; a*=0.5 — 4–6 octaves  
+**Success check:** they can sum 4–6 octaves and name lacunarity and gain
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,20 +14,25 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: sum scaled noise | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 5 | Goal: octaves as a stack you can turn down | Invariant: fBm is a recipe; cranking octaves until the machine cries is not a measurement`
 
 ## Board at the end (they photograph this)
 
 ```
-amp 1/2/4, freq 1/2/4
-Octave stack.
+octave   freq     amp
+  0       1       0.5
+  1       2       0.25
+  2       4       0.125
+
+lacunarity ~ 2     gain ~ 0.5
+do not unroll 20
 ```
 
 ## Slides today (cap: 6)
 
 | # | What is on it | Why it is not the board |
 | ---: | --- | --- |
-| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
+| 1 | 1 octave vs 6, same uv | photograph |
 
 ---
 
@@ -37,11 +42,11 @@ Octave stack.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** fBm. Fractional Brownian motion as a *recipe*, not a proof.
+**Say:** Fractional Brownian motion is a recipe, not a proof. Terrain and marble later are this sum. If they unroll twenty octaves, we do not invent fps — we turn octaves down or we omit the speed claim.
 
-**Ask:** Sum 4–6 octaves? Wait seven seconds. Take two answers.
+**Ask:** What does gain 0.5 do to amplitude each octave? Wait.
 
-**Board:** parked strip. Then amp 1/2/4, freq 1/2/4.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -51,9 +56,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: sum scaled noise. Kernel: sum scaled noise. We freeze conventions and we do not invent timings.
+**Say:** Parameters: octaves, lacunarity, gain. Warp `noise(p + noise(p))` once. fBm is not lighting.
 
-**Ask:** What would a wrong version of this look like? Want: unrolled 20 octaves.
+**Ask:** Why not 20 octaves on a laptop?
 
 **Board:** today’s question in one line.
 
@@ -65,21 +70,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** fBm. Fractional Brownian motion as a *recipe*, not a proof.
+**Say:** Stack amplitudes. Draw three sine-ish layers.
 
-**Say:** Parameters. octaves, lacunarity (~2), gain (~0.5).
+**Board:** the table. Circle 5 as the lab default.
 
-**Say:** Warp. `noise(p + noise(p))` marble.
+**Say:** One sentence of cost: more octaves = more hash. Measure if you claim; otherwise omit.
 
-**Ask:** Sum 4–6 octaves? Wait seven seconds. Take two answers.
+**Ask:** Lacunarity in one sentence?
 
-**They do:** On paper: warp extra.
+**They do:** On paper: the for-loop of fbm(vec2).
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: fBm slider for octaves; screenshot 1 vs 6.. Zoom 140%. Read errors out loud.
+**Say:** fBm slider for octaves; screenshot 1 vs 6. Plant 20 unrolled octaves. Warp extra after they have the sum.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -89,7 +94,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** warp extra.
+**Say:** Warp extra, or write the cost sentence. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -99,7 +104,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: warp extra.; measure cost sentence.. Homework: Written: one octave vs fBm.; GLSL fbm.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: warp + cost sentence. Homework: one octave vs fBm; GLSL fbm. Quiz: lacunarity, gain 0.5, mobile octaves.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -111,10 +116,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: sum scaled noise | Plant the first common mistake. |
-| 10–30 | fBm slider for octaves; screenshot 1 vs 6. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | One octave | They see value noise again. |
+| 10–30 | Octave slider | Plant 20 octaves; no invented fps. |
+| 30–45 | Warp once | marble = noise(p+noise(p)). |
+| 45–60 | They write fbm() | Circulate. Uniform octaves. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -136,9 +141,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. lacunarity (3)
-2. why gain 0.5 (4)
-3. mobile octaves (3)
+None this meeting.
 
 
 ## Snippet
@@ -157,11 +160,7 @@ See [[Shader Programming/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. fBm.** Fractional Brownian motion as a *recipe*, not a proof. Terrain height, clouds, marble (warp).
-
-**2. Parameters.** octaves, lacunarity (~2), gain (~0.5). Students crank octaves until fps dies.
-
-**3. Warp.** `noise(p + noise(p))` marble. Show once.
+_none_
 
 ---
 
@@ -172,8 +171,8 @@ See [[Shader Programming/exercises/Week 05]].
 
 ## If we run long, cut
 
-Warp
+Domain warp catalog. Keep 5 octaves + names.
 
 ## If we run short, add
 
-measure cost sentence.
+Measure one sentence if they insist on speed.

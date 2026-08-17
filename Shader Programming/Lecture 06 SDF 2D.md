@@ -2,8 +2,8 @@
 
 **Week 6 of 15** · Shader Programming  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** circle, union, smooth  
-**Success check:** Circle and box SDF.
+**Kernel:** sdCircle = length(p)-r; min=union, max=intersection; smoothmin name  
+**Success check:** they can write circle and box SDF and union two circles minus a box
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,18 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 5 (10 min, paper or LMS).
 - Demo: `Shader Programming/code/` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 6 | Goal: circle, union, smooth | Invariant: a shader is a program over pixels or vertices`
+- Parked strip: `Lecture 6 | Goal: a boolean logo from distances | Invariant: signed distance is a number; a mesh of a 2D logo is the wrong tool this week`
 
 ## Board at the end (they photograph this)
 
 ```
-d = length(p)-r
-CSG tree.
+d = length(p) - r          // <0 inside
+
+min(d1,d2)  union
+max(d1,d2)  intersection
+max(-d2,d1)  subtract
+
+smoothmin  blends  (can break Lipschitz later)
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +43,11 @@ CSG tree.
 
 Hand out the Lecture 5 quiz. Mark one item together. Then:
 
-**Say:** Distance fields. A function that returns signed distance to a shape.
+**Say:** A function returns signed distance. Rendering is smoothstep on d, or sphere tracing in 3D later. IQ's tables are the encyclopedia — we implement three primitives, not fifty.
 
-**Ask:** Circle and box SDF? Wait seven seconds. Take two answers.
+**Ask:** Is d negative inside the circle? Wait. Want: yes if signed.
 
-**Board:** parked strip. Then d = length(p)-r.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +57,9 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: circle, union, smooth. Kernel: circle, union, smooth. We freeze conventions and we do not invent timings.
+**Say:** CSG: min/max. Onion is abs(d)-t. Unsigned-only cannot subtract cleanly.
 
-**Ask:** What would a wrong version of this look like? Want: polygon meshes for a 2D logo in a shader course.
+**Ask:** Why signed, not only |d|?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +71,21 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Distance fields. A function that returns signed distance to a shape.
+**Say:** Circle. Then box as a named sdBox they copy from the board, not from a 200-line paste.
 
-**Say:** CSG. min = union, max = intersection.
+**Board:** CSG tree for two circles minus a box.
 
-**Say:** Why. Logos, HUDs, 2D games, 3D modeling (Blender) all meet here.
+**Say:** fwidth AA on the edge. Pause time; the logo is a still you debug.
 
-**Ask:** Circle and box SDF? Wait seven seconds. Take two answers.
+**Ask:** Union in one operation?
 
-**They do:** On paper: onion (abs(d)-t) extra.
+**They do:** On paper: d for a circle at origin radius 0.3.
 
-**Do not:** paste a 200-line Shadertoy as the first kernel.
+**Do not:** Paste a 200-line Shadertoy as the first kernel.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: A boolean logo (two circles minus a box).. Zoom 140%. Read errors out loud.
+**Say:** Boolean logo: two circles minus a box. Plant unsigned distance only. AA with fwidth.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +95,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** onion (abs(d)-t) extra.
+**Say:** Onion (abs(d)-t) extra. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +105,7 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: onion (abs(d)-t) extra.; AA with fwidth.. Homework: Written: why signed.; Code: sdCircle + sdBox.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: onion + AA. Homework: why signed; sdCircle + sdBox. Quiz: union op, smoothmin idea, inside sign.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +117,10 @@ Hand out the Lecture 5 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: circle, union, smooth | Plant the first common mistake. |
-| 10–30 | A boolean logo (two circles minus a box). | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | sdCircle | Plant a triangle mesh logo. |
+| 10–30 | CSG logo | Plant unsigned only. |
+| 30–45 | fwidth AA | Aliased step(d). |
+| 45–60 | They onion | Circulate. Uniform r. |
 
 Point them at `Shader Programming/code/` as the after-class check, not as the lecture.
 
@@ -137,9 +142,7 @@ Point them at `Shader Programming/code/` as the after-class check, not as the le
 
 ## Quiz next meeting (they hear this now)
 
-1. union op (2)
-2. smoothmin idea (4)
-3. inside sign (4)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +161,7 @@ See [[Shader Programming/exercises/Week 06]].
 
 ## Notes you may still need (from the outline)
 
-**1. Distance fields.** A function that returns signed distance to a shape. Rendering is `smoothstep` on d, or later sphere tracing in 3D.
-
-**2. CSG.** min = union, max = intersection. Smoothmin blends.
-
-**3. Why.** Logos, HUDs, 2D games, 3D modeling (Blender) all meet here. IQ's tables are the encyclopedia — students implement three primitives, not fifty.
+_none_
 
 ---
 
@@ -173,8 +172,8 @@ See [[Shader Programming/exercises/Week 06]].
 
 ## If we run long, cut
 
-Why
+Fifty IQ primitives. Keep circle, box, one CSG.
 
 ## If we run short, add
 
-AA with fwidth.
+smoothmin as a name; warn Lipschitz.

@@ -2,8 +2,8 @@
 
 **Week 4 of 15** · Blender for Real-Time Graphics  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** seams, islands, texel  
-**Success check:** Mark seams on a crate.
+**Kernel:** seams, islands, texel density; checker grid as the judge  
+**Success check:** they mark seams on a crate, unwrap, pack with margin, and can read stretch on a checker
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,14 +14,17 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 3 (10 min, paper or LMS).
 - Demo: `Blender/code/03-budget.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 4 | Goal: seams, islands, texel | Invariant: units, facing, and budget travel with the asset`
+- Parked strip: `Lecture 4 | Goal: islands a texture can use | Invariant: UVs are the fragment-shader map; stretch is blur; Smart UV is not a character pipeline`
 
 ## Board at the end (they photograph this)
 
 ```
-cut seams, unwrap, pack
-Seams on a cube.
-Checker.
+seam  =  cut where the island splits
+island  =  connected UV chart
+checker: even squares = good; skinny = stretch
+
+pack + margin     overlap = shared texels
+texel density: same pixel size on crate faces
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Checker.
 
 Hand out the Lecture 3 quiz. Mark one item together. Then:
 
-**Say:** Why UVs. The fragment shader samples a 2D image.
+**Say:** The fragment shader samples a 2D image. That is why this week exists. Lightmaps hate overlap; albedo sometimes shares trim. Do not Smart-UV a character as the only method.
 
-**Ask:** Mark seams on a crate? Wait seven seconds. Take two answers.
+**Ask:** If the checker is long rectangles, is that a 4k texture problem? Wait. Want: no — stretch in the unwrap.
 
-**Board:** parked strip. Then cut seams, unwrap, pack.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: seams, islands, texel. Kernel: seams, islands, texel. We freeze conventions and we do not invent timings.
+**Say:** Cylinders: one side seam + caps. Pack with margin. Tiny islands / giant waste is a packing bug.
 
-**Ask:** What would a wrong version of this look like? Want: Smart UV project on a character as the only method.
+**Ask:** What is an island?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Why UVs. The fragment shader samples a 2D image.
+**Say:** Why UVs. Seams where they hide.
 
-**Say:** Seams. Put seams where they hide.
+**Board:** checker judgment.
 
-**Say:** Checker. Apply a checker grid material.
+**Say:** One overlap bug then fix.
 
-**Ask:** Mark seams on a crate? Wait seven seconds. Take two answers.
+**Ask:** Why a margin when packing?
 
-**They do:** On paper: Pack with a margin.
+**They do:** Sketch seams on a crate (six faces).
 
-**Do not:** model at unknown scale. Do not skip apply rotation.
+**Do not:** Model at unknown scale. Skip apply rotation.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Unwrap the week-2 crate; checker; screenshot UV editor + 3D.. Zoom 140%. Read errors out loud.
+**Say:** Mark seams; unwrap; checker. Plant Smart UV as the only method. Plant tiny islands.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** Pack with a margin.
+**Say:** Pack with a margin. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: Pack with a margin.; One overlap bug then fix.. Homework: Written: what a seam is.; UV screenshot.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: pack + margin; overlap bug then fix. Homework: what a seam is; UV screenshot. Quiz: island, stretch symptom, why checker.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 3 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: seams, islands, texel | Plant the first common mistake. |
-| 10–30 | Unwrap the week-2 crate; checker; screenshot UV editor + 3D. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–10 | Checker material | Plant judging in solid view. |
+| 10–30 | Seams on crate | Plant seam on the hero face. |
+| 30–45 | Pack margin | Bleed named. |
+| 45–60 | They fix overlap | Circulate. |
 
 Point them at `Blender/code/03-budget.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Blender/code/03-budget.html` as the after-class check, not as the
 
 ## Quiz next meeting (they hear this now)
 
-1. island (3)
-2. stretch symptom (4)
-3. why checker (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Blender/exercises/Week 04]].
 
 ## Notes you may still need (from the outline)
 
-**1. Why UVs.** The fragment shader samples a 2D image. UVs are the mapping. Stretch = blur. Overlap = two faces share texels (lightmaps hate this; albedo sometimes OK for trim).
-
-**2. Seams.** Put seams where they hide. Cylinders: one side seam + caps.
-
-**3. Checker.** Apply a checker grid material. Even squares = good. Skinny rectangles = stretch.
+_none_
 
 ---
 
@@ -173,7 +170,7 @@ See [[Blender/exercises/Week 04]].
 
 ## If we run long, cut
 
-Checker
+UDIM speeches. Keep crate seams + checker.
 
 ## If we run short, add
 

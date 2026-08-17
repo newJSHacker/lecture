@@ -1,58 +1,107 @@
 # Lecture 14 — Project studio
 
-**Time:** 30 min lecture, then studio until the period ends  
-**No new theory**  
-**Required this week:** running algorithm, one degeneracy, README
+**Week 14 of 15** · Computational Geometry  
+**Meeting:** studio (not a content lecture)  
+**Kernel:** core algorithm on a non-toy input + one degeneracy handled or shown + README that runs on a lab machine  
+**Success check:** a TA can serve the folder, see the invariant (stack/strip/illegal/sweep), and hear where orient lives
+
+This meeting is **studio**. Session guide: [[Teaching/24 Session Guides]].
 
 ---
 
-
-This file is a **session guide** ([[Teaching/24 Session Guides]]) plus the detailed notes. This meeting is **studio**, not a content lecture.
-
 ## Before you enter
 
-- Demo: `Computational Geometry/code/14-voronoi-discrete.html` (local, no CDN). Serve the folder if ES modules fail.
-- Backup: board first — today's picture.
-- Parked strip: `Lecture 14 | Project studio | Invariant: predicates before constructions; degeneracy is the course`
-- Quiz from last lecture (except Lecture 1 / midterm / presentations).
+- Rubric / report headings on the parked strip.
+- Clock visible.
+- Demo only if a volunteer asks for a blocked kernel: `Computational Geometry/code/14-voronoi-discrete.html`.
+- Parked strip: `Lecture 14 | Goal: freeze and review | Invariant: predicates before constructions; degeneracy is the course`
 
 ## Board at the end (they photograph this)
 
 ```
-Project studio
+Report: problem · weeks · algorithm+complexity · degeneracy · kernel · results · limits · refs
+Defense: predicate?  complexity and n measured?  degenerate input?
+         naive vs yours?  3D break?  construction vs predicate?
+         test if orient flips?  library vs you?
+
+Cuts: Fortune → discrete Voronoi + DT dual
+      map editor → intersect + DCEL walk
+      3D physics → 2D hull + SAT
+      shaders → unlit canvas + correct kernel
+Do not invent timings.
 ```
 
-## Slides today (cap: 6)
+## Slides today (cap: 2)
 
-Photograph, animation, or 20pt code only. If a slide has the argument in sentences, delete the sentences and write them on the board.
-
-## How to run this meeting
-
-Use the **Timing** or **Classroom moves** table below as the 75-minute spine. For each block: **Say** the question, **Board** the picture, **They do** a fragment, **Do not** skip the attempt. Then stand up for live coding (60 min).
-
-## Timing
-
-| Minutes | Do this |
-| ---: | --- |
-| 0–15 | How to write the report |
-| 15–30 | Defense-style questions; presentation clock |
-| 30–end | Desk review. Professor and TAs circulate. |
-
-Do not give a third lecture on Delaunay. If a team is stuck on a predicate, debug the predicate.
+| # | What is on it | Why it is not the board |
+| ---: | --- | --- |
+| 1 | Screenshot of the demo or a bug | photograph / animation / 20pt code only |
 
 ---
 
-## Learning goals (for the studio)
+## Lecture / studio (75 min)
 
-1. Freeze the project scope: one core algorithm, one visual story.
-2. Write a report that a second examiner can grade without watching the demo twice.
-3. Answer “what happens on a T-junction / collinear / duplicate?” without guessing.
+### Minutes 0–10 — Frame
+
+**Say:** This meeting is **studio**. No third Delaunay lecture. If they are stuck on a predicate, debug the predicate. A correct O(n log n) on a plain canvas beats a broken Three.js scene. Pretty UI with no tests fails.
+
+**Ask:** If behind, what do you cut first?
+
+**They do:** write their cut list in one column.
+
+**Do not:** introduce a new library today.
+
+### Minutes 10–65 — Desk review
+
+**Say:** Desk order: kernel (orient/intersect/incircle), visualizer, tests, report outline. Comment on the algorithm, not the CSS. Rehearse 12+5: 0–2 problem, 2–6 invariant+complexity, 6–10 live ugly input, 10–12 limits and who did what.
+
+**They do:** Studio. Serve first. Freeze a degenerate input as reset state.
+
+**Do not:** sit at the podium. Do not add features for them.
+
+### Minutes 65–75 — Land
+
+**Say:** Report draft + 30s recording before Week 15. Next week 12+5. Always ask where orient is. No quiz.
+
+**Do not:** “Any questions?” End on the clock.
 
 ---
 
-## 1. Report structure (15 min)
+## Live coding (60 min)
 
-6–8 pages, including figures. Not a blog post. Not a 30-page thesis.
+| Min | Beat | Plant / fix |
+| ---: | --- | --- |
+| 0–10 | Eight headings + eight questions + clock | Photograph. |
+| 10–50 | Desk review | Kernel, then viz, then tests, then outline. |
+| 50–60 | 60s rehearsal with ugly input | Hard stop. |
+
+This slot is **more studio**, not a hidden lecture.
+
+---
+
+## Lab
+
+_(none this meeting)_
+
+---
+
+## Homework
+
+_(none this meeting)_
+
+---
+
+## Quiz next meeting
+
+None this week.
+
+## Extra exercises
+
+See [[Computational Geometry/exercises/Week 14]].
+
+## Notes from the outline
+
+**1. Report structure (15 min).** 6–8 pages, including figures. Not a blog post. Not a 30-page thesis.
 
 | Section | What we want | Typical length |
 | --- | --- | --- |
@@ -72,10 +121,7 @@ Do not give a third lecture on Delaunay. If a team is stuck on a predicate, debu
 **Do not** invent timings. If you did not measure, say so.
 
 ---
-
-## 2. Questions I will ask next week (15 min)
-
-Give students this list. Next week you will actually ask two of them.
+**2. Questions I will ask next week (15 min).** Give students this list. Next week you will actually ask two of them.
 
 1. What is the **predicate** at the center of your project?
 2. What is the complexity, and for which n did you try it?
@@ -102,10 +148,7 @@ Suggested 12-minute shape:
 | 10–12 | Limitations, who did what |
 
 ---
-
-## 3. Studio rules
-
-### Must be true before they leave today
+**3. Studio rules.** ### Must be true before they leave today
 
 - `npm start` / `python -m http.server` / whatever is in the README works on a lab machine.
 - The core algorithm runs on more than 5 toy points.
@@ -137,61 +180,10 @@ A correct O(n log n) algorithm on a plain canvas beats a broken Three.js scene.
 
 ---
 
-## Lab
+## If we run long, cut
 
-The studio **is** the lab. Attendance is required. Checkpoint grade: complete / incomplete from Week 13, plus today’s README/degeneracy check.
+New algorithms. Keep freeze.
 
----
+## If we run short, add
 
-## Homework
-
-Finish the report draft and the 30-second screen recording (portfolio). Submit the recording before Week 15 so the session cannot die on a failed HDMI cable.
-
----
-
-## Quiz
-
-None.
-
----
-
-## Common failure modes this week
-
-- Pretty UI, no tests.
-- Library did the Delaunay; student drew it.
-- Report is a tutorial on Three.js.
-- “It works on my laptop” and no lockfile / no README.
-- Three people, one git author.
-
----
-
-## Board
-
-Write only:
-
-1. The 8 report headings
-2. The 8 defense questions
-3. The 12 + 5 clock
-
----
-
-## Extra exercises and snippets
-
-Sheet: [[Computational Geometry/exercises/Week 14]] · Sandbox: [20-project-sandbox.html](code/20-project-sandbox.html)
-
-Desk-review drills (write answers in the repo, not a new essay):
-
-1. Freeze a degenerate input as the sandbox reset state.
-2. Point to the test that fails if `orient` flips sign.
-3. Complexity and the n you **measured**. Do not invent timings.
-4. If behind: cut Fortune → discrete Voronoi + Delaunay dual; cut shaders → unlit canvas + correct kernel.
-
-```js
-assert(andrew([
-  {x:0,y:0},{x:1,y:0},{x:2,y:0},{x:1,y:1}
-]).length === 3); // drop collinear middle
-
-assert(segmentsIntersect(
-  {x:0,y:0},{x:4,y:0},{x:2,y:0},{x:2,y:3}
-).type === "touch");
-```
+Point to the test that fails if orient flips sign.

@@ -2,8 +2,8 @@
 
 **Week 5 of 15** · Interactive Experience Development  
 **Meeting:** 75 min lecture + 60 min live coding  
-**Kernel:** easing, CameraControls  
-**Success check:** Lerp vs spring (react-spring/drei).
+**Kernel:** one motion library; CameraControls vs OrbitControls do not both own the camera  
+**Success check:** they can spring or lerp one part on click and say which control is makeDefault
 
 This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week markdown is the **course plan**, not this.
 
@@ -14,13 +14,16 @@ This file is a **session guide** ([[Teaching/24 Session Guides]]). The 15-week m
 - Quiz from Lecture 4 (10 min, paper or LMS).
 - Demo: `Interactive Experience/code/02-two-clocks.html` (local, no CDN). If ES modules fail, `python -m http.server` in the course folder.
 - Backup: the board photograph list below if the projector dies.
-- Parked strip: `Lecture 5 | Goal: easing, CameraControls | Invariant: 3D and DOM are two clocks`
+- Parked strip: `Lecture 5 | Goal: feel without fighting the camera | Invariant: 3D and DOM are two clocks`
 
 ## Board at the end (they photograph this)
 
 ```
-spring vs lerp
-Modes.
+pick one:  lerp    or    spring
+do not: GSAP + spring + CSS on the same property
+
+OrbitControls  vs  CameraControls
+          makeDefault — one owner
 ```
 
 ## Slides today (cap: 6)
@@ -38,11 +41,11 @@ Modes.
 
 Hand out the Lecture 4 quiz. Mark one item together. Then:
 
-**Say:** Feel. Product sites use springs.
+**Say:** Product sites use springs. Games often lerp. Two owners of the camera is a bug, not a style.
 
-**Ask:** Lerp vs spring (react-spring/drei)? Wait seven seconds. Take two answers.
+**Ask:** If Orbit and CameraControls both run, who wins? Wait. Want: a fight — pick makeDefault.
 
-**Board:** parked strip. Then spring vs lerp.
+**Board:** parked strip. Then today’s picture.
 
 **Slide:** none unless the table above has a photograph.
 
@@ -52,9 +55,9 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 10–12 — Frame
 
-**Say:** Today’s question: easing, CameraControls. Kernel: easing, CameraControls. We freeze conventions and we do not invent timings.
+**Say:** drei helpers are oracles. Cleanup: geometries created in effects must dispose, or use JSX geometries. We freeze one library today.
 
-**Ask:** What would a wrong version of this look like? Want: GSAP + spring + CSS all on one property.
+**Ask:** What must unmount dispose?
 
 **Board:** today’s question in one line.
 
@@ -66,21 +69,21 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 12–35 — Build
 
-**Say:** Feel. Product sites use springs.
+**Say:** Feel is a choice under constraint. One library.
 
-**Say:** Camera. CameraControls vs OrbitControls.
+**Board:** two control names. Cross out dual ownership.
 
-**Say:** Cleanup. R3F unmount must dispose geometries if you create them in useLayoutEffect — or use JSX geometries.
+**Say:** Mode toggle: orbit vs story camera. Story wins during the beat.
 
-**Ask:** Lerp vs spring (react-spring/drei)? Wait seven seconds. Take two answers.
+**Ask:** lerp vs spring in one sentence?
 
-**They do:** On paper: mode toggle orbit vs story.
+**They do:** On paper: click → spring position; orbit disabled while it runs.
 
-**Do not:** fight React state with the frame loop silently.
+**Do not:** Fight React state with the frame loop silently.
 
 ### Minutes 35–50 — Show
 
-**Say:** Live demo: Spring a camera or a part on click.. Zoom 140%. Read errors out loud.
+**Say:** Spring a part on click. Plant two controls. Fix makeDefault. Plant leaked geometry on hot reload.
 
 **Slide:** none. Live editor or local demo. Zoom 140%.
 
@@ -90,7 +93,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 50–65 — Attempt
 
-**Say:** mode toggle orbit vs story.
+**Say:** One spring or lerp on click. Eight minutes.
 
 **They do:** alone or pairs, ~8 minutes. You do not help for the first 3 minutes.
 
@@ -100,7 +103,7 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 ### Minutes 65–75 — Land
 
-**Say:** Photograph the board. Lab: mode toggle orbit vs story.; dispose note.. Homework: Written: spring vs lerp.; demo.. Do not end on “any questions?” — end on the lab hook.
+**Say:** Lab: orbit vs story toggle; dispose note. Homework: which control owns the camera. Quiz: makeDefault, one library, dispose.
 
 **Board:** add the invariant if it is not already in the parked strip.
 
@@ -112,10 +115,10 @@ Hand out the Lecture 4 quiz. Mark one item together. Then:
 
 | Min | Beat | Plant / fix |
 | ---: | --- | --- |
-| 0–10 | Start the kernel: easing, CameraControls | Plant the first common mistake. |
-| 10–30 | Spring a camera or a part on click. | Fix on the board; they copy. |
-| 30–45 | Second pass / tests | Do not hide the error. |
-| 45–60 | They type; you circulate | Do not sit. |
+| 0–15 | Lerp or spring one part | Plant three libraries. |
+| 15–40 | makeDefault | Plant dual controls. |
+| 40–55 | Dispose / JSX geom | Hot-reload leak. |
+| 55–60 | They add a mode toggle | Circulate. |
 
 Point them at `Interactive Experience/code/02-two-clocks.html` as the after-class check, not as the lecture.
 
@@ -137,9 +140,7 @@ Point them at `Interactive Experience/code/02-two-clocks.html` as the after-clas
 
 ## Quiz next meeting (they hear this now)
 
-1. conflict (4)
-2. dispose (3)
-3. one motion system (3)
+None this meeting.
 
 
 ## Snippet
@@ -158,11 +159,7 @@ See [[Interactive Experience/exercises/Week 05]].
 
 ## Notes you may still need (from the outline)
 
-**1. Feel.** Product sites use springs. Games often lerp. Pick one library and stay.
-
-**2. Camera.** CameraControls vs OrbitControls. Conflict is a common bug.
-
-**3. Cleanup.** R3F unmount must dispose geometries if you create them in useLayoutEffect — or use JSX geometries.
+_none_
 
 ---
 
@@ -173,8 +170,8 @@ See [[Interactive Experience/exercises/Week 05]].
 
 ## If we run long, cut
 
-Cleanup
+Full CameraControls API. Keep one owner + one motion.
 
 ## If we run short, add
 
-dispose note.
+dispose note on a useLayoutEffect geometry.
